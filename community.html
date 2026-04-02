@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community — Bad Decisions Studio</title>
+  <meta name="description" content="Join the Bad Decisions Studio community across all platforms." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <meta name="theme-color" content="#080808">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="cursor-dot" id="cursor"></div>
+  <div data-include="/sections/nav.html"></div>
+  <div style="padding-top: 80px;">
+    <div data-include="/sections/community.html"></div>
+  </div>
+  <div data-include="/sections/footer.html"></div>
+  <script>
+    (function() {
+      var slots = document.querySelectorAll('[data-include]');
+      var total = slots.length;
+      var loaded = 0;
+      slots.forEach(function(slot) {
+        fetch(slot.getAttribute('data-include'))
+          .then(function(r) { return r.text(); })
+          .then(function(html) {
+            var temp = document.createElement('div');
+            temp.innerHTML = html;
+            while (temp.firstChild) {
+              slot.parentNode.insertBefore(temp.firstChild, slot);
+            }
+            slot.parentNode.removeChild(slot);
+            loaded++;
+            if (loaded === total) {
+              window.dispatchEvent(new Event('sections-loaded'));
+            }
+          });
+      });
+    })();
+  </script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
