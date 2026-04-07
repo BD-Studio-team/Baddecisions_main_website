@@ -70,6 +70,18 @@ function initBDS() {
     }, 2500);
   }
 
+  // ─── VIDEO CYCLING (play one at a time) ─────────────────────
+  document.querySelectorAll('.premium-card-cycle').forEach(function(video) {
+    var sources = (video.getAttribute('data-videos') || '').split(',');
+    if (sources.length < 2) return;
+    var index = 0;
+    video.addEventListener('ended', function() {
+      index = (index + 1) % sources.length;
+      video.src = sources[index];
+      video.play();
+    });
+  });
+
   // ─── STAGGER REVEAL ──────────────────────────────────────────
   document.querySelectorAll('.pillars-grid .pillar-card, .episodes-grid .ep-card, .tools-grid .tool-card, .socials-grid .social-card').forEach(function(el, i) {
     el.style.transitionDelay = (i * 0.06) + 's';
@@ -80,25 +92,82 @@ function initBDS() {
     if (!res.ok) throw new Error('API ' + res.status);
     return res.json();
   }).then(function(data) {
+    // Update pillar stat
     var pillarStat = document.querySelector('.pillar-card .pillar-stat');
     if (pillarStat && data.totalEpisodes) {
       pillarStat.textContent = data.totalEpisodes + '+ Episodes';
     }
+
     if (data.episodes && data.episodes.length > 0) {
       var ep = data.episodes[0];
-      var epNum = document.querySelector('.ep-number');
-      if (epNum) epNum.textContent = ep.episodeNumber || '';
-      var epTitle = document.querySelector('.ep-featured-card.main .ep-title');
-      if (epTitle) epTitle.textContent = ep.title || '';
+
+      // Only update featured episode if API has a newer one than what's hardcoded
+      var currentEpNum = document.querySelector('.ep-number');
+      var currentNum = currentEpNum ? parseInt(currentEpNum.textContent) : 0;
+      var apiNum = ep.episodeNumber || data.totalEpisodes || 0;
+
+      if (apiNum >= currentNum) {
+        var epNum = document.querySelector('.ep-number');
+        if (epNum) epNum.textContent = apiNum;
+        var epTitle = document.querySelector('.ep-featured-card.main .ep-title');
+        if (epTitle) epTitle.textContent = ep.title || '';
+        var epGuest = document.querySelector('.ep-featured-card.main .ep-guest');
+        if (epGuest) epGuest.textContent = ep.date + ' \u2022 ' + ep.duration;
+        var epBadge = document.querySelector('.ep-date');
+        if (epBadge) epBadge.textContent = ep.date;
+
+      // Add thumbnail to featured card — above the meta/title
+      var featuredCard = document.querySelector('.ep-featured-card.main');
+      var epMeta = featuredCard ? featuredCard.querySelector('.ep-meta') : null;
+      if (featuredCard && epMeta && ep.artworkUrl && !featuredCard.querySelector('.ep-featured-thumb')) {
+        var thumb = document.createElement('img');
+        thumb.src = ep.artworkUrl.replace('hqdefault', 'maxresdefault');
+        thumb.alt = '';
+        thumb.className = 'ep-featured-thumb';
+        thumb.loading = 'lazy';
+        featuredCard.insertBefore(thumb, epMeta);
+      }
+
+      // Update featured episode links
+      var epBtns = document.querySelectorAll('.ep-featured-card.main .ep-btn');
+      if (epBtns.length >= 1 && ep.trackViewUrl) {
+        // Apple link on the Apple button (3rd)
+        if (epBtns[2]) epBtns[2].href = ep.trackViewUrl;
+      }
+      if (ep.youtubeUrl) {
+        // YouTube button (2nd)
+        if (epBtns[1]) epBtns[1].href = ep.youtubeUrl;
+      }
+      } // end if apiNum >= currentNum
+
+      // Grid episodes
       var cards = document.querySelectorAll('.episodes-grid .ep-card');
       for (var i = 0; i < Math.min(cards.length, data.episodes.length - 1); i++) {
         var e = data.episodes[i + 1];
         var numEl = cards[i].querySelector('.ep-card-number');
         var titleEl = cards[i].querySelector('.ep-card-title');
+        var guestEl = cards[i].querySelector('.ep-card-guest');
         var dateEl = cards[i].querySelector('.ep-card-date');
-        if (numEl) numEl.textContent = 'Ep. ' + (e.episodeNumber || '');
+        if (numEl) numEl.textContent = e.episodeNumber ? 'Ep. ' + e.episodeNumber : 'Ep.';
         if (titleEl) titleEl.textContent = e.title || '';
+        if (guestEl) guestEl.textContent = e.duration ? e.date + ' \u2022 ' + e.duration : e.date || '';
         if (dateEl) dateEl.textContent = e.date || '';
+
+        // Add artwork thumbnail
+        if (e.artworkUrl && !cards[i].querySelector('.ep-card-art')) {
+          var img = document.createElement('img');
+          img.src = e.artworkUrl.replace('hqdefault', 'mqdefault');
+          img.alt = '';
+          img.className = 'ep-card-art';
+          img.loading = 'lazy';
+          cards[i].insertBefore(img, cards[i].firstChild);
+        }
+
+        // Update play button link to YouTube or Apple
+        var playBtn = cards[i].querySelector('.ep-card-play');
+        if (playBtn) {
+          playBtn.href = e.youtubeUrl || playBtn.href;
+        }
       }
     }
   }).catch(function() {});
