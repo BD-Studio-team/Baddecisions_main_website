@@ -9,13 +9,21 @@ const LOOKUP_URL = `https://itunes.apple.com/lookup?id=${SHOW_ID}&media=podcast&
 const YT_CHANNEL_ID = 'UCOQ6GGRyyu8S3jahnUz2zHw';
 const YT_API_KEY = process.env.YOUTUBE_API_KEY || '';
 
-// Initialize Redis (env vars set automatically when you add Upstash integration on Vercel)
+// Initialize Redis (env vars set automatically when you add Upstash via Vercel Marketplace)
 let redis = null;
 try {
   if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
     redis = new Redis({
       url: process.env.KV_REST_API_URL,
       token: process.env.KV_REST_API_TOKEN,
+    });
+  } else if (process.env.KV_REDIS_URL) {
+    redis = Redis.fromEnv({ UPSTASH_REDIS_REST_URL: '', UPSTASH_REDIS_REST_TOKEN: '' });
+    // Use the connection URL directly
+    const url = new URL(process.env.KV_REDIS_URL);
+    redis = new Redis({
+      url: 'https://' + url.hostname,
+      token: url.password,
     });
   }
 } catch (e) { /* redis not configured yet */ }
