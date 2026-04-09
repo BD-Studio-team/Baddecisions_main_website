@@ -17,7 +17,7 @@ Production marketing site for [Bad Decisions Studio](https://www.baddecisions.st
 │   ├── index.html
 │   ├── learn.html
 │   ├── podcast.html
-│   └── careers.html
+│   └── work-with-us.html
 ├── sections/             Shared HTML partials (content blocks)
 │   ├── nav.html          Nav with skip-link, mobile toggle, a11y attrs
 │   ├── hero.html         Hero with video + integrated featured logo strip
@@ -30,7 +30,7 @@ Production marketing site for [Bad Decisions Studio](https://www.baddecisions.st
 │   ├── footer.html       Links, socials, copyright
 │   ├── learn.html        Premium courses + free series grid
 │   ├── podcast.html      Featured ep, recent eps, listen-on, guest grid
-│   └── careers.html      Commercial hub: services, sponsorships, roles, inquiry routes
+│   └── work-with-us.html Commercial hub: services, sponsorships, roles, inquiry routes
 ├── css/
 │   ├── globals.css       Design system tokens, typography, buttons, badges, utilities
 │   └── style.css         Section-specific layouts and responsive rules
@@ -54,7 +54,7 @@ Production marketing site for [Bad Decisions Studio](https://www.baddecisions.st
 | Home | `/` | Hero (with featured strip), pillars, stats, highlights, podcast landing, about, sponsors, footer |
 | Podcast | `/podcast` | Header, featured episode, recent episodes, listen-on platforms, notable guests (peach bg), footer |
 | Learn | `/learn` | Premium programs, featured playlist, free series grid, footer |
-| Careers | `/careers` | Work-with-us hero, pathways, services, proof, sponsorships, roles, inquiry routes, final CTA |
+| Work With Us | `/work-with-us` | Work-with-us hero, pathways, services, proof, sponsorships, roles, inquiry routes, final CTA |
 
 ## Development
 

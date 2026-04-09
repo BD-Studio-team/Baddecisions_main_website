@@ -50,16 +50,18 @@
 
     /* ── Logo ── */
     .site-nav .nav-logo {
-      font-family: var(--font-editorial, 'PP Editorial New', Georgia, serif);
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      color: var(--color-paper, #FBF9ED);
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
       flex-shrink: 0;
     }
-    .site-nav .nav-logo .logo-bd {
-      color: var(--color-yellow, #FFEF7B);
+    .site-nav .nav-logo img {
+      display: block;
+      width: auto;
+      height: 26px;
+    }
+    .site-nav.scrolled .nav-logo img {
+      opacity: 1;
     }
 
     /* ── Center links ── */
@@ -149,7 +151,6 @@
     .site-nav .nav-dd-item {
       display: flex;
       align-items: center;
-      gap: 12px;
       padding: 14px 18px;
       border-bottom: 1px solid rgba(255,255,255,.05);
       text-decoration: none;
@@ -157,23 +158,6 @@
     }
     .site-nav .nav-dd-item:last-child { border-bottom: none; }
     .site-nav .nav-dd-item:hover { background: rgba(255,255,255,.04); }
-
-    .site-nav .nav-dd-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 13px;
-    }
-    .site-nav .nav-dd-icon.icon-ai      { background: rgba(255,239,123,.08); }
-    .site-nav .nav-dd-icon.icon-ue       { background: rgba(58,93,91,.2); }
-    .site-nav .nav-dd-icon.icon-free     { background: rgba(255,255,255,.05); }
-    .site-nav .nav-dd-icon.icon-services { background: rgba(58,93,91,.2); }
-    .site-nav .nav-dd-icon.icon-sponsor  { background: rgba(255,239,123,.08); }
-    .site-nav .nav-dd-icon.icon-roles    { background: rgba(255,255,255,.05); }
 
     .site-nav .nav-dd-label {
       font-family: var(--font-body, 'Inter', system-ui, sans-serif);
@@ -184,16 +168,6 @@
       transition: color 150ms ease;
     }
     .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow, #FFEF7B); }
-
-    .site-nav .nav-dd-sub {
-      font-family: var(--font-mono, 'Azeret Mono', monospace);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: rgba(255,255,255,.3);
-      line-height: 1.3;
-      margin-top: 2px;
-    }
 
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
@@ -324,6 +298,7 @@
       .site-nav .nav-center,
       .site-nav .nav-cta-btn { display: none; }
       .site-nav .nav-burger { display: flex; }
+      .site-nav .nav-logo img { height: 22px; }
     }
     @media (min-width: 769px) {
       .nav-mobile-overlay { display: none !important; }
@@ -334,7 +309,9 @@
   <nav class="site-nav" id="nav" aria-label="Primary">
 
     <!-- Logo -->
-    <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">BADDECISIONS <span class="logo-bd">BD</span></a>
+    <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
+      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
+    </a>
 
     <!-- Center links -->
     <ul class="nav-center">
@@ -349,55 +326,31 @@
         <div class="nav-dropdown">
           <div class="nav-dropdown-header">Programs</div>
           <a href="https://ai.baddecisions.studio" target="_self" class="nav-dd-item">
-            <div class="nav-dd-icon icon-ai">🤖</div>
-            <div>
-              <div class="nav-dd-label">AI Programs</div>
-              <div class="nav-dd-sub">Workflows · Tools · Strategy</div>
-            </div>
+            <div class="nav-dd-label">AI Programs</div>
           </a>
           <a href="https://learn.baddecisions.studio" target="_self" class="nav-dd-item">
-            <div class="nav-dd-icon icon-ue">🎮</div>
-            <div>
-              <div class="nav-dd-label">Unreal Engine</div>
-              <div class="nav-dd-sub">UE5 · Cinematic · Real-Time</div>
-            </div>
+            <div class="nav-dd-label">Unreal Engine</div>
           </a>
           <a href="/learn" class="nav-dd-item">
-            <div class="nav-dd-icon icon-free">📚</div>
-            <div>
-              <div class="nav-dd-label">Free Learning</div>
-              <div class="nav-dd-sub">Start Here · No Cost</div>
-            </div>
+            <div class="nav-dd-label">Free Learning</div>
           </a>
         </div>
       </li>
       <li class="nav-item">
-        <a href="/careers">
+        <a href="/work-with-us">
           Work With Us
           <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
         </a>
         <div class="nav-dropdown">
           <div class="nav-dropdown-header">Collaborate</div>
-          <a href="/careers#services" class="nav-dd-item">
-            <div class="nav-dd-icon icon-services">⚡</div>
-            <div>
-              <div class="nav-dd-label">Services</div>
-              <div class="nav-dd-sub">Production · AI · Consulting</div>
-            </div>
+          <a href="/work-with-us/services" class="nav-dd-item">
+            <div class="nav-dd-label">Services</div>
           </a>
-          <a href="/careers#sponsorships" class="nav-dd-item">
-            <div class="nav-dd-icon icon-sponsor">🎙️</div>
-            <div>
-              <div class="nav-dd-label">Sponsorships</div>
-              <div class="nav-dd-sub">Show · Instagram · YouTube</div>
-            </div>
+          <a href="/work-with-us/sponsorships" class="nav-dd-item">
+            <div class="nav-dd-label">Sponsorships</div>
           </a>
-          <a href="/careers#roles" class="nav-dd-item">
-            <div class="nav-dd-icon icon-roles">💼</div>
-            <div>
-              <div class="nav-dd-label">Open Roles</div>
-              <div class="nav-dd-sub">4 Positions · Remote & Dubai</div>
-            </div>
+          <a href="/work-with-us/open-roles" class="nav-dd-item">
+            <div class="nav-dd-label">Open Roles</div>
           </a>
         </div>
       </li>
@@ -421,11 +374,11 @@
       <a href="https://learn.baddecisions.studio" target="_self" class="nav-delay-3">Unreal Engine</a>
       <a href="/learn" class="nav-delay-4">Free Learning</a>
     </div>
-    <a href="/careers" class="mobile-link nav-delay-5">Work With Us</a>
+    <a href="/work-with-us" class="mobile-link nav-delay-5">Work With Us</a>
     <div class="mobile-sublinks work-sub">
-      <a href="/careers#services" class="nav-delay-6">Services</a>
-      <a href="/careers#sponsorships" class="nav-delay-7">Sponsorships</a>
-      <a href="/careers#roles" class="nav-delay-8">Open Roles</a>
+      <a href="/work-with-us/services" class="nav-delay-6">Services</a>
+      <a href="/work-with-us/sponsorships" class="nav-delay-7">Sponsorships</a>
+      <a href="/work-with-us/open-roles" class="nav-delay-8">Open Roles</a>
     </div>
     <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-9">Learn AI →</a>
   </div>
@@ -548,7 +501,7 @@
             <li><a href="/#about">About Us</a></li>
             <li><a href="/podcast">Podcast</a></li>
             <li><a href="/learn">Learn</a></li>
-            <li><a href="/careers">Work With Us</a></li>
+            <li><a href="/work-with-us">Work With Us</a></li>
             <li><a href="mailto:create@baddecisions.studio">Contact</a></li>
           </ul>
         </div>
@@ -573,9 +526,9 @@
         <div>
           <div class="footer-col-title">Work With Us</div>
           <ul class="footer-links">
-            <li><a href="/careers#services">Start a Project</a></li>
-            <li><a href="/careers#sponsorships">Sponsor the Show</a></li>
-            <li><a href="/careers#roles">Open Roles</a></li>
+            <li><a href="/work-with-us/services">Start a Project</a></li>
+            <li><a href="/work-with-us/sponsorships">Sponsor the Show</a></li>
+            <li><a href="/work-with-us/open-roles">Open Roles</a></li>
             <li><a href="mailto:create@baddecisions.studio">General Inquiry</a></li>
           </ul>
         </div>
