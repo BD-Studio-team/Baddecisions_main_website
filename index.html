@@ -59,39 +59,38 @@
 </head>
 <body>
 
-  <!-- Cursor -->
-  <div class="cursor-dot" id="cursor"></div>
-
   <!-- Home page sections -->
   <a href="#main-content" class="skip-nav">Skip to main content</a>
-  <!-- ─── NAV ──────────────────────────────────────────────────── -->
-  <nav id="nav">
-    <a href="/" class="nav-logo">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="nav-logo-full" fetchpriority="high">
+  <!-- ─── HEADER ───────────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="/" class="site-logo" aria-label="Bad Decisions Studio home">
+      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="site-logo-full" fetchpriority="high">
     </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/podcast.html">Podcast</a></li>
-      <li><a href="/learn.html">Learn</a></li>
-      <li><a href="/careers.html">Careers</a></li>
-    </ul>
-    <a href="https://learn.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-cta">Start Learning →</a>
-    <div class="nav-mobile-toggle" id="mobileToggle">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
-  <!-- ─── HERO ──────────────────────────────────────────────────── -->
+    <nav id="nav" aria-label="Primary">
+      <ul class="nav-links" id="primary-links">
+        <li><a href="/learn.html">Learn</a></li>
+        <li><a href="/podcast.html">Podcast</a></li>
+        <li><a href="/careers.html">Work with us</a></li>
+      </ul>
+      <a href="https://ai.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-cta">Learn AI</a>
+      <button type="button" class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+  <div id="main-content">
+    <!-- ─── HERO ──────────────────────────────────────────────────── -->
   <section id="hero">
     <div class="hero-bg"></div>
 
     <div class="container">
       <div class="hero-split">
         <div class="hero-content">
-          <h1 class="display-xl hero-headline">
+          <h1 class="heading-hero hero-headline">
             Ultimate Educational<br>Platform for:<br>
             <strong class="hero-rotating-word">Artists.</strong>
           </h1>
-          <p class="hero-body">
+          <p class="hero-body body-text">
             Built for learning and growth, empowering people with the skills and knowledge to unlock new opportunities.
           </p>
           <div class="hero-actions">
@@ -117,6 +116,7 @@
       <span>Scroll</span>
     </div>
   </section>
+  </div>
   <!-- ─── FEATURED ON ─────────────────────────────────────────── -->
   <div class="featured-section">
     <div class="featured-title">As Featured On</div>
@@ -166,7 +166,7 @@
       <div class="section-header reveal">
         <div class="section-header-left">
           <div class="label section-label">What We Do</div>
-          <h2 class="display-lg">Three pillars.<br>One <em>mission</em>.</h2>
+          <h2 class="heading-section">Three pillars.<br>One <em>mission</em>.</h2>
         </div>
       </div>
     </div>
@@ -246,7 +246,7 @@
     </div>
   </div>
   <!-- ─── HIGHLIGHTS ──────────────────────────────────────────── -->
-  <section style="padding: 80px 0;">
+  <section class="section-padded-sm">
     <div class="container">
       <div class="whoweare-highlights reveal">
         <div class="whoweare-highlight-card">
@@ -295,7 +295,7 @@
           <p class="pod-landing-desc">
             Tech, AI, and creative culture - broken down for builders, artists, and entrepreneurs. Two brothers sharing honest conversations with founders, CEOs, and the people shaping the future of creative technology.
           </p>
-          <p class="pod-landing-desc" style="margin-bottom: 40px;">
+          <p class="pod-landing-desc mb-lg">
             New episodes every Monday, Wednesday, and Friday.
           </p>
 
@@ -333,10 +333,10 @@
     <div class="container">
 
       <!-- Header -->
-      <div class="reveal" style="text-align: center; margin-bottom: 80px;">
-        <div class="label section-label" style="margin-bottom: 16px;">The Story</div>
-        <h2 class="display-xl" style="margin-bottom: 24px;">Two brothers.<br>One <em>bad decision</em>.</h2>
-        <p style="font-size: 20px; line-height: 1.7; color: var(--text-secondary); max-width: 640px; margin: 0 auto;">
+      <div class="reveal section-header-center">
+        <div class="label section-label">The Story</div>
+        <h2 class="heading-hero">Two brothers.<br>One <em>bad decision</em>.</h2>
+        <p class="body-text text-center-readable">
           We started with nothing. Just a camera, a computer, and a belief that creative technology should be accessible to everyone.
         </p>
       </div>
@@ -356,15 +356,15 @@
       </div>
 
       <!-- Big quote -->
-      <div class="reveal" style="text-align: center; padding: 80px 0;">
-        <blockquote style="font-family: var(--serif); font-size: clamp(24px, 3.5vw, 40px); font-weight: 300; font-style: italic; line-height: 1.4; color: var(--text-primary); max-width: 800px; margin: 0 auto;">
+      <div class="reveal text-center" style="padding: 80px 0;">
+        <blockquote class="blockquote">
           That one bad decision to quit the comfort zone and build something from nothing - it was the best decision we ever made.
         </blockquote>
       </div>
 
       <!-- Contact -->
-      <div class="reveal" style="text-align: center; padding-bottom: 40px;">
-        <div class="label" style="margin-bottom: 16px;">Get in Touch</div>
+      <div class="reveal text-center pb-lg">
+        <div class="label mb-sm" style="justify-content: center;">Get in Touch</div>
         <a href="mailto:create@baddecisions.studio" class="contact-link">
           create@baddecisions.studio →
         </a>
@@ -373,12 +373,12 @@
     </div>
   </section>
   <!-- ─── SPONSORS ──────────────────────────────────────────────── -->
-  <section id="sponsors" style="padding: 80px 0;">
+  <section id="sponsors" class="section-padded-sm">
     <div class="container">
 
-      <div style="text-align: center; margin-bottom: 48px;">
-        <div class="label section-label" style="margin-bottom: 12px;">Partners & Sponsors</div>
-        <h2 class="display-lg">Backed by the<br><em>best in the industry</em>.</h2>
+      <div class="section-header-center" style="margin-bottom: 48px;">
+        <div class="label section-label">Partners & Sponsors</div>
+        <h2 class="heading-section">Backed by the<br><em>best in the industry</em>.</h2>
       </div>
 
       <div class="sponsor-strip">
@@ -399,8 +399,8 @@
         <div class="sponsor-strip-item"><img src="/assets/clients/jumeirah.png" alt="Jumeirah" loading="lazy"></div>
       </div>
 
-      <div style="text-align: center; margin-top: 48px;">
-        <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 20px;">Interested in partnering with Bad Decisions Studio?</p>
+      <div class="text-center mt-lg">
+        <p class="body-text mb-md">Interested in partnering with Bad Decisions Studio?</p>
         <a href="mailto:create@baddecisions.studio" class="btn-primary">Become a Partner →</a>
       </div>
 
@@ -414,8 +414,8 @@
           <div style="display: flex; align-items: center; gap: 10px;">
             <img src="/assets/logo/bd-mark.svg" alt="BD" width="34" height="34" loading="lazy">
             <div>
-              <div style="font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Bad Decisions Studio</div>
-              <div style="font-size:9px;font-weight:400;letter-spacing:0.2em;color:var(--text-muted);text-transform:uppercase;">Vancouver · Dubai</div>
+              <div class="footer-brand-name">Bad Decisions Studio</div>
+              <div class="footer-brand-location">Vancouver · Dubai</div>
             </div>
           </div>
           <p>Creative technology education and content. Teaching millions to build with Unreal Engine, AI, and emerging tools.</p>

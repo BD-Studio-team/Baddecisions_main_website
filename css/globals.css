@@ -548,20 +548,6 @@ body::before {
 }
 .skip-nav:focus { top: 16px; }
 
-/* ─── CURSOR DOT ─────────────────────────────────────────────── */
-.cursor-dot {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--peach);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s, height 0.25s, opacity 0.25s;
-  mix-blend-mode: difference;
-}
-
 /* ─── SCROLLBAR ──────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -575,6 +561,40 @@ body::before {
   margin-bottom: 80px;
 }
 .section-header-center .label { justify-content: center; }
+.section-header-center .heading-section,
+.section-header-center .heading-hero { margin-bottom: 24px; }
+
+.section-padded-sm { padding: 80px 0; }
+.section-padded { padding: 120px 0; }
+
+/* ─── BLOCKQUOTE ─────────────────────────────────────────────── */
+.blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ctx-heading, var(--text-primary));
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ─── TEXT UTILITIES ─────────────────────────────────────────── */
+.text-center { text-align: center; }
+.text-center-readable {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-sm { margin-bottom: var(--space-md); }
+.mb-md { margin-bottom: var(--space-lg); }
+.mb-lg { margin-bottom: var(--space-xl); }
+.mb-xl { margin-bottom: var(--space-2xl); }
+.mt-md { margin-top: var(--space-lg); }
+.mt-lg { margin-top: var(--space-xl); }
+.pt-lg { padding-top: var(--space-xl); }
+.pb-lg { padding-bottom: var(--space-xl); }
 
 /* ─── REDUCED MOTION ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

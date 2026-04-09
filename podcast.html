@@ -42,24 +42,24 @@
   </script>
 </head>
 <body>
-  <div class="cursor-dot" id="cursor"></div>
   <a href="#main-content" class="skip-nav">Skip to main content</a>
-  <!-- ─── NAV ──────────────────────────────────────────────────── -->
-  <nav id="nav">
-    <a href="/" class="nav-logo">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="nav-logo-full" fetchpriority="high">
+  <!-- ─── HEADER ───────────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="/" class="site-logo" aria-label="Bad Decisions Studio home">
+      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="site-logo-full" fetchpriority="high">
     </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/podcast.html">Podcast</a></li>
-      <li><a href="/learn.html">Learn</a></li>
-      <li><a href="/careers.html">Careers</a></li>
-    </ul>
-    <a href="https://learn.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-cta">Start Learning →</a>
-    <div class="nav-mobile-toggle" id="mobileToggle">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
+    <nav id="nav" aria-label="Primary">
+      <ul class="nav-links" id="primary-links">
+        <li><a href="/learn.html">Learn</a></li>
+        <li><a href="/podcast.html">Podcast</a></li>
+        <li><a href="/careers.html">Work with us</a></li>
+      </ul>
+      <a href="https://ai.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-cta">Learn AI</a>
+      <button type="button" class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
   <div style="padding-top: 80px;" id="main-content">
     <!-- ─── PODCAST ───────────────────────────────────────────────── -->
   <section id="podcast">
@@ -78,8 +78,8 @@
       </a>
 
       <!-- Recent Episodes - 4 card grid -->
-      <div class="reveal" style="margin-top: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+      <div class="reveal mt-md">
+        <div class="pod-section-header">
           <h3 class="learn-row-title">Recent Episodes</h3>
           <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="learn-row-link">All Episodes →</a>
         </div>
@@ -116,8 +116,8 @@
       </div>
 
       <!-- We've Talked To - 4 card grid row -->
-      <div class="reveal" style="margin-top: 48px;">
-        <div style="margin-bottom: 24px;">
+      <div class="reveal mt-lg">
+        <div class="mb-md">
           <h3 class="learn-row-title">We've Talked To</h3>
         </div>
         <div class="pod-4grid">
@@ -191,8 +191,8 @@
           <div style="display: flex; align-items: center; gap: 10px;">
             <img src="/assets/logo/bd-mark.svg" alt="BD" width="34" height="34" loading="lazy">
             <div>
-              <div style="font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Bad Decisions Studio</div>
-              <div style="font-size:9px;font-weight:400;letter-spacing:0.2em;color:var(--text-muted);text-transform:uppercase;">Vancouver · Dubai</div>
+              <div class="footer-brand-name">Bad Decisions Studio</div>
+              <div class="footer-brand-location">Vancouver · Dubai</div>
             </div>
           </div>
           <p>Creative technology education and content. Teaching millions to build with Unreal Engine, AI, and emerging tools.</p>

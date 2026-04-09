@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Catalyst-meta/bds-vercel.git"
+    "url": "git+https://github.com/badxstudio/bds-website.git"
   },
   "keywords": [],
   "author": "Bad Decisions Studio",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/Catalyst-meta/bds-vercel/issues"
+    "url": "https://github.com/badxstudio/bds-website/issues"
   },
-  "homepage": "https://github.com/Catalyst-meta/bds-vercel#readme",
+  "homepage": "https://www.baddecisions.studio",
   "dependencies": {
     "@upstash/redis": "^1.37.0"
   }

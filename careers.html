@@ -25,94 +25,94 @@
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <div class="cursor-dot" id="cursor"></div>
   <a href="#main-content" class="skip-nav">Skip to main content</a>
-  <!-- ─── NAV ──────────────────────────────────────────────────── -->
-  <nav id="nav">
-    <a href="/" class="nav-logo">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="nav-logo-full" fetchpriority="high">
+  <!-- ─── HEADER ───────────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="/" class="site-logo" aria-label="Bad Decisions Studio home">
+      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="site-logo-full" fetchpriority="high">
     </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/podcast.html">Podcast</a></li>
-      <li><a href="/learn.html">Learn</a></li>
-      <li><a href="/careers.html">Careers</a></li>
-    </ul>
-    <a href="https://learn.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-cta">Start Learning →</a>
-    <div class="nav-mobile-toggle" id="mobileToggle">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
+    <nav id="nav" aria-label="Primary">
+      <ul class="nav-links" id="primary-links">
+        <li><a href="/learn.html">Learn</a></li>
+        <li><a href="/podcast.html">Podcast</a></li>
+        <li><a href="/careers.html">Work with us</a></li>
+      </ul>
+      <a href="https://ai.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-cta">Learn AI</a>
+      <button type="button" class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
   <div style="padding-top: 80px;" id="main-content">
     <!-- ─── CAREERS & SERVICES ──────────────────────────────────── -->
-  <section id="careers" style="padding: 120px 0;">
+  <section id="careers" class="section-padded">
     <div class="container">
 
       <!-- Header -->
-      <div class="reveal" style="text-align: center; margin-bottom: 80px;">
-        <div class="label section-label" style="margin-bottom: 16px;">Work With Us</div>
-        <h2 class="display-lg" style="margin-bottom: 20px;">Careers & <em>Services</em></h2>
-        <p style="font-size: 18px; line-height: 1.7; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+      <div class="reveal section-header-center">
+        <div class="label section-label">Work With Us</div>
+        <h2 class="heading-section">Careers & <em>Services</em></h2>
+        <p class="body-text text-center-readable">
           We're always looking for talented people and exciting projects. Whether you want to join the team or hire us - let's talk.
         </p>
       </div>
 
       <!-- Services -->
-      <div class="reveal" style="margin-bottom: 64px;">
-        <div class="label" style="margin-bottom: 24px; color: var(--text-muted);">Our Services</div>
+      <div class="reveal mb-xl">
+        <div class="label meta-text mb-md">Our Services</div>
         <div class="services-grid">
           <div class="service-card">
             <div class="service-icon">🎬</div>
-            <h3>Cinematic Production</h3>
+            <h3 class="heading-card">Cinematic Production</h3>
             <p>Real-time cinematic content using Unreal Engine 5. From concept to final render - trailers, short films, and branded content.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">🤖</div>
-            <h3>AI Integration</h3>
+            <h3 class="heading-card">AI Integration</h3>
             <p>Custom AI pipelines for creative workflows. We help teams adopt AI tools for content creation, automation, and production.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">🎓</div>
-            <h3>Corporate Training</h3>
+            <h3 class="heading-card">Corporate Training</h3>
             <p>Tailored Unreal Engine and AI training programs for studios, agencies, and enterprise teams. On-site or remote.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">🎙️</div>
-            <h3>Podcast Sponsorship</h3>
+            <h3 class="heading-card">Podcast Sponsorship</h3>
             <p>Reach 290K+ followers and millions of views. Sponsor the Bad Decisions Podcast - the #1 show in the 3D creative space.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">🎮</div>
-            <h3>Interactive Experiences</h3>
+            <h3 class="heading-card">Interactive Experiences</h3>
             <p>Virtual production, AR/VR experiences, and interactive installations built with real-time 3D technology.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">📱</div>
-            <h3>Content Strategy</h3>
+            <h3 class="heading-card">Content Strategy</h3>
             <p>Social media strategy, YouTube growth, and content production. We built 290K on Instagram and 124K on YouTube - we can help you do the same.</p>
           </div>
         </div>
       </div>
 
       <!-- Clients we've worked with -->
-      <div class="reveal" style="text-align: center; margin-bottom: 64px;">
-        <p style="font-size: 14px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Trusted by</p>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 64px; flex-wrap: wrap;">
-          <img src="/assets/featured/epic-games.svg" alt="Epic Games" style="height: 52px; width: 52px; filter: brightness(0) invert(1); opacity: 0.8;" loading="lazy">
-          <img src="/assets/featured/dell-technologies.svg" alt="Dell" style="height: 30px; filter: brightness(0) invert(1); opacity: 0.8;" loading="lazy">
-          <img src="/assets/featured/autodesk.svg" alt="Autodesk" style="height: 30px; filter: brightness(0) invert(1); opacity: 0.8;" loading="lazy">
-          <img src="/assets/clients/dubai-police.png" alt="Dubai Police" style="height: 80px; filter: brightness(0) invert(1); opacity: 0.8;" loading="lazy">
-          <img src="/assets/clients/a2rl.svg" alt="A2RL" style="height: 34px; filter: brightness(0) invert(1); opacity: 0.8;" loading="lazy">
+      <div class="reveal text-center mb-xl">
+        <p class="meta-text mb-md">Trusted by</p>
+        <div class="careers-client-logos">
+          <img src="/assets/featured/epic-games.svg" alt="Epic Games" class="trust-logo" style="height: 52px;" loading="lazy">
+          <img src="/assets/featured/dell-technologies.svg" alt="Dell" class="trust-logo" style="height: 30px;" loading="lazy">
+          <img src="/assets/featured/autodesk.svg" alt="Autodesk" class="trust-logo" style="height: 30px;" loading="lazy">
+          <img src="/assets/clients/dubai-police.png" alt="Dubai Police" class="trust-logo" style="height: 80px;" loading="lazy">
+          <img src="/assets/clients/a2rl.svg" alt="A2RL" class="trust-logo" style="height: 34px;" loading="lazy">
         </div>
       </div>
 
       <!-- Careers -->
       <div class="reveal">
-        <div class="label" style="margin-bottom: 24px; color: var(--text-muted);">Open Positions</div>
+        <div class="label meta-text mb-md">Open Positions</div>
         <div class="careers-list">
           <div class="career-card">
             <div class="career-info">
-              <h3>Video Editor</h3>
+              <h3 class="heading-card">Video Editor</h3>
               <p>Edit podcast episodes, YouTube content, and social media clips. Proficiency in Premiere Pro or DaVinci Resolve required.</p>
             </div>
             <div class="career-meta">
@@ -122,7 +122,7 @@
           </div>
           <div class="career-card">
             <div class="career-info">
-              <h3>Unreal Engine Artist</h3>
+              <h3 class="heading-card">Unreal Engine Artist</h3>
               <p>Create cinematic environments and characters in UE5 for course content and client projects. Strong portfolio required.</p>
             </div>
             <div class="career-meta">
@@ -132,7 +132,7 @@
           </div>
           <div class="career-card">
             <div class="career-info">
-              <h3>Community Manager</h3>
+              <h3 class="heading-card">Community Manager</h3>
               <p>Manage Discord, Instagram, and YouTube communities. Engage with students and creators across all platforms.</p>
             </div>
             <div class="career-meta">
@@ -142,7 +142,7 @@
           </div>
           <div class="career-card">
             <div class="career-info">
-              <h3>AI Engineer</h3>
+              <h3 class="heading-card">AI Engineer</h3>
               <p>Build and maintain proprietary AI tools for content generation, podcast automation, and creative workflows.</p>
             </div>
             <div class="career-meta">
@@ -154,9 +154,9 @@
       </div>
 
       <!-- CTA -->
-      <div class="reveal" style="text-align: center; padding: 64px 0 0;">
-        <h3 style="font-family: var(--serif); font-size: clamp(24px, 3vw, 36px); font-weight: 300; margin-bottom: 16px;">Don't see your role? <em>Reach out anyway.</em></h3>
-        <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 28px;">We're always open to hearing from talented people.</p>
+      <div class="reveal careers-cta-section">
+        <h3 class="careers-cta-heading">Don't see your role? <em>Reach out anyway.</em></h3>
+        <p class="body-text mb-md">We're always open to hearing from talented people.</p>
         <a href="mailto:create@baddecisions.studio" class="btn-primary">Get in Touch →</a>
       </div>
 
@@ -171,8 +171,8 @@
           <div style="display: flex; align-items: center; gap: 10px;">
             <img src="/assets/logo/bd-mark.svg" alt="BD" width="34" height="34" loading="lazy">
             <div>
-              <div style="font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Bad Decisions Studio</div>
-              <div style="font-size:9px;font-weight:400;letter-spacing:0.2em;color:var(--text-muted);text-transform:uppercase;">Vancouver · Dubai</div>
+              <div class="footer-brand-name">Bad Decisions Studio</div>
+              <div class="footer-brand-location">Vancouver · Dubai</div>
             </div>
           </div>
           <p>Creative technology education and content. Teaching millions to build with Unreal Engine, AI, and emerging tools.</p>
