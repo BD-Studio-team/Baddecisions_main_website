@@ -1,5 +1,5 @@
 // ─── BDS Main Script ─────────────────────────────────────────
-// Runs after all sections are loaded via the include system
+// Runs after DOM is ready (sections are pre-rendered by build script)
 
 function initBDS() {
   // ─── NAV SCROLL ──────────────────────────────────────────────
@@ -8,6 +8,28 @@ function initBDS() {
     window.addEventListener('scroll', function() {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
+  }
+
+  // ─── MOBILE NAV TOGGLE ──────────────────────────────────────
+  var toggle = document.getElementById('mobileToggle');
+  var navLinks = document.querySelector('.nav-links');
+  var navCta = document.querySelector('.nav-cta');
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('open');
+      if (navLinks) navLinks.classList.toggle('nav-open');
+      if (navCta) navCta.classList.toggle('nav-open');
+    });
+    // Close mobile nav when a link is clicked
+    if (navLinks) {
+      navLinks.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          toggle.classList.remove('open');
+          navLinks.classList.remove('nav-open');
+          if (navCta) navCta.classList.remove('nav-open');
+        });
+      });
+    }
   }
 
   // ─── SCROLL REVEAL ───────────────────────────────────────────
@@ -22,26 +44,28 @@ function initBDS() {
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(function(el) { revealObserver.observe(el); });
 
-  // ─── CUSTOM CURSOR ───────────────────────────────────────────
-  var cursor = document.getElementById('cursor');
-  if (cursor) {
-    document.addEventListener('mousemove', function(e) {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
+  // ─── CUSTOM CURSOR (pointer devices only) ───────────────────
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var cursor = document.getElementById('cursor');
+    if (cursor) {
+      document.addEventListener('mousemove', function(e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
 
-    document.querySelectorAll('a, button, .pillar-card, .ep-card, .tool-card, .social-card').forEach(function(el) {
-      el.addEventListener('mouseenter', function() {
-        cursor.style.width = '20px';
-        cursor.style.height = '20px';
-        cursor.style.opacity = '0.6';
+      document.querySelectorAll('a, button, .pillar-card, .ep-card, .tool-card, .social-card').forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+          cursor.style.width = '20px';
+          cursor.style.height = '20px';
+          cursor.style.opacity = '0.6';
+        });
+        el.addEventListener('mouseleave', function() {
+          cursor.style.width = '8px';
+          cursor.style.height = '8px';
+          cursor.style.opacity = '1';
+        });
       });
-      el.addEventListener('mouseleave', function() {
-        cursor.style.width = '8px';
-        cursor.style.height = '8px';
-        cursor.style.opacity = '1';
-      });
-    });
+    }
   }
 
   // ─── SMOOTH ANCHOR SCROLL ────────────────────────────────────
@@ -82,8 +106,23 @@ function initBDS() {
     });
   });
 
+  // ─── LAZY VIDEO AUTOPLAY ────────────────────────────────────
+  // Only hero video autoplays immediately; below-fold videos play on scroll
+  var lazyVideos = document.querySelectorAll('video[data-lazy]');
+  if (lazyVideos.length > 0) {
+    var videoObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.play();
+          videoObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+    lazyVideos.forEach(function(v) { videoObserver.observe(v); });
+  }
+
   // ─── STAGGER REVEAL ──────────────────────────────────────────
-  document.querySelectorAll('.pillars-grid .pillar-card, .episodes-grid .ep-card, .tools-grid .tool-card, .socials-grid .social-card').forEach(function(el, i) {
+  document.querySelectorAll('.pillars-grid .pillar-card, .episodes-grid .ep-card').forEach(function(el, i) {
     el.style.transitionDelay = (i * 0.06) + 's';
   });
 
@@ -116,29 +155,27 @@ function initBDS() {
         var epBadge = document.querySelector('.ep-date');
         if (epBadge) epBadge.textContent = ep.date;
 
-      // Add thumbnail to featured card — above the meta/title
-      var featuredCard = document.querySelector('.ep-featured-card.main');
-      var epMeta = featuredCard ? featuredCard.querySelector('.ep-meta') : null;
-      if (featuredCard && epMeta && ep.artworkUrl && !featuredCard.querySelector('.ep-featured-thumb')) {
-        var thumb = document.createElement('img');
-        thumb.src = ep.artworkUrl.replace('hqdefault', 'maxresdefault');
-        thumb.alt = '';
-        thumb.className = 'ep-featured-thumb';
-        thumb.loading = 'lazy';
-        featuredCard.insertBefore(thumb, epMeta);
-      }
+        // Add thumbnail to featured card
+        var featuredCard = document.querySelector('.ep-featured-card.main');
+        var epMeta = featuredCard ? featuredCard.querySelector('.ep-meta') : null;
+        if (featuredCard && epMeta && ep.artworkUrl && !featuredCard.querySelector('.ep-featured-thumb')) {
+          var thumb = document.createElement('img');
+          thumb.src = ep.artworkUrl.replace('hqdefault', 'maxresdefault');
+          thumb.alt = '';
+          thumb.className = 'ep-featured-thumb';
+          thumb.loading = 'lazy';
+          featuredCard.insertBefore(thumb, epMeta);
+        }
 
-      // Update featured episode links
-      var epBtns = document.querySelectorAll('.ep-featured-card.main .ep-btn');
-      if (epBtns.length >= 1 && ep.trackViewUrl) {
-        // Apple link on the Apple button (3rd)
-        if (epBtns[2]) epBtns[2].href = ep.trackViewUrl;
+        // Update featured episode links
+        var epBtns = document.querySelectorAll('.ep-featured-card.main .ep-btn');
+        if (epBtns.length >= 1 && ep.trackViewUrl) {
+          if (epBtns[2]) epBtns[2].href = ep.trackViewUrl;
+        }
+        if (ep.youtubeUrl) {
+          if (epBtns[1]) epBtns[1].href = ep.youtubeUrl;
+        }
       }
-      if (ep.youtubeUrl) {
-        // YouTube button (2nd)
-        if (epBtns[1]) epBtns[1].href = ep.youtubeUrl;
-      }
-      } // end if apiNum >= currentNum
 
       // Grid episodes
       var cards = document.querySelectorAll('.episodes-grid .ep-card');
@@ -163,7 +200,7 @@ function initBDS() {
           cards[i].insertBefore(img, cards[i].firstChild);
         }
 
-        // Update play button link to YouTube or Apple
+        // Update play button link
         var playBtn = cards[i].querySelector('.ep-card-play');
         if (playBtn) {
           playBtn.href = e.youtubeUrl || playBtn.href;
@@ -187,5 +224,9 @@ function handleSubscribe(e) {
   }, 3000);
 }
 
-// Listen for sections-loaded event from the include loader
-window.addEventListener('sections-loaded', initBDS);
+// Initialize after DOM is ready (sections are pre-rendered by build script)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBDS);
+} else {
+  initBDS();
+}

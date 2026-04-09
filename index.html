@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bad Decisions Studio | Creative Technology. Education. Culture.</title>
   <meta name="description" content="Bad Decisions Studio is a creative technology brand teaching millions to build with Unreal Engine, AI, and emerging tools. Podcast. Courses. Events." />
+  <link rel="canonical" href="https://www.baddecisions.studio/" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
   <meta property="og:type" content="website">
@@ -19,8 +20,42 @@
   <meta name="theme-color" content="#080808">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/globals.css" />
   <link rel="stylesheet" href="/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Bad Decisions Studio",
+        "url": "https://www.baddecisions.studio",
+        "logo": "https://www.baddecisions.studio/assets/logo/bd-logo.svg",
+        "description": "Creative technology education and content brand teaching millions to build with Unreal Engine, AI, and emerging tools.",
+        "email": "create@baddecisions.studio",
+        "founder": [
+          { "@type": "Person", "name": "Faraz Shababi", "alternateName": "Commander" },
+          { "@type": "Person", "name": "Farhad Shababi" }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/badxstudio/",
+          "https://www.youtube.com/@badxstudio",
+          "https://x.com/badxstudio",
+          "https://www.tiktok.com/@badxstudio",
+          "https://ca.linkedin.com/company/badxstudio",
+          "https://discord.gg/bWCBcmqYh9",
+          "https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "name": "Bad Decisions Studio",
+        "url": "https://www.baddecisions.studio"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -28,46 +63,409 @@
   <div class="cursor-dot" id="cursor"></div>
 
   <!-- Home page sections -->
-  <div data-include="/sections/nav.html"></div>
-  <div data-include="/sections/hero.html"></div>
-  <div data-include="/sections/featured.html"></div>
-  <div data-include="/sections/pillars.html"></div>
-  <div data-include="/sections/stats.html"></div>
-  <div data-include="/sections/highlights.html"></div>
-  <div data-include="/sections/podcast-landing.html"></div>
-  <div data-include="/sections/about.html"></div>
-  <div data-include="/sections/sponsors.html"></div>
-  <div data-include="/sections/footer.html"></div>
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+  <!-- ─── NAV ──────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="/" class="nav-logo">
+      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="nav-logo-full" fetchpriority="high">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/podcast.html">Podcast</a></li>
+      <li><a href="/learn.html">Learn</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+    </ul>
+    <a href="https://learn.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-cta">Start Learning →</a>
+    <div class="nav-mobile-toggle" id="mobileToggle">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <!-- ─── HERO ──────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
 
-  <!-- Section loader -->
-  <script>
-    (function() {
-      var slots = document.querySelectorAll('[data-include]');
-      var total = slots.length;
-      var loaded = 0;
+    <div class="container">
+      <div class="hero-split">
+        <div class="hero-content">
+          <h1 class="display-xl hero-headline">
+            Ultimate Educational<br>Platform for:<br>
+            <strong class="hero-rotating-word">Artists.</strong>
+          </h1>
+          <p class="hero-body">
+            Built for learning and growth, empowering people with the skills and knowledge to unlock new opportunities.
+          </p>
+          <div class="hero-actions">
+            <a href="/podcast.html" class="btn-primary">
+              Podcast
+            </a>
+            <a href="/learn.html" class="btn-secondary">
+              Education
+            </a>
+          </div>
+        </div>
+        <div class="hero-video-wrap">
+          <video autoplay muted loop playsinline>
+            <source src="/assets/video/hero-video.webm" type="video/webm">
+            <source src="/assets/video/hero-video.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
 
-      slots.forEach(function(slot) {
-        var includeUrl = slot.getAttribute('data-include');
-        if (!includeUrl || !includeUrl.startsWith('/sections/')) return;
-        fetch(includeUrl)
-          .then(function(r) { return r.text(); })
-          .then(function(html) {
-            var temp = document.createElement('div');
-            temp.innerHTML = html;
-            while (temp.firstChild) {
-              slot.parentNode.insertBefore(temp.firstChild, slot);
-            }
-            slot.parentNode.removeChild(slot);
-            loaded++;
-            if (loaded === total) {
-              window.dispatchEvent(new Event('sections-loaded'));
-            }
-          });
-      });
-    })();
-  </script>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+  <!-- ─── FEATURED ON ─────────────────────────────────────────── -->
+  <div class="featured-section">
+    <div class="featured-title">As Featured On</div>
+    <div class="featured-scroll-wrap">
+      <div class="featured-scroll-track">
+        <img src="/assets/featured/epic-games.svg" alt="Epic Games" loading="lazy">
+        <img src="/assets/featured/unreal-engine.svg" alt="Unreal Engine" loading="lazy">
+        <img src="/assets/featured/dell-technologies.svg" alt="Dell Technologies" loading="lazy">
+        <img src="/assets/featured/autodesk.svg" alt="Autodesk" loading="lazy">
+        <img src="/assets/featured/metahuman.svg" alt="MetaHuman" loading="lazy">
+        <img src="/assets/featured/80lv.svg" alt="80 Level" loading="lazy">
+        <img src="/assets/featured/snapchat.svg" alt="Snapchat" loading="lazy">
+        <img src="/assets/featured/move-ai.svg" alt="Move AI" loading="lazy">
+        <!-- copy 2 -->
+        <img src="/assets/featured/epic-games.svg" alt="Epic Games" loading="lazy">
+        <img src="/assets/featured/unreal-engine.svg" alt="Unreal Engine" loading="lazy">
+        <img src="/assets/featured/dell-technologies.svg" alt="Dell Technologies" loading="lazy">
+        <img src="/assets/featured/autodesk.svg" alt="Autodesk" loading="lazy">
+        <img src="/assets/featured/metahuman.svg" alt="MetaHuman" loading="lazy">
+        <img src="/assets/featured/80lv.svg" alt="80 Level" loading="lazy">
+        <img src="/assets/featured/snapchat.svg" alt="Snapchat" loading="lazy">
+        <img src="/assets/featured/move-ai.svg" alt="Move AI" loading="lazy">
+        <!-- copy 3 -->
+        <img src="/assets/featured/epic-games.svg" alt="Epic Games" loading="lazy">
+        <img src="/assets/featured/unreal-engine.svg" alt="Unreal Engine" loading="lazy">
+        <img src="/assets/featured/dell-technologies.svg" alt="Dell Technologies" loading="lazy">
+        <img src="/assets/featured/autodesk.svg" alt="Autodesk" loading="lazy">
+        <img src="/assets/featured/metahuman.svg" alt="MetaHuman" loading="lazy">
+        <img src="/assets/featured/80lv.svg" alt="80 Level" loading="lazy">
+        <img src="/assets/featured/snapchat.svg" alt="Snapchat" loading="lazy">
+        <img src="/assets/featured/move-ai.svg" alt="Move AI" loading="lazy">
+        <!-- copy 4 -->
+        <img src="/assets/featured/epic-games.svg" alt="Epic Games" loading="lazy">
+        <img src="/assets/featured/unreal-engine.svg" alt="Unreal Engine" loading="lazy">
+        <img src="/assets/featured/dell-technologies.svg" alt="Dell Technologies" loading="lazy">
+        <img src="/assets/featured/autodesk.svg" alt="Autodesk" loading="lazy">
+        <img src="/assets/featured/metahuman.svg" alt="MetaHuman" loading="lazy">
+        <img src="/assets/featured/80lv.svg" alt="80 Level" loading="lazy">
+        <img src="/assets/featured/snapchat.svg" alt="Snapchat" loading="lazy">
+        <img src="/assets/featured/move-ai.svg" alt="Move AI" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <!-- ─── PILLARS ───────────────────────────────────────────────── -->
+  <section id="pillars">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header-left">
+          <div class="label section-label">What We Do</div>
+          <h2 class="display-lg">Three pillars.<br>One <em>mission</em>.</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="pillars-grid">
+        <div class="pillar-card reveal">
+          <div class="pillar-number">01</div>
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="#FFEF7B" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4zm7 10a7 7 0 01-6 6.93V21h3a1 1 0 110 2H8a1 1 0 110-2h3v-3.07A7 7 0 015 11a1 1 0 112 0 5 5 0 0010 0 1 1 0 112 0z"/>
+          </svg>
+          <h3 class="pillar-title">The Bad Decisions Podcast</h3>
+          <p class="pillar-body">Tech, AI, and creative culture - broken down for builders, artists, and entrepreneurs. New episodes every Monday, Wednesday, and Friday.</p>
+          <div>
+            <div class="pillar-stat">78+ Episodes</div>
+            <div class="pillar-stat-label">Released to date</div>
+          </div>
+          <div class="pillar-bg-num">01</div>
+        </div>
+        <div class="pillar-card reveal reveal-delay-1">
+          <div class="pillar-number">02</div>
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="#FFEF7B" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17a1 1 0 102 0V9L12 3zm5 12.09L12 18l-5-2.91V12.27L12 15l5-2.73v2.82zM12 13L4.35 9 12 5l7.65 4L12 13z"/>
+          </svg>
+          <h3 class="pillar-title">World-Class Education</h3>
+          <p class="pillar-body">From free YouTube tutorials with millions of views to premium cinematic courses - we teach Unreal Engine, AI, and creative tech the right way.</p>
+          <div>
+            <div class="pillar-stat">7.9M+ Views</div>
+            <div class="pillar-stat-label">Free tutorials on YouTube</div>
+          </div>
+          <div class="pillar-bg-num">02</div>
+        </div>
+        <div class="pillar-card reveal reveal-delay-2">
+          <div class="pillar-number">03</div>
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="#FFEF7B" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-2 .89-2 2v11c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+          </svg>
+          <h3 class="pillar-title">Services & Clients</h3>
+          <p class="pillar-body">Delivering cinematic production, AI integration, and creative technology solutions to top-tier clients across the US, Canada, Europe, and the Middle East.</p>
+          <div>
+            <div class="pillar-stat">6+ Regions</div>
+            <div class="pillar-stat-label">Clients worldwide</div>
+          </div>
+          <div class="pillar-bg-num">03</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ─── STATS ──────────────────────────────────────────────── -->
+  <div class="stats-section reveal">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">7.9M+</div>
+          <div class="stat-label">Video Views</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">290K</div>
+          <div class="stat-label">Instagram Followers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1,500+</div>
+          <div class="stat-label">Students Enrolled</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">80+</div>
+          <div class="stat-label">Countries Reached</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">78+</div>
+          <div class="stat-label">Podcast Episodes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">124K</div>
+          <div class="stat-label">YouTube Subscribers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ─── HIGHLIGHTS ──────────────────────────────────────────── -->
+  <section style="padding: 80px 0;">
+    <div class="container">
+      <div class="whoweare-highlights reveal">
+        <div class="whoweare-highlight-card">
+          <div class="whoweare-highlight-video">
+            <video data-lazy muted loop playsinline>
+              <source src="/assets/video/education-reel.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3><em>Teaching</em> millions of learners worldwide</h3>
+          <p>Through engaging, easy-to-follow content that helped them upskill and find career opportunities.</p>
+        </div>
+        <div class="whoweare-highlight-card">
+          <div class="whoweare-highlight-video">
+            <video data-lazy muted loop playsinline>
+              <source src="/assets/video/epic-featured.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3>Officially featured by <em>Epic Games</em></h3>
+          <p>The cinematic recreated in this course has been officially featured on Epic Games Launcher.</p>
+        </div>
+        <div class="whoweare-highlight-card">
+          <div class="whoweare-highlight-video">
+            <video data-lazy muted loop playsinline>
+              <source src="/assets/video/podcast-reel.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3>Hosts of the <em>#1 Podcast</em> in the 3D space</h3>
+          <p>Featuring conversations with founders, CEOs, creatives, and thoughtful leaders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ─── PODCAST LANDING ─────────────────────────────────────── -->
+  <section class="pod-landing">
+    <div class="container">
+      <div class="pod-landing-grid">
 
-  <!-- Main script (initializes after sections load) -->
+        <!-- Real iPhone screenshot -->
+        <div class="pod-phone-img">
+          <img src="/assets/podcast/iphone-spotify.png" alt="Bad Decisions Podcast on Spotify" loading="lazy">
+        </div>
+
+        <!-- Content -->
+        <div class="pod-landing-content">
+          <h2 class="pod-landing-title">The Bad Decisions<br>Podcast</h2>
+          <p class="pod-landing-desc">
+            Tech, AI, and creative culture - broken down for builders, artists, and entrepreneurs. Two brothers sharing honest conversations with founders, CEOs, and the people shaping the future of creative technology.
+          </p>
+          <p class="pod-landing-desc" style="margin-bottom: 40px;">
+            New episodes every Monday, Wednesday, and Friday.
+          </p>
+
+          <div class="pod-landing-label">Listen on:</div>
+          <div class="pod-landing-platforms">
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-platform-btn">
+              <img src="/assets/platforms/spotify.svg" alt="" width="24" height="24">
+              <div>
+                <span class="pod-platform-listen">Listen on</span>
+                <span class="pod-platform-name">Spotify</span>
+              </div>
+            </a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-platform-btn">
+              <img src="/assets/platforms/apple-podcasts.svg" alt="" width="24" height="24">
+              <div>
+                <span class="pod-platform-listen">Listen on</span>
+                <span class="pod-platform-name">Apple Podcasts</span>
+              </div>
+            </a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-platform-btn">
+              <img src="/assets/platforms/youtube.svg" alt="" width="24" height="24">
+              <div>
+                <span class="pod-platform-listen">Watch on</span>
+                <span class="pod-platform-name">YouTube</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ─── ABOUT ──────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="reveal" style="text-align: center; margin-bottom: 80px;">
+        <div class="label section-label" style="margin-bottom: 16px;">The Story</div>
+        <h2 class="display-xl" style="margin-bottom: 24px;">Two brothers.<br>One <em>bad decision</em>.</h2>
+        <p style="font-size: 20px; line-height: 1.7; color: var(--text-secondary); max-width: 640px; margin: 0 auto;">
+          We started with nothing. Just a camera, a computer, and a belief that creative technology should be accessible to everyone.
+        </p>
+      </div>
+
+      <!-- Videos side by side -->
+      <div class="about-videos-row reveal">
+        <div class="about-video-card">
+          <video data-lazy muted loop playsinline>
+            <source src="/assets/video/before.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="about-video-card">
+          <video data-lazy muted loop playsinline>
+            <source src="/assets/video/after.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- Big quote -->
+      <div class="reveal" style="text-align: center; padding: 80px 0;">
+        <blockquote style="font-family: var(--serif); font-size: clamp(24px, 3.5vw, 40px); font-weight: 300; font-style: italic; line-height: 1.4; color: var(--text-primary); max-width: 800px; margin: 0 auto;">
+          That one bad decision to quit the comfort zone and build something from nothing - it was the best decision we ever made.
+        </blockquote>
+      </div>
+
+      <!-- Contact -->
+      <div class="reveal" style="text-align: center; padding-bottom: 40px;">
+        <div class="label" style="margin-bottom: 16px;">Get in Touch</div>
+        <a href="mailto:create@baddecisions.studio" class="contact-link">
+          create@baddecisions.studio →
+        </a>
+      </div>
+
+    </div>
+  </section>
+  <!-- ─── SPONSORS ──────────────────────────────────────────────── -->
+  <section id="sponsors" style="padding: 80px 0;">
+    <div class="container">
+
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div class="label section-label" style="margin-bottom: 12px;">Partners & Sponsors</div>
+        <h2 class="display-lg">Backed by the<br><em>best in the industry</em>.</h2>
+      </div>
+
+      <div class="sponsor-strip">
+        <div class="sponsor-strip-item"><img src="/assets/clients/epic-games.png" alt="Epic Games" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/dell.svg" alt="Dell" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/youtube.svg" alt="YouTube" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/snapchat.svg" alt="Snapchat" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/dubai-police.png" alt="Dubai Police" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/a2rl.svg" alt="A2RL" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/polycam.svg" alt="Polycam" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/featured/autodesk.svg" alt="Autodesk" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/featured/metahuman.svg" alt="MetaHuman" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/featured/unreal-engine.svg" alt="Unreal Engine" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/featured/move-ai.svg" alt="Move AI" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/featured/80lv.svg" alt="80 Level" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/artbat.png" alt="ARTBAT" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/food-fighters.png" alt="Food Fighters" loading="lazy"></div>
+        <div class="sponsor-strip-item"><img src="/assets/clients/jumeirah.png" alt="Jumeirah" loading="lazy"></div>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;">
+        <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 20px;">Interested in partnering with Bad Decisions Studio?</p>
+        <a href="mailto:create@baddecisions.studio" class="btn-primary">Become a Partner →</a>
+      </div>
+
+    </div>
+  </section>
+  <!-- ─── FOOTER ──────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/assets/logo/bd-mark.svg" alt="BD" width="34" height="34" loading="lazy">
+            <div>
+              <div style="font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Bad Decisions Studio</div>
+              <div style="font-size:9px;font-weight:400;letter-spacing:0.2em;color:var(--text-muted);text-transform:uppercase;">Vancouver · Dubai</div>
+            </div>
+          </div>
+          <p>Creative technology education and content. Teaching millions to build with Unreal Engine, AI, and emerging tools.</p>
+          <div class="footer-social-row">
+            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platforms/instagram.svg" alt="Instagram" width="16" height="16" loading="lazy"></a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><img src="/assets/platforms/youtube.svg" alt="YouTube" width="16" height="16" loading="lazy"></a>
+            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><img src="/assets/platforms/x.svg" alt="X" width="16" height="16" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><img src="/assets/platforms/tiktok.svg" alt="TikTok" width="16" height="16" loading="lazy"></a>
+            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><img src="/assets/platforms/linkedin.svg" alt="LinkedIn" width="16" height="16" loading="lazy"></a>
+            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><img src="/assets/platforms/discord.svg" alt="Discord" width="16" height="16" loading="lazy"></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Studio</div>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="mailto:create@baddecisions.studio">Contact</a></li>
+            <li><a href="mailto:create@baddecisions.studio">Events</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Podcast</div>
+          <ul class="footer-links">
+            <li><a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer">Spotify</a></li>
+            <li><a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer">Apple Podcasts</a></li>
+            <li><a href="/podcast">All Episodes</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Education</div>
+          <ul class="footer-links">
+            <li><a href="https://learn.baddecisions.studio" target="_blank" rel="noopener noreferrer">Ultimate UE Program</a></li>
+            <li><a href="https://ai.baddecisions.studio" target="_blank" rel="noopener noreferrer">AI Program</a></li>
+            <li><a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer">Free Tutorials</a></li>
+            <li><a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 Bad Decisions Studio. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main script -->
   <script src="/js/main.js"></script>
 
 </body>

@@ -1,9 +1,10 @@
 {
   "name": "bds-vercel",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bad Decisions Studio website",
   "main": "index.js",
   "scripts": {
+    "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,7 +12,7 @@
     "url": "git+https://github.com/Catalyst-meta/bds-vercel.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bad Decisions Studio",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
