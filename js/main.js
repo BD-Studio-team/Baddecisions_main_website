@@ -198,12 +198,11 @@ function initBDS() {
         var cardTitle = cards[i].querySelector('.pod-showcase-name h4');
         if (cardTitle) cardTitle.textContent = e.title || '';
 
-        // Update meta (episode number, date, duration)
-        var cardMeta = cards[i].querySelector('.pod-showcase-name span');
+        // Update meta (episode number + date only, no duration)
+        var cardMeta = cards[i].querySelector('.pod-card-meta');
         if (cardMeta) {
           var metaParts = ['Ep. ' + (e.episodeNumber || '')];
           if (e.date) metaParts.push(e.date);
-          if (e.duration) metaParts.push(e.duration);
           cardMeta.textContent = metaParts.join(' \u00b7 ');
         }
       }

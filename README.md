@@ -1,117 +1,135 @@
 # Bad Decisions Studio — Website
 
-Production website for [Bad Decisions Studio](https://www.baddecisions.studio), a creative technology education and content brand.
+Production marketing site for [Bad Decisions Studio](https://www.baddecisions.studio), focused on education, podcast discovery, and creative technology brand storytelling.
 
 ## Stack
 
 - **HTML/CSS/JS** — vanilla, no framework
-- **Vercel** — hosting, CDN, serverless functions
-- **Upstash Redis** — podcast episode cache (via Vercel Marketplace)
-- **Google Fonts** — Cormorant Garamond, DM Sans, Syne
+- **Vercel** — hosting, CDN, security headers, serverless functions
+- **Upstash Redis** — optional podcast episode cache (via Vercel Marketplace)
+- **Google Fonts** — Cormorant Garamond, Inter, Azeret Mono (+ PP Editorial New when self-hosted)
 
 ## Project Structure
 
-```
-├── build.js              Build script — inlines section partials into pages
-├── templates/            Source page templates (with data-include markers)
+```text
+├── build.js              Build script — inlines section partials into final pages
+├── templates/            Source page templates (head, meta, layout)
 │   ├── index.html
 │   ├── learn.html
 │   ├── podcast.html
 │   └── careers.html
-├── sections/             HTML partials (source of truth for editing)
-│   ├── nav.html
-│   ├── hero.html
-│   ├── featured.html
-│   ├── pillars.html
-│   ├── stats.html
-│   ├── highlights.html
-│   ├── podcast-landing.html
-│   ├── about.html
-│   ├── sponsors.html
-│   ├── footer.html
-│   ├── learn.html
-│   ├── podcast.html
-│   └── careers.html
+├── sections/             Shared HTML partials (content blocks)
+│   ├── nav.html          Nav with skip-link, mobile toggle, a11y attrs
+│   ├── hero.html         Hero with video + integrated featured logo strip
+│   ├── pillars.html      Three-pillar value prop
+│   ├── stats.html        Key metrics band
+│   ├── highlights.html   Three video highlight cards
+│   ├── podcast-landing.html   Podcast CTA with iPhone mockup
+│   ├── about.html        Founder story + blockquote
+│   ├── sponsors.html     Partner logo grid (5-col)
+│   ├── footer.html       Links, socials, copyright
+│   ├── learn.html        Premium courses + free series grid
+│   ├── podcast.html      Featured ep, recent eps, listen-on, guest grid
+│   └── careers.html      Services, trust logos, open positions
 ├── css/
-│   ├── globals.css       Design system (tokens, typography, components)
-│   └── style.css         Section-specific layouts
+│   ├── globals.css       Design system tokens, typography, buttons, badges, utilities
+│   └── style.css         Section-specific layouts and responsive rules
 ├── js/
-│   └── main.js           Navigation, scroll reveal, podcast API, lazy video
+│   └── main.js           Nav toggle, scroll reveal, word rotation, podcast API, lazy video
 ├── api/
-│   └── podcast.js        Serverless function — fetches live podcast episodes
-├── assets/               Static assets (logos, videos, images)
-├── vercel.json           Vercel config, cache headers, security headers
-├── sitemap.xml           Sitemap for all pages
-├── llms.txt              Machine-readable brand info for LLMs
-└── CLAUDE.md             AI assistant instructions
+│   └── podcast.js        Serverless — Apple Podcasts + YouTube Data API + Redis cache
+├── assets/               Logos, videos, thumbnails, platform icons
+├── llms.txt              Machine-readable brand summary
+├── sitemap.xml           All public pages
+├── vercel.json           Build command, cache headers, security headers
+├── CLAUDE.md             AI assistant build instructions + design rules
+└── index.html            ← Build output (do not edit directly)
 ```
 
-## Setup
+## Pages
 
-```bash
-npm install
-```
+| Page | URL | Sections |
+|------|-----|----------|
+| Home | `/` | Hero (with featured strip), pillars, stats, highlights, podcast landing, about, sponsors, footer |
+| Podcast | `/podcast` | Header, featured episode, recent episodes, listen-on platforms, notable guests (peach bg), footer |
+| Learn | `/learn` | Premium programs, featured playlist, free series grid, footer |
+| Careers | `/careers` | Services grid, trust logos, open positions, CTA, footer |
 
 ## Development
 
-1. **Edit sections** in `sections/` — these are the HTML partials
-2. **Edit templates** in `templates/` — these define page structure and `<head>` meta
-3. **Build** to generate the final HTML pages:
-
 ```bash
-npm run build
+npm install
+npm run build        # Inlines sections into pages
+npx serve .          # Local preview (podcast API won't work locally)
 ```
 
-This inlines the section partials into the page templates and outputs complete HTML to the project root. The root `index.html`, `learn.html`, `podcast.html`, and `careers.html` are build outputs — do not edit them directly.
+**Workflow:** Edit `sections/` or `templates/` → run `npm run build` → refresh browser.
 
-4. **Preview locally** — open the root HTML files in a browser, or use a local server:
+Do NOT edit root HTML files directly — they are build outputs.
 
-```bash
-npx serve .
-```
+## Build Script
 
-Note: The podcast API (`/api/podcast`) only works on Vercel (serverless function).
-
-## Deployment
-
-The site auto-deploys to Vercel on push to main. Vercel runs `npm run build` before serving.
-
-```bash
-vercel deploy          # preview deploy
-vercel deploy --prod   # production deploy
-```
-
-## Environment Variables
-
-Set these in the Vercel dashboard (or `.env.local` for local testing):
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `YOUTUBE_API_KEY` | Optional | YouTube Data API key for episode thumbnail lookup |
-| `KV_REST_API_URL` | Optional | Upstash Redis REST URL (auto-set via Vercel Marketplace) |
-| `KV_REST_API_TOKEN` | Optional | Upstash Redis REST token (auto-set via Vercel Marketplace) |
-
-The podcast API works without these — it falls back to Apple Podcasts artwork and a hardcoded YouTube cache.
+`build.js` reads each template from `templates/`, replaces `<div data-include="/sections/...">` markers with the actual section content, injects `globals.css`, and writes the final HTML to the project root.
 
 ## CSS Architecture
 
-- **`globals.css`** — Design system foundation: custom properties, typography classes, button/card components, context-based color system (`--ctx-*` variables), animation utilities
-- **`style.css`** — Section-specific layouts: nav, hero, pillars, podcast, learn, about, sponsors, footer, and all responsive breakpoints
+- **`globals.css`** (724 lines) — Design tokens, custom properties, context classes (`.bg-dark`, `.bg-light`, `.bg-green`), typography (`.heading-hero`, `.heading-section`, `.heading-card`, `.label`, `.body-text`, `.meta-text`), buttons (`.btn-primary`, `.btn-secondary`, `.btn-teal`, `.btn-peach`, `.btn-light`), badges (`.badge--episode`, `.badge--new`, `.badge--free`, `.badge--live`), cards, stats, utilities, spacing helpers, scroll reveal, reduced-motion support
+- **`style.css`** (3,419 lines) — Nav, hero, featured scroller, pillars, podcast, learn, about, sponsors grid, careers, footer, all responsive breakpoints
 
-## Key URLs
+### Design Tokens (from brand review)
 
-| Page | URL |
-|------|-----|
-| Home | https://www.baddecisions.studio |
-| Podcast | https://www.baddecisions.studio/podcast |
-| Learn | https://www.baddecisions.studio/learn |
-| Careers | https://www.baddecisions.studio/careers |
-| Course (external) | https://learn.baddecisions.studio |
-| AI Program (external) | https://ai.baddecisions.studio |
-| Academy LMS (external) | https://academy.baddecisions.studio |
+| Token | Value |
+|-------|-------|
+| `--color-void` | `#000000` |
+| `--color-paper` | `#FBF9ED` |
+| `--color-yellow` | `#FFEF7B` |
+| `--color-teal-dark` | `#3A5D5B` |
+| `--color-teal-light` | `#97C7CD` |
+| `--color-peach` | `#C17E59` |
+| `--color-brown` | `#937E67` |
+| `--radius-button` | `4px` |
+| `--radius-badge` | `2px` |
+| `--radius-card` | `4px` |
+| `--font-editorial` | PP Editorial New |
+| `--font-body` | Inter |
+| `--font-mono` | Azeret Mono |
 
-## Notes
+### Section Background Rotation
 
-- Privacy Policy and Terms of Service pages are placeholder links (`#`) — need dedicated pages
-- The `sections/` directory is publicly accessible but contains only HTML fragments
-- Footer copyright year should be updated annually
+Sections rotate through brand colors — never all the same background:
+1. `#000000` — void (hero, main content)
+2. `#FFEF7B` — yellow (stats bands)
+3. `#3A5D5B` — teal (featured content)
+4. `#FBF9ED` — paper (light inversions)
+5. `#C17E59` — peach (CTAs, guest sections)
+
+## SEO & Accessibility
+
+- Canonical tags on all pages
+- Open Graph + Twitter Card meta on all pages
+- JSON-LD structured data (Organization, WebSite, PodcastSeries, Course)
+- Sitemap covering all public pages
+- `llms.txt` for LLM crawlers
+- Skip-nav link with `#main-content` target
+- `rel="noopener noreferrer"` on all external links
+- `prefers-reduced-motion` support (CSS + JS)
+- Lazy video autoplay via IntersectionObserver
+
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `YOUTUBE_API_KEY` | Optional | YouTube Data API key for episode thumbnails |
+| `KV_REST_API_URL` | Optional | Upstash Redis REST URL |
+| `KV_REST_API_TOKEN` | Optional | Upstash Redis REST token |
+
+Falls back to Apple Podcasts artwork + hardcoded YouTube cache if not set.
+
+## Deployment
+
+```bash
+vercel deploy          # Preview
+vercel deploy --prod   # Production
+```
+
+Vercel runs `npm run build` automatically before serving.

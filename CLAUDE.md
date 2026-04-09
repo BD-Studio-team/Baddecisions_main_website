@@ -119,23 +119,53 @@ After all assets are in place:
 
 | Rule | Value |
 |------|-------|
-| Background | `#080808` |
-| Card surface | `#111111` |
-| Primary text | `#EBEBEB` |
-| Gold accent | `#C8A44A` |
-| Display font | Cormorant Garamond (Google Fonts, already loaded) |
-| UI font | Syne (Google Fonts, already loaded) |
-| Border style | `1px solid #202020` — never rounded, always sharp |
-| Spacing unit | Grid of `2px` gaps between cards/cells — maintain this |
-| All-caps | Only for `.label` and `.section-label` elements — nowhere else |
+| Primary text | `#FBF9ED` (tan, never pure white) |
+| Display font | PP Editorial New (italic = always #FFEF7B) |
+| Body font | Inter |
+| Mono font | Azeret Mono (eyebrow labels, metadata, timestamps) |
 | Animations | Preserve all existing `.reveal` scroll animations |
 
 **Never:**
-- Add border-radius to cards, buttons, or the logo mark
-- Use purple, blue, or any accent other than gold
-- Use Inter, Roboto, or system-ui as a display font
+- Use pure white (#fff) for heading text on dark backgrounds
+- Use the same gray for body text on dark and light backgrounds
 - Add drop shadows (use borders instead)
-- Break the 2px grid gap between cards
+
+### Button System
+- border-radius: 4px on ALL buttons — never pill/rounded, never 0px
+- Primary: background `#FFEF7B`, color `#000`, font-weight 700
+- Secondary: background transparent, border `1.5px solid rgba(255,255,255,.25)`, color `#fff`
+- Teal action: background `#3A5D5B`, color `#fff`
+- Peach action: background `#C17E59`, color `#fff`
+- Light (on paper sections): background `#000`, color `#fff`
+- Font: Inter, font-size 13px, letter-spacing .02em
+
+### Section Background Rotation
+Sections must NOT all be #000. Rotate through:
+1. `#000000` — void (hero, podcast section)
+2. `#FFEF7B` — yellow (stats band) → all text #000
+3. `#3A5D5B` — teal (podcast grid, features)
+4. `#FBF9ED` — paper/tan (courses, light inversion)
+5. `#C17E59` — peach (CTA blocks, events)
+Never use more than 2 accent colors in the same viewport.
+
+### Typography Rules
+- PP Editorial New italic = always color `#FFEF7B`, no exceptions
+- Eyebrow labels = Azeret Mono, 11px, letter-spacing `.15em`, text-transform uppercase
+- Stats numbers = PP Editorial New, large, bold
+- Metadata/timestamps = Azeret Mono only
+
+### Badge/Tag System
+- border-radius: 2px (nearly square)
+- Episode tag: background `#3A5D5B`, color `#97C7CD`
+- New: background `#FFEF7B`, color `#000`
+- Bestseller: background `#C17E59`, color `#fff`
+- Free: border `1.5px solid #FFEF7B`, color `#FFEF7B`, background transparent
+- Live: background `rgba(255,239,123,.1)`, color `#FFEF7B`, with 5px pulsing dot
+
+### Footer
+- Top: 6px colour bar split across 5 divs — `#FFEF7B`, `#3A5D5B`, `#97C7CD`, `#C17E59`, `#937E67`
+- Social icons: 36x36px, border-radius 4px, background `rgba(255,255,255,.06)`
+- Newsletter input: underline style only (border-bottom), no box border
 
 ---
 

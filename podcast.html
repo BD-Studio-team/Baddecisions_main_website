@@ -45,10 +45,10 @@
   <a href="#main-content" class="skip-nav">Skip to main content</a>
   <!-- ─── HEADER ───────────────────────────────────────────────── -->
   <header class="site-header">
-    <a href="/" class="site-logo" aria-label="Bad Decisions Studio home">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="site-logo-full" fetchpriority="high">
-    </a>
     <nav id="nav" aria-label="Primary">
+      <a href="/" class="site-logo" aria-label="Bad Decisions Studio home">
+        <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" class="site-logo-full" fetchpriority="high">
+      </a>
       <ul class="nav-links" id="primary-links">
         <li><a href="/learn.html">Learn</a></li>
         <li><a href="/podcast.html">Podcast</a></li>
@@ -65,6 +65,11 @@
   <section id="podcast">
     <div class="container">
 
+      <!-- Page header -->
+      <div class="reveal" style="margin-bottom: 48px;">
+        <div class="label section-label">The Bad Decisions Podcast</div>
+        <h1 class="heading-section">A practical guide to modern Tech, AI, and <em>Business</em>.</h1>
+      </div>
 
       <!-- Big featured episode -->
       <a href="https://www.youtube.com/watch?v=xRx7yKg0n-U" target="_blank" rel="noopener noreferrer" class="pod-hero reveal">
@@ -81,105 +86,135 @@
       <div class="reveal mt-md">
         <div class="pod-section-header">
           <h3 class="learn-row-title">Recent Episodes</h3>
-          <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="learn-row-link">All Episodes →</a>
         </div>
         <div class="pod-4grid">
           <a href="https://www.youtube.com/watch?v=ETeL0mYJxQs" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
             <img src="https://i.ytimg.com/vi/ETeL0mYJxQs/maxresdefault.jpg" alt="" loading="lazy">
             <div class="pod-showcase-name">
               <h4>Seedance 2.0 Is Finally Here but ...</h4>
-              <span>Ep. 102 · Apr 2026</span>
+              <span class="pod-card-meta">Ep. 102 · Apr 2026</span>
             </div>
           </a>
           <a href="https://www.youtube.com/watch?v=SJlxJMQkkgg" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
             <img src="https://i.ytimg.com/vi/SJlxJMQkkgg/maxresdefault.jpg" alt="" loading="lazy">
             <div class="pod-showcase-name">
               <h4>$122 BILLION to make CHATGPT the AI Super App</h4>
-              <span>Ep. 101 · Apr 2026 · 1h 8m</span>
+              <span class="pod-card-meta">Ep. 101 · Apr 2026</span>
             </div>
           </a>
           <a href="https://www.youtube.com/watch?v=dQ66PVD3oVY" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
             <img src="https://i.ytimg.com/vi/dQ66PVD3oVY/maxresdefault.jpg" alt="" loading="lazy">
             <div class="pod-showcase-name">
               <h4>Can we Create Quality Visuals and Music with AI?</h4>
-              <span>Ep. 100 · Mar 2026 · 49m</span>
+              <span class="pod-card-meta">Ep. 100 · Mar 2026</span>
             </div>
           </a>
           <a href="https://www.youtube.com/watch?v=315kvYywUGU" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
             <img src="https://i.ytimg.com/vi/315kvYywUGU/maxresdefault.jpg" alt="" loading="lazy">
             <div class="pod-showcase-name">
               <h4>The Most Powerful AI MODEL Leaked</h4>
-              <span>Ep. 99 · Mar 2026 · 1h 5m</span>
+              <span class="pod-card-meta">Ep. 99 · Mar 2026</span>
             </div>
           </a>
+        </div>
+
+        <!-- Listen on platforms -->
+        <div class="pod-listen-row reveal">
+          <div class="pod-listen-label">Listen on:</div>
+          <div class="pod-listen-buttons">
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-listen-btn">
+              <img src="/assets/platforms/spotify.svg" alt="" width="24" height="24">
+              <div>
+                <span class="pod-listen-sub">Listen on</span>
+                <span class="pod-listen-name">Spotify</span>
+              </div>
+            </a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-listen-btn">
+              <img src="/assets/platforms/apple-podcasts.svg" alt="" width="24" height="24">
+              <div>
+                <span class="pod-listen-sub">Listen on</span>
+                <span class="pod-listen-name">Apple Podcasts</span>
+              </div>
+            </a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-listen-btn">
+              <img src="/assets/platforms/youtube.svg" alt="" width="24" height="24">
+              <div>
+                <span class="pod-listen-sub">Watch on</span>
+                <span class="pod-listen-name">YouTube</span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- We've Talked To - 4 card grid row -->
-      <div class="reveal mt-lg">
-        <div class="mb-md">
-          <h3 class="learn-row-title">We've Talked To</h3>
-        </div>
-        <div class="pod-4grid">
-          <a href="https://www.youtube.com/watch?v=cfPeP0s8EKU" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/cfPeP0s8EKU/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Mo Gawdat</h4>
-              <span>Ex-Chief Business Officer, Google X</span>
-            </div>
-          </a>
-          <a href="https://www.youtube.com/watch?v=hx3lnDHeqKs" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/hx3lnDHeqKs/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Ton Roosendaal</h4>
-              <span>Founder & CEO, Blender</span>
-            </div>
-          </a>
-          <a href="https://www.youtube.com/watch?v=JRXmPbOr9Hk" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/JRXmPbOr9Hk/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Nikola Todorovic</h4>
-              <span>CEO, Wonder Dynamics</span>
-            </div>
-          </a>
-          <a href="https://www.youtube.com/watch?v=E5IIMNQ4rl4" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/E5IIMNQ4rl4/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Andrew Price</h4>
-              <span>Blender Guru · 4M+ Subscribers</span>
-            </div>
-          </a>
-          <a href="https://www.youtube.com/watch?v=QdB_amZcI5o" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/QdB_amZcI5o/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Dr. Shade Zahrai</h4>
-              <span>#1 Confidence Expert · 2M+ Followers</span>
-            </div>
-          </a>
-          <a href="https://www.youtube.com/watch?v=pn4-ELJ_Afw" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/pn4-ELJ_Afw/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Move AI CEO</h4>
-              <span>AI Motion Capture · $30M Raised</span>
-            </div>
-          </a>
-          <a href="https://www.youtube.com/watch?v=Kx9oB1pNMhw" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/Kx9oB1pNMhw/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Gawx</h4>
-              <span>Creative Artist · 10M+ Subscribers</span>
-            </div>
-          </a>
-          <a href="https://www.youtube.com/watch?v=ATtZ40OB7TQ" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/ATtZ40OB7TQ/maxresdefault.jpg" alt="" loading="lazy">
-            <div class="pod-showcase-name">
-              <h4>Maha Abouelenein</h4>
-              <span>How the Top 1% Really Get Ahead</span>
-            </div>
-          </a>
-        </div>
-      </div>
+    </div>
+  </section>
 
+  <!-- ─── GUESTS ──────────────────────────────────────────────── -->
+  <section class="pod-guests-section">
+    <div class="container">
+      <div class="reveal">
+        <div class="label section-label" style="color: rgba(255,255,255,.7);">Notable Guests</div>
+        <h2 class="heading-section" style="color: #fff; margin-bottom: 48px;">Hosting CEOs, founders, Industry Leaders and Authors:</h2>
+      </div>
+      <div class="pod-4grid reveal">
+        <a href="https://www.youtube.com/watch?v=cfPeP0s8EKU" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/cfPeP0s8EKU/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Mo Gawdat</h4>
+            <span>Ex-Chief Business Officer, Google X</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=hx3lnDHeqKs" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/hx3lnDHeqKs/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Ton Roosendaal</h4>
+            <span>Founder & CEO, Blender</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=JRXmPbOr9Hk" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/JRXmPbOr9Hk/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Nikola Todorovic</h4>
+            <span>CEO, Wonder Dynamics</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=E5IIMNQ4rl4" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/E5IIMNQ4rl4/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Andrew Price</h4>
+            <span>Blender Guru · 4M+ Subscribers</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=QdB_amZcI5o" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/QdB_amZcI5o/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Dr. Shade Zahrai</h4>
+            <span>#1 Confidence Expert · 2M+ Followers</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=pn4-ELJ_Afw" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/pn4-ELJ_Afw/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Tino Millar</h4>
+            <span>Founder & CEO, Move AI</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=Kx9oB1pNMhw" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/Kx9oB1pNMhw/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Gawx</h4>
+            <span>Creative Artist · 10M+ Subscribers</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=R7H0t5Hhv_Y" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
+          <img src="https://i.ytimg.com/vi/R7H0t5Hhv_Y/maxresdefault.jpg" alt="" loading="lazy">
+          <div class="pod-guest-card-info">
+            <h4>Oscar Höglund</h4>
+            <span>CEO & Co-founder, Epidemic Sound</span>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
   </div>
@@ -199,6 +234,8 @@
           <div class="footer-social-row">
             <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platforms/instagram.svg" alt="Instagram" width="16" height="16" loading="lazy"></a>
             <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><img src="/assets/platforms/youtube.svg" alt="YouTube" width="16" height="16" loading="lazy"></a>
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><img src="/assets/platforms/spotify.svg" alt="Spotify" width="16" height="16" loading="lazy"></a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><img src="/assets/platforms/apple-podcasts.svg" alt="Apple Podcasts" width="16" height="16" loading="lazy"></a>
             <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><img src="/assets/platforms/x.svg" alt="X" width="16" height="16" loading="lazy"></a>
             <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><img src="/assets/platforms/tiktok.svg" alt="TikTok" width="16" height="16" loading="lazy"></a>
             <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><img src="/assets/platforms/linkedin.svg" alt="LinkedIn" width="16" height="16" loading="lazy"></a>
@@ -210,7 +247,6 @@
           <ul class="footer-links">
             <li><a href="#about">About Us</a></li>
             <li><a href="mailto:create@baddecisions.studio">Contact</a></li>
-            <li><a href="mailto:create@baddecisions.studio">Events</a></li>
           </ul>
         </div>
         <div>
@@ -234,10 +270,6 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-copyright">© 2026 Bad Decisions Studio. All rights reserved.</div>
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-        </div>
       </div>
     </div>
   </footer>
