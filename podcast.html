@@ -25,7 +25,9 @@
       var total = slots.length;
       var loaded = 0;
       slots.forEach(function(slot) {
-        fetch(slot.getAttribute('data-include'))
+        var includeUrl = slot.getAttribute('data-include');
+        if (!includeUrl || !includeUrl.startsWith('/sections/')) return;
+        fetch(includeUrl)
           .then(function(r) { return r.text(); })
           .then(function(html) {
             var temp = document.createElement('div');

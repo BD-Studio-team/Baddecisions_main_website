@@ -2979,10 +2979,8 @@
     /* Tablet portrait / large mobile */
     @media (max-width: 768px) {
       .container { padding: 0 20px; }
-      nav { padding: 12px 16px; left: 8px; right: 8px; top: 6px; }
-      .nav-logo-mark { width: 30px; height: 30px; }
-      .nav-logo-text { font-size: 12px; }
-      .nav-logo-sub { display: none; }
+      nav { padding: 10px 16px; left: 8px; right: 8px; top: 6px; width: auto; max-width: none; transform: none; left: 8px; right: 8px; gap: 16px; }
+      .nav-logo-full { height: 18px; }
       .nav-links, .nav-cta { display: none; }
       .nav-mobile-toggle { display: flex; }
 
@@ -2994,36 +2992,27 @@
       .hero-actions .btn-secondary { width: 100%; justify-content: center; text-align: center; }
       .hero-video-wrap video { min-height: 240px; }
 
-      .episodes-grid { grid-template-columns: 1fr; }
-      .tutorials-strip { grid-template-columns: 1fr; }
-      .tools-grid { grid-template-columns: 1fr; }
-      .socials-grid { grid-template-columns: 1fr; }
-      .sponsors-grid { grid-template-columns: 1fr 1fr; }
-      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .pod-4grid { grid-template-columns: 1fr 1fr; }
+      .pod-landing-grid { grid-template-columns: 1fr; gap: 32px; max-width: 100%; }
+      .pod-phone-img { max-width: 260px; margin: 0 auto; }
+      .pod-landing-content { align-items: center; text-align: center; }
+      .pod-landing-title { font-size: 32px; }
+      .pod-platform-btn { flex: 1; min-width: 140px; }
+      .sponsor-strip { gap: 32px; }
+      .sponsor-strip-item img { height: 32px !important; max-width: 100px !important; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .whoweare-highlights { grid-template-columns: 1fr; }
+      .premium-duo { grid-template-columns: 1fr; }
+      .premium-card { min-height: 420px; }
+      .learn-grid { grid-template-columns: 1fr 1fr; }
+      .about-videos-row { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .one-mind-grid { grid-template-columns: 1fr; }
-      .newsletter-section { padding: 40px 20px; }
-      .newsletter-form { flex-direction: column; }
-      .newsletter-input { border-radius: var(--radius-sm); }
-      .newsletter-btn { border-radius: var(--radius-sm); }
-      .featured-track img { height: 28px; }
-      .featured-track { gap: 48px; }
-      .social-count { font-size: 36px; }
-      .social-card { padding: 28px 24px; min-height: 160px; }
+      .footer-social-row { flex-wrap: wrap; }
       .ep-featured-card { padding: 32px; }
       .pillar-card { padding: 32px 24px; }
-      .about-story, .about-founders { padding: 40px 28px; }
-      .about-videos-row { grid-template-columns: 1fr; }
-      .about-founders-grid { grid-template-columns: 1fr; max-width: 400px; }
-      .one-mind-info, .one-mind-visual { padding: 40px 28px; }
-      .course-info { padding: 40px 28px; }
-      .footer-social-row { flex-wrap: wrap; }
-    }
-
-    @media (max-width: 768px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .onemind-preview-video { max-width: 280px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .career-card { flex-direction: column; align-items: flex-start; }
     }
 
     /* Small mobile */

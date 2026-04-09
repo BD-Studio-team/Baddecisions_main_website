@@ -5,4 +5,7 @@ Thumbs.db
 *.log
 
 .vercel
+.env
+.env*
 .env*.local
+.env.local

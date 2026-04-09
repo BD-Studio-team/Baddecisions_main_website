@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="#FFFFFF">
-  <path d="M36 2C33.5 2 24 4 24 4S14.5 2 12 2C9.5 2 4 3.5 4 8v16c0 4 3 8 8 10l12 4 12-4c5-2 8-6 8-10V8c0-4.5-5.5-6-8-6zm0 3c1.5 0 5 1 5 3v16c0 2.5-2 5.5-5.5 7L24 35l-11.5-4C9 29.5 7 26.5 7 24V8c0-2 3.5-3 5-3 2 0 10.5 1.8 12 2 1.5-.2 10-2 12-2z"/>
-  <text x="60" y="17" font-family="Arial,sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#FFFFFF">DUBAI</text>
-  <text x="60" y="26" font-family="Arial,sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#FFFFFF">POLICE</text>
-  <path d="M80 10h5.5v2.8h-2.5v1.5h2.3v2.5h-2.3v1.7h2.6V21H80V10zm7.5 0h3c2.2 0 3.5 1.5 3.5 3.8v2.5c0 2.3-1.3 3.8-3.5 3.8h-3V10zm3 8.3c.8 0 1.2-.5 1.2-1.5v-2.5c0-1-.4-1.5-1.2-1.5h-.7v5.5h.7z"/>
-</svg>
