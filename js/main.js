@@ -137,15 +137,9 @@ function initPodcastData() {
     if (!res.ok) throw new Error('API ' + res.status);
     return res.json();
   }).then(function(data) {
-    var pillarStat = document.querySelector('#pillars .pillar-card:first-child .pillar-stat');
-    if (pillarStat && data.totalEpisodes) {
-      pillarStat.textContent = data.totalEpisodes + '+ Episodes';
-    }
-
     if (!data.episodes || data.episodes.length === 0) return;
 
     var featuredEpisode = data.episodes[0];
-    var apiNum = featuredEpisode.episodeNumber || data.totalEpisodes || 0;
     var podHero = document.querySelector('.pod-hero');
 
     if (podHero) {
@@ -155,13 +149,15 @@ function initPodcastData() {
 
       var heroBg = podHero.querySelector('.pod-hero-bg');
       if (heroBg && featuredEpisode.artworkUrl) {
-        heroBg.src = featuredEpisode.artworkUrl.replace('hqdefault', 'maxresdefault');
+        heroBg.src = featuredEpisode.artworkUrl;
         heroBg.alt = (featuredEpisode.title || 'Featured podcast episode') + ' thumbnail';
       }
 
       var badge = podHero.querySelector('.playlist-badge');
       if (badge) {
-        badge.textContent = 'Latest \u00b7 Ep. ' + apiNum;
+        badge.textContent = featuredEpisode.episodeNumber
+          ? 'Latest \u00b7 Ep. ' + featuredEpisode.episodeNumber
+          : 'Latest';
       }
 
       var heroTitle = podHero.querySelector('h2');
@@ -180,7 +176,7 @@ function initPodcastData() {
 
       var cardImg = cards[i].querySelector('img');
       if (cardImg && episode.artworkUrl) {
-        cardImg.src = episode.artworkUrl.replace('hqdefault', 'maxresdefault');
+        cardImg.src = episode.artworkUrl;
         cardImg.alt = (episode.title || 'Podcast episode') + ' thumbnail';
       }
 
@@ -191,7 +187,7 @@ function initPodcastData() {
 
       var cardMeta = cards[i].querySelector('.pod-card-meta');
       if (cardMeta) {
-        cardMeta.textContent = 'Ep. ' + (episode.episodeNumber || '');
+        cardMeta.textContent = episode.episodeNumber ? 'Ep. ' + episode.episodeNumber : '';
       }
     }
   }).catch(function(err) {

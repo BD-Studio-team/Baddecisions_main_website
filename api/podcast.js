@@ -1,173 +1,165 @@
-// Vercel Serverless Function — podcast episodes with cached YouTube thumbnails
-// Apple Podcasts (show ID: 1677462934) + YouTube Data API + Upstash Redis cache
+// Vercel Serverless Function — live podcast feed from YouTube only
+// Top section of /podcast is dynamic. Guest section remains curated in HTML.
 
-import { Redis } from '@upstash/redis';
-
-const SHOW_ID = '1677462934';
-const LIMIT = 20;
-const LOOKUP_URL = `https://itunes.apple.com/lookup?id=${SHOW_ID}&media=podcast&entity=podcastEpisode&limit=${LIMIT}&sort=recent`;
 const YT_CHANNEL_ID = 'UCOQ6GGRyyu8S3jahnUz2zHw';
 const YT_API_KEY = process.env.YOUTUBE_API_KEY || '';
+const MAX_RESULTS = 8;
 
-// Initialize Redis (env vars set automatically when you add Upstash via Vercel Marketplace)
-let redis = null;
-try {
-  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-    redis = new Redis({
-      url: process.env.KV_REST_API_URL,
-      token: process.env.KV_REST_API_TOKEN,
-    });
-  } else if (process.env.KV_REDIS_URL) {
-    redis = Redis.fromEnv({ UPSTASH_REDIS_REST_URL: '', UPSTASH_REDIS_REST_TOKEN: '' });
-    // Use the connection URL directly
-    const url = new URL(process.env.KV_REDIS_URL);
-    redis = new Redis({
-      url: 'https://' + url.hostname,
-      token: url.password,
-    });
-  }
-} catch (e) { /* redis not configured yet */ }
-
-// Hardcoded fallback cache for when Redis isn't set up yet
-const FALLBACK_CACHE = {
-  "The BEST AI tool for Artists? 👀": "xRx7yKg0n-U",
-  "Seedance 2.0 Is Finally Here but ... 🤯": "ETeL0mYJxQs",
-  "$122 BILLION to make CHATGPT the AI Super App 👀": "SJlxJMQkkgg",
-  "Can we Create Quality Visuals and Music with AI?": "dQ66PVD3oVY",
-  "The Most Powerful AI MODEL Leaked 👀": "315kvYywUGU",
-  "Why Claude AI is becoming #1 AI APP🔥?": "DxfMhTIU0Ss",
-  "Higgsfield AI releases their First AI Film and It's really GOOD??": "bY6iVUcI6K8",
-  "NVIDIA's DLSS 5, Dune Part 3 and China's First Commercial Brain Chip 🤯": "DiLC7VZrBHo",
-};
-
-function formatDuration(ms) {
-  if (!ms) return '';
-  const totalMin = Math.round(ms / 60000);
-  if (totalMin < 60) return totalMin + 'm';
-  const h = Math.floor(totalMin / 60);
-  const m = totalMin % 60;
-  return h + 'h ' + (m > 0 ? m + 'm' : '');
-}
+const FALLBACK_EPISODES = [
+  {
+    videoId: 'xRx7yKg0n-U',
+    title: 'The BEST AI tool for Artists? 👀',
+    description: 'A breakdown of one of the most useful new AI tools for artists and creators.',
+    publishedAt: '2026-04-01T00:00:00.000Z',
+  },
+  {
+    videoId: 'ETeL0mYJxQs',
+    title: 'Seedance 2.0 Is Finally Here but ...',
+    description: 'A practical look at what changed, what matters, and what still needs work.',
+    publishedAt: '2026-03-29T00:00:00.000Z',
+  },
+  {
+    videoId: 'SJlxJMQkkgg',
+    title: '$122 BILLION to make CHATGPT the AI Super App',
+    description: 'What the latest AI platform push means for products, users, and competition.',
+    publishedAt: '2026-03-26T00:00:00.000Z',
+  },
+  {
+    videoId: 'dQ66PVD3oVY',
+    title: 'Can we Create Quality Visuals and Music with AI?',
+    description: 'A grounded conversation about how far AI tools can really take creative work.',
+    publishedAt: '2026-03-23T00:00:00.000Z',
+  },
+  {
+    videoId: '315kvYywUGU',
+    title: 'The Most Powerful AI MODEL Leaked',
+    description: 'A practical breakdown of the latest AI model leak and why it matters.',
+    publishedAt: '2026-03-20T00:00:00.000Z',
+  },
+];
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
-  const d = new Date(dateStr);
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var d = new Date(dateStr);
+  if (Number.isNaN(d.getTime())) return '';
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   return months[d.getMonth()] + ' ' + d.getFullYear();
 }
 
-function cleanDescription(html) {
-  if (!html) return '';
-  return html
-    .replace(/<[^>]*>/g, '')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+function cleanDescription(text) {
+  if (!text) return '';
+  return text
     .replace(/\n{3,}/g, '\n\n')
     .trim()
     .slice(0, 300);
 }
 
-// Get cached YouTube video ID from Redis
-async function getCachedVideoId(title) {
-  if (!redis) return FALLBACK_CACHE[title] || null;
-  try {
-    const key = 'yt:' + title.slice(0, 80);
-    return await redis.get(key);
-  } catch (e) {
-    return FALLBACK_CACHE[title] || null;
-  }
+function bestThumbnail(thumbnails, videoId) {
+  if (thumbnails && thumbnails.maxres && thumbnails.maxres.url) return thumbnails.maxres.url;
+  if (thumbnails && thumbnails.standard && thumbnails.standard.url) return thumbnails.standard.url;
+  if (thumbnails && thumbnails.high && thumbnails.high.url) return thumbnails.high.url;
+  if (thumbnails && thumbnails.medium && thumbnails.medium.url) return thumbnails.medium.url;
+  if (thumbnails && thumbnails.default && thumbnails.default.url) return thumbnails.default.url;
+  return videoId ? 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg' : '';
 }
 
-// Save YouTube video ID to Redis (never expires)
-async function cacheVideoId(title, videoId) {
-  if (!redis) return;
-  try {
-    const key = 'yt:' + title.slice(0, 80);
-    await redis.set(key, videoId);
-  } catch (e) { /* skip */ }
+function normalizeEpisode(item, index, totalEpisodes) {
+  var videoId = item.videoId;
+  return {
+    id: videoId,
+    episodeNumber: totalEpisodes > 0 ? totalEpisodes - index : null,
+    title: item.title || 'Untitled',
+    description: cleanDescription(item.description || ''),
+    date: formatDate(item.publishedAt),
+    duration: '',
+    artworkUrl: bestThumbnail(item.thumbnails, videoId),
+    youtubeUrl: videoId ? 'https://www.youtube.com/watch?v=' + videoId : '',
+    trackViewUrl: videoId ? 'https://www.youtube.com/watch?v=' + videoId : '',
+  };
 }
 
-// Search YouTube for a single episode — only called for uncached episodes
-async function searchYouTube(title) {
-  if (!YT_API_KEY) return null;
-  try {
-    const q = title.replace(/[^\w\s]/g, '').slice(0, 50);
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YT_CHANNEL_ID}&q=${encodeURIComponent(q)}&type=video&maxResults=1&key=${YT_API_KEY}`;
-    const resp = await fetch(url);
-    if (!resp.ok) return null;
-    const data = await resp.json();
-    if (data.items && data.items.length > 0) {
-      return {
-        videoId: data.items[0].id.videoId,
-        thumbnail: data.items[0].snippet.thumbnails.high?.url || data.items[0].snippet.thumbnails.default.url
-      };
-    }
-  } catch (e) { /* quota exceeded or network error */ }
-  return null;
+function fallbackPayload() {
+  var totalEpisodes = FALLBACK_EPISODES.length;
+  return {
+    totalEpisodes: totalEpisodes,
+    episodes: FALLBACK_EPISODES.map(function(item, index) {
+      return normalizeEpisode(item, index, totalEpisodes);
+    }),
+  };
 }
 
-// Get YouTube data for an episode — cache-first, search only if missing
-async function getYouTubeData(title) {
-  // 1. Check cache
-  const cached = await getCachedVideoId(title);
-  if (cached) {
-    return {
-      videoId: cached,
-      thumbnail: `https://i.ytimg.com/vi/${cached}/hqdefault.jpg`
-    };
+async function fetchJson(url, label) {
+  var response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(label + ' returned ' + response.status);
+  }
+  return response.json();
+}
+
+async function getUploadsPlaylistId() {
+  var channelUrl = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=' + YT_CHANNEL_ID + '&key=' + YT_API_KEY;
+  var channelData = await fetchJson(channelUrl, 'YouTube channels');
+  var items = channelData.items || [];
+  var uploadsId = items[0] && items[0].contentDetails && items[0].contentDetails.relatedPlaylists
+    ? items[0].contentDetails.relatedPlaylists.uploads
+    : '';
+
+  if (!uploadsId) {
+    throw new Error('YouTube uploads playlist not found');
   }
 
-  // 2. Search YouTube (uses 100 quota units)
-  const result = await searchYouTube(title);
-  if (result) {
-    // 3. Cache permanently
-    await cacheVideoId(title, result.videoId);
-    return result;
-  }
+  return uploadsId;
+}
 
-  return null;
+async function getLatestYouTubeEpisodes() {
+  if (!YT_API_KEY) return fallbackPayload();
+
+  var uploadsId = await getUploadsPlaylistId();
+  var playlistUrl =
+    'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status'
+    + '&playlistId=' + uploadsId
+    + '&maxResults=' + MAX_RESULTS
+    + '&key=' + YT_API_KEY;
+
+  var playlistData = await fetchJson(playlistUrl, 'YouTube playlistItems');
+  var rawItems = playlistData.items || [];
+  var publicItems = rawItems.filter(function(item) {
+    var title = item && item.snippet ? item.snippet.title : '';
+    var privacy = item && item.status ? item.status.privacyStatus : '';
+    return privacy !== 'private'
+      && title
+      && title !== 'Private video'
+      && title !== 'Deleted video'
+      && item.contentDetails
+      && item.contentDetails.videoId;
+  });
+
+  var totalEpisodes = playlistData.pageInfo && playlistData.pageInfo.totalResults
+    ? playlistData.pageInfo.totalResults
+    : publicItems.length;
+
+  return {
+    totalEpisodes: totalEpisodes,
+    episodes: publicItems.map(function(item, index) {
+      return normalizeEpisode({
+        videoId: item.contentDetails.videoId,
+        title: item.snippet.title,
+        description: item.snippet.description,
+        publishedAt: item.contentDetails.videoPublishedAt || item.snippet.publishedAt,
+        thumbnails: item.snippet.thumbnails,
+      }, index, totalEpisodes);
+    }),
+  };
 }
 
 export default async function handler(req, res) {
   try {
-    // Fetch from Apple
-    const response = await fetch(LOOKUP_URL);
-    if (!response.ok) throw new Error('Apple API returned ' + response.status);
-
-    const data = await response.json();
-    const results = data.results || [];
-
-    const show = results.find(r => r.wrapperType === 'track' && r.kind === 'podcast');
-    const totalEpisodes = show ? show.trackCount : 0;
-    const episodeResults = results
-      .filter(r => r.wrapperType === 'podcastEpisode' || r.kind === 'podcast-episode');
-
-    // Get YouTube data for each episode (cached = free, uncached = 100 units each)
-    const ytPromises = episodeResults.map(ep => getYouTubeData(ep.trackName || ''));
-    const ytResults = await Promise.all(ytPromises);
-
-    const episodes = episodeResults.map((ep, index) => {
-      const yt = ytResults[index];
-      return {
-        id: ep.trackId,
-        episodeNumber: totalEpisodes > 0 ? totalEpisodes - index : null,
-        title: ep.trackName || 'Untitled',
-        description: cleanDescription(ep.description || ep.shortDescription || ''),
-        date: formatDate(ep.releaseDate),
-        duration: formatDuration(ep.trackTimeMillis),
-        artworkUrl: yt ? yt.thumbnail : (ep.artworkUrl600 || ep.artworkUrl160 || ''),
-        youtubeUrl: yt ? 'https://www.youtube.com/watch?v=' + yt.videoId : '',
-        trackViewUrl: ep.trackViewUrl || ep.collectionViewUrl || ''
-      };
-    });
-
+    var payload = await getLatestYouTubeEpisodes();
     res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-    res.status(200).json({ totalEpisodes, episodes });
+    res.status(200).json(payload);
   } catch (err) {
     console.error('Podcast API error:', err.message);
-    res.status(500).json({ error: 'Failed to fetch podcast data', totalEpisodes: 0, episodes: [] });
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
+    res.status(200).json(fallbackPayload());
   }
 }
