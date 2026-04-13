@@ -30,22 +30,28 @@
     /* ── Base ── */
     .site-nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 12px; left: 20px; right: 20px;
       z-index: 100;
-      height: 64px;
+      max-width: 1240px;
+      margin: 0 auto;
+      height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s ease, border-color 0.3s ease;
+      padding: 0 18px 0 20px;
+      background: rgba(8,8,8,.84);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      box-shadow: 0 14px 38px rgba(0,0,0,.24);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     }
     .site-nav.scrolled {
-      background: rgba(0,0,0,.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: rgba(255,255,255,.08);
+      background: rgba(8,8,8,.92);
+      border-color: rgba(255,239,123,.12);
+      box-shadow: 0 18px 46px rgba(0,0,0,.3);
+      transform: translateY(1px);
     }
 
     /* ── Logo ── */
@@ -58,17 +64,14 @@
     .site-nav .nav-logo img {
       display: block;
       width: auto;
-      height: 26px;
-    }
-    .site-nav.scrolled .nav-logo img {
-      opacity: 1;
+      height: 24px;
     }
 
     /* ── Center links ── */
     .site-nav .nav-center {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
       list-style: none;
       position: absolute;
       left: 50%;
@@ -81,21 +84,36 @@
       display: flex;
       align-items: center;
     }
+    /* Invisible bridge so cursor can travel from link to dropdown */
+    .site-nav .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+      pointer-events: none;
+    }
+    .site-nav .nav-item:hover::after {
+      pointer-events: auto;
+    }
     .site-nav .nav-item > a {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       font-family: var(--font-body, 'Inter', system-ui, sans-serif);
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,.5);
-      padding: 0 18px;
+      font-size: 13.5px;
+      font-weight: 550;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,.55);
+      padding: 0 15px;
       height: 100%;
       text-decoration: none;
       transition: color 150ms ease;
       white-space: nowrap;
     }
-    .site-nav .nav-item > a:hover {
+    .site-nav .nav-item > a:hover,
+    .site-nav .nav-item:hover > a {
       color: #fff;
     }
     .site-nav .nav-item.active > a {
@@ -105,86 +123,84 @@
 
     /* ── Chevron ── */
     .site-nav .nav-chevron {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      transition: transform 200ms ease;
+      opacity: .5;
+      transition: transform 200ms cubic-bezier(0.16,1,0.3,1), opacity 150ms ease;
     }
     .site-nav .nav-item:hover .nav-chevron {
       transform: rotate(180deg);
+      opacity: 1;
     }
 
     /* ── Dropdown ── */
     .site-nav .nav-dropdown {
       position: absolute;
-      top: 100%;
+      top: calc(100% + 4px);
       left: 50%;
       transform: translateX(-50%) translateY(-8px);
-      min-width: 260px;
-      background: #0a0a0a;
+      min-width: 220px;
+      background: rgba(10,10,10,.97);
       border: 1px solid rgba(255,255,255,.1);
       border-top: 2px solid var(--color-yellow, #FFEF7B);
-      border-radius: 0 0 4px 4px;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 200ms cubic-bezier(0.16,1,0.3,1), transform 200ms cubic-bezier(0.16,1,0.3,1);
-      padding: 8px 0;
+      transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
+      padding: 6px;
     }
     .site-nav .nav-item:hover .nav-dropdown {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
       pointer-events: auto;
     }
-    .site-nav .nav-dropdown-header {
-      font-family: var(--font-mono, 'Azeret Mono', monospace);
-      font-size: 9px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: rgba(255,255,255,.2);
-      padding: 8px 18px 10px;
-    }
     .site-nav .nav-dd-item {
       display: flex;
       align-items: center;
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(255,255,255,.05);
+      padding: 11px 14px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: background 150ms ease;
+      transition: background 120ms ease;
     }
-    .site-nav .nav-dd-item:last-child { border-bottom: none; }
-    .site-nav .nav-dd-item:hover { background: rgba(255,255,255,.04); }
+    .site-nav .nav-dd-item:hover { background: rgba(255,255,255,.06); }
 
     .site-nav .nav-dd-label {
       font-family: var(--font-body, 'Inter', system-ui, sans-serif);
       font-size: 13px;
       font-weight: 600;
-      color: #fff;
+      color: rgba(255,255,255,.7);
       line-height: 1.2;
-      transition: color 150ms ease;
+      transition: color 120ms ease;
     }
     .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow, #FFEF7B); }
 
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
       font-family: var(--font-body, 'Inter', system-ui, sans-serif);
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 700;
-      color: #000;
-      background: var(--color-yellow, #FFEF7B);
-      padding: 10px 20px;
-      border-radius: 4px;
+      letter-spacing: 0.01em;
+      color: var(--color-yellow, #FFEF7B);
+      background: rgba(255,239,123,.06);
+      border: 1px solid rgba(255,239,123,.18);
+      padding: 11px 18px;
+      border-radius: 12px;
       text-decoration: none;
       flex-shrink: 0;
-      transition: transform 150ms ease, box-shadow 150ms ease;
+      transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
     }
     .site-nav .nav-cta-btn:hover {
+      color: #000;
+      background: var(--color-yellow, #FFEF7B);
+      border-color: var(--color-yellow, #FFEF7B);
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(255,239,123,.25);
+      box-shadow: 0 8px 20px rgba(255,239,123,.16);
     }
 
     /* ── Mobile toggle ── */
@@ -193,9 +209,14 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
     }
     .site-nav .nav-burger span {
       display: block;
@@ -294,7 +315,14 @@
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .site-nav { padding: 0 20px; }
+      .site-nav {
+        top: 10px;
+        left: 12px;
+        right: 12px;
+        height: 60px;
+        padding: 0 14px;
+        border-radius: 14px;
+      }
       .site-nav .nav-center,
       .site-nav .nav-cta-btn { display: none; }
       .site-nav .nav-burger { display: flex; }
@@ -316,7 +344,7 @@
     <!-- Center links -->
     <ul class="nav-center">
       <li class="nav-item">
-        <a href="/podcast">Podcast</a>
+        <a href="/podcast">Watch</a>
       </li>
       <li class="nav-item">
         <a href="/learn">
@@ -324,7 +352,6 @@
           <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
         </a>
         <div class="nav-dropdown">
-          <div class="nav-dropdown-header">Programs</div>
           <a href="https://ai.baddecisions.studio" target="_self" class="nav-dd-item">
             <div class="nav-dd-label">AI Programs</div>
           </a>
@@ -342,12 +369,11 @@
           <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
         </a>
         <div class="nav-dropdown">
-          <div class="nav-dropdown-header">Collaborate</div>
           <a href="/work-with-us/services" class="nav-dd-item">
             <div class="nav-dd-label">Services</div>
           </a>
-          <a href="/work-with-us/sponsorships" class="nav-dd-item">
-            <div class="nav-dd-label">Sponsorships</div>
+          <a href="/work-with-us/media-partnerships" class="nav-dd-item">
+            <div class="nav-dd-label">Media Partnerships</div>
           </a>
           <a href="/work-with-us/open-roles" class="nav-dd-item">
             <div class="nav-dd-label">Open Roles</div>
@@ -367,7 +393,7 @@
 
   <!-- Mobile overlay -->
   <div class="nav-mobile-overlay" id="navMobileOverlay">
-    <a href="/podcast" class="mobile-link nav-delay-0">Podcast</a>
+    <a href="/podcast" class="mobile-link nav-delay-0">Watch</a>
     <a href="/learn" class="mobile-link nav-delay-1">Learn</a>
     <div class="mobile-sublinks education-sub">
       <a href="https://ai.baddecisions.studio" target="_self" class="nav-delay-2">AI Programs</a>
@@ -377,7 +403,7 @@
     <a href="/work-with-us" class="mobile-link nav-delay-5">Work With Us</a>
     <div class="mobile-sublinks work-sub">
       <a href="/work-with-us/services" class="nav-delay-6">Services</a>
-      <a href="/work-with-us/sponsorships" class="nav-delay-7">Sponsorships</a>
+      <a href="/work-with-us/media-partnerships" class="nav-delay-7">Media Partnerships</a>
       <a href="/work-with-us/open-roles" class="nav-delay-8">Open Roles</a>
     </div>
     <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-9">Learn AI →</a>
@@ -412,61 +438,77 @@
     <div class="container">
 
       <div class="reveal section-header-center">
-        <div class="label section-label">What We Offer</div>
-        <h1 class="heading-hero">Creative Technology <em>Services</em></h1>
+        <div class="label section-label">Services</div>
+        <h1 class="heading-hero">Services built for brands that want to <em>stay ahead</em>.</h1>
         <p class="body-text text-center-readable">
-          We help brands, studios, and enterprise teams harness creative technology — from cinematic production to AI integration.
+          Bad Decisions helps brands, studios, and teams across consulting, production, AI-enabled solutions, training, and execution.
         </p>
       </div>
 
       <div class="services-grid reveal">
         <div class="service-card">
+          <div class="service-icon">💡</div>
+          <h3 class="heading-card">Consulting</h3>
+          <p>Strategic consulting across AI adoption, workflow design, content systems, and technology execution.</p>
+        </div>
+        <div class="service-card">
           <div class="service-icon">🎬</div>
           <h3 class="heading-card">Cinematic Production</h3>
-          <p>Real-time cinematic content using Unreal Engine 5. From concept to final render — trailers, short films, and branded content.</p>
+          <p>High-end cinematic production using Unreal Engine and modern workflows, from concept to final delivery.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">🤖</div>
-          <h3 class="heading-card">AI Integration</h3>
-          <p>Custom AI pipelines for creative workflows. We help teams adopt AI tools for content creation, automation, and production.</p>
+          <h3 class="heading-card">AI-Enabled Solutions</h3>
+          <p>Custom AI-enabled solutions for content, automation, internal tools, and modern creative workflows.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">🎓</div>
           <h3 class="heading-card">Corporate Training</h3>
-          <p>Tailored Unreal Engine and AI training programs for studios, agencies, and enterprise teams. On-site or remote.</p>
+          <p>Tailored training programs in AI, Unreal Engine, and emerging tools for teams, studios, and organizations.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">🎮</div>
           <h3 class="heading-card">Interactive Experiences</h3>
-          <p>Virtual production, AR/VR experiences, and interactive installations built with real-time 3D technology.</p>
+          <p>Interactive experiences built with real-time technology, from virtual production to immersive installations and spatial concepts.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">📱</div>
           <h3 class="heading-card">Content Strategy</h3>
-          <p>Social media strategy, YouTube growth, and content production. We built 290K on Instagram and 124K on YouTube.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">💡</div>
-          <h3 class="heading-card">Consulting</h3>
-          <p>Strategic consulting on creative technology adoption, workflow optimization, and team training for emerging tools.</p>
+          <p>Content strategy for brands and founders who want sharper positioning, better distribution, and stronger output.</p>
         </div>
       </div>
 
-      <!-- Trust logos -->
-      <div class="reveal text-center mt-lg mb-xl">
-        <p class="meta-text mb-md">Trusted by</p>
-        <div class="careers-client-logos">
-          <img src="/assets/featured/epic-games.svg" alt="Epic Games" class="trust-logo" style="height: 52px;" loading="lazy">
-          <img src="/assets/featured/dell-technologies.svg" alt="Dell" class="trust-logo" style="height: 30px;" loading="lazy">
-          <img src="/assets/featured/autodesk.svg" alt="Autodesk" class="trust-logo" style="height: 30px;" loading="lazy">
-          <img src="/assets/clients/dubai-police.png" alt="Dubai Police" class="trust-logo" style="height: 80px;" loading="lazy">
-          <img src="/assets/clients/a2rl.svg" alt="A2RL" class="trust-logo" style="height: 34px;" loading="lazy">
+      <!-- Trusted by -->
+      <div class="reveal" style="margin-top: 80px;">
+        <div class="section-header-center" style="margin-bottom: 48px;">
+          <div class="label section-label">Trusted by</div>
+        </div>
+        <div class="sponsors-logo-grid">
+          <div class="sponsors-logo-cell"><img src="/assets/clients/epic-games.png" alt="Epic Games" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/dell.svg" alt="Dell" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/youtube.svg" alt="YouTube" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/snapchat.svg" alt="Snapchat" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/dubai-police.png" alt="Dubai Police" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/a2rl.svg" alt="A2RL" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/featured/autodesk.svg" alt="Autodesk" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/featured/metahuman.svg" alt="MetaHuman" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/featured/unreal-engine.svg" alt="Unreal Engine" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/featured/move-ai.svg" alt="Move AI" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/featured/80lv.svg" alt="80 Level" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/polycam.svg" alt="Polycam" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/artbat.svg" alt="ARTBAT" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/food-fighters.png" alt="Food Fighters" loading="lazy"></div>
+          <div class="sponsors-logo-cell"><img src="/assets/clients/jumeirah.png" alt="Jumeirah" loading="lazy"></div>
         </div>
       </div>
 
-      <div class="reveal text-center">
-        <p class="body-text mb-md">Have a project in mind?</p>
-        <a href="mailto:create@baddecisions.studio" class="btn-primary">Start a Conversation →</a>
+      <!-- Final CTA -->
+      <div class="reveal text-center" style="padding: 80px 0 0;">
+        <h2 class="heading-section mb-md">Let's talk about what <em>you need</em>.</h2>
+        <p class="body-text text-center-readable mb-md">
+          Whether you need consulting, production, training, or custom solutions, Bad Decisions can help you move faster and build better.
+        </p>
+        <a href="mailto:create@baddecisions.studio" class="btn-primary">Start a Project →</a>
       </div>
 
     </div>
@@ -486,25 +528,15 @@
           </div>
           <p>Premium podcast, education, and creative technology work for artists, founders, and ambitious teams.</p>
           <div class="footer-social-row">
-            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platforms/instagram.svg" alt="Instagram" width="16" height="16" loading="lazy"></a>
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><img src="/assets/platforms/youtube.svg" alt="YouTube" width="16" height="16" loading="lazy"></a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><img src="/assets/platforms/spotify.svg" alt="Spotify" width="16" height="16" loading="lazy"></a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><img src="/assets/platforms/apple-podcasts.svg" alt="Apple Podcasts" width="16" height="16" loading="lazy"></a>
-            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><img src="/assets/platforms/x.svg" alt="X" width="16" height="16" loading="lazy"></a>
-            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><img src="/assets/platforms/tiktok.svg" alt="TikTok" width="16" height="16" loading="lazy"></a>
-            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><img src="/assets/platforms/linkedin.svg" alt="LinkedIn" width="16" height="16" loading="lazy"></a>
-            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><img src="/assets/platforms/discord.svg" alt="Discord" width="16" height="16" loading="lazy"></a>
+            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-instagram"/></svg></a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg></a>
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-spotify"/></svg></a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-apple-podcasts"/></svg></a>
+            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm" style="color:#FBF9ED"><use href="/assets/icons/platforms.svg#icon-x"/></svg></a>
+            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm" style="color:#FBF9ED"><use href="/assets/icons/platforms.svg#icon-tiktok"/></svg></a>
+            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-linkedin"/></svg></a>
+            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-discord"/></svg></a>
           </div>
-        </div>
-        <div>
-          <div class="footer-col-title">Studio</div>
-          <ul class="footer-links">
-            <li><a href="/#about">About Us</a></li>
-            <li><a href="/podcast">Podcast</a></li>
-            <li><a href="/learn">Learn</a></li>
-            <li><a href="/work-with-us">Work With Us</a></li>
-            <li><a href="mailto:create@baddecisions.studio">Contact</a></li>
-          </ul>
         </div>
         <div>
           <div class="footer-col-title">Podcast</div>
@@ -516,21 +548,21 @@
           </ul>
         </div>
         <div>
-          <div class="footer-col-title">Learn</div>
+          <div class="footer-col-title">Education</div>
           <ul class="footer-links">
-            <li><a href="https://learn.baddecisions.studio" target="_blank" rel="noopener noreferrer">Ultimate UE Program</a></li>
-            <li><a href="https://ai.baddecisions.studio" target="_blank" rel="noopener noreferrer">AI Program</a></li>
-            <li><a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer">Free Tutorials</a></li>
+            <li><a href="https://ai.baddecisions.studio" target="_self">AI Programs</a></li>
+            <li><a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a></li>
+            <li><a href="/learn">Free Learning</a></li>
             <li><a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a></li>
           </ul>
         </div>
         <div>
           <div class="footer-col-title">Work With Us</div>
           <ul class="footer-links">
-            <li><a href="/work-with-us/services">Start a Project</a></li>
-            <li><a href="/work-with-us/sponsorships">Sponsor the Show</a></li>
+            <li><a href="/work-with-us/services">Services</a></li>
+            <li><a href="/work-with-us/media-partnerships">Media Partnerships</a></li>
             <li><a href="/work-with-us/open-roles">Open Roles</a></li>
-            <li><a href="mailto:create@baddecisions.studio">General Inquiry</a></li>
+            <li><a href="mailto:create@baddecisions.studio">Contact</a></li>
           </ul>
         </div>
       </div>

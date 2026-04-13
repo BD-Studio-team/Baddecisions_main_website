@@ -1,181 +1,206 @@
-# Bad Decisions Studio — Website Build Instructions for Claude Code
+# Bad Decisions Studio — Website
 
-You are building the production website for **Bad Decisions Studio (BDS)**, a creative technology education and content brand run by brothers Faraz (Commander) and Farhad Shababi, operating across Vancouver and Dubai.
+## What This Is
+
+Bad Decisions is a brand ecosystem website built around three business pillars: **Content**, **Education**, and **Services**. The website explains the ecosystem clearly, builds trust quickly, and routes visitors into the correct path.
+
+The site is for: viewers, students, brands, sponsors, and future team members.
+
+**Founders:** Faraz Shababi (Commander) and Farhad Shababi. Operating across Vancouver and Dubai.
+
+---
+
+## Brand Architecture
+
+**Internal pillars** (for strategy, copy, design logic):
+- Content
+- Education
+- Services
+
+**User-facing homepage paths** (action-based, immediately understandable):
+- Watch (Podcast)
+- Learn (Education)
+- Work With Us (Services, Media Partnerships, Open Roles)
+
+**Work With Us sub-sections** (always these three, in this order):
+- Services
+- Media Partnerships
+- Open Roles
+
+Do not replace Services with Projects. Do not use Media as the main label. Do not mix naming systems.
 
 ---
 
 ## Project Structure
 
-```
-bds-vercel/
-├── CLAUDE.md              ← you are here
-├── index.html             ← main site (single-page)
-├── vercel.json            ← Vercel config + cache headers
+```text
+├── build.js                  Build script — inlines section partials into pages
+├── templates/                Source page templates (head, meta, layout)
+│   ├── index.html
+│   ├── learn.html
+│   ├── podcast.html
+│   ├── work-with-us.html
+│   └── work-with-us/
+│       ├── open-roles.html
+│       ├── services.html
+│       └── sponsorships.html
+├── sections/                 HTML partials (source of truth for content)
+│   ├── nav.html              Nav with dropdowns, mobile overlay, skip-link
+│   ├── hero.html             Hero with video + integrated featured logo strip
+│   ├── pillars.html          Three-pillar value prop (Watch / Learn / Work With Us)
+│   ├── stats.html            Key metrics band
+│   ├── highlights.html       Three video highlight cards
+│   ├── podcast-landing.html  Podcast CTA with iPhone mockup
+│   ├── about.html            "Why We Exist" — mission statement + contact
+│   ├── sponsors.html         Partner logo grid (5-col)
+│   ├── footer.html           Links, socials, copyright
+│   ├── learn.html            Premium courses + free series grid
+│   ├── podcast.html          Featured ep, recent eps, listen-on, guest grid
+│   ├── work-with-us.html     Commercial hub: services, sponsorships, roles
+│   └── work-with-us/         Sub-page sections
+│       ├── open-roles.html
+│       ├── services.html
+│       └── sponsorships.html
+├── css/
+│   ├── globals.css           Design system tokens, @font-face, typography, buttons, badges
+│   └── style.css             Section-specific layouts and responsive rules
+├── js/
+│   └── main.js               Nav, scroll reveal, word rotation, podcast API, lazy video
 ├── api/
-│   └── podcast.js         ← serverless function: fetches live podcast episodes
-└── public/
-    ├── favicon.ico
-    ├── og-image.png        ← 1200×630 Open Graph image
-    └── assets/
-        ├── logo/
-        │   ├── bd-logo.svg          ← primary BDS logo (SVG preferred)
-        │   ├── bd-logo-dark.png     ← dark background version
-        │   ├── bd-logo-light.png    ← light background version
-        │   └── bd-mark.svg          ← just the "BD" mark / icon
-        ├── founders/
-        │   ├── faraz.jpg            ← Commander headshot (dark background, cinematic)
-        │   └── farhad.jpg           ← Farhad headshot (dark background, cinematic)
-        ├── clients/
-        │   ├── epic-games.svg
-        │   ├── dubai-police.svg
-        │   ├── a2rl.svg
-        │   ├── youtube.svg
-        │   ├── snapchat.svg
-        │   └── polycam.svg
-        ├── platforms/
-        │   ├── spotify.svg
-        │   ├── apple-podcasts.svg
-        │   ├── youtube.svg
-        │   ├── instagram.svg
-        │   ├── tiktok.svg
-        │   ├── x.svg
-        │   ├── linkedin.svg
-        │   └── discord.svg
-        └── one-mind/
-            └── event-photos/        ← drop event photos here (jpg/webp)
+│   └── podcast.js            Serverless — Apple Podcasts + YouTube + Redis cache
+├── assets/
+│   ├── fonts-web/            Self-hosted woff2: PP Editorial New, Inter, Azeret Mono
+│   ├── logo/                 SVG logos and marks
+│   ├── clients/              Client/partner logos
+│   ├── featured/             "As Featured On" logos
+│   ├── platforms/             Social/podcast platform icons
+│   ├── founders/             Founder photos
+│   ├── podcast/              Podcast cover art, iPhone mockup
+│   └── video/                Hero video, highlight reels, course previews
+├── vercel.json               Build command, cache headers, security headers
+├── sitemap.xml               All public pages
+├── llms.txt                  Machine-readable brand summary
+└── README.md                 Setup, build, deploy, architecture
 ```
+
+**Build flow:** Edit `sections/` or `templates/` → run `npm run build` → outputs pre-rendered HTML to root. Do NOT edit root `.html` files directly.
 
 ---
 
-## Your Tasks (in order)
+## Pages
 
-### 1. Logo Integration
-- Replace the CSS `BD` text mark in the nav (`div.nav-logo-mark`) with the actual SVG logo from `public/assets/logo/bd-mark.svg`
-- Replace the footer logo the same way
-- If `bd-logo.svg` exists, use it in full — otherwise compose: mark + wordmark text
-- Logo should be white/light on dark background
-- Max nav logo height: **32px**
+| Page | URL | Purpose |
+|------|-----|---------|
+| Home | `/` | Explain what BDS is, build trust, show 3 paths, prove credibility |
+| Podcast | `/podcast` | Premium content destination — explain the show, recent episodes, platforms, guest credibility |
+| Learn | `/learn` | Premium programs + free series |
+| Work With Us | `/work-with-us` | Commercial hub — services, sponsorships, open roles |
+| Services | `/work-with-us/services` | Detailed services offering |
+| Media Partnerships | `/work-with-us/media-partnerships` | Multi-platform sponsorship packages + stats |
+| Open Roles | `/work-with-us/open-roles` | Current job openings |
 
-### 2. Founder Photos
-- In `#about` section, find the two `.founder-card` elements
-- Replace the letter-avatar divs (`.founder-avatar`) with actual `<img>` tags pointing to `public/assets/founders/faraz.jpg` and `public/assets/founders/farhad.jpg`
-- Style: `width: 64px; height: 64px; object-fit: cover; object-position: top;`
-- If photos are larger/cinematic, increase to `80×80` or add a full founder photo section above the story text
+### Homepage Structure
+1. Hero
+2. Trusted by logo strip (integrated into hero)
+3. Choose Your Path (pillars)
+4. Proof / credibility (stats + highlights)
+5. Podcast landing CTA
+6. Why We Exist
+7. Partners & sponsors
+8. Footer
 
-### 3. Client & Partner Logos
-- In `#about` → `.clients-grid`, replace the plain text cells with actual logo images
-- Source from `public/assets/clients/`
-- Each logo: max height `28px`, `filter: brightness(0) invert(0.4)` (muted), hover → `invert(1)` (full white)
-- If an SVG is missing for a client, keep the text fallback
-
-### 4. Platform/Social Icons
-- In `#community` → `.socials-grid`, each `.social-card` currently shows text platform names
-- Add the matching SVG icon from `public/assets/platforms/` above the platform name
-- Icon size: `24px × 24px`, color: `#888888`, hover: `#C8A44A`
-- In the footer `.footer-social-btn` elements — same treatment, icons instead of text abbreviations
-
-### 5. One Mind Event Photos
-- In `#one-mind` section, there is currently a quote block and stats
-- If photos exist in `public/assets/one-mind/event-photos/`, add a photo strip between the grid and the testimonials:
-  ```html
-  <div class="event-photos-strip">
-    <!-- 3–5 photos, horizontal scroll on mobile -->
-  </div>
-  ```
-- Photos: `height: 320px`, `object-fit: cover`, aspect ratio preserved
-- Add `loading="lazy"` to all images
-
-### 6. Favicon + OG Meta
-- Set `<link rel="icon" href="/favicon.ico">` in `<head>`
-- Add Open Graph tags using `public/og-image.png`:
-  ```html
-  <meta property="og:title" content="Bad Decisions Studio" />
-  <meta property="og:description" content="Creative technology education and content. Podcast. Courses. Events." />
-  <meta property="og:image" content="/og-image.png" />
-  <meta property="og:url" content="https://www.baddecisions.studio" />
-  <meta property="twitter:card" content="summary_large_image" />
-  ```
-
-### 7. Hero Visual Enhancement
-- The hero currently uses CSS geometric shapes as stand-ins for a cinematic render
-- If a hero image/render exists at `public/assets/hero-render.jpg` or `.webp`, replace the `.hero-visual` CSS-only section with:
-  ```html
-  <img src="/assets/hero-render.jpg" class="hero-render-img" alt="" aria-hidden="true" loading="eager" />
-  ```
-  With CSS: `position: absolute; right: 0; top: 0; height: 100%; width: 55%; object-fit: cover; object-position: left; mask-image: linear-gradient(to right, transparent 0%, black 30%);`
-- Keep the geometric shapes as a fallback if no image is present
-
-### 8. Performance Pass
-After all assets are in place:
-- Add `width` and `height` attributes to all `<img>` tags to prevent layout shift
-- Add `loading="lazy"` to all below-fold images
-- Add `loading="eager"` + `fetchpriority="high"` to any hero image
-- Verify all font imports are preconnected (already done for Google Fonts)
-- Run a quick check that no image paths are broken (all resolve from `public/`)
+### Podcast Page Goals
+1. Explain what the show is
+2. Make recent episodes easy to consume
+3. Show listening platforms clearly
+4. Build credibility through notable guests
 
 ---
 
 ## Design Rules — Do Not Break These
 
-| Rule | Value |
-|------|-------|
-| Primary text | `#FBF9ED` (tan, never pure white) |
-| Display font | PP Editorial New (italic = always #FFEF7B) |
-| Body font | Inter |
-| Mono font | Azeret Mono (eyebrow labels, metadata, timestamps) |
-| Animations | Preserve all existing `.reveal` scroll animations |
+### Colors
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--color-void` | `#000000` | Primary background |
+| `--color-paper` | `#FBF9ED` | Primary text on dark, light section bg |
+| `--color-yellow` | `#FFEF7B` | Primary accent, CTA buttons, italic text |
+| `--color-teal-dark` | `#3A5D5B` | Teal action buttons, section bg |
+| `--color-teal-light` | `#97C7CD` | Secondary accent |
+| `--color-peach` | `#C17E59` | Warm accent, section bg |
+| `--color-brown` | `#937E67` | Secondary text, muted labels |
 
-**Never:**
-- Use pure white (#fff) for heading text on dark backgrounds
-- Use the same gray for body text on dark and light backgrounds
-- Add drop shadows (use borders instead)
+**Never** use pure white (`#fff`) for heading text on dark backgrounds. Use `#FBF9ED`.
 
-### Button System
-- border-radius: 4px on ALL buttons — never pill/rounded, never 0px
-- Primary: background `#FFEF7B`, color `#000`, font-weight 700
-- Secondary: background transparent, border `1.5px solid rgba(255,255,255,.25)`, color `#fff`
-- Teal action: background `#3A5D5B`, color `#fff`
-- Peach action: background `#C17E59`, color `#fff`
-- Light (on paper sections): background `#000`, color `#fff`
-- Font: Inter, font-size 13px, letter-spacing .02em
+### Typography
+| Role | Font | Notes |
+|------|------|-------|
+| Display headings | PP Editorial New | Self-hosted. Italic = always `#FFEF7B`, no exceptions |
+| Body text | Inter | Self-hosted variable font |
+| Labels, meta, timestamps | Azeret Mono | 11px, uppercase, letter-spacing `.15em` |
+
+All fonts are self-hosted in `assets/fonts-web/` and loaded via `@font-face` in `globals.css`.
+
+### Buttons
+- `border-radius: 4px` on ALL buttons — never pill, never 0
+- Primary: `#FFEF7B` bg, `#000` text, Inter 700 13px
+- Secondary: transparent bg, `1.5px solid rgba(255,255,255,.25)`, white text
+- Teal: `#3A5D5B` bg, white text
+- Peach: `#C17E59` bg, white text
+- Light (on paper sections): `#000` bg, white text
 
 ### Section Background Rotation
-Sections must NOT all be #000. Rotate through:
-1. `#000000` — void (hero, podcast section)
-2. `#FFEF7B` — yellow (stats band) → all text #000
-3. `#3A5D5B` — teal (podcast grid, features)
-4. `#FBF9ED` — paper/tan (courses, light inversion)
-5. `#C17E59` — peach (CTA blocks, events)
+Sections must NOT all be `#000`. Rotate through:
+1. `#000000` — void (hero, main content)
+2. `#FFEF7B` — yellow (stats bands) → all text `#000`
+3. `#3A5D5B` — teal (featured content)
+4. `#FBF9ED` — paper (light inversions)
+5. `#C17E59` — peach (CTAs, guest sections)
+
 Never use more than 2 accent colors in the same viewport.
 
-### Typography Rules
-- PP Editorial New italic = always color `#FFEF7B`, no exceptions
-- Eyebrow labels = Azeret Mono, 11px, letter-spacing `.15em`, text-transform uppercase
-- Stats numbers = PP Editorial New, large, bold
-- Metadata/timestamps = Azeret Mono only
-
 ### Badge/Tag System
-- border-radius: 2px (nearly square)
-- Episode tag: background `#3A5D5B`, color `#97C7CD`
-- New: background `#FFEF7B`, color `#000`
-- Bestseller: background `#C17E59`, color `#fff`
-- Free: border `1.5px solid #FFEF7B`, color `#FFEF7B`, background transparent
-- Live: background `rgba(255,239,123,.1)`, color `#FFEF7B`, with 5px pulsing dot
+- `border-radius: 2px`
+- Episode: `#3A5D5B` bg, `#97C7CD` text
+- New: `#FFEF7B` bg, `#000` text
+- Bestseller: `#C17E59` bg, white text
+- Free: `1.5px solid #FFEF7B` border, `#FFEF7B` text, transparent bg
+- Live: `rgba(255,239,123,.1)` bg, `#FFEF7B` text, 5px pulsing dot
 
 ### Footer
-- Top: 6px colour bar split across 5 divs — `#FFEF7B`, `#3A5D5B`, `#97C7CD`, `#C17E59`, `#937E67`
-- Social icons: 36x36px, border-radius 4px, background `rgba(255,255,255,.06)`
-- Newsletter input: underline style only (border-bottom), no box border
+- Top: 6px color bar — `#FFEF7B`, `#3A5D5B`, `#97C7CD`, `#C17E59`, `#937E67`
+- Social icons: 36x36px, `border-radius: 4px`, `rgba(255,255,255,.06)` bg
+- Newsletter: underline input only (border-bottom), no box border
+
+### General Rules
+- Preserve all `.reveal` scroll animations
+- No drop shadows — use borders instead
+- `prefers-reduced-motion` must disable JS animations (word rotation, lazy video, stagger)
+- Custom cursor only on pointer devices (`pointer: fine`)
 
 ---
 
-## Brand Voice (for any copy edits)
+## Brand Voice
 
-- Confident, not boastful
-- Direct, not corporate
-- Technical, not jargon-heavy
+- Premium, modern, clear, confident, minimal
+- Not corporate, not vague, not overly startup-like
 - The brand is "Bad Decisions Studio" — always full name or "BDS", never just "Bad Decisions"
-- Founders: Faraz Shababi (goes by Commander) and Farhad Shababi
+- Feels like a serious company at the intersection of tech, AI, content, education, and execution
+
+---
+
+## Navigation
+
+**Desktop (64px height):**
+- Logo left: "BADDECISIONS BD" text, BD in yellow
+- Center: Podcast (plain link), Education (dropdown), Work With Us (dropdown)
+- CTA right: "Learn AI →" yellow button
+- Transparent on load, `rgba(0,0,0,.88)` + `backdrop-filter: blur(12px)` on scroll
+
+**Education dropdown:** AI Programs, Unreal Engine, Free Learning
+**Work With Us dropdown:** Services, Media Partnerships, Open Roles
+
+**Mobile (below 768px):** Full-screen overlay, links in PP Editorial New at 26px, stagger animation.
 
 ---
 
@@ -193,71 +218,73 @@ TikTok:          https://www.tiktok.com/@badxstudio
 X:               https://x.com/badxstudio
 LinkedIn:        https://ca.linkedin.com/company/badxstudio
 Discord:         https://discord.gg/bWCBcmqYh9
-Contact email:   create@baddecisions.studio
+Contact:         create@baddecisions.studio
 ```
+
+External links (ai.baddecisions.studio, learn.baddecisions.studio) open in the same tab (`target="_self"`). All other external links use `rel="noopener noreferrer"`.
 
 ---
 
 ## Podcast API
 
-`/api/podcast.js` is a Vercel serverless function. It fetches live episode data from the Apple Podcasts API (show ID: `1677462934`) and returns:
+`/api/podcast.js` is a Vercel serverless function fetching from Apple Podcasts (show ID: `1677462934`) + YouTube Data API with Upstash Redis caching.
 
 ```json
 {
-  "totalEpisodes": 78,
+  "totalEpisodes": 103,
   "episodes": [
     {
       "id": 123456,
-      "episodeNumber": 78,
+      "episodeNumber": 103,
       "title": "Episode Title",
-      "description": "Cleaned plain text description...",
-      "date": "Mar 2025",
+      "description": "Cleaned plain text...",
+      "date": "Apr 2026",
       "duration": "1h 12m",
       "artworkUrl": "https://...",
+      "youtubeUrl": "https://www.youtube.com/watch?v=...",
       "trackViewUrl": "https://podcasts.apple.com/..."
     }
   ]
 }
 ```
 
-The `index.html` calls this at `/api/podcast` on page load. Do not modify the API contract without updating both sides.
+The podcast page JS updates the featured hero (`.pod-hero`) and episode grid (`.pod-4grid .pod-showcase-card`) from this API. Do not modify the contract without updating both sides.
 
 ---
 
-## Deploy Checklist
+## SEO & Accessibility
 
-- [ ] All logo files placed in `public/assets/logo/`
-- [ ] Founder photos placed in `public/assets/founders/`
-- [ ] Client logos placed in `public/assets/clients/`
-- [ ] Platform icons placed in `public/assets/platforms/`
-- [ ] `public/favicon.ico` present
-- [ ] `public/og-image.png` present (1200×630)
-- [ ] No broken image paths
-- [ ] `vercel.json` unchanged
-- [ ] `api/podcast.js` unchanged unless intentional
-- [ ] `vercel deploy` from project root
+- Canonical tags on all pages
+- Open Graph + Twitter Card meta on all pages
+- JSON-LD: Organization (home), PodcastSeries (podcast), Course (learn)
+- Sitemap at `/sitemap.xml`
+- `llms.txt` at root
+- Skip-nav link with `#main-content` target
+- `prefers-reduced-motion` support (CSS + JS)
+- Local font preloads with `font-display: swap`
+- Lazy video autoplay via IntersectionObserver
+- Sub-pages (`/work-with-us/*`) use `noindex,nofollow` until ready
 
-<!-- VERCEL BEST PRACTICES START -->
-## Best practices for developing on Vercel
+---
 
-These defaults are optimized for AI coding agents (and humans) working on apps that deploy to Vercel.
+## Environment Variables
 
-- Treat Vercel Functions as stateless + ephemeral (no durable RAM/FS, no background daemons), use Blob or marketplace integrations for preserving state
-- Edge Functions (standalone) are deprecated; prefer Vercel Functions
-- Don't start new projects on Vercel KV/Postgres (both discontinued); use Marketplace Redis/Postgres instead
-- Store secrets in Vercel Env Variables; not in git or `NEXT_PUBLIC_*`
-- Provision Marketplace native integrations with `vercel integration add` (CI/agent-friendly)
-- Sync env + project settings with `vercel env pull` / `vercel pull` when you need local/offline parity
-- Use `waitUntil` for post-response work; avoid the deprecated Function `context` parameter
-- Set Function regions near your primary data source; avoid cross-region DB/service roundtrips
-- Tune Fluid Compute knobs (e.g., `maxDuration`, memory/CPU) for long I/O-heavy calls (LLMs, APIs)
-- Use Runtime Cache for fast **regional** caching + tag invalidation (don't treat it as global KV)
-- Use Cron Jobs for schedules; cron runs in UTC and triggers your production URL via HTTP GET
-- Use Vercel Blob for uploads/media; Use Edge Config for small, globally-read config
-- If Enable Deployment Protection is enabled, use a bypass secret to directly access them
-- Add OpenTelemetry via `@vercel/otel` on Node; don't expect OTEL support on the Edge runtime
-- Enable Web Analytics + Speed Insights early
-- Use AI Gateway for model routing, set AI_GATEWAY_API_KEY, using a model string (e.g. 'anthropic/claude-sonnet-4.6'), Gateway is already default in AI SDK
-  needed. Always curl https://ai-gateway.vercel.sh/v1/models first; never trust model IDs from memory
-- For durable agent loops or untrusted code: use Workflow (pause/resume/state) + Sandbox; use Vercel MCP for secure infra access
-<!-- VERCEL BEST PRACTICES END -->
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `YOUTUBE_API_KEY` | Optional | YouTube Data API key |
+| `KV_REST_API_URL` | Optional | Upstash Redis REST URL |
+| `KV_REST_API_TOKEN` | Optional | Upstash Redis REST token |
+
+Falls back to Apple Podcasts artwork + hardcoded YouTube cache if not set.
+
+---
+
+## Deployment
+
+```bash
+npm install
+npm run build         # Inlines sections into pages
+vercel deploy --prod  # Production deploy
+```
+
+Vercel runs `npm run build` automatically via `vercel.json` `buildCommand`.

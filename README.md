@@ -17,44 +17,62 @@ Production marketing site for [Bad Decisions Studio](https://www.baddecisions.st
 │   ├── index.html
 │   ├── learn.html
 │   ├── podcast.html
-│   └── work-with-us.html
+│   ├── work-with-us.html
+│   └── work-with-us/
+│       ├── services.html
+│       ├── media-partnerships.html
+│       └── open-roles.html
 ├── sections/             Shared HTML partials (content blocks)
-│   ├── nav.html          Nav with skip-link, mobile toggle, a11y attrs
+│   ├── nav.html          Nav with dropdowns, mobile overlay, skip-link
 │   ├── hero.html         Hero with video + integrated featured logo strip
-│   ├── pillars.html      Three-pillar value prop
+│   ├── pillars.html      Three-pillar value prop (Watch / Learn / Work With Us)
 │   ├── stats.html        Key metrics band
 │   ├── highlights.html   Three video highlight cards
 │   ├── podcast-landing.html   Podcast CTA with iPhone mockup
-│   ├── about.html        Founder story + blockquote
+│   ├── about.html        "Why We Exist" — mission statement + contact
 │   ├── sponsors.html     Partner logo grid (5-col)
 │   ├── footer.html       Links, socials, copyright
 │   ├── learn.html        Premium courses + free series grid
 │   ├── podcast.html      Featured ep, recent eps, listen-on, guest grid
-│   └── work-with-us.html Commercial hub: services, sponsorships, roles, inquiry routes
+│   ├── work-with-us.html Commercial hub: pathways, services, proof, partnerships, roles
+│   └── work-with-us/     Sub-page sections
+│       ├── services.html
+│       ├── media-partnerships.html
+│       └── open-roles.html
 ├── css/
-│   ├── globals.css       Design system tokens, typography, buttons, badges, utilities
+│   ├── globals.css       Design system tokens, @font-face, typography, buttons, badges
 │   └── style.css         Section-specific layouts and responsive rules
 ├── js/
-│   └── main.js           Nav toggle, scroll reveal, word rotation, podcast API, lazy video
+│   └── main.js           Nav, scroll reveal, word rotation, podcast API, lazy video
 ├── api/
 │   └── podcast.js        Serverless — Apple Podcasts + YouTube Data API + Redis cache
-├── assets/               Logos, videos, thumbnails, platform icons, source font files
-├── assets/fonts-web/     Production web fonts used by the site
-├── llms.txt              Machine-readable brand summary
-├── sitemap.xml           All public pages
+├── assets/
+│   ├── fonts-web/        Self-hosted woff2: PP Editorial New, Inter, Azeret Mono
+│   ├── icons/            SVG sprite system (platforms.svg)
+│   ├── logo/             SVG logos and marks
+│   ├── clients/          Client/partner logos
+│   ├── featured/         "As Featured On" logos
+│   ├── platforms/        Social/podcast platform icons (legacy, see icons/)
+│   ├── founders/         Founder photos
+│   ├── podcast/          Podcast cover art, iPhone mockup
+│   └── video/            Hero video, highlight reels, course previews
 ├── vercel.json           Build command, cache headers, security headers
-├── CLAUDE.md             AI assistant build instructions + design rules
-└── index.html            ← Build output (do not edit directly)
+├── sitemap.xml           All public pages
+├── llms.txt              Machine-readable brand summary
+└── CLAUDE.md             AI assistant build instructions + design rules
 ```
 
 ## Pages
 
-| Page | URL | Sections |
-|------|-----|----------|
-| Home | `/` | Hero (with featured strip), pillars, stats, highlights, podcast landing, about, sponsors, footer |
-| Podcast | `/podcast` | Header, featured episode, recent episodes, listen-on platforms, notable guests (peach bg), footer |
-| Learn | `/learn` | Premium programs, featured playlist, free series grid, footer |
-| Work With Us | `/work-with-us` | Work-with-us hero, pathways, services, proof, sponsorships, roles, inquiry routes, final CTA |
+| Page | URL | Purpose |
+|------|-----|---------|
+| Home | `/` | Explain what BDS is, build trust, show 3 paths, prove credibility |
+| Podcast | `/podcast` | Show, recent episodes, listen-on platforms, notable guests |
+| Learn | `/learn` | Premium programs + free series |
+| Work With Us | `/work-with-us` | Commercial hub — services, media partnerships, open roles |
+| Services | `/work-with-us/services` | Detailed services offering + trusted-by logos |
+| Media Partnerships | `/work-with-us/media-partnerships` | Multi-platform sponsorship packages, audience, formats |
+| Open Roles | `/work-with-us/open-roles` | Current job openings |
 
 ## Development
 
@@ -70,14 +88,33 @@ Do NOT edit root HTML files directly — they are build outputs.
 
 ## Build Script
 
-`build.js` reads each template from `templates/`, replaces `<div data-include="/sections/...">` markers with the actual section content, injects `globals.css`, and writes the final HTML to the project root.
+`build.js` reads each template from `templates/` (including subdirectories like `work-with-us/`), replaces `<div data-include="/sections/...">` markers with actual section content, injects `globals.css`, and writes final HTML to the project root.
+
+## Navigation
+
+Desktop: logo left, 3 center links (Watch, Learn with dropdown, Work With Us with dropdown), CTA right. Dropdowns appear on hover with animated entrance. Mobile: full-screen overlay with staggered link animations.
+
+**Education dropdown:** AI Programs, Unreal Engine, Free Learning
+**Work With Us dropdown:** Services, Media Partnerships, Open Roles
+
+## Icon System
+
+SVG sprite at `assets/icons/platforms.svg` with brand-accurate platform logos. Usage:
+
+```html
+<svg class="pi pi-md"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg>
+```
+
+Available icons: `icon-youtube`, `icon-spotify`, `icon-apple-podcasts`, `icon-instagram`, `icon-x`, `icon-tiktok`, `icon-linkedin`, `icon-discord`, `icon-threads`
+
+Size classes: `.pi-sm` (16px), `.pi-md` (20px), `.pi-lg` (24px), `.pi-xl` (32px)
 
 ## CSS Architecture
 
-- **`globals.css`** — Design tokens, local `@font-face` loading, typography primitives, buttons, badges, utilities, focus states, and reduced-motion support
-- **`style.css`** — Section-specific layouts for nav, hero, pillars, podcast, learn, work-with-us, sponsors, about, footer, and responsive rules
+- **`globals.css`** (821 lines) — Design tokens, `@font-face`, typography classes, buttons, badges, cards, stats, icon utilities, scroll reveal, reduced-motion support
+- **`style.css`** (3,484 lines) — Nav, hero, featured scroller, pillars, podcast, learn, work-with-us, sponsors, about, footer, media partnerships page styles, responsive breakpoints
 
-### Design Tokens (from brand review)
+### Design Tokens
 
 | Token | Value |
 |-------|-------|
@@ -99,10 +136,10 @@ Do NOT edit root HTML files directly — they are build outputs.
 
 Sections rotate through brand colors — never all the same background:
 1. `#000000` — void (hero, main content)
-2. `#FFEF7B` — yellow (stats bands)
-3. `#3A5D5B` — teal (featured content)
-4. `#FBF9ED` — paper (light inversions)
-5. `#C17E59` — peach (CTAs, guest sections)
+2. `#FFEF7B` — yellow (stats bands, media partnerships hero)
+3. `#3A5D5B` — teal (audience sections, CTAs)
+4. `#FBF9ED` — paper (partnership formats, light inversions)
+5. `#C17E59` — peach (guest sections)
 
 ## SEO & Accessibility
 
@@ -114,8 +151,9 @@ Sections rotate through brand colors — never all the same background:
 - Skip-nav link with `#main-content` target
 - `rel="noopener noreferrer"` on all external links
 - `prefers-reduced-motion` support (CSS + JS)
-- Local font preloads plus `font-display: swap`
-- Lazy below-the-fold video playback via IntersectionObserver
+- Local font preloads with `font-display: swap`
+- Lazy video autoplay via IntersectionObserver
+- Sub-pages (`/work-with-us/*`) use `noindex,nofollow` until ready
 
 ## Environment Variables
 
@@ -134,4 +172,4 @@ vercel deploy          # Preview
 vercel deploy --prod   # Production
 ```
 
-Vercel runs `npm run build` automatically before serving.
+Vercel runs `npm run build` automatically via `vercel.json` `buildCommand`.

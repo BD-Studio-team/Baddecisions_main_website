@@ -191,9 +191,7 @@ function initPodcastData() {
 
       var cardMeta = cards[i].querySelector('.pod-card-meta');
       if (cardMeta) {
-        var metaParts = ['Ep. ' + (episode.episodeNumber || '')];
-        if (episode.date) metaParts.push(episode.date);
-        cardMeta.textContent = metaParts.join(' \u00b7 ');
+        cardMeta.textContent = 'Ep. ' + (episode.episodeNumber || '');
       }
     }
   }).catch(function(err) {

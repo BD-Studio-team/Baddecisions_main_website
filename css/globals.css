@@ -619,6 +619,19 @@ body::before {
   text-transform: uppercase;
 }
 
+/* ─── PLATFORM ICON (SVG sprite) ─────────────────────────────── */
+/* Usage: <svg class="pi" width="20" height="20"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg> */
+.pi {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+.pi-sm { width: 16px; height: 16px; }
+.pi-md { width: 20px; height: 20px; }
+.pi-lg { width: 24px; height: 24px; }
+.pi-xl { width: 32px; height: 32px; }
+
 /* ─── TRUST LOGO ─────────────────────────────────────────────── */
 .trust-logo {
   opacity: 0.35;
@@ -747,7 +760,7 @@ select:focus-visible,
 
 .section-padded-sm { padding: 80px 0; }
 .section-padded { padding: 120px 0; }
-.page-main { padding-top: 80px; }
+.page-main { padding-top: 100px; background: var(--color-void, #000); }
 
 /* ─── BLOCKQUOTE ─────────────────────────────────────────────── */
 .blockquote {

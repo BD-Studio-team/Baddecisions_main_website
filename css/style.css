@@ -254,7 +254,7 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 700px;
+      max-width: 640px;
     }
 
     .hero-eyebrow {
@@ -285,7 +285,7 @@
       font-size: 18px;
       line-height: 1.7;
       color: var(--text-secondary);
-      max-width: 620px;
+      max-width: 560px;
       margin-bottom: 44px;
       opacity: 0;
       animation: fadeUp 1.1s var(--transition) 0.7s forwards;
@@ -505,6 +505,10 @@
       padding: 56px 48px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 380px;
       transition: all 0.5s var(--transition);
       cursor: default;
       border-radius: var(--radius);
@@ -527,19 +531,16 @@
     .pillar-card:hover::after { transform: scaleX(1); background: var(--peach); }
 
     .pillar-number {
-      font-family: var(--serif);
-      font-size: 11px;
-      font-weight: 400;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
       letter-spacing: 0.2em;
       color: var(--gold);
-      margin-bottom: 32px;
-    }
-
-    .pillar-icon {
-      width: 48px;
-      height: 48px;
       margin-bottom: 28px;
-      opacity: 0.7;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 239, 123, 0.14);
+      border-radius: 4px;
+      background: rgba(255, 239, 123, 0.04);
     }
 
     .pillar-title {
@@ -554,21 +555,34 @@
       font-size: 15px;
       line-height: 1.75;
       color: var(--text-secondary);
-      margin-bottom: 32px;
+      margin-bottom: 22px;
     }
 
-    .pillar-stat {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 300;
-      color: var(--gold);
-    }
-    .pillar-stat-label {
+    .pillar-preview {
+      font-family: var(--font-mono);
       font-size: 10px;
-      letter-spacing: 0.15em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--text-muted);
-      margin-top: 2px;
+      color: rgba(251, 249, 237, 0.42);
+      margin-top: auto;
+      margin-bottom: 26px;
+    }
+
+    .pillar-cta {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .pillar-cta:hover {
+      color: var(--text-primary);
+      transform: translateX(2px);
     }
 
     .pillar-bg-num {
@@ -1160,7 +1174,7 @@
     /* ─── ABOUT ────────────────────────────────────────────────────── */
     #about {
       padding-top: 120px;
-      padding-bottom: 120px;
+      padding-bottom: 156px;
     }
 
     .contact-link {
@@ -1685,12 +1699,8 @@
       height: 28px;
       flex-shrink: 0;
     }
-    /* Spotify green */
-    .pod-listen-btn:nth-child(1) img { filter: brightness(0) saturate(100%) invert(58%) sepia(75%) saturate(473%) hue-rotate(88deg) brightness(97%) contrast(90%); }
-    /* Apple purple */
-    .pod-listen-btn:nth-child(2) img { filter: brightness(0) saturate(100%) invert(30%) sepia(90%) saturate(2000%) hue-rotate(260deg) brightness(100%) contrast(95%); }
-    /* YouTube red */
-    .pod-listen-btn:nth-child(3) img { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) saturate(7000%) hue-rotate(358deg) brightness(100%) contrast(110%); }
+    /* Platform icons use SVG sprite with brand colors built in */
+    .pod-listen-btn .pi { width: 28px; height: 28px; }
     .pod-listen-sub {
       display: block;
       font-family: var(--font-body);
@@ -1721,9 +1731,20 @@
     }
     .podcast-page-header {
       margin-bottom: 48px;
+      text-align: left;
+    }
+    .podcast-page-header .label {
+      justify-content: flex-start;
+    }
+    .podcast-page-header .heading-section {
+      text-align: left;
+      margin-bottom: 24px;
     }
     .podcast-page-copy {
       margin-top: 18px;
+      max-width: 860px;
+      text-align: left;
+      margin-left: 0;
     }
     .pod-guests-header {
       margin-bottom: 48px;
@@ -2335,6 +2356,12 @@
     }
 
     /* Highlight cards */
+    .highlights-header {
+      margin-bottom: 40px;
+    }
+    .highlights-subtitle {
+      margin-top: 16px;
+    }
     .whoweare-highlights {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -2513,13 +2540,8 @@
       width: 28px;
       height: 28px;
     }
-    .pod-platform-btn img[alt=""] { filter: none; }
-    /* Spotify green */
-    .pod-platform-btn:nth-child(1) img { filter: brightness(0) saturate(100%) invert(58%) sepia(75%) saturate(473%) hue-rotate(88deg) brightness(97%) contrast(90%); }
-    /* Apple purple */
-    .pod-platform-btn:nth-child(2) img { filter: brightness(0) saturate(100%) invert(30%) sepia(90%) saturate(2000%) hue-rotate(260deg) brightness(100%) contrast(95%); }
-    /* YouTube red */
-    .pod-platform-btn:nth-child(3) img { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) saturate(7000%) hue-rotate(358deg) brightness(100%) contrast(110%); }
+    /* Platform icons use SVG sprite with brand colors built in */
+    .pod-platform-btn .pi { width: 28px; height: 28px; }
     .pod-platform-listen {
       display: block;
       font-size: 10px;
@@ -3051,7 +3073,7 @@
       gap: 18px;
     }
     .workhub-path-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .workhub-service-grid {
       display: grid;
@@ -3257,6 +3279,15 @@
     }
     .about-quote-block {
       padding: 80px 0;
+    }
+    .about-mission-statement {
+      max-width: 980px;
+      margin: 0 auto;
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--text-primary);
     }
 
     @media (max-width: 1180px) {

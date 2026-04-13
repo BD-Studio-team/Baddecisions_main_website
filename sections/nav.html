@@ -5,22 +5,28 @@
     /* ── Base ── */
     .site-nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 12px; left: 20px; right: 20px;
       z-index: 100;
-      height: 64px;
+      max-width: 1240px;
+      margin: 0 auto;
+      height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s ease, border-color 0.3s ease;
+      padding: 0 18px 0 20px;
+      background: rgba(8,8,8,.84);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      box-shadow: 0 14px 38px rgba(0,0,0,.24);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     }
     .site-nav.scrolled {
-      background: rgba(0,0,0,.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: rgba(255,255,255,.08);
+      background: rgba(8,8,8,.92);
+      border-color: rgba(255,239,123,.12);
+      box-shadow: 0 18px 46px rgba(0,0,0,.3);
+      transform: translateY(1px);
     }
 
     /* ── Logo ── */
@@ -33,17 +39,14 @@
     .site-nav .nav-logo img {
       display: block;
       width: auto;
-      height: 26px;
-    }
-    .site-nav.scrolled .nav-logo img {
-      opacity: 1;
+      height: 24px;
     }
 
     /* ── Center links ── */
     .site-nav .nav-center {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
       list-style: none;
       position: absolute;
       left: 50%;
@@ -56,21 +59,36 @@
       display: flex;
       align-items: center;
     }
+    /* Invisible bridge so cursor can travel from link to dropdown */
+    .site-nav .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+      pointer-events: none;
+    }
+    .site-nav .nav-item:hover::after {
+      pointer-events: auto;
+    }
     .site-nav .nav-item > a {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       font-family: var(--font-body, 'Inter', system-ui, sans-serif);
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,.5);
-      padding: 0 18px;
+      font-size: 13.5px;
+      font-weight: 550;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,.55);
+      padding: 0 15px;
       height: 100%;
       text-decoration: none;
       transition: color 150ms ease;
       white-space: nowrap;
     }
-    .site-nav .nav-item > a:hover {
+    .site-nav .nav-item > a:hover,
+    .site-nav .nav-item:hover > a {
       color: #fff;
     }
     .site-nav .nav-item.active > a {
@@ -80,86 +98,84 @@
 
     /* ── Chevron ── */
     .site-nav .nav-chevron {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      transition: transform 200ms ease;
+      opacity: .5;
+      transition: transform 200ms cubic-bezier(0.16,1,0.3,1), opacity 150ms ease;
     }
     .site-nav .nav-item:hover .nav-chevron {
       transform: rotate(180deg);
+      opacity: 1;
     }
 
     /* ── Dropdown ── */
     .site-nav .nav-dropdown {
       position: absolute;
-      top: 100%;
+      top: calc(100% + 4px);
       left: 50%;
       transform: translateX(-50%) translateY(-8px);
-      min-width: 260px;
-      background: #0a0a0a;
+      min-width: 220px;
+      background: rgba(10,10,10,.97);
       border: 1px solid rgba(255,255,255,.1);
       border-top: 2px solid var(--color-yellow, #FFEF7B);
-      border-radius: 0 0 4px 4px;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 200ms cubic-bezier(0.16,1,0.3,1), transform 200ms cubic-bezier(0.16,1,0.3,1);
-      padding: 8px 0;
+      transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
+      padding: 6px;
     }
     .site-nav .nav-item:hover .nav-dropdown {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
       pointer-events: auto;
     }
-    .site-nav .nav-dropdown-header {
-      font-family: var(--font-mono, 'Azeret Mono', monospace);
-      font-size: 9px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: rgba(255,255,255,.2);
-      padding: 8px 18px 10px;
-    }
     .site-nav .nav-dd-item {
       display: flex;
       align-items: center;
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(255,255,255,.05);
+      padding: 11px 14px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: background 150ms ease;
+      transition: background 120ms ease;
     }
-    .site-nav .nav-dd-item:last-child { border-bottom: none; }
-    .site-nav .nav-dd-item:hover { background: rgba(255,255,255,.04); }
+    .site-nav .nav-dd-item:hover { background: rgba(255,255,255,.06); }
 
     .site-nav .nav-dd-label {
       font-family: var(--font-body, 'Inter', system-ui, sans-serif);
       font-size: 13px;
       font-weight: 600;
-      color: #fff;
+      color: rgba(255,255,255,.7);
       line-height: 1.2;
-      transition: color 150ms ease;
+      transition: color 120ms ease;
     }
     .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow, #FFEF7B); }
 
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
       font-family: var(--font-body, 'Inter', system-ui, sans-serif);
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 700;
-      color: #000;
-      background: var(--color-yellow, #FFEF7B);
-      padding: 10px 20px;
-      border-radius: 4px;
+      letter-spacing: 0.01em;
+      color: var(--color-yellow, #FFEF7B);
+      background: rgba(255,239,123,.06);
+      border: 1px solid rgba(255,239,123,.18);
+      padding: 11px 18px;
+      border-radius: 12px;
       text-decoration: none;
       flex-shrink: 0;
-      transition: transform 150ms ease, box-shadow 150ms ease;
+      transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
     }
     .site-nav .nav-cta-btn:hover {
+      color: #000;
+      background: var(--color-yellow, #FFEF7B);
+      border-color: var(--color-yellow, #FFEF7B);
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(255,239,123,.25);
+      box-shadow: 0 8px 20px rgba(255,239,123,.16);
     }
 
     /* ── Mobile toggle ── */
@@ -168,9 +184,14 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
     }
     .site-nav .nav-burger span {
       display: block;
@@ -269,7 +290,14 @@
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .site-nav { padding: 0 20px; }
+      .site-nav {
+        top: 10px;
+        left: 12px;
+        right: 12px;
+        height: 60px;
+        padding: 0 14px;
+        border-radius: 14px;
+      }
       .site-nav .nav-center,
       .site-nav .nav-cta-btn { display: none; }
       .site-nav .nav-burger { display: flex; }
@@ -291,7 +319,7 @@
     <!-- Center links -->
     <ul class="nav-center">
       <li class="nav-item">
-        <a href="/podcast">Podcast</a>
+        <a href="/podcast">Watch</a>
       </li>
       <li class="nav-item">
         <a href="/learn">
@@ -299,7 +327,6 @@
           <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
         </a>
         <div class="nav-dropdown">
-          <div class="nav-dropdown-header">Programs</div>
           <a href="https://ai.baddecisions.studio" target="_self" class="nav-dd-item">
             <div class="nav-dd-label">AI Programs</div>
           </a>
@@ -317,12 +344,11 @@
           <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
         </a>
         <div class="nav-dropdown">
-          <div class="nav-dropdown-header">Collaborate</div>
           <a href="/work-with-us/services" class="nav-dd-item">
             <div class="nav-dd-label">Services</div>
           </a>
-          <a href="/work-with-us/sponsorships" class="nav-dd-item">
-            <div class="nav-dd-label">Sponsorships</div>
+          <a href="/work-with-us/media-partnerships" class="nav-dd-item">
+            <div class="nav-dd-label">Media Partnerships</div>
           </a>
           <a href="/work-with-us/open-roles" class="nav-dd-item">
             <div class="nav-dd-label">Open Roles</div>
@@ -342,7 +368,7 @@
 
   <!-- Mobile overlay -->
   <div class="nav-mobile-overlay" id="navMobileOverlay">
-    <a href="/podcast" class="mobile-link nav-delay-0">Podcast</a>
+    <a href="/podcast" class="mobile-link nav-delay-0">Watch</a>
     <a href="/learn" class="mobile-link nav-delay-1">Learn</a>
     <div class="mobile-sublinks education-sub">
       <a href="https://ai.baddecisions.studio" target="_self" class="nav-delay-2">AI Programs</a>
@@ -352,7 +378,7 @@
     <a href="/work-with-us" class="mobile-link nav-delay-5">Work With Us</a>
     <div class="mobile-sublinks work-sub">
       <a href="/work-with-us/services" class="nav-delay-6">Services</a>
-      <a href="/work-with-us/sponsorships" class="nav-delay-7">Sponsorships</a>
+      <a href="/work-with-us/media-partnerships" class="nav-delay-7">Media Partnerships</a>
       <a href="/work-with-us/open-roles" class="nav-delay-8">Open Roles</a>
     </div>
     <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-9">Learn AI →</a>
