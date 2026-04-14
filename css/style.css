@@ -2013,7 +2013,8 @@
 
     /* ─── PODCAST GUESTS SECTION ──────────────────────────────────── */
     .pod-guests-section {
-      background: var(--color-peach);
+      background-color: var(--color-tan);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)' opacity='0.025'/%3E%3C/svg%3E");
       padding: 100px 0;
     }
     .podcast-page-header {
@@ -2035,57 +2036,132 @@
     }
     .pod-guests-header {
       margin-bottom: 48px;
+      text-align: left;
     }
-    .pod-guests-label {
-      color: var(--color-tan);
+    .pod-guests-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-family: var(--font-mono);
+      font-size: 10px;
       font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-green);
+    }
+    .pod-guests-kicker::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(58,93,91,0.4);
+      flex: 0 0 auto;
     }
     .pod-guests-title {
       color: var(--color-void);
       margin-bottom: 0;
+      font-family: var(--font-editorial);
+      font-size: clamp(48px, 5vw, 72px);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    .pod-guests-title em {
+      color: var(--color-green);
+      font-style: italic;
     }
     .sponsors-header {
       margin-bottom: 48px;
     }
 
-    .pod-guest-card-v2 {
-      border-radius: var(--radius-card);
+    .pod-guest-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 28px;
+    }
+    .pod-guest-tile {
+      display: block;
+      color: inherit;
+    }
+    .pod-guest-image-wrap {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 4px;
       overflow: hidden;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: transform 0.4s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+      background: rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s ease;
     }
-    .pod-guest-card-v2:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.2);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    .pod-guest-tile:hover .pod-guest-image-wrap {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
-    .pod-guest-card-v2 img {
+    .pod-guest-image-wrap img {
       width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 9;
+      height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s var(--ease-out-expo);
+      filter: saturate(0.3) brightness(0.7) contrast(1.1);
+      transition: filter 0.5s ease, transform 0.5s ease;
     }
-    .pod-guest-card-v2:hover img { transform: scale(1.04); }
-
-    .pod-guest-card-info {
-      padding: 16px 20px 20px;
+    .pod-guest-tile:hover .pod-guest-image-wrap img {
+      filter: saturate(0.6) brightness(0.8) contrast(1.05);
+      transform: scale(1.04);
     }
-    .pod-guest-card-info h4 {
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--color-void);
-      margin-bottom: 4px;
+    .pod-guest-arrow {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    .pod-guest-card-info span {
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: rgba(5,5,5,.55);
+    .pod-guest-tile:hover .pod-guest-arrow {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pod-guest-arrow svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--color-cream);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .pod-guest-meta {
+      margin-top: 14px;
+    }
+    .pod-guest-meta h4 {
+      font-family: var(--font-editorial);
+      font-size: 18px;
+      font-style: italic;
       font-weight: 400;
+      line-height: 1.15;
+      color: var(--color-void);
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+    .pod-guest-tile:hover .pod-guest-meta h4 {
+      color: var(--color-green);
+    }
+    .pod-guest-meta span {
+      display: block;
+      margin-top: 3px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--color-ash);
+      line-height: 1.5;
     }
 
     /* ─── FOOTER ───────────────────────────────────────────────────── */
@@ -3056,10 +3132,14 @@
       height: auto;
       aspect-ratio: 16 / 9;
       object-fit: cover;
+      object-position: center;
       display: block;
+      transform: scale(1.015);
+      transform-origin: center;
+      clip-path: inset(0 0 2px 0);
       transition: transform 0.5s;
     }
-    .pod-showcase-card:hover img { transform: scale(1.08); }
+    .pod-showcase-card:hover img { transform: scale(1.09); }
     .pod-showcase-overlay {
       display: none;
     }
@@ -3120,6 +3200,28 @@
       .pod-ep-thumb { width: 80px; }
       .pod-showcase-card { flex: 0 0 240px; }
       .pod-showcase-scroll { margin: 0 -20px; padding: 0 20px; }
+    }
+    @media (max-width: 1024px) {
+      .pod-guest-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+    }
+    @media (max-width: 640px) {
+      .pod-guests-section {
+        padding: 72px 0;
+      }
+      .pod-guests-header {
+        margin-bottom: 36px;
+      }
+      .pod-guests-title {
+        font-size: clamp(34px, 11vw, 48px);
+      }
+      .pod-guest-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 16px;
+        row-gap: 24px;
+      }
     }
 
     /* ─── FEATURED INTERVIEWS ────────────────────────────────────── */
