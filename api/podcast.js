@@ -1,9 +1,43 @@
-// Vercel Serverless Function — live podcast feed from YouTube only
-// Top section of /podcast is dynamic. Guest section remains curated in HTML.
+// Vercel Serverless Function — live podcast feed from YouTube
+// Cached in Upstash Redis (when configured) to reduce YouTube API quota usage.
+//
+// Cache strategy:
+//   1. Check Redis for cached payload — if fresh (< CACHE_TTL_MS), return it.
+//   2. If Redis has a stale copy (< STALE_TTL_MS), return it immediately AND kick off
+//      a background refresh. This gives the user a fast response even when YouTube is slow.
+//   3. If nothing in Redis, fetch from YouTube synchronously and cache.
+//   4. On any error, return FALLBACK_EPISODES with a short edge cache TTL.
+//
+// Upstash is optional — if env vars aren't set, the function falls back to direct
+// YouTube calls (which are still cached at the Vercel edge via s-maxage header).
+
+import { Redis } from '@upstash/redis';
 
 const YT_CHANNEL_ID = 'UCOQ6GGRyyu8S3jahnUz2zHw';
 const YT_API_KEY = process.env.YOUTUBE_API_KEY || '';
 const MAX_RESULTS = 8;
+
+// Redis cache TTLs
+const CACHE_KEY = 'bds:podcast:feed:v1';
+const CACHE_TTL_SECONDS = 3600;        // 1 hour — fresh
+const STALE_TTL_SECONDS = 86400;       // 24 hours — serve stale while refreshing
+
+// Initialize Redis client only if env vars are present.
+// Upstash reads KV_REST_API_URL / KV_REST_API_TOKEN automatically via Redis.fromEnv(),
+// but we check explicitly so the function works without Redis configured.
+let redis = null;
+if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+  try {
+    redis = new Redis({
+      url: process.env.KV_REST_API_URL,
+      token: process.env.KV_REST_API_TOKEN,
+    });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('Redis init failed, continuing without cache:', err.message);
+    redis = null;
+  }
+}
 
 const FALLBACK_EPISODES = [
   {
@@ -40,18 +74,15 @@ const FALLBACK_EPISODES = [
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
-  var d = new Date(dateStr);
+  const d = new Date(dateStr);
   if (Number.isNaN(d.getTime())) return '';
-  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   return months[d.getMonth()] + ' ' + d.getFullYear();
 }
 
 function cleanDescription(text) {
   if (!text) return '';
-  return text
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
-    .slice(0, 300);
+  return text.replace(/\n{3,}/g, '\n\n').trim().slice(0, 300);
 }
 
 function bestThumbnail(thumbnails, videoId) {
@@ -64,7 +95,7 @@ function bestThumbnail(thumbnails, videoId) {
 }
 
 function normalizeEpisode(item, index, totalEpisodes) {
-  var videoId = item.videoId;
+  const videoId = item.videoId;
   return {
     id: videoId,
     episodeNumber: totalEpisodes > 0 ? totalEpisodes - index : null,
@@ -79,7 +110,7 @@ function normalizeEpisode(item, index, totalEpisodes) {
 }
 
 function fallbackPayload() {
-  var totalEpisodes = FALLBACK_EPISODES.length;
+  const totalEpisodes = FALLBACK_EPISODES.length;
   return {
     totalEpisodes: totalEpisodes,
     episodes: FALLBACK_EPISODES.map(function(item, index) {
@@ -89,7 +120,7 @@ function fallbackPayload() {
 }
 
 async function fetchJson(url, label) {
-  var response = await fetch(url);
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(label + ' returned ' + response.status);
   }
@@ -97,10 +128,11 @@ async function fetchJson(url, label) {
 }
 
 async function getUploadsPlaylistId() {
-  var channelUrl = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=' + YT_CHANNEL_ID + '&key=' + YT_API_KEY;
-  var channelData = await fetchJson(channelUrl, 'YouTube channels');
-  var items = channelData.items || [];
-  var uploadsId = items[0] && items[0].contentDetails && items[0].contentDetails.relatedPlaylists
+  const channelUrl = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id='
+    + YT_CHANNEL_ID + '&key=' + YT_API_KEY;
+  const channelData = await fetchJson(channelUrl, 'YouTube channels');
+  const items = channelData.items || [];
+  const uploadsId = items[0] && items[0].contentDetails && items[0].contentDetails.relatedPlaylists
     ? items[0].contentDetails.relatedPlaylists.uploads
     : '';
 
@@ -111,21 +143,21 @@ async function getUploadsPlaylistId() {
   return uploadsId;
 }
 
-async function getLatestYouTubeEpisodes() {
+async function fetchFromYouTube() {
   if (!YT_API_KEY) return fallbackPayload();
 
-  var uploadsId = await getUploadsPlaylistId();
-  var playlistUrl =
+  const uploadsId = await getUploadsPlaylistId();
+  const playlistUrl =
     'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status'
     + '&playlistId=' + uploadsId
     + '&maxResults=' + MAX_RESULTS
     + '&key=' + YT_API_KEY;
 
-  var playlistData = await fetchJson(playlistUrl, 'YouTube playlistItems');
-  var rawItems = playlistData.items || [];
-  var publicItems = rawItems.filter(function(item) {
-    var title = item && item.snippet ? item.snippet.title : '';
-    var privacy = item && item.status ? item.status.privacyStatus : '';
+  const playlistData = await fetchJson(playlistUrl, 'YouTube playlistItems');
+  const rawItems = playlistData.items || [];
+  const publicItems = rawItems.filter(function(item) {
+    const title = item && item.snippet ? item.snippet.title : '';
+    const privacy = item && item.status ? item.status.privacyStatus : '';
     return privacy !== 'private'
       && title
       && title !== 'Private video'
@@ -134,7 +166,7 @@ async function getLatestYouTubeEpisodes() {
       && item.contentDetails.videoId;
   });
 
-  var totalEpisodes = playlistData.pageInfo && playlistData.pageInfo.totalResults
+  const totalEpisodes = playlistData.pageInfo && playlistData.pageInfo.totalResults
     ? playlistData.pageInfo.totalResults
     : publicItems.length;
 
@@ -152,14 +184,89 @@ async function getLatestYouTubeEpisodes() {
   };
 }
 
-export default async function handler(req, res) {
+// ── Redis helpers ───────────────────────────────────────────────
+// The cached value is wrapped with { fetchedAt, payload } so we can decide
+// fresh vs stale without a separate TTL lookup.
+
+async function getCached() {
+  if (!redis) return null;
   try {
-    var payload = await getLatestYouTubeEpisodes();
-    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-    res.status(200).json(payload);
+    const raw = await redis.get(CACHE_KEY);
+    if (!raw) return null;
+    // Upstash returns objects directly when stored with redis.set()
+    const wrapped = typeof raw === 'string' ? JSON.parse(raw) : raw;
+    if (!wrapped || !wrapped.fetchedAt || !wrapped.payload) return null;
+    const ageSeconds = Math.floor((Date.now() - wrapped.fetchedAt) / 1000);
+    return { ...wrapped, ageSeconds };
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('Redis get failed:', err.message);
+    return null;
+  }
+}
+
+async function setCached(payload) {
+  if (!redis) return;
+  try {
+    const wrapped = { fetchedAt: Date.now(), payload: payload };
+    // Store for STALE_TTL_SECONDS; the "fresh vs stale" check uses fetchedAt.
+    await redis.set(CACHE_KEY, wrapped, { ex: STALE_TTL_SECONDS });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('Redis set failed:', err.message);
+  }
+}
+
+async function refreshInBackground() {
+  try {
+    const fresh = await fetchFromYouTube();
+    await setCached(fresh);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('Background YouTube refresh failed:', err.message);
+  }
+}
+
+// ── Handler ─────────────────────────────────────────────────────
+
+export default async function handler(req, res) {
+  // 1. Try Redis cache first (if configured)
+  const cached = await getCached();
+
+  if (cached) {
+    const isFresh = cached.ageSeconds < CACHE_TTL_SECONDS;
+    if (isFresh) {
+      // Fresh cache hit — return immediately
+      res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+      res.setHeader('X-Cache', 'HIT');
+      res.setHeader('X-Cache-Age', String(cached.ageSeconds));
+      return res.status(200).json(cached.payload);
+    }
+
+    // Stale cache hit — serve immediately, refresh in background.
+    // Vercel functions finish after the response, but because Redis writes
+    // are fast we can usually complete the refresh inside the timeout.
+    res.setHeader('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
+    res.setHeader('X-Cache', 'STALE');
+    res.setHeader('X-Cache-Age', String(cached.ageSeconds));
+    res.status(200).json(cached.payload);
+    // Fire and forget — do not await
+    refreshInBackground();
+    return;
+  }
+
+  // 2. No cache — fetch live from YouTube
+  try {
+    const payload = await fetchFromYouTube();
+    await setCached(payload);
+    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+    res.setHeader('X-Cache', redis ? 'MISS' : 'BYPASS');
+    return res.status(200).json(payload);
+  } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Podcast API error:', err.message);
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
-    res.status(200).json(fallbackPayload());
+    res.setHeader('X-Cache', 'FALLBACK');
+    return res.status(200).json(fallbackPayload());
   }
 }

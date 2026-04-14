@@ -14,12 +14,13 @@
   <meta property="og:description" content="Cinematic production, AI integration, corporate training, and creative technology consulting.">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:url" content="https://www.baddecisions.studio/work-with-us/services">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#050505">
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
 </head>
 <body>
   <div data-include="/sections/nav.html"></div>
@@ -27,6 +28,6 @@
     <div data-include="/sections/work-with-us/services.html"></div>
   </main>
   <div data-include="/sections/footer.html"></div>
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>

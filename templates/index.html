@@ -17,12 +17,19 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Bad Decisions Studio">
   <meta name="twitter:image" content="/og-image.png">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#050505">
+  <!-- Preconnect to external CDNs -->
+  <link rel="preconnect" href="https://r14hngokr8soy7ms.public.blob.vercel-storage.com" crossorigin>
+  <!-- Fonts -->
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts-web/inter-var-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.css" />
+  <!-- Hero video preload (LCP) -->
+  <link rel="preload" href="/assets/video/hero-video.webm" as="video" type="video/webm">
+  <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -31,7 +38,7 @@
         "@type": "Organization",
         "name": "Bad Decisions Studio",
         "url": "https://www.baddecisions.studio",
-        "logo": "https://www.baddecisions.studio/assets/logo/bd-logo.svg",
+        "logo": "https://www.baddecisions.studio/assets/bd-logo/bd-logo.svg",
         "description": "Premium media, education, and creative technology brand spanning podcast, learning, and commercial work.",
         "email": "create@baddecisions.studio",
         "founder": [
@@ -64,15 +71,15 @@
   <main id="main-content">
     <div data-include="/sections/hero.html"></div>
     <div data-include="/sections/pillars.html"></div>
-    <div data-include="/sections/highlights.html"></div>
+    <div data-include="/sections/find-us.html"></div>
     <div data-include="/sections/podcast-landing.html"></div>
-    <div data-include="/sections/sponsors.html"></div>
+    <div data-include="/sections/newsletter.html"></div>
     <div data-include="/sections/about.html"></div>
   </main>
   <div data-include="/sections/footer.html"></div>
 
   <!-- Main script -->
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 
 </body>
 </html>

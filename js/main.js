@@ -47,6 +47,7 @@ function initSmoothScroll() {
   });
 }
 
+var heroRotationInterval = null;
 function initHeroRotation() {
   if (prefersReducedMotion) return;
 
@@ -56,7 +57,7 @@ function initHeroRotation() {
   var words = ['artists.', 'builders.', 'studios.', 'brands.', 'founders.', 'teams.'];
   var wordIndex = 0;
 
-  setInterval(function() {
+  heroRotationInterval = setInterval(function() {
     rotatingWord.classList.add('fade-out');
     setTimeout(function() {
       wordIndex = (wordIndex + 1) % words.length;
@@ -64,6 +65,13 @@ function initHeroRotation() {
       rotatingWord.classList.remove('fade-out');
     }, 400);
   }, 2500);
+}
+// Cleanup helper for future SPA use
+function destroyHeroRotation() {
+  if (heroRotationInterval) {
+    clearInterval(heroRotationInterval);
+    heroRotationInterval = null;
+  }
 }
 
 function safePlay(video) {

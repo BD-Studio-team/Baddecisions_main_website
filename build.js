@@ -18,9 +18,15 @@ const LOADER_IIFE_RE = /\s*<script>\s*\(function\(\)\s*\{[\s\S]*?sections-loaded
 // Regex to match <script src="/js/loader.js"></script>
 const LOADER_SCRIPT_RE = /\s*<script\s+src="\/js\/loader\.js"\s*><\/script>/;
 
-// Inject globals.css before style.css
-const STYLE_LINK = '<link rel="stylesheet" href="/css/style.css" />';
-const GLOBALS_INJECT = '<link rel="stylesheet" href="/css/globals.css" />\n  <link rel="stylesheet" href="/css/style.css" />';
+// Inject globals.css before style.css (regex matches both plain and fetchpriority variants)
+const STYLE_LINK_RE = /<link rel="stylesheet" href="\/css\/style\.css"([^>]*?)\s*\/?\s*>/;
+const GLOBALS_INJECT = (match, attrs) => {
+  const cleanAttrs = attrs.trim();
+  const styleTag = cleanAttrs
+    ? `<link rel="stylesheet" href="/css/style.css" ${cleanAttrs} />`
+    : `<link rel="stylesheet" href="/css/style.css" />`;
+  return `<link rel="stylesheet" href="/css/globals.css" />\n  ${styleTag}`;
+};
 
 function buildPage(templateFile) {
   const templatePath = path.join(TEMPLATES_DIR, templateFile);
@@ -30,8 +36,8 @@ function buildPage(templateFile) {
   html = html.replace(INCLUDE_RE, (match, sectionPath) => {
     const filePath = path.join(ROOT, sectionPath);
     if (!fs.existsSync(filePath)) {
-      console.warn(`  Warning: ${sectionPath} not found, skipping`);
-      return `<!-- missing: ${sectionPath} -->`;
+      // Fail loud: missing includes should break the build, not silently produce broken HTML
+      throw new Error(`Missing section include: ${sectionPath} (referenced in ${templateFile})`);
     }
     const content = fs.readFileSync(filePath, 'utf8');
     return content.trim();
@@ -44,7 +50,10 @@ function buildPage(templateFile) {
   html = html.replace(LOADER_SCRIPT_RE, '');
 
   // 4. Inject globals.css before style.css
-  html = html.replace(STYLE_LINK, GLOBALS_INJECT);
+  if (!STYLE_LINK_RE.test(html)) {
+    throw new Error(`Template ${templateFile} is missing /css/style.css link — cannot inject globals.css`);
+  }
+  html = html.replace(STYLE_LINK_RE, GLOBALS_INJECT);
 
   // 5. Write to output (preserving subdirectory structure)
   const outPath = path.join(ROOT, templateFile);

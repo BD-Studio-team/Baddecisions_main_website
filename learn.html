@@ -17,13 +17,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Learn | Bad Decisions Studio">
   <meta name="twitter:image" content="/og-image.png">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#050505">
+  <!-- Fonts -->
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/globals.css" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -361,7 +363,7 @@
 
     <!-- Logo: BD mark + text -->
     <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
+      <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
     </a>
 
     <!-- Center links -->
@@ -472,7 +474,7 @@
   <main class="page-main" id="main-content">
     <!-- ─── LEARN ──────────────────────────────────────────────────── -->
   <section id="learn">
-    <div class="learn-premium-section">
+    <div class="learn-premium-section bg-glow-gold">
       <div class="container">
         <div class="section-header reveal">
           <div class="section-header-left">
@@ -489,14 +491,14 @@
             <h3 class="learn-row-title">Premium Programs</h3>
           </div>
           <div class="premium-duo">
-            <a href="https://learn.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="premium-card premium-card-ue">
+            <a href="https://learn.baddecisions.studio" target="_self" class="premium-card premium-card-ue">
               <video class="premium-card-video premium-card-cycle" data-autoplay muted playsinline data-videos="/assets/video/ue-virtual-prod.mp4,/assets/video/ue-metahuman.mp4,/assets/video/ue-world-building.mp4" poster="/assets/podcast/ep77.jpg">
                 <source src="/assets/video/ue-virtual-prod.mp4" type="video/mp4">
               </video>
               <div class="premium-card-overlay"></div>
               <div class="premium-card-content">
                 <span class="playlist-badge mb-sm">Endorsed by Epic Games</span>
-                <img src="/assets/logos/unreal-engine-full.svg" alt="Unreal Engine" class="premium-card-logo" loading="lazy">
+                <img src="/assets/client-logos/unreal-engine-full.svg" alt="Unreal Engine" class="premium-card-logo" width="200" height="100" loading="lazy">
                 <h2>The Ultimate<br>Unreal Engine<br><em>Program</em></h2>
                 <p>Build a full cinematic samurai story set in 1514 Osaka, Japan. MetaHuman characters, 4K environments, advanced lighting.</p>
                 <div class="premium-card-stats">
@@ -504,10 +506,10 @@
                   <div><strong>20+</strong> Hours</div>
                   <div><strong>1,500+</strong> Students</div>
                 </div>
-                <span class="premium-card-cta">Explore Course →</span>
+                <span class="premium-card-cta">Explore Course &rarr;</span>
               </div>
             </a>
-            <a href="https://ai.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="premium-card premium-card-ai">
+            <a href="https://ai.baddecisions.studio" target="_self" class="premium-card premium-card-ai">
               <video class="premium-card-video" data-autoplay muted loop playsinline poster="/assets/podcast/ep79.jpg">
                 <source src="/assets/video/hero-video.mp4" type="video/mp4">
               </video>
@@ -516,17 +518,26 @@
                 <span class="playlist-badge playlist-badge--violet mb-sm">New Program</span>
                 <div class="premium-card-ai-icon">AI</div>
                 <h2>The Ultimate<br>AI for Creatives<br><em>Program</em></h2>
-                <p>Master AI tools for creative workflows. From prompt engineering to building custom pipelines - learn to work with AI, not against it.</p>
+                <p>Master AI tools for creative workflows. From prompt engineering to building custom pipelines &mdash; learn to work with AI, not against it.</p>
                 <div class="premium-card-stats">
                   <div><strong>AI</strong> Powered</div>
                   <div><strong>Live</strong> Updates</div>
                   <div><strong>80+</strong> Countries</div>
                 </div>
-                <span class="premium-card-cta">Explore Course →</span>
+                <span class="premium-card-cta">Explore Course &rarr;</span>
               </div>
             </a>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Confidence moment break -->
+    <div class="learn-confidence">
+      <div class="container">
+        <p class="learn-confidence-statement reveal">
+          <em>1,500+ students.</em> <em>80+ countries.</em><br>One <em>samurai story.</em>
+        </p>
       </div>
     </div>
 
@@ -541,12 +552,12 @@
 
         <!-- Hero banner - featured free playlist -->
         <a href="https://www.youtube.com/watch?v=L9qixi858Ag&list=PLIn-yd4vnXbjWeYqU7epakdnVzoysMToy" target="_blank" rel="noopener noreferrer" class="learn-hero reveal">
-          <img src="https://i.ytimg.com/vi/R8dINxLFfRU/maxresdefault.jpg" alt="UE5 Beginner Series" class="learn-hero-bg" loading="lazy">
+          <img src="/assets/learn/ue5-beginner-series.jpg" alt="UE5 Beginner Series" class="learn-hero-bg" width="1280" height="720" loading="lazy">
           <div class="learn-hero-overlay"></div>
           <div class="learn-hero-content">
             <span class="playlist-badge">Most Popular Series</span>
             <h2>UE5 Beginner Series</h2>
-            <p>Start from zero and build cinematic Star Wars worlds in Unreal Engine 5. The most-watched free UE5 series on YouTube - 2.5M+ views.</p>
+            <p>Start from zero and build cinematic Star Wars worlds in Unreal Engine 5. The most-watched free UE5 series on YouTube &mdash; 2.5M+ views.</p>
             <span class="learn-hero-cta">Watch Now ▶</span>
           </div>
         </a>
@@ -559,7 +570,7 @@
           <div class="learn-grid">
             <a href="https://www.youtube.com/watch?v=gqV4pC425gI&list=PLIn-yd4vnXbhFAzPbSN1I8C3A8XlI73xx" target="_blank" rel="noopener noreferrer" class="learn-card">
               <div class="learn-card-thumb">
-                <img src="https://i.ytimg.com/vi/gqV4pC425gI/maxresdefault.jpg" alt="Dune Remake" loading="lazy">
+                <img src="/assets/learn/dune-remake.jpg" alt="Dune Remake" width="1280" height="720" loading="lazy">
                 <div class="learn-card-play">▶</div>
               </div>
               <div class="learn-card-info">
@@ -569,7 +580,7 @@
             </a>
             <a href="https://www.youtube.com/watch?v=U3ipg5pG39k&list=PLIn-yd4vnXbiJMd3EwkYB8FeUlJVQAFIz" target="_blank" rel="noopener noreferrer" class="learn-card">
               <div class="learn-card-thumb">
-                <img src="https://i.ytimg.com/vi/U3ipg5pG39k/maxresdefault.jpg" alt="Gaussian Splatting" loading="lazy">
+                <img src="/assets/learn/gaussian-splatting.jpg" alt="Gaussian Splatting" width="1280" height="720" loading="lazy">
                 <div class="learn-card-play">▶</div>
               </div>
               <div class="learn-card-info">
@@ -579,7 +590,7 @@
             </a>
             <a href="https://www.youtube.com/watch?v=7lAWhk_aVvc&list=PLIn-yd4vnXbjwxPNYeHz4Ac3le_zIZc-P" target="_blank" rel="noopener noreferrer" class="learn-card">
               <div class="learn-card-thumb">
-                <img src="https://i.ytimg.com/vi/7lAWhk_aVvc/maxresdefault.jpg" alt="Create Your MetaHuman" loading="lazy">
+                <img src="/assets/learn/create-your-metahuman.jpg" alt="Create Your MetaHuman" width="1280" height="720" loading="lazy">
                 <div class="learn-card-play">▶</div>
               </div>
               <div class="learn-card-info">
@@ -589,7 +600,7 @@
             </a>
             <a href="https://www.youtube.com/watch?v=L9qixi858Ag&list=PLIn-yd4vnXbjWeYqU7epakdnVzoysMToy" target="_blank" rel="noopener noreferrer" class="learn-card">
               <div class="learn-card-thumb">
-                <img src="https://i.ytimg.com/vi/L9qixi858Ag/maxresdefault.jpg" alt="Star Wars Beginner Series" loading="lazy">
+                <img src="/assets/learn/star-wars-beginner.jpg" alt="Star Wars Beginner Series" width="1280" height="720" loading="lazy">
                 <div class="learn-card-play">▶</div>
               </div>
               <div class="learn-card-info">
@@ -602,6 +613,192 @@
       </div>
     </div>
   </section>
+    <!-- ─── NEWSLETTER ───────────────────────────────────────── -->
+  <section class="newsletter">
+    <div class="nl-atmosphere" aria-hidden="true">
+      <div class="nl-glow"></div>
+    </div>
+    <div class="container">
+      <div class="nl-shell reveal">
+        <div class="nl-copy">
+          <div class="nl-eyebrow">
+            <span class="nl-eyebrow-line"></span>
+            <span class="nl-eyebrow-text">The Newsletter</span>
+          </div>
+          <h2 class="nl-heading">
+            Get our best work<br>in your <em>inbox.</em>
+          </h2>
+          <p class="nl-body">
+            New episodes, course drops, and field notes from the studio. No fluff, no spam &mdash; unsubscribe anytime.
+          </p>
+        </div>
+        <form class="nl-form" novalidate>
+          <!-- Honeypot — hidden from real users, filled by bots -->
+          <input type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" class="nl-honeypot">
+
+          <div class="nl-fields">
+            <label class="nl-field">
+              <span class="nl-field-label">Name</span>
+              <input type="text" name="name" placeholder="First name" autocomplete="given-name" minlength="2" required>
+            </label>
+            <label class="nl-field">
+              <span class="nl-field-label">Email</span>
+              <input type="email" name="email" placeholder="you@domain.com" autocomplete="email" required>
+            </label>
+          </div>
+          <button type="submit" class="nl-submit">
+            <span class="nl-submit-text">Subscribe</span>
+            <span class="nl-submit-arrow" aria-hidden="true">&rarr;</span>
+          </button>
+          <p class="nl-fineprint">
+            <span class="nl-fineprint-dot"></span>
+            By subscribing you agree to our privacy policy.
+          </p>
+          <div class="nl-success" role="status" aria-live="polite" hidden>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 7 6 11 12 3"/></svg>
+            <span>You're on the list. Check your inbox.</span>
+          </div>
+          <div class="nl-error" role="alert" aria-live="polite" hidden>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5.5"/><line x1="7" y1="4.5" x2="7" y2="7.5"/><circle cx="7" cy="9.5" r="0.5" fill="currentColor"/></svg>
+            <span class="nl-error-text">Something went wrong. Please try again.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    /* ── Klaviyo config ──────────────────────────────────
+       These are PUBLIC client-side identifiers, not secrets.
+       See https://developers.klaviyo.com/en/reference/create_client_subscription
+       Bump the API revision when upgrading. */
+    var KLAVIYO_PUBLIC_KEY = 'Tir9Yi';
+    var KLAVIYO_LIST_ID = 'UWvYjQ';
+    var KLAVIYO_API_REVISION = '2024-02-15';
+    var SUBMIT_COOLDOWN_MS = 5000;
+
+    /* Per-form state so multiple newsletter forms on the same page
+       (e.g. homepage + footer) each have their own cooldown. */
+    var lastSubmitTime = new WeakMap();
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function detectSource() {
+      var path = (window.location.pathname || '/').toLowerCase();
+      if (path === '/' || path === '') return 'BD Studio Homepage';
+      if (path.indexOf('/podcast') === 0) return 'BD Studio Podcast';
+      if (path.indexOf('/learn') === 0) return 'BD Studio Learn';
+      if (path.indexOf('/work-with-us/services') === 0) return 'BD Studio Services';
+      if (path.indexOf('/work-with-us/media-partnerships') === 0) return 'BD Studio Media Partnerships';
+      if (path.indexOf('/work-with-us/open-roles') === 0) return 'BD Studio Open Roles';
+      if (path.indexOf('/work-with-us') === 0) return 'BD Studio Work With Us';
+      return 'BD Studio' + path;
+    }
+
+    function showError(form, message) {
+      var errBox = form.querySelector('.nl-error');
+      var errText = form.querySelector('.nl-error-text');
+      var success = form.querySelector('.nl-success');
+      if (success) success.hidden = true;
+      if (errText && message) errText.textContent = message;
+      if (errBox) errBox.hidden = false;
+    }
+
+    function showSuccess(form) {
+      var success = form.querySelector('.nl-success');
+      var errBox = form.querySelector('.nl-error');
+      var fineprint = form.querySelector('.nl-fineprint');
+      if (errBox) errBox.hidden = true;
+      if (fineprint) fineprint.hidden = true;
+      if (success) success.hidden = false;
+    }
+
+    function setSubmitting(btn, state) {
+      if (!btn) return;
+      btn.disabled = state;
+      var text = btn.querySelector('.nl-submit-text');
+      if (text) text.textContent = state ? 'Subscribing...' : 'Subscribe';
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      var form = e.currentTarget;
+
+      /* Honeypot: if a bot filled the hidden field, silently succeed */
+      var honeypot = form.querySelector('.nl-honeypot');
+      if (honeypot && honeypot.value) return;
+
+      /* Debounce rapid submissions */
+      var now = Date.now();
+      var last = lastSubmitTime.get(form) || 0;
+      if (now - last < SUBMIT_COOLDOWN_MS) {
+        showError(form, 'Please wait a few seconds before trying again.');
+        return;
+      }
+
+      var nameInput = form.querySelector('input[name="name"]');
+      var emailInput = form.querySelector('input[name="email"]');
+      var name = nameInput ? nameInput.value.trim() : '';
+      var email = emailInput ? emailInput.value.trim() : '';
+
+      if (name.length < 2) { showError(form, 'Please enter your name.'); return; }
+      if (!isValidEmail(email)) { showError(form, 'Please enter a valid email.'); return; }
+
+      lastSubmitTime.set(form, now);
+      var submitBtn = form.querySelector('.nl-submit');
+      setSubmitting(submitBtn, true);
+
+      var source = form.getAttribute('data-source') || detectSource();
+      var payload = {
+        data: {
+          type: 'subscription',
+          attributes: {
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: { email: email, first_name: name }
+              }
+            },
+            custom_source: source
+          },
+          relationships: {
+            list: {
+              data: { type: 'list', id: KLAVIYO_LIST_ID }
+            }
+          }
+        }
+      };
+
+      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'revision': KLAVIYO_API_REVISION
+        },
+        body: JSON.stringify(payload)
+      }).then(function(res) {
+        if (!res.ok) throw new Error('status_' + res.status);
+        form.reset();
+        showSuccess(form);
+      }).catch(function(err) {
+        var isNetwork = err && err.message === 'Failed to fetch';
+        showError(form, isNetwork
+          ? 'Network error — check your connection and try again.'
+          : 'Something went wrong. Please try again.');
+      }).then(function() {
+        setSubmitting(submitBtn, false);
+      });
+    }
+
+    var forms = document.querySelectorAll('.nl-form');
+    forms.forEach(function(form) {
+      form.addEventListener('submit', handleSubmit);
+    });
+  })();
+  </script>
   </main>
   <!-- ─── FOOTER ──────────────────────────────────────────────────── -->
   <footer>
@@ -609,20 +806,20 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-brand-lockup">
-            <img src="/assets/logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
+            <img src="/assets/bd-logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
             <div class="footer-brand-text">BAD DECISIONS STUDIO</div>
           </div>
           <p class="footer-tagline">Premium podcast, education, and creative technology work for artists, founders, and ambitious teams.</p>
           <div class="footer-brand-location">Vancouver &middot; Dubai</div>
           <div class="footer-social-row">
-            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-instagram"/></svg></a>
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg></a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-spotify"/></svg></a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-apple-podcasts"/></svg></a>
-            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-x"/></svg></a>
-            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-tiktok"/></svg></a>
-            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-linkedin"/></svg></a>
-            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-discord"/></svg></a>
+            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-instagram"/></svg></a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-youtube"/></svg></a>
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-spotify"/></svg></a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-apple-podcasts"/></svg></a>
+            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-x"/></svg></a>
+            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-tiktok"/></svg></a>
+            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-linkedin"/></svg></a>
+            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-discord"/></svg></a>
           </div>
         </div>
         <div>
@@ -631,7 +828,6 @@
             <li><a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer">Spotify</a></li>
             <li><a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer">YouTube</a></li>
             <li><a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer">Apple Podcasts</a></li>
-            <li><a href="/podcast">All Episodes</a></li>
           </ul>
         </div>
         <div>
@@ -656,8 +852,11 @@
       <div class="footer-bottom">
         <div class="footer-copyright">&copy; 2026 Bad Decisions Studio. All rights reserved.</div>
       </div>
+      <div class="footer-signoff" aria-hidden="true">
+        <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="" class="footer-signoff-logo" loading="lazy">
+      </div>
     </div>
   </footer>
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>

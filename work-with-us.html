@@ -17,13 +17,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Work With Us | Bad Decisions Studio">
   <meta name="twitter:image" content="/og-image.png">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#050505">
+  <link rel="preconnect" href="https://r14hngokr8soy7ms.public.blob.vercel-storage.com" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/globals.css" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
 </head>
 <body>
   <a href="#main-content" class="skip-nav">Skip to main content</a>
@@ -347,7 +349,7 @@
 
     <!-- Logo: BD mark + text -->
     <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
+      <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
     </a>
 
     <!-- Center links -->
@@ -461,41 +463,91 @@
     <div class="container">
       <div class="workhub-hero reveal">
         <div class="label section-label">Work With Us</div>
-        <h1 class="heading-hero workhub-hero-title">Work with Bad Decisions.</h1>
+        <h1 class="heading-hero workhub-hero-title">Work with <em>Bad Decisions.</em></h1>
         <p class="body-text text-center-readable workhub-hero-copy">
-          Explore services and media partnerships.
+          Two ways to build with the studio &mdash; and a side door for the right people.
         </p>
       </div>
 
-      <section class="workhub-section reveal">
-        <div class="workhub-path-grid">
-          <article class="workhub-path-card">
-            <div class="workhub-card-number">01</div>
-            <h3 class="heading-card">Services</h3>
-            <p>Hire Bad Decisions for services and consulting across AI, Unreal Engine, content, and execution.</p>
-            <a href="/work-with-us/services" class="workhub-card-link">Explore Services →</a>
-          </article>
-          <article class="workhub-path-card">
-            <div class="workhub-card-number">02</div>
-            <h3 class="heading-card">Media Partnerships</h3>
-            <p>Partner with Bad Decisions across the podcast, show, YouTube, and social content.</p>
-            <a href="/work-with-us/media-partnerships" class="workhub-card-link">Explore Partnerships →</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="workhub-section reveal">
-        <div class="workhub-final-cta">
-          <h2 class="heading-section">Open Roles</h2>
-          <p class="body-text text-center-readable workhub-section-copy">
-            Want to join the team behind Bad Decisions? Explore current roles and opportunities.
-          </p>
-          <div class="workhub-final-actions">
-            <a href="/work-with-us/open-roles" class="btn-secondary">View Open Roles</a>
+      <div class="wwu-grid reveal">
+        <!-- Card 01 — Services -->
+        <a href="/work-with-us/services" class="wwu-card">
+          <div class="wwu-card-media" aria-hidden="true">
+            <video data-lazy muted loop playsinline poster="/assets/podcast/ep77.jpg" class="wwu-card-video">
+              <source src="/assets/video/ue-virtual-prod.mp4" type="video/mp4">
+            </video>
+            <div class="wwu-card-overlay"></div>
+            <div class="wwu-card-grain"></div>
           </div>
-        </div>
-      </section>
+          <div class="wwu-card-body">
+            <div class="wwu-card-kickerline">
+              <span class="wwu-card-num">01</span>
+              <span class="wwu-card-sep"></span>
+              <span class="wwu-card-kicker">Build with us</span>
+            </div>
+            <h2 class="wwu-card-title"><em>Services.</em></h2>
+            <p class="wwu-card-copy">
+              Consulting, cinematic production, AI-enabled solutions, and team training &mdash; for brands and studios that want to move faster and build better.
+            </p>
+            <span class="wwu-card-cta">
+              <span class="wwu-card-cta-text">Explore Services</span>
+              <span class="wwu-card-cta-arrow" aria-hidden="true">&rarr;</span>
+            </span>
+          </div>
+          <div class="wwu-card-corner" aria-hidden="true"></div>
+        </a>
 
+        <!-- Card 02 — Media Partnerships -->
+        <a href="/work-with-us/media-partnerships" class="wwu-card">
+          <div class="wwu-card-media" aria-hidden="true">
+            <video data-lazy muted loop playsinline poster="/assets/podcast/ep79.jpg" class="wwu-card-video">
+              <source src="/assets/video/podcast-reel.mp4" type="video/mp4">
+            </video>
+            <div class="wwu-card-overlay"></div>
+            <div class="wwu-card-grain"></div>
+          </div>
+          <div class="wwu-card-body">
+            <div class="wwu-card-kickerline">
+              <span class="wwu-card-num">02</span>
+              <span class="wwu-card-sep"></span>
+              <span class="wwu-card-kicker">Sponsor the show</span>
+            </div>
+            <h2 class="wwu-card-title"><em>Media<br>Partnerships.</em></h2>
+            <p class="wwu-card-copy">
+              Partner with Bad Decisions across the podcast, show, YouTube, and social &mdash; one deal, multiple formats, an audience that acts.
+            </p>
+            <span class="wwu-card-cta">
+              <span class="wwu-card-cta-text">Explore Partnerships</span>
+              <span class="wwu-card-cta-arrow" aria-hidden="true">&rarr;</span>
+            </span>
+          </div>
+          <div class="wwu-card-corner" aria-hidden="true"></div>
+        </a>
+      </div>
+
+      <!-- Confidence moment -->
+      <div class="workhub-confidence reveal">
+        <p class="workhub-confidence-statement">
+          Built by <em>creators</em> for <em>creators.</em>
+        </p>
+      </div>
+
+      <!-- Open Roles — refined hairline strip -->
+      <a href="/work-with-us/open-roles" class="wwu-roles reveal">
+        <div class="wwu-roles-left">
+          <span class="wwu-roles-badge">
+            <span class="wwu-roles-dot"></span>
+            Careers
+          </span>
+          <span class="wwu-roles-title">
+            Join the team behind <em>Bad Decisions.</em>
+          </span>
+        </div>
+        <span class="wwu-roles-link">
+          <span class="wwu-roles-link-text">View Open Roles</span>
+          <span class="wwu-roles-link-arrow" aria-hidden="true">&rarr;</span>
+        </span>
+      </a>
     </div>
   </section>
   </main>
@@ -505,20 +557,20 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-brand-lockup">
-            <img src="/assets/logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
+            <img src="/assets/bd-logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
             <div class="footer-brand-text">BAD DECISIONS STUDIO</div>
           </div>
           <p class="footer-tagline">Premium podcast, education, and creative technology work for artists, founders, and ambitious teams.</p>
           <div class="footer-brand-location">Vancouver &middot; Dubai</div>
           <div class="footer-social-row">
-            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-instagram"/></svg></a>
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg></a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-spotify"/></svg></a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-apple-podcasts"/></svg></a>
-            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-x"/></svg></a>
-            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-tiktok"/></svg></a>
-            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-linkedin"/></svg></a>
-            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-discord"/></svg></a>
+            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-instagram"/></svg></a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-youtube"/></svg></a>
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-spotify"/></svg></a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-apple-podcasts"/></svg></a>
+            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-x"/></svg></a>
+            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-tiktok"/></svg></a>
+            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-linkedin"/></svg></a>
+            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-discord"/></svg></a>
           </div>
         </div>
         <div>
@@ -527,7 +579,6 @@
             <li><a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer">Spotify</a></li>
             <li><a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer">YouTube</a></li>
             <li><a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer">Apple Podcasts</a></li>
-            <li><a href="/podcast">All Episodes</a></li>
           </ul>
         </div>
         <div>
@@ -552,8 +603,11 @@
       <div class="footer-bottom">
         <div class="footer-copyright">&copy; 2026 Bad Decisions Studio. All rights reserved.</div>
       </div>
+      <div class="footer-signoff" aria-hidden="true">
+        <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="" class="footer-signoff-logo" loading="lazy">
+      </div>
     </div>
   </footer>
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>

@@ -17,13 +17,17 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Bad Decisions Podcast">
   <meta name="twitter:image" content="/og-image.png">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#050505">
+  <!-- Preconnect to YouTube CDN for thumbnails -->
+  <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+  <!-- Fonts -->
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/globals.css" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -364,7 +368,7 @@
 
     <!-- Logo: BD mark + text -->
     <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
+      <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
     </a>
 
     <!-- Center links -->
@@ -474,13 +478,13 @@
   </script>
   <main class="page-main" id="main-content">
     <!-- ─── PODCAST ───────────────────────────────────────────────── -->
-  <section id="podcast">
+  <section id="podcast" class="bg-glow-blue">
     <div class="container">
 
       <!-- Page header -->
       <div class="reveal podcast-page-header">
         <div class="label section-label">The Bad Decisions Podcast</div>
-        <h1 class="heading-section">A practical guide to modern tech, AI, and business.</h1>
+        <h1 class="heading-section">A practical guide to <em>modern tech, AI, and business.</em></h1>
         <p class="body-text text-center-readable podcast-page-copy">
           We break down what matters, cut through the hype, and share clear insights you can actually use.
         </p>
@@ -488,10 +492,10 @@
 
       <!-- Big featured episode -->
       <a href="https://www.youtube.com/watch?v=xRx7yKg0n-U" target="_blank" rel="noopener noreferrer" class="pod-hero reveal">
-        <img src="https://i.ytimg.com/vi/xRx7yKg0n-U/maxresdefault.jpg" alt="Featured podcast episode thumbnail" class="pod-hero-bg" loading="lazy">
+        <img src="https://i.ytimg.com/vi/xRx7yKg0n-U/maxresdefault.jpg" alt="Featured podcast episode thumbnail" class="pod-hero-bg" width="1280" height="720" loading="eager" fetchpriority="high">
         <div class="pod-hero-overlay"></div>
         <div class="pod-hero-content">
-          <span class="playlist-badge">Latest · Ep. 103</span>
+          <span class="playlist-badge">Latest &middot; Ep. 103</span>
           <h2>The BEST AI tool for Artists? 👀</h2>
           <span class="pod-hero-cta">Watch Episode ▶</span>
         </div>
@@ -504,28 +508,28 @@
         </div>
         <div class="pod-4grid">
           <a href="https://www.youtube.com/watch?v=ETeL0mYJxQs" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/ETeL0mYJxQs/maxresdefault.jpg" alt="Seedance 2.0 episode thumbnail" loading="lazy">
+            <img src="https://i.ytimg.com/vi/ETeL0mYJxQs/maxresdefault.jpg" alt="Seedance 2.0 episode thumbnail" width="1280" height="720" loading="eager">
             <div class="pod-showcase-name">
               <h4>Seedance 2.0 Is Finally Here but ...</h4>
               <span class="pod-card-meta">Ep. 102</span>
             </div>
           </a>
           <a href="https://www.youtube.com/watch?v=SJlxJMQkkgg" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/SJlxJMQkkgg/maxresdefault.jpg" alt="ChatGPT super app episode thumbnail" loading="lazy">
+            <img src="https://i.ytimg.com/vi/SJlxJMQkkgg/maxresdefault.jpg" alt="ChatGPT super app episode thumbnail" width="1280" height="720" loading="eager">
             <div class="pod-showcase-name">
               <h4>$122 BILLION to make CHATGPT the AI Super App</h4>
               <span class="pod-card-meta">Ep. 101</span>
             </div>
           </a>
           <a href="https://www.youtube.com/watch?v=dQ66PVD3oVY" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/dQ66PVD3oVY/maxresdefault.jpg" alt="AI visuals and music episode thumbnail" loading="lazy">
+            <img src="https://i.ytimg.com/vi/dQ66PVD3oVY/maxresdefault.jpg" alt="AI visuals and music episode thumbnail" width="1280" height="720" loading="lazy">
             <div class="pod-showcase-name">
               <h4>Can we Create Quality Visuals and Music with AI?</h4>
               <span class="pod-card-meta">Ep. 100</span>
             </div>
           </a>
           <a href="https://www.youtube.com/watch?v=315kvYywUGU" target="_blank" rel="noopener noreferrer" class="pod-showcase-card">
-            <img src="https://i.ytimg.com/vi/315kvYywUGU/maxresdefault.jpg" alt="AI model leak episode thumbnail" loading="lazy">
+            <img src="https://i.ytimg.com/vi/315kvYywUGU/maxresdefault.jpg" alt="AI model leak episode thumbnail" width="1280" height="720" loading="lazy">
             <div class="pod-showcase-name">
               <h4>The Most Powerful AI MODEL Leaked</h4>
               <span class="pod-card-meta">Ep. 99</span>
@@ -533,35 +537,32 @@
           </a>
         </div>
 
-        <!-- Listen on platforms -->
-        <div class="pod-listen-row reveal">
-          <div class="pod-listen-label">Listen on:</div>
-          <div class="pod-listen-buttons">
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-listen-btn">
-              <svg class="pi pi-lg"><use href="/assets/icons/platforms.svg#icon-spotify"/></svg>
-              <div>
-                <span class="pod-listen-sub">Listen on</span>
-                <span class="pod-listen-name">Spotify</span>
-              </div>
+        <!-- Watch on platforms (shared component with /#podcast landing) -->
+        <div class="pod-platforms pod-platforms--center reveal">
+          <div class="pod-platforms-label">Watch on:</div>
+          <div class="pod-platforms-grid">
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Spotify">
+              <img src="/assets/platform-logos/spotify.svg" alt="Spotify" class="pod-platforms-logo" loading="lazy">
             </a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-listen-btn">
-              <svg class="pi pi-lg"><use href="/assets/icons/platforms.svg#icon-apple-podcasts"/></svg>
-              <div>
-                <span class="pod-listen-sub">Listen on</span>
-                <span class="pod-listen-name">Apple Podcasts</span>
-              </div>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Apple Podcasts">
+              <img src="/assets/platform-logos/apple-podcasts.svg" alt="Apple Podcasts" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">
             </a>
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-listen-btn">
-              <svg class="pi pi-lg"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg>
-              <div>
-                <span class="pod-listen-sub">Watch on</span>
-                <span class="pod-listen-name">YouTube</span>
-              </div>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Watch on YouTube">
+              <img src="/assets/platform-logos/youtube.png" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube" loading="lazy">
             </a>
           </div>
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ─── CONFIDENCE MOMENT ──────────────────────────────────── -->
+  <section class="pod-confidence">
+    <div class="container">
+      <p class="pod-confidence-statement reveal">
+        <em>103 episodes.</em> <em>7.9M+ views.</em><br>Still <em>asking better questions.</em>
+      </p>
     </div>
   </section>
 
@@ -574,64 +575,250 @@
       </div>
       <div class="pod-4grid reveal">
         <a href="https://www.youtube.com/watch?v=cfPeP0s8EKU" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/cfPeP0s8EKU/maxresdefault.jpg" alt="Mo Gawdat episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/mo-gawdat.jpg" alt="Mo Gawdat episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Mo Gawdat</h4>
             <span>Ex-Chief Business Officer, Google X</span>
           </div>
         </a>
         <a href="https://www.youtube.com/watch?v=hx3lnDHeqKs" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/hx3lnDHeqKs/maxresdefault.jpg" alt="Ton Roosendaal episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/ton-roosendaal.jpg" alt="Ton Roosendaal episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Ton Roosendaal</h4>
-            <span>Founder & CEO, Blender</span>
+            <span>Founder &amp; CEO, Blender</span>
           </div>
         </a>
         <a href="https://www.youtube.com/watch?v=JRXmPbOr9Hk" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/JRXmPbOr9Hk/maxresdefault.jpg" alt="Nikola Todorovic episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/nikola-todorovic.jpg" alt="Nikola Todorovic episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Nikola Todorovic</h4>
             <span>CEO, Wonder Dynamics</span>
           </div>
         </a>
         <a href="https://www.youtube.com/watch?v=E5IIMNQ4rl4" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/E5IIMNQ4rl4/maxresdefault.jpg" alt="Andrew Price episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/andrew-price.jpg" alt="Andrew Price episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Andrew Price</h4>
-            <span>Blender Guru · 4M+ Subscribers</span>
+            <span>Blender Guru &middot; 4M+ Subscribers</span>
           </div>
         </a>
         <a href="https://www.youtube.com/watch?v=QdB_amZcI5o" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/QdB_amZcI5o/maxresdefault.jpg" alt="Dr. Shade Zahrai episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/shade-zahrai.jpg" alt="Dr. Shade Zahrai episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Dr. Shade Zahrai</h4>
-            <span>#1 Confidence Expert · 2M+ Followers</span>
+            <span>#1 Confidence Expert &middot; 2M+ Followers</span>
           </div>
         </a>
         <a href="https://www.youtube.com/watch?v=pn4-ELJ_Afw" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/pn4-ELJ_Afw/maxresdefault.jpg" alt="Tino Millar episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/tino-millar.jpg" alt="Tino Millar episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Tino Millar</h4>
-            <span>Founder & CEO, Move AI</span>
+            <span>Founder &amp; CEO, Move AI</span>
           </div>
         </a>
         <a href="https://www.youtube.com/watch?v=Kx9oB1pNMhw" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/Kx9oB1pNMhw/maxresdefault.jpg" alt="Gawx episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/gawx.jpg" alt="Gawx episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Gawx</h4>
-            <span>Creative Artist · 10M+ Subscribers</span>
+            <span>Creative Artist &middot; 10M+ Subscribers</span>
           </div>
         </a>
         <a href="https://www.youtube.com/watch?v=R7H0t5Hhv_Y" target="_blank" rel="noopener noreferrer" class="pod-guest-card-v2">
-          <img src="https://i.ytimg.com/vi/R7H0t5Hhv_Y/maxresdefault.jpg" alt="Oscar Hoglund episode thumbnail" loading="lazy">
+          <img src="/assets/podcast/guests/oscar-hoglund.jpg" alt="Oscar Hoglund episode thumbnail" width="1280" height="720" loading="lazy">
           <div class="pod-guest-card-info">
             <h4>Oscar Höglund</h4>
-            <span>CEO & Co-founder, Epidemic Sound</span>
+            <span>CEO &amp; Co-founder, Epidemic Sound</span>
           </div>
         </a>
       </div>
     </div>
   </section>
+    <!-- ─── NEWSLETTER ───────────────────────────────────────── -->
+  <section class="newsletter">
+    <div class="nl-atmosphere" aria-hidden="true">
+      <div class="nl-glow"></div>
+    </div>
+    <div class="container">
+      <div class="nl-shell reveal">
+        <div class="nl-copy">
+          <div class="nl-eyebrow">
+            <span class="nl-eyebrow-line"></span>
+            <span class="nl-eyebrow-text">The Newsletter</span>
+          </div>
+          <h2 class="nl-heading">
+            Get our best work<br>in your <em>inbox.</em>
+          </h2>
+          <p class="nl-body">
+            New episodes, course drops, and field notes from the studio. No fluff, no spam &mdash; unsubscribe anytime.
+          </p>
+        </div>
+        <form class="nl-form" novalidate>
+          <!-- Honeypot — hidden from real users, filled by bots -->
+          <input type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" class="nl-honeypot">
+
+          <div class="nl-fields">
+            <label class="nl-field">
+              <span class="nl-field-label">Name</span>
+              <input type="text" name="name" placeholder="First name" autocomplete="given-name" minlength="2" required>
+            </label>
+            <label class="nl-field">
+              <span class="nl-field-label">Email</span>
+              <input type="email" name="email" placeholder="you@domain.com" autocomplete="email" required>
+            </label>
+          </div>
+          <button type="submit" class="nl-submit">
+            <span class="nl-submit-text">Subscribe</span>
+            <span class="nl-submit-arrow" aria-hidden="true">&rarr;</span>
+          </button>
+          <p class="nl-fineprint">
+            <span class="nl-fineprint-dot"></span>
+            By subscribing you agree to our privacy policy.
+          </p>
+          <div class="nl-success" role="status" aria-live="polite" hidden>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 7 6 11 12 3"/></svg>
+            <span>You're on the list. Check your inbox.</span>
+          </div>
+          <div class="nl-error" role="alert" aria-live="polite" hidden>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5.5"/><line x1="7" y1="4.5" x2="7" y2="7.5"/><circle cx="7" cy="9.5" r="0.5" fill="currentColor"/></svg>
+            <span class="nl-error-text">Something went wrong. Please try again.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    /* ── Klaviyo config ──────────────────────────────────
+       These are PUBLIC client-side identifiers, not secrets.
+       See https://developers.klaviyo.com/en/reference/create_client_subscription
+       Bump the API revision when upgrading. */
+    var KLAVIYO_PUBLIC_KEY = 'Tir9Yi';
+    var KLAVIYO_LIST_ID = 'UWvYjQ';
+    var KLAVIYO_API_REVISION = '2024-02-15';
+    var SUBMIT_COOLDOWN_MS = 5000;
+
+    /* Per-form state so multiple newsletter forms on the same page
+       (e.g. homepage + footer) each have their own cooldown. */
+    var lastSubmitTime = new WeakMap();
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function detectSource() {
+      var path = (window.location.pathname || '/').toLowerCase();
+      if (path === '/' || path === '') return 'BD Studio Homepage';
+      if (path.indexOf('/podcast') === 0) return 'BD Studio Podcast';
+      if (path.indexOf('/learn') === 0) return 'BD Studio Learn';
+      if (path.indexOf('/work-with-us/services') === 0) return 'BD Studio Services';
+      if (path.indexOf('/work-with-us/media-partnerships') === 0) return 'BD Studio Media Partnerships';
+      if (path.indexOf('/work-with-us/open-roles') === 0) return 'BD Studio Open Roles';
+      if (path.indexOf('/work-with-us') === 0) return 'BD Studio Work With Us';
+      return 'BD Studio' + path;
+    }
+
+    function showError(form, message) {
+      var errBox = form.querySelector('.nl-error');
+      var errText = form.querySelector('.nl-error-text');
+      var success = form.querySelector('.nl-success');
+      if (success) success.hidden = true;
+      if (errText && message) errText.textContent = message;
+      if (errBox) errBox.hidden = false;
+    }
+
+    function showSuccess(form) {
+      var success = form.querySelector('.nl-success');
+      var errBox = form.querySelector('.nl-error');
+      var fineprint = form.querySelector('.nl-fineprint');
+      if (errBox) errBox.hidden = true;
+      if (fineprint) fineprint.hidden = true;
+      if (success) success.hidden = false;
+    }
+
+    function setSubmitting(btn, state) {
+      if (!btn) return;
+      btn.disabled = state;
+      var text = btn.querySelector('.nl-submit-text');
+      if (text) text.textContent = state ? 'Subscribing...' : 'Subscribe';
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      var form = e.currentTarget;
+
+      /* Honeypot: if a bot filled the hidden field, silently succeed */
+      var honeypot = form.querySelector('.nl-honeypot');
+      if (honeypot && honeypot.value) return;
+
+      /* Debounce rapid submissions */
+      var now = Date.now();
+      var last = lastSubmitTime.get(form) || 0;
+      if (now - last < SUBMIT_COOLDOWN_MS) {
+        showError(form, 'Please wait a few seconds before trying again.');
+        return;
+      }
+
+      var nameInput = form.querySelector('input[name="name"]');
+      var emailInput = form.querySelector('input[name="email"]');
+      var name = nameInput ? nameInput.value.trim() : '';
+      var email = emailInput ? emailInput.value.trim() : '';
+
+      if (name.length < 2) { showError(form, 'Please enter your name.'); return; }
+      if (!isValidEmail(email)) { showError(form, 'Please enter a valid email.'); return; }
+
+      lastSubmitTime.set(form, now);
+      var submitBtn = form.querySelector('.nl-submit');
+      setSubmitting(submitBtn, true);
+
+      var source = form.getAttribute('data-source') || detectSource();
+      var payload = {
+        data: {
+          type: 'subscription',
+          attributes: {
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: { email: email, first_name: name }
+              }
+            },
+            custom_source: source
+          },
+          relationships: {
+            list: {
+              data: { type: 'list', id: KLAVIYO_LIST_ID }
+            }
+          }
+        }
+      };
+
+      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'revision': KLAVIYO_API_REVISION
+        },
+        body: JSON.stringify(payload)
+      }).then(function(res) {
+        if (!res.ok) throw new Error('status_' + res.status);
+        form.reset();
+        showSuccess(form);
+      }).catch(function(err) {
+        var isNetwork = err && err.message === 'Failed to fetch';
+        showError(form, isNetwork
+          ? 'Network error — check your connection and try again.'
+          : 'Something went wrong. Please try again.');
+      }).then(function() {
+        setSubmitting(submitBtn, false);
+      });
+    }
+
+    var forms = document.querySelectorAll('.nl-form');
+    forms.forEach(function(form) {
+      form.addEventListener('submit', handleSubmit);
+    });
+  })();
+  </script>
   </main>
   <!-- ─── FOOTER ──────────────────────────────────────────────────── -->
   <footer>
@@ -639,20 +826,20 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-brand-lockup">
-            <img src="/assets/logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
+            <img src="/assets/bd-logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
             <div class="footer-brand-text">BAD DECISIONS STUDIO</div>
           </div>
           <p class="footer-tagline">Premium podcast, education, and creative technology work for artists, founders, and ambitious teams.</p>
           <div class="footer-brand-location">Vancouver &middot; Dubai</div>
           <div class="footer-social-row">
-            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-instagram"/></svg></a>
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg></a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-spotify"/></svg></a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-apple-podcasts"/></svg></a>
-            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-x"/></svg></a>
-            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-tiktok"/></svg></a>
-            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-linkedin"/></svg></a>
-            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-discord"/></svg></a>
+            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-instagram"/></svg></a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-youtube"/></svg></a>
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-spotify"/></svg></a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-apple-podcasts"/></svg></a>
+            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-x"/></svg></a>
+            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-tiktok"/></svg></a>
+            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-linkedin"/></svg></a>
+            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-discord"/></svg></a>
           </div>
         </div>
         <div>
@@ -661,7 +848,6 @@
             <li><a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer">Spotify</a></li>
             <li><a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer">YouTube</a></li>
             <li><a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer">Apple Podcasts</a></li>
-            <li><a href="/podcast">All Episodes</a></li>
           </ul>
         </div>
         <div>
@@ -686,8 +872,11 @@
       <div class="footer-bottom">
         <div class="footer-copyright">&copy; 2026 Bad Decisions Studio. All rights reserved.</div>
       </div>
+      <div class="footer-signoff" aria-hidden="true">
+        <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="" class="footer-signoff-logo" loading="lazy">
+      </div>
     </div>
   </footer>
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>

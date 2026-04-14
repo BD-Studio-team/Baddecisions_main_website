@@ -79,6 +79,7 @@
   --color-tan:         #FBF9ED;
   --color-brown:       #937E67;
   --color-peach:       #C17E59;
+  --color-black:       #000000;
 
   /* ── Neutral Scale (warm-shifted, never pure) ── */
   --color-void:        #050505;
@@ -700,7 +701,7 @@ body::after {
 .stat__number {
   font-family: var(--font-editorial);
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--accent-primary);
   line-height: 1;
 }
@@ -715,7 +716,7 @@ body::after {
 }
 
 /* ─── PLATFORM ICON (SVG sprite) ─────────────────────────────── */
-/* Usage: <svg class="pi" width="20" height="20"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg> */
+/* Usage: <svg class="pi" width="20" height="20"><use href="/assets/platform-logos/sprite.svg#icon-youtube"/></svg> */
 .pi {
   display: inline-block;
   vertical-align: middle;

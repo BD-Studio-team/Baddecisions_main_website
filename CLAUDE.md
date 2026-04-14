@@ -48,9 +48,10 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 │   ├── nav.html
 │   ├── hero.html
 │   ├── pillars.html
-│   ├── stats.html
+│   ├── find-us.html          "Find Bad Decisions" social icon bar
 │   ├── highlights.html
 │   ├── podcast-landing.html
+│   ├── newsletter.html       Klaviyo newsletter signup (reusable on any page)
 │   ├── about.html
 │   ├── sponsors.html
 │   ├── footer.html
@@ -65,9 +66,9 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 │   ├── globals.css           Design system tokens, @font-face, typography, buttons, badges
 │   └── style.css             Section-specific layouts and responsive rules
 ├── js/
-│   └── main.js               Nav, scroll reveal, word rotation, podcast API, lazy video
+│   └── main.js               Nav, scroll reveal, podcast API, lazy video
 ├── api/
-│   └── podcast.js            Serverless — Apple Podcasts + YouTube + Redis cache
+│   └── podcast.js            Serverless — YouTube Data API + Upstash Redis cache
 ├── assets/
 │   ├── fonts-web/            Self-hosted woff2: PP Editorial New, Inter, Azeret Mono
 │   ├── icons/                SVG sprite system (platforms.svg)
@@ -77,6 +78,8 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 │   ├── platforms/            Social/podcast platform icons
 │   ├── founders/             Founder photos
 │   ├── podcast/              Podcast cover art, iPhone mockup
+│   ├── podcast/guests/       Locally-hosted podcast guest thumbnails
+│   ├── learn/                Locally-hosted free-learning thumbnails
 │   └── video/                Hero video, highlight reels, course previews
 ├── vercel.json
 ├── sitemap.xml
@@ -432,32 +435,16 @@ body::after {
 
 ## Image Treatment
 
-All images pass through CSS filters. Never use raw, unstyled images.
+Use images at their natural saturation and brightness. Do not apply global `.img-cinematic` or `.img-warm` filter classes — they make the site feel muted and strip personality out of thumbnails, product shots, and course posters.
 
-```css
-/* Primary treatment — desaturated cinematic */
-.img-cinematic {
-  filter: saturate(0.4) brightness(0.65) contrast(1.1);
-}
-
-/* Warm cinematic — for hero/feature images */
-.img-warm {
-  filter: saturate(0.6) brightness(0.6) sepia(0.15) contrast(1.05);
-}
-
-/* Hover state — slightly restore */
-.img-cinematic:hover,
-.img-warm:hover {
-  filter: saturate(0.6) brightness(0.72) contrast(1.05);
-  transform: scale(1.03);
-}
-```
+**When filters ARE appropriate (case by case only):**
+- Full-bleed hero backgrounds behind text overlays — drop brightness to 50–65% so text stays readable, usually via a gradient overlay on top rather than a filter on the image itself.
+- Decorative background images where tone matters more than clarity.
 
 **Rules:**
-- Reduce saturation to 40–60% on all photos — the palette owns color, images provide tone
-- When text overlays images, brightness drops to 50–65% with a gradient overlay (transparent → void)
-- Subtle sepia shift (10–15%) keeps images warm
-- Full-bleed images are preferred over small thumbnails whenever possible
+- Full-bleed images are preferred over small thumbnails whenever possible.
+- When text overlays an image, use a gradient overlay (`linear-gradient(transparent → void)`) rather than filtering the image.
+- Raw YouTube thumbnails, product shots, and partner logos should render at full color.
 
 ---
 
@@ -503,28 +490,42 @@ All images pass through CSS filters. Never use raw, unstyled images.
 
 ## Podcast API
 
-`/api/podcast.js` is a Vercel serverless function fetching from Apple Podcasts (show ID: `1677462934`) + YouTube Data API with Upstash Redis caching.
+`/api/podcast.js` is a Vercel serverless function fetching the latest episodes from the YouTube Data API (channel `UCOQ6GGRyyu8S3jahnUz2zHw`). Optionally layered with **Upstash Redis** caching when `KV_REST_API_URL` and `KV_REST_API_TOKEN` are set — reduces YouTube API quota burn and cold-start latency.
+
+**Cache strategy:**
+- Redis key `bds:podcast:feed:v1` wrapped as `{ fetchedAt, payload }`
+- Fresh window: **1 hour** (returns immediately with `X-Cache: HIT`)
+- Stale window: **24 hours** (returns cached data immediately + kicks off background refresh, `X-Cache: STALE`)
+- Cold cache: fetches live, caches, returns (`X-Cache: MISS`)
+- Any failure: returns hardcoded `FALLBACK_EPISODES` with short edge cache (`X-Cache: FALLBACK`)
+- Every failure mode degrades gracefully — the API never errors out
+
+**Vercel edge cache:** `Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400` for successful responses, `s-maxage=300` for fallback. Sits in front of Redis, so most requests never reach the function.
+
+**Observability:** Responses include `X-Cache` and `X-Cache-Age` headers for debugging.
+
+**Dynamic / static split:** Only the **top section of `/podcast`** is dynamic. The featured hero (`.pod-hero`) and recent episodes grid (`.pod-4grid .pod-showcase-card`) are updated at runtime from this API. The **8 guest cards** are static — thumbnails are downloaded once to `/assets/podcast/guests/*.jpg` and referenced as local files. Same for `/learn` free-series thumbnails in `/assets/learn/*.jpg`.
 
 ```json
 {
   "totalEpisodes": 103,
   "episodes": [
     {
-      "id": 123456,
+      "id": "xRx7yKg0n-U",
       "episodeNumber": 103,
       "title": "Episode Title",
       "description": "Cleaned plain text...",
       "date": "Apr 2026",
-      "duration": "1h 12m",
-      "artworkUrl": "https://...",
+      "duration": "",
+      "artworkUrl": "https://i.ytimg.com/vi/.../maxresdefault.jpg",
       "youtubeUrl": "https://www.youtube.com/watch?v=...",
-      "trackViewUrl": "https://podcasts.apple.com/..."
+      "trackViewUrl": "https://www.youtube.com/watch?v=..."
     }
   ]
 }
 ```
 
-The podcast page JS updates the featured hero (`.pod-hero`) and episode grid (`.pod-4grid .pod-showcase-card`) from this API. Do not modify the contract without updating both sides.
+Do not modify the contract without updating both sides (`api/podcast.js` + `js/main.js:initPodcastData`).
 
 ---
 
@@ -568,11 +569,11 @@ External links (ai.baddecisions.studio, learn.baddecisions.studio) open in the s
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `YOUTUBE_API_KEY` | Optional | YouTube Data API key |
-| `KV_REST_API_URL` | Optional | Upstash Redis REST URL |
-| `KV_REST_API_TOKEN` | Optional | Upstash Redis REST token |
+| `YOUTUBE_API_KEY` | Optional | YouTube Data API key. Without it, the podcast API returns `FALLBACK_EPISODES`. |
+| `KV_REST_API_URL` | Optional | Upstash Redis REST URL. Adds cache layer in front of YouTube. |
+| `KV_REST_API_TOKEN` | Optional | Upstash Redis REST token. |
 
-Falls back to Apple Podcasts artwork + hardcoded YouTube cache if not set.
+All three are optional. With none set, the podcast API still works (returns hardcoded fallback episodes with Vercel edge caching). With `YOUTUBE_API_KEY` only, the API fetches live but hits YouTube on every edge cache miss. With all three set, you get the full cache chain: Redis (fresh/stale) → YouTube → fallback.
 
 ---
 

@@ -14,13 +14,14 @@
   <meta property="og:description" content="Join the BDS team. Remote and Dubai positions available.">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:url" content="https://www.baddecisions.studio/work-with-us/open-roles">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#050505">
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/globals.css" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
 </head>
 <body>
   <a href="#main-content" class="skip-nav">Skip to main content</a>
@@ -344,7 +345,7 @@
 
     <!-- Logo: BD mark + text -->
     <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
-      <img src="/assets/logo/bd-logo-horizontal-yellow.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
+      <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
     </a>
 
     <!-- Center links -->
@@ -454,9 +455,8 @@
   </script>
   <main class="page-main" id="main-content">
     <!-- ─── OPEN ROLES ───────────────────────────────────────────── -->
-  <section class="section-padded-sm">
+  <section class="open-roles-header bg-glow-blue">
     <div class="container">
-
       <div class="reveal section-header-center">
         <div class="label section-label">Join the Team</div>
         <h1 class="heading-hero">Open <em>Roles</em></h1>
@@ -464,7 +464,11 @@
           We're building the future of creative technology education. Join a small, fast-moving team working across Vancouver and Dubai.
         </p>
       </div>
+    </div>
+  </section>
 
+  <section class="open-roles-list-section">
+    <div class="container">
       <div class="careers-list reveal">
         <div class="career-card">
           <div class="career-info">
@@ -507,13 +511,16 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
+  <section class="open-roles-cta bg-ember">
+    <div class="container">
       <div class="reveal careers-cta-section">
         <h3 class="careers-cta-heading">Don't see your role? <em>Reach out anyway.</em></h3>
         <p class="body-text mb-md">We're always open to hearing from talented people.</p>
-        <a href="mailto:create@baddecisions.studio" class="btn-primary">Get in Touch →</a>
+        <a href="mailto:create@baddecisions.studio" class="btn-primary">Get in Touch &rarr;</a>
       </div>
-
     </div>
   </section>
   </main>
@@ -523,20 +530,20 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-brand-lockup">
-            <img src="/assets/logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
+            <img src="/assets/bd-logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
             <div class="footer-brand-text">BAD DECISIONS STUDIO</div>
           </div>
           <p class="footer-tagline">Premium podcast, education, and creative technology work for artists, founders, and ambitious teams.</p>
           <div class="footer-brand-location">Vancouver &middot; Dubai</div>
           <div class="footer-social-row">
-            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-instagram"/></svg></a>
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg></a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-spotify"/></svg></a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-apple-podcasts"/></svg></a>
-            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-x"/></svg></a>
-            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-tiktok"/></svg></a>
-            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-linkedin"/></svg></a>
-            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/icons/platforms.svg#icon-discord"/></svg></a>
+            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-instagram"/></svg></a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-youtube"/></svg></a>
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-spotify"/></svg></a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-apple-podcasts"/></svg></a>
+            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-x"/></svg></a>
+            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-tiktok"/></svg></a>
+            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-linkedin"/></svg></a>
+            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-discord"/></svg></a>
           </div>
         </div>
         <div>
@@ -545,7 +552,6 @@
             <li><a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer">Spotify</a></li>
             <li><a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer">YouTube</a></li>
             <li><a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer">Apple Podcasts</a></li>
-            <li><a href="/podcast">All Episodes</a></li>
           </ul>
         </div>
         <div>
@@ -570,8 +576,11 @@
       <div class="footer-bottom">
         <div class="footer-copyright">&copy; 2026 Bad Decisions Studio. All rights reserved.</div>
       </div>
+      <div class="footer-signoff" aria-hidden="true">
+        <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="" class="footer-signoff-logo" loading="lazy">
+      </div>
     </div>
   </footer>
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
