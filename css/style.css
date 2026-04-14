@@ -3134,9 +3134,10 @@
       object-fit: cover;
       object-position: center;
       display: block;
-      transform: scale(1.015);
+      margin-bottom: -4px;
+      transform: scale(1.02);
       transform-origin: center;
-      clip-path: inset(0 0 2px 0);
+      clip-path: inset(0 0 6px 0);
       transition: transform 0.5s;
     }
     .pod-showcase-card:hover img { transform: scale(1.09); }
@@ -3144,6 +3145,9 @@
       display: none;
     }
     .pod-showcase-name {
+      position: relative;
+      z-index: 1;
+      margin-top: -2px;
       padding: 16px 20px 20px;
       background: var(--bg-card);
     }

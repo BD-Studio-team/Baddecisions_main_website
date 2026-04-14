@@ -148,6 +148,11 @@ async function fetchFromYouTube() {
       && item.contentDetails
       && item.contentDetails.videoId;
   });
+  publicItems.sort(function(a, b) {
+    const aDate = new Date((a.contentDetails && a.contentDetails.videoPublishedAt) || (a.snippet && a.snippet.publishedAt) || 0).getTime();
+    const bDate = new Date((b.contentDetails && b.contentDetails.videoPublishedAt) || (b.snippet && b.snippet.publishedAt) || 0).getTime();
+    return bDate - aDate;
+  });
 
   const totalEpisodes = playlistData.pageInfo && playlistData.pageInfo.totalResults
     ? playlistData.pageInfo.totalResults
