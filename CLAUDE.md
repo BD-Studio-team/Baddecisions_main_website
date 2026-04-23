@@ -49,11 +49,10 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 │   ├── hero.html
 │   ├── pillars.html
 │   ├── find-us.html          "Find Bad Decisions" social icon bar
-│   ├── highlights.html
 │   ├── podcast-landing.html
 │   ├── newsletter.html       Klaviyo newsletter signup (reusable on any page)
 │   ├── about.html
-│   ├── sponsors.html
+│   ├── _trust-logos.html     Shared trusted-by logo strip
 │   ├── footer.html
 │   ├── learn.html
 │   ├── podcast.html
@@ -61,22 +60,22 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 │   └── work-with-us/
 │       ├── open-roles.html
 │       ├── services.html
+│       ├── media-partnerships-cta.html
 │       └── media-partnerships.html
 ├── css/
 │   ├── globals.css           Design system tokens, @font-face, typography, buttons, badges
-│   └── style.css             Section-specific layouts and responsive rules
+│   ├── style.css             Section-specific layouts and responsive rules
+│   ├── components.css        Shared system overrides and component normalization
+│   └── nav.css               Shared nav layout and mobile overlay styling
 ├── js/
-│   └── main.js               Nav, scroll reveal, podcast API, lazy video
+│   └── main.js               Nav toggle, scroll reveal, podcast API, lazy video
 ├── api/
 │   └── podcast.js            Serverless — YouTube Data API + Upstash Redis cache
 ├── assets/
 │   ├── fonts-web/            Self-hosted woff2: PP Editorial New, Inter, Azeret Mono
-│   ├── icons/                SVG sprite system (platforms.svg)
-│   ├── logo/                 SVG logos and marks
-│   ├── clients/              Client/partner logos
-│   ├── featured/             "As Featured On" logos
-│   ├── platforms/            Social/podcast platform icons
-│   ├── founders/             Founder photos
+│   ├── bd-logo/              SVG logos and marks
+│   ├── client-logos/         Client/partner logos
+│   ├── platform-logos/       Social/podcast platform assets
 │   ├── podcast/              Podcast cover art, iPhone mockup
 │   ├── podcast/guests/       Locally-hosted podcast guest thumbnails
 │   ├── learn/                Locally-hosted free-learning thumbnails
@@ -600,10 +599,8 @@ Vercel runs `npm run build` automatically via `vercel.json` `buildCommand`.
 | `learn-*` | `sections/learn.html` | `.learn-row`, `.learn-card` |
 | `pillar-*` | `sections/pillars.html` | `.pillar-panel`, `.pillar-panel-img` |
 | `nl-*`   | `sections/newsletter.html` | `.nl-shell`, `.nl-submit` |
-| `nav-*` / `site-nav` | `sections/nav.html` | `.nav-cta-btn`, `.site-nav` |
+| `nav-*` / `site-nav` | `sections/nav.html` | `.nav-dropdown`, `.site-nav` |
 | `find-us-*` | `sections/find-us.html` | `.find-us-bar` |
-| `cta-band__*` | `sections/_cta-band.html` (shared) | `.cta-band__inner`, `.cta-band__heading` |
-| `testimonial-band__*` | `sections/_testimonial-band.html` | `.testimonial-band__quote` |
 | `trust-logos__*` | `sections/_trust-logos.html` | `.trust-logos__grid`, `.trust-logos__cell` |
 
 **Conventions:**

@@ -1,0 +1,93 @@
+/* Shared system overrides
+   This layer sits after style.css and pulls repeated UI back toward one
+   calmer, more maintainable design system. */
+
+main.page-main {
+  position: relative;
+}
+
+section {
+  scroll-margin-top: 104px;
+}
+
+.section-header,
+.learn-section-header,
+.pod-section-header {
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.section-header-left {
+  max-width: 720px;
+}
+
+.section-link {
+  padding-bottom: 6px;
+}
+
+:where(
+  .card,
+  .nl-shell,
+  .wwu-card,
+  .premium-card,
+  .ep-card,
+  .tutorial-card,
+  .testimonial-card,
+  .founder-card,
+  .about-video-card,
+  .about-founder-card,
+  .tool-card,
+  .social-card,
+  .pod-guest-card,
+  .pod-showcase-card,
+  .interview-card,
+  .services-card,
+  .career-card,
+  .workhub-path-card,
+  .workhub-service-card,
+  .workhub-engagement-card,
+  .workhub-sponsor-card,
+  .workhub-inquiry-card,
+  .mp-visual-card,
+  .mp-stat-card
+) {
+  box-shadow: var(--shadow-card);
+}
+
+:where(
+  .card,
+  .wwu-card,
+  .premium-card,
+  .ep-card,
+  .pod-guest-card,
+  .pod-showcase-card,
+  .interview-card,
+  .services-card,
+  .career-card,
+  .workhub-path-card,
+  .workhub-service-card,
+  .workhub-engagement-card,
+  .workhub-sponsor-card,
+  .workhub-inquiry-card,
+  .mp-visual-card,
+  .mp-stat-card
+):hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+@media (max-width: 1024px) {
+  section {
+    scroll-margin-top: 88px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-header,
+  .learn-section-header,
+  .pod-section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-header-left {
+    max-width: none;
+  }
+}

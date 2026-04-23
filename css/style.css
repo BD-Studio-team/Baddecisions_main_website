@@ -2011,9 +2011,14 @@
     }
     .careers-cta-heading {
       font-family: var(--font-editorial);
-      font-size: clamp(24px, 3vw, 36px);
+      font-size: clamp(20px, 2.5vw, 30px);
       font-weight: 300;
-      margin-bottom: 16px;
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+    .careers-cta-section .body-text {
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     /* Podcast section helpers (replaces inline styles) */
@@ -2126,20 +2131,21 @@
       .pod-platforms--inline .pod-platforms-grid {
         width: auto;
         flex-direction: row;
+        flex-wrap: nowrap;
         justify-content: center;
-        gap: 16px;
+        gap: 12px;
       }
       .pod-platforms--inline .pod-platforms-btn {
         width: auto;
       }
       .pod-platforms--inline .pod-platforms-logo {
-        height: 30px;
+        height: 26px;
       }
       .pod-platforms--inline .pod-platforms-logo--apple {
-        height: 24px;
+        height: 18px;
       }
       .pod-platforms--inline .pod-platforms-logo--youtube {
-        height: 32px;
+        height: 28px;
       }
     }
 
@@ -2349,10 +2355,10 @@
 
     .footer-top {
       display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr 1fr;
-      gap: 60px;
-      margin-bottom: 60px;
-      padding-bottom: 60px;
+      grid-template-columns: minmax(0, 1.45fr) repeat(3, minmax(0, 0.82fr));
+      gap: 48px;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
       border-bottom: 1px solid var(--color-stone);
     }
 
@@ -2378,10 +2384,10 @@
     }
     .footer-tagline {
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.65;
       color: var(--color-ash);
-      margin-bottom: 16px;
-      max-width: 280px;
+      margin-bottom: 14px;
+      max-width: 240px;
     }
     .footer-brand-location {
       font-family: var(--font-mono);
@@ -2395,9 +2401,10 @@
 
     .footer-social-row {
       display: flex;
-      gap: 18px;
+      gap: 14px;
       flex-wrap: wrap;
       align-items: center;
+      opacity: 0.92;
     }
     .footer-social-btn {
       display: flex;
@@ -2412,17 +2419,17 @@
     .footer-social-icon {
       display: block;
       width: auto;
-      height: 20px;
+      height: 18px;
       flex-shrink: 0;
     }
-    .footer-social-icon--youtube { height: 22px; }
-    .footer-social-icon--instagram { height: 24px; }
-    .footer-social-icon--spotify { height: 21px; }
-    .footer-social-icon--x { height: 18px; }
-    .footer-social-icon--linkedin { height: 20px; }
-    .footer-social-icon--tiktok { height: 20px; }
-    .footer-social-icon--apple { height: 21px; }
-    .footer-social-icon--discord { height: 20px; }
+    .footer-social-icon--youtube { height: 19px; }
+    .footer-social-icon--instagram { height: 21px; }
+    .footer-social-icon--spotify { height: 19px; }
+    .footer-social-icon--x { height: 16px; }
+    .footer-social-icon--linkedin { height: 18px; }
+    .footer-social-icon--tiktok { height: 18px; }
+    .footer-social-icon--apple { height: 19px; }
+    .footer-social-icon--discord { height: 18px; }
     .footer-social-btn .footer-social-icon {
       display: block;
     }
@@ -2434,14 +2441,14 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-ash);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .footer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .footer-links a {
       font-size: 13px;
@@ -2462,6 +2469,13 @@
       font-size: 10px;
       color: var(--color-stone);
       letter-spacing: 0.02em;
+    }
+    .footer-signoff {
+      margin-top: 18px;
+    }
+    .footer-signoff-logo {
+      width: min(620px, 100%);
+      height: auto;
     }
 
     /* ─── LEARN — NETFLIX STYLE ────────────────────────────────── */
@@ -3068,63 +3082,6 @@
       font-size: 12px;
       color: var(--color-ash);
       margin-top: 8px;
-    }
-
-    /* Highlight cards */
-    .highlights-header {
-      margin-bottom: 40px;
-    }
-    .highlights-subtitle {
-      margin-top: 16px;
-    }
-    .whoweare-highlights {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .whoweare-highlight-card {
-      background: var(--color-soot);
-      border: 1px solid var(--border-cream-faint);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      transition: border-color 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
-    }
-    .whoweare-highlight-card:hover {
-      border-color: rgba(193, 126, 89, 0.3);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-    }
-    .whoweare-highlight-video {
-      width: 100%;
-      overflow: hidden;
-    }
-    .whoweare-highlight-video video {
-      width: 100%;
-      display: block;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      transition: transform 0.6s var(--ease-out-expo);
-    }
-    .whoweare-highlight-card:hover .whoweare-highlight-video video {
-      transform: scale(1.04);
-    }
-    .whoweare-highlight-card h3 {
-      font-family: var(--font-editorial);
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.3;
-      padding: 20px 24px 8px;
-      color: var(--color-cream);
-    }
-    .whoweare-highlight-card h3 em {
-      color: var(--color-yellow);
-      font-style: italic;
-    }
-    .whoweare-highlight-card p {
-      font-size: 14px;
-      color: var(--color-fog);
-      line-height: 1.6;
-      padding: 0 24px 24px;
     }
 
     /* ─── STATS ────────────────────────────────────────────────────── */
@@ -4418,7 +4375,6 @@
     @media (min-width: 2000px) {
       .container { max-width: 1600px; }
       body { font-size: 18px; }
-      .site-nav { padding: 0 48px; }
       section { padding: 160px 0; }
       .pillar-body { font-size: 17px; }
       .hero-body { font-size: 20px; }
@@ -4456,7 +4412,6 @@
     @media (max-width: 1024px) {
       .whoweare-grid { grid-template-columns: 1fr; }
       .whoweare-videos { flex-direction: row; }
-      .whoweare-highlights { grid-template-columns: 1fr; }
       .whoweare-stats { grid-template-columns: repeat(2, 1fr); }
       .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
     }
@@ -4501,7 +4456,6 @@
       .pillars-grid { grid-template-columns: 1fr; }
       .pillar-panel-content { padding: 24px 24px 32px; }
       .pillar-panel-desc { font-size: 13px; margin-bottom: 20px; }
-      .whoweare-highlights { grid-template-columns: 1fr; }
       .premium-duo { grid-template-columns: 1fr; }
       .premium-card { min-height: 420px; }
       .about-feature-grid {
@@ -4514,7 +4468,7 @@
       .footer-top { grid-template-columns: 1fr; }
       .footer-social-row { flex-wrap: wrap; }
       .footer-top {
-        gap: 28px;
+        gap: 20px;
         margin-bottom: 40px;
         padding-bottom: 40px;
       }
@@ -4619,7 +4573,7 @@
         padding-right: 18px;
       }
       .footer-top {
-        gap: 24px;
+        gap: 16px;
       }
       .footer-social-btn {
         width: 40px;
@@ -4636,10 +4590,6 @@
       padding-top: 64px;
       padding-bottom: 72px;
     }
-    body[data-page="work-with-us"] .cta-band {
-      padding-top: 104px;
-      padding-bottom: 104px;
-    }
     @media (max-width: 768px) {
       body[data-page="work-with-us"] #work-with-us {
         padding-bottom: 18px;
@@ -4647,10 +4597,6 @@
       body[data-page="work-with-us"] .trust-logos {
         padding-top: 48px;
         padding-bottom: 56px;
-      }
-      body[data-page="work-with-us"] .cta-band {
-        padding-top: 72px;
-        padding-bottom: 72px;
       }
     }
 
@@ -4916,59 +4862,6 @@ body[data-page="media-partnerships"] .trust-logos {
   }
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   CTA BAND — shared closing CTA (sections/_cta-band.html)
-   ═══════════════════════════════════════════════════════════════ */
-.cta-band { padding: 120px 0; }
-.cta-band__inner { max-width: 720px; margin: 0 auto; }
-.cta-band__heading { margin-bottom: 20px; }
-@media (max-width: 768px) {
-  .cta-band { padding: 72px 0; }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   TESTIMONIAL BAND — shared testimonial (sections/_testimonial-band.html)
-   ═══════════════════════════════════════════════════════════════ */
-.testimonial-band { padding: 100px 0; }
-.testimonial-band__inner { max-width: 840px; margin: 0 auto; text-align: center; }
-.testimonial-band__quote {
-  font-family: var(--font-editorial);
-  font-size: clamp(22px, 3vw, 34px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--ctx-heading, var(--color-cream));
-  margin-bottom: 28px;
-}
-.testimonial-band__quote em { color: var(--color-yellow); font-style: italic; }
-.testimonial-band__attribution {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ctx-muted, var(--color-fog));
-}
-.testimonial-band__attribution strong {
-  font-family: var(--font-body);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  font-size: 13px;
-  color: var(--ctx-heading, var(--color-cream));
-}
-.testimonial-band__sep {
-  width: 20px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.3;
-}
-@media (max-width: 768px) {
-  .testimonial-band { padding: 64px 0; }
-}
 
 /* ═══════════════════════════════════════════════════════════════
    TRUST LOGOS — shared "as featured on / trusted by" strip

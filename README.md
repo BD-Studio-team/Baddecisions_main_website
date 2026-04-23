@@ -13,6 +13,8 @@ Production marketing site for [Bad Decisions Studio](https://www.baddecisions.st
 
 ```text
 ├── build.js              Build script — inlines section partials into final pages
+├── data/
+│   └── site-content.js   Shared content/config for platforms, Learn rows, podcast cards, guests
 ├── templates/            Source page templates (head, meta, layout)
 │   ├── index.html
 │   ├── learn.html
@@ -23,38 +25,40 @@ Production marketing site for [Bad Decisions Studio](https://www.baddecisions.st
 │       ├── media-partnerships.html
 │       └── open-roles.html
 ├── sections/             Shared HTML partials (content blocks)
-│   ├── nav.html          Edge-to-edge nav with dropdowns, mobile overlay, scroll blur
+│   ├── nav.html          Shared fixed nav with dropdowns and mobile overlay
 │   ├── hero.html         Full-bleed cinematic video hero with bottom-anchored content
 │   ├── pillars.html      Three image cards on tan paper (Watch / Learn / Work With Us)
-│   ├── stats.html        Key metrics on green background
-│   ├── highlights.html   Three video highlight cards on diagonal gradient
+│   ├── find-us.html      Social/platform icon strip
 │   ├── podcast-landing.html   Podcast CTA with iPhone mockup on ember gradient
-│   ├── about.html        "Why We Exist" on brown — mission statement + contact
-│   ├── sponsors.html     Partner logo grid on mesh gradient
+│   ├── newsletter.html   Shared newsletter signup section
+│   ├── about.html        Studio positioning section on brown
+│   ├── _trust-logos.html Shared trusted-by logo strip
 │   ├── footer.html       4-column footer with BD mark, links, socials, copyright
-│   ├── learn.html        Premium courses + free series grid
+│   ├── learn.html        Premium programs + free-learning rows
 │   ├── podcast.html      Featured ep, recent eps, listen-on, guest grid
-│   ├── work-with-us.html Commercial hub: pathways, services, proof, partnerships, roles
+│   ├── work-with-us.html Commercial hub: pathways and roles
 │   └── work-with-us/     Sub-page sections
 │       ├── services.html
 │       ├── media-partnerships.html
+│       ├── media-partnerships-cta.html
 │       └── open-roles.html
 ├── css/
 │   ├── globals.css       Design tokens, @font-face, typography, buttons, badges, bg treatments
-│   └── style.css         Section-specific layouts and responsive rules
+│   ├── style.css         Section-specific layouts and responsive rules
+│   ├── components.css    Shared system overrides for cards, spacing, and surfaces
+│   └── nav.css           Shared nav layout and mobile overlay styling
 ├── js/
-│   └── main.js           Nav scroll, reveal animations, podcast API, lazy video
+│   └── main.js           Nav toggle, reveal animations, podcast API, lazy video
 ├── api/
 │   └── podcast.js        Serverless — Apple Podcasts + YouTube Data API + Redis cache
 ├── assets/
 │   ├── fonts-web/        Self-hosted woff2: PP Editorial New, Inter, Azeret Mono
-│   ├── icons/            SVG sprite system (platforms.svg)
-│   ├── logo/             SVG logos and marks
-│   ├── clients/          Client/partner logos
-│   ├── featured/         "As Featured On" logos
-│   ├── founders/         Founder photos
+│   ├── bd-logo/          SVG logos and brand marks
+│   ├── client-logos/     Client/partner logos
+│   ├── platform-logos/   Standalone social/podcast platform assets
 │   ├── podcast/          Podcast cover art, iPhone mockup
-│   └── video/            Hero video, highlight reels, course previews
+│   ├── learn/            Free-learning thumbnails
+│   └── video/            Hero video and course/program previews
 ├── vercel.json           Build command, cache headers, security headers
 ├── sitemap.xml           All public pages
 ├── llms.txt              Machine-readable brand summary
@@ -70,7 +74,7 @@ Production marketing site for [Bad Decisions Studio](https://www.baddecisions.st
 | Learn | `/learn` | Premium programs + free series |
 | Work With Us | `/work-with-us` | Commercial hub — services, media partnerships, open roles |
 | Services | `/work-with-us/services` | Detailed services offering + trusted-by logos |
-| Media Partnerships | `/work-with-us/media-partnerships` | Multi-platform sponsorship packages, audience, formats |
+| Media Partnerships | `/work-with-us/media-partnerships` | Fast sponsor-facing page with audience stats and partnership CTA |
 | Open Roles | `/work-with-us/open-roles` | Current job openings |
 
 ## Development
@@ -87,7 +91,7 @@ Do NOT edit root HTML files directly — they are build outputs.
 
 ## Build Script
 
-`build.js` reads each template from `templates/` (including subdirectories like `work-with-us/`), replaces `<div data-include="/sections/...">` markers with actual section content, injects `globals.css`, and writes final HTML to the project root.
+`build.js` reads each template from `templates/` (including subdirectories like `work-with-us/`), replaces `<div data-include="/sections/...">` markers with actual section content, injects shared CSS (`globals.css`, `style.css`, `components.css`, `nav.css`), expands build-time content tokens from `data/site-content.js`, and writes final HTML to the project root.
 
 ## Design System
 
@@ -123,14 +127,7 @@ The design system uses a warm-shifted neutral scale (never pure greys) plus 6 br
 
 ### Section Backgrounds
 
-Homepage rotates through distinct backgrounds — no two adjacent sections share the same treatment:
-
-1. **Void** — hero (cinematic video + gradient overlay)
-2. **Tan paper** — pillars (paper texture SVG noise)
-3. **Diagonal gradient** — highlights (void → soot → green tint)
-4. **Ember** — podcast landing (warm bottom glow)
-5. **Mesh gradient** — sponsors (dual radial gradients)
-6. **Brown** — about (origin story)
+Homepage rotates through distinct backgrounds to separate the three core pillars, podcast, newsletter, and studio positioning without relying on repeated section treatments.
 
 ### Background Treatment Classes
 
@@ -142,19 +139,11 @@ Per CLAUDE.md, images render at natural saturation. Use gradient overlays (`line
 
 ## Navigation
 
-Edge-to-edge fixed nav (64px). Transparent on load, dark backdrop-blur on scroll. Logo left (SVG), 3 center links (Watch, Learn dropdown, Work With Us dropdown), yellow CTA right. Mobile: full-screen overlay with staggered PP Editorial links.
+Fixed shared nav across every page. Logo left, primary links in the middle, dropdowns for Learn and Work With Us, and a simplified mobile overlay. No route-specific CTA swapping.
 
-## Icon System
+## Platform Assets
 
-SVG sprite at `assets/icons/platforms.svg` with brand-accurate platform logos. Usage:
-
-```html
-<svg class="pi pi-md"><use href="/assets/icons/platforms.svg#icon-youtube"/></svg>
-```
-
-Available icons: `icon-youtube`, `icon-spotify`, `icon-apple-podcasts`, `icon-instagram`, `icon-x`, `icon-tiktok`, `icon-linkedin`, `icon-discord`, `icon-threads`
-
-Size classes: `.pi-sm` (16px), `.pi-md` (20px), `.pi-lg` (24px), `.pi-xl` (32px)
+All visible social and platform surfaces use standalone assets in `assets/platform-logos/`, with platform links and ordering centralized in `data/site-content.js`.
 
 ## SEO & Accessibility
 

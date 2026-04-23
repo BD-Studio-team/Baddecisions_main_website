@@ -4,16 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Open Roles | Bad Decisions Studio</title>
-  <meta name="description" content="Join Bad Decisions Studio. Open positions in video editing, Unreal Engine, community management, and AI engineering." />
+  <meta name="description" content="Join Bad Decisions Studio. Current roles include Video Producer, Social Media Manager, and Generative AI Curator." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://www.baddecisions.studio/work-with-us/open-roles" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Open Roles | Bad Decisions Studio">
-  <meta property="og:description" content="Join the BDS team. Remote and Dubai positions available.">
+  <meta property="og:description" content="Current roles include Video Producer, Social Media Manager, and Generative AI Curator.">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:url" content="https://www.baddecisions.studio/work-with-us/open-roles">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Open Roles | Bad Decisions Studio">
+  <meta name="twitter:description" content="Current roles include Video Producer, Social Media Manager, and Generative AI Curator.">
+  <meta name="twitter:image" content="/og-image.png">
   <meta name="theme-color" content="#050505">
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
@@ -22,383 +26,19 @@
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/globals.css" />
   <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
 </head>
 <body data-page="open-roles">
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
-  <!-- ─── NAV STYLES (scoped to .site-nav) ────────────────────── -->
-  <style>
-    /* ── Base ── */
-    .site-nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 0 28px;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
-    }
-    .site-nav.scrolled {
-      background: rgba(5,5,5,0.85);
-      border-bottom-color: var(--border-cream-faint);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-    }
-
-    .site-nav .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      min-width: 0;
-      flex: 1 1 auto;
-    }
-
-    /* ── Logo ── */
-    .site-nav .nav-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .site-nav .nav-logo img {
-      display: block;
-      width: auto;
-      height: 24px;
-    }
-
-    /* ── Center links ── */
-    .site-nav .nav-center {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      list-style: none;
-      position: static;
-      transform: none;
-      height: auto;
-      flex-wrap: nowrap;
-    }
-    .site-nav .nav-item {
-      position: relative;
-      height: auto;
-      display: flex;
-      align-items: center;
-    }
-    /* Invisible bridge so cursor can travel from link to dropdown */
-    .site-nav .nav-item::after {
-      content: '';
-      position: absolute;
-      bottom: -16px;
-      left: 0;
-      right: 0;
-      height: 16px;
-      pointer-events: none;
-    }
-    .site-nav .nav-item:hover::after {
-      pointer-events: auto;
-    }
-    .site-nav .nav-item > a {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 550;
-      letter-spacing: 0.01em;
-      color: var(--color-fog);
-      padding: 0 14px;
-      height: auto;
-      text-decoration: none;
-      transition: color 150ms ease;
-      white-space: nowrap;
-      line-height: 1;
-    }
-    .site-nav .nav-item > a:hover,
-    .site-nav .nav-item:hover > a {
-      color: var(--color-cream);
-    }
-    .site-nav .nav-item.active > a {
-      color: var(--color-cream);
-    }
-
-    /* ── Chevron ── */
-    .site-nav .nav-chevron {
-      width: 9px;
-      height: 9px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: .5;
-      transition: transform 200ms cubic-bezier(0.16,1,0.3,1), opacity 150ms ease;
-    }
-    .site-nav .nav-item:hover .nav-chevron {
-      transform: rotate(180deg);
-      opacity: 1;
-    }
-
-    /* ── Dropdown ── */
-    .site-nav .nav-dropdown {
-      position: absolute;
-      top: calc(100% + 20px);
-      left: 50%;
-      transform: translateX(-50%) translateY(-8px);
-      min-width: 220px;
-      background: rgba(10,10,10,.97);
-      border: 1px solid rgba(245,242,234,0.08);
-      border-top: 2px solid var(--color-yellow);
-      border-radius: 0 0 10px 10px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.4);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
-      padding: 6px;
-    }
-    .site-nav .nav-item:hover .nav-dropdown {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      pointer-events: auto;
-    }
-    .site-nav .nav-dd-item {
-      display: flex;
-      align-items: center;
-      padding: 11px 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 120ms ease;
-    }
-    .site-nav .nav-dd-item:hover { background: rgba(255,255,255,.06); }
-
-    .site-nav .nav-dd-label {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--color-fog);
-      line-height: 1.2;
-      transition: color 120ms ease;
-    }
-    .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow); }
-
-    /* Account utility item — demoted below primary discovery links */
-    .site-nav .nav-dd-divider {
-      height: 1px;
-      background: rgba(245,242,234,0.08);
-      margin: 4px 8px;
-    }
-    .site-nav .nav-dd-item--utility .nav-dd-label {
-      font-size: 11.5px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--color-ash);
-    }
-
-    .site-nav .nav-right {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 14px;
-      flex: 0 0 auto;
-    }
-
-    /* ── CTA ── */
-    .site-nav .nav-cta-btn {
-      font-family: var(--font-body);
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      color: var(--color-void);
-      background: var(--color-yellow);
-      padding: 10px 18px;
-      border-radius: var(--radius-button);
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: transform 150ms ease, box-shadow 150ms ease;
-    }
-    .site-nav .nav-cta-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(255,239,123,.16);
-    }
-
-    /* ── Mobile toggle ── */
-    .site-nav .nav-burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 0;
-      width: 40px;
-      height: 40px;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-    }
-    .site-nav .nav-burger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--color-cream);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .site-nav .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .site-nav .nav-burger.open span:nth-child(2) { opacity: 0; }
-    .site-nav .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* ── Mobile overlay ── */
-    .nav-mobile-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--color-void);
-      z-index: 99;
-      padding: 80px 32px 32px;
-      overflow-y: auto;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .nav-mobile-overlay.open {
-      display: flex;
-    }
-
-    .nav-mobile-overlay .mobile-link {
-      display: block;
-      font-family: var(--font-editorial);
-      font-size: 26px;
-      font-weight: 400;
-      color: var(--color-cream);
-      text-decoration: none;
-      padding: 14px 0 10px;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.3s ease, transform 0.3s ease, color 0.15s ease;
-      border-top: 1px solid rgba(245,242,234,0.06);
-    }
-    .nav-mobile-overlay .mobile-link:first-child {
-      border-top: 0;
-    }
-    .nav-mobile-overlay.open .mobile-link {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .nav-mobile-overlay .mobile-link:hover { color: var(--color-yellow); }
-
-    .nav-mobile-overlay .mobile-sublinks {
-      padding: 4px 0 18px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .nav-mobile-overlay .mobile-sublinks.education-sub {
-      border-left: 1px solid rgba(245,242,234,0.12);
-    }
-    .nav-mobile-overlay .mobile-sublinks.work-sub {
-      border-left: 2px solid var(--color-yellow);
-    }
-    .nav-mobile-overlay .mobile-sublinks a {
-      display: flex;
-      align-items: center;
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-fog);
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.3s ease, transform 0.3s ease, color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-    }
-    .nav-mobile-overlay.open .mobile-sublinks a {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .nav-mobile-overlay .mobile-sublinks a:hover {
-      color: var(--color-cream);
-      background: rgba(255,255,255,0.04);
-      border-color: rgba(255,255,255,0.08);
-    }
-
-    .site-nav .mobile-cta {
-      display: inline-block;
-      margin-top: 12px;
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--color-void);
-      background: var(--color-yellow);
-      padding: 14px 32px;
-      border-radius: var(--radius-button);
-      text-decoration: none;
-    }
-    .site-nav .nav-delay-0 { transition-delay: 0ms; }
-    .site-nav .nav-delay-1 { transition-delay: 50ms; }
-    .site-nav .nav-delay-2 { transition-delay: 100ms; }
-    .site-nav .nav-delay-3 { transition-delay: 150ms; }
-    .site-nav .nav-delay-4 { transition-delay: 200ms; }
-    .site-nav .nav-delay-5 { transition-delay: 250ms; }
-    .site-nav .nav-delay-6 { transition-delay: 300ms; }
-    .site-nav .nav-delay-7 { transition-delay: 350ms; }
-    .site-nav .nav-delay-8 { transition-delay: 400ms; }
-    .site-nav .nav-delay-9 { transition-delay: 450ms; }
-
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .site-nav {
-        padding: 0 16px;
-        height: 56px;
-      }
-      .site-nav .nav-left {
-        gap: 0;
-      }
-      .site-nav .nav-logo img {
-        height: 20px;
-      }
-      .site-nav .nav-center,
-      .site-nav .nav-cta-btn { display: none; }
-      .site-nav .nav-burger { display: flex; }
-      .nav-mobile-overlay {
-        padding: 72px 20px 28px;
-      }
-      .nav-mobile-overlay .mobile-link {
-        font-size: clamp(22px, 7vw, 26px);
-        padding: 14px 0 10px;
-      }
-      .nav-mobile-overlay .mobile-sublinks {
-        padding: 2px 0 14px 14px;
-      }
-      .nav-mobile-overlay .mobile-sublinks a {
-        font-size: 13px;
-        padding: 9px 12px;
-      }
-      .site-nav .mobile-cta {
-        width: 100%;
-        text-align: center;
-        margin-top: 16px;
-        padding: 14px 18px;
-      }
-    }
-    @media (min-width: 769px) {
-      .nav-mobile-overlay { display: none !important; }
-    }
-  </style>
-
-  <!-- ─── NAV HTML ────────────────────────────────────────────── -->
-  <nav class="site-nav" id="nav" aria-label="Primary">
+<nav class="site-nav" id="nav" aria-label="Primary">
+  <div class="container site-nav-inner">
     <div class="nav-left">
-      <!-- Logo: BD mark + text -->
       <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
         <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
       </a>
 
-      <!-- Primary links -->
       <ul class="nav-center">
         <li class="nav-item">
           <a href="/podcast">Watch</a>
@@ -406,7 +46,7 @@
         <li class="nav-item">
           <a href="/learn">
             Learn
-            <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+            <svg class="nav-chevron" viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
           </a>
           <div class="nav-dropdown">
             <a href="https://ai.baddecisions.studio" target="_self" class="nav-dd-item">
@@ -427,7 +67,7 @@
         <li class="nav-item">
           <a href="/work-with-us">
             Work With Us
-            <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+            <svg class="nav-chevron" viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
           </a>
           <div class="nav-dropdown">
             <a href="/work-with-us/services" class="nav-dd-item">
@@ -445,91 +85,37 @@
     </div>
 
     <div class="nav-right">
-      <!-- CTA (context-aware via data-page on <body>) -->
-      <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn" id="navCta">Learn AI &rarr;</a>
-
-      <!-- Mobile burger -->
       <button type="button" class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </nav>
-
-  <!-- Mobile overlay -->
-  <div class="nav-mobile-overlay" id="navMobileOverlay">
-    <a href="/podcast" class="mobile-link nav-delay-0">Watch</a>
-    <a href="/learn" class="mobile-link nav-delay-1">Learn</a>
-    <div class="mobile-sublinks education-sub">
-      <a href="https://ai.baddecisions.studio" target="_self" class="nav-delay-2">AI Program</a>
-      <a href="https://learn.baddecisions.studio" target="_self" class="nav-delay-3">Unreal Engine</a>
-      <a href="/learn" class="nav-delay-4">Free Learning</a>
-      <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-delay-5">Student Login</a>
-    </div>
-    <a href="/work-with-us" class="mobile-link nav-delay-6">Work With Us</a>
-    <div class="mobile-sublinks work-sub">
-      <a href="/work-with-us/services" class="nav-delay-7">Services</a>
-      <a href="/work-with-us/media-partnerships" class="nav-delay-8">Media Partnerships</a>
-      <a href="/work-with-us/open-roles" class="nav-delay-9">Open Roles</a>
-    </div>
-    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10" id="navCtaMobile">Learn AI &rarr;</a>
   </div>
+</nav>
 
-  <!-- Nav script -->
-  <script>
-  (function() {
-    var nav = document.getElementById('nav');
-    var burger = document.getElementById('navBurger');
-    var overlay = document.getElementById('navMobileOverlay');
+<div class="nav-mobile-overlay" id="navMobileOverlay" aria-hidden="true">
+  <div class="container nav-mobile-shell">
+    <a href="/podcast" class="mobile-link">Watch</a>
 
-    // Context-aware CTA — swap copy + href based on <body data-page="…">
-    var page = (document.body && document.body.getAttribute('data-page')) || '';
-    var ctaMap = {
-      'services':           { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' },
-      'media-partnerships': { label: 'Start a Partnership →', href: 'mailto:create@baddecisions.studio' },
-      'open-roles':         { label: 'Apply →',                href: 'mailto:create@baddecisions.studio' },
-      'work-with-us':       { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' }
-    };
-    var ctaSwap = ctaMap[page];
-    if (ctaSwap) {
-      ['navCta', 'navCtaMobile'].forEach(function(id) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        el.innerHTML = ctaSwap.label;
-        el.setAttribute('href', ctaSwap.href);
-        el.removeAttribute('target');
-      });
-    }
+    <div class="mobile-group">
+      <a href="/learn" class="mobile-link">Learn</a>
+      <div class="mobile-sublinks">
+        <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
+        <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
+        <a href="/learn">Free Learning</a>
+        <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a>
+      </div>
+    </div>
 
-    // Scroll state
-    if (nav) {
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 40) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
-      }, { passive: true });
-    }
-
-    // Mobile toggle
-    if (burger && overlay) {
-      burger.addEventListener('click', function() {
-        var isOpen = burger.classList.toggle('open');
-        overlay.classList.toggle('open');
-        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-      });
-      overlay.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-          burger.classList.remove('open');
-          overlay.classList.remove('open');
-          burger.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
-        });
-      });
-    }
-  })();
-  </script>
+    <div class="mobile-group">
+      <a href="/work-with-us" class="mobile-link">Work With Us</a>
+      <div class="mobile-sublinks">
+        <a href="/work-with-us/services">Services</a>
+        <a href="/work-with-us/media-partnerships">Media Partnerships</a>
+        <a href="/work-with-us/open-roles">Open Roles</a>
+      </div>
+    </div>
+  </div>
+</div>
   <main class="page-main" id="main-content">
     <!-- ─── OPEN ROLES ───────────────────────────────────────────── -->
   <section class="open-roles-header bg-glow-blue">
@@ -624,7 +210,7 @@
           <p class="footer-tagline">Content, education, and execution in the age of AI.</p>
           <div class="footer-brand-location">Vancouver &middot; Dubai</div>
           <div class="footer-social-row">
-            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platform-logos/instagram-glyph-gradient.svg" alt="Instagram" class="footer-social-icon footer-social-icon--instagram" loading="lazy"></a>
+<a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platform-logos/instagram-glyph-gradient.svg" alt="Instagram" class="footer-social-icon footer-social-icon--instagram" loading="lazy"></a>
             <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><img src="/assets/platform-logos/youtube-icon.svg" alt="YouTube" class="footer-social-icon footer-social-icon--youtube" loading="lazy"></a>
             <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><img src="/assets/platform-logos/spotify-icon.svg" alt="Spotify" class="footer-social-icon footer-social-icon--spotify" loading="lazy"></a>
             <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="footer-social-icon footer-social-icon--apple" loading="lazy"></a>
@@ -637,7 +223,7 @@
         <div>
           <div class="footer-col-title">Podcast</div>
           <ul class="footer-links">
-            <li><a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer">Spotify</a></li>
+<li><a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer">Spotify</a></li>
             <li><a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0" target="_blank" rel="noopener noreferrer">YouTube</a></li>
             <li><a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer">Apple Podcasts</a></li>
           </ul>
