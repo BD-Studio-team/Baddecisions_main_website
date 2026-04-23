@@ -65,7 +65,7 @@
   }
   </script>
 </head>
-<body>
+<body data-page="home">
 
   <!-- Home page sections -->
     <a href="#main-content" class="skip-nav">Skip to main content</a>
@@ -88,7 +88,7 @@
     }
     .site-nav.scrolled {
       background: rgba(5,5,5,0.85);
-      border-bottom-color: rgba(245,242,237,0.06);
+      border-bottom-color: var(--border-cream-faint);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
@@ -218,6 +218,19 @@
       transition: color 120ms ease;
     }
     .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow); }
+
+    /* Account utility item — demoted below primary discovery links */
+    .site-nav .nav-dd-divider {
+      height: 1px;
+      background: rgba(245,242,234,0.08);
+      margin: 4px 8px;
+    }
+    .site-nav .nav-dd-item--utility .nav-dd-label {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-ash);
+    }
 
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
@@ -412,7 +425,8 @@
           <a href="/learn" class="nav-dd-item">
             <div class="nav-dd-label">Free Learning</div>
           </a>
-          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item">
+          <div class="nav-dd-divider" aria-hidden="true"></div>
+          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item nav-dd-item--utility">
             <div class="nav-dd-label">Student Login</div>
           </a>
         </div>
@@ -436,8 +450,8 @@
       </li>
     </ul>
 
-    <!-- CTA -->
-    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn">Learn AI &rarr;</a>
+    <!-- CTA (context-aware via data-page on <body>) -->
+    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn" id="navCta">Learn AI &rarr;</a>
 
     <!-- Mobile burger -->
     <button type="button" class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
@@ -461,7 +475,7 @@
       <a href="/work-with-us/media-partnerships" class="nav-delay-8">Media Partnerships</a>
       <a href="/work-with-us/open-roles" class="nav-delay-9">Open Roles</a>
     </div>
-    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10">Learn AI &rarr;</a>
+    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10" id="navCtaMobile">Learn AI &rarr;</a>
   </div>
 
   <!-- Nav script -->
@@ -470,6 +484,25 @@
     var nav = document.getElementById('nav');
     var burger = document.getElementById('navBurger');
     var overlay = document.getElementById('navMobileOverlay');
+
+    // Context-aware CTA — swap copy + href based on <body data-page="…">
+    var page = (document.body && document.body.getAttribute('data-page')) || '';
+    var ctaMap = {
+      'services':           { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' },
+      'media-partnerships': { label: 'Start a Partnership →', href: 'mailto:create@baddecisions.studio' },
+      'open-roles':         { label: 'Apply →',                href: 'mailto:create@baddecisions.studio' },
+      'work-with-us':       { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' }
+    };
+    var ctaSwap = ctaMap[page];
+    if (ctaSwap) {
+      ['navCta', 'navCtaMobile'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = ctaSwap.label;
+        el.setAttribute('href', ctaSwap.href);
+        el.removeAttribute('target');
+      });
+    }
 
     // Scroll state
     if (nav) {
@@ -505,7 +538,7 @@
     <!-- ─── HERO ──────────────────────────────────────────────────── -->
   <section id="hero" class="bg-glow-gold bg-vignette">
     <div class="hero-bg">
-      <video data-autoplay muted loop playsinline class="hero-bg-video">
+      <video data-autoplay muted loop playsinline preload="metadata" class="hero-bg-video">
         <source src="/assets/video/hero-video.webm" type="video/webm">
         <source src="/assets/video/hero-video.mp4" type="video/mp4">
       </video>
@@ -526,8 +559,8 @@
         </p>
         <div class="hero-actions">
           <a href="/podcast" class="btn-primary">Watch</a>
-          <a href="/learn" class="btn-outline">Learn</a>
-          <a href="/work-with-us" class="btn-outline">Work With Us</a>
+          <a href="/learn" class="btn-secondary">Learn</a>
+          <a href="/work-with-us" class="btn-secondary">Work With Us</a>
         </div>
       </div>
     </div>
@@ -592,7 +625,7 @@
     </div>
   </section>
     <!-- ─── PILLARS ───────────────────────────────────────────────── -->
-  <section id="pillars">
+  <section id="pillars" class="bg-dark">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-header-left">
@@ -638,7 +671,7 @@
     </div>
   </section>
     <!-- ─── FIND BAD DECISIONS ────────────────────────────────── -->
-  <section class="find-us-section">
+  <section class="find-us-section bg-dark">
     <div class="container">
       <div class="find-us-bar reveal">
         <div class="find-us-label">
@@ -649,7 +682,7 @@
             <svg class="pi"><use href="/assets/platform-logos/sprite.svg#icon-youtube"/></svg>
           </a>
           <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="find-us-icon" aria-label="Instagram">
-            <svg class="pi"><use href="/assets/platform-logos/sprite.svg#icon-instagram"/></svg>
+            <img src="/assets/platform-logos/instagram-glyph-gradient.svg" alt="Instagram" class="find-us-icon-img find-us-icon-img--instagram" loading="lazy">
           </a>
           <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="find-us-icon" aria-label="Spotify">
             <svg class="pi"><use href="/assets/platform-logos/sprite.svg#icon-spotify"/></svg>
@@ -662,6 +695,9 @@
           </a>
           <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="find-us-icon" aria-label="TikTok">
             <svg class="pi"><use href="/assets/platform-logos/sprite.svg#icon-tiktok"/></svg>
+          </a>
+          <a href="https://www.threads.net/@badxstudio" target="_blank" rel="noopener noreferrer" class="find-us-icon" aria-label="Threads">
+            <img src="/assets/platform-logos/threads-logo-white.svg" alt="Threads" class="find-us-icon-img find-us-icon-img--threads" loading="lazy">
           </a>
           <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="find-us-icon" aria-label="Apple Podcasts">
             <svg class="pi"><use href="/assets/platform-logos/sprite.svg#icon-apple-podcasts"/></svg>
@@ -694,14 +730,14 @@
           <div class="pod-platforms">
             <div class="pod-platforms-label">Watch on:</div>
             <div class="pod-platforms-grid">
+              <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Watch on YouTube">
+                <img src="/assets/platform-logos/youtube.png" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube" loading="lazy">
+              </a>
               <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Spotify">
                 <img src="/assets/platform-logos/spotify.svg" alt="Spotify" class="pod-platforms-logo" loading="lazy">
               </a>
               <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Apple Podcasts">
                 <img src="/assets/platform-logos/apple-podcasts.svg" alt="Apple Podcasts" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">
-              </a>
-              <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Watch on YouTube">
-                <img src="/assets/platform-logos/youtube.png" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube" loading="lazy">
               </a>
             </div>
           </div>
@@ -903,7 +939,7 @@
       <!-- Header -->
       <div class="reveal section-header-center">
         <div class="label section-label">Why We Exist</div>
-        <h2 class="heading-hero">Built to help people <em>stay ahead</em>.</h2>
+        <h2 class="heading-section">Built to help people <em>stay ahead</em>.</h2>
         <p class="body-text text-center-readable">
           Bad Decisions was built to make the latest tools, ideas, and opportunities in technology more accessible through content, education, and services.
         </p>
@@ -912,12 +948,12 @@
       <!-- Brand evolution visuals -->
       <div class="about-videos-row reveal">
         <div class="about-video-card">
-          <video data-lazy muted loop playsinline class="img-cinematic">
+          <video data-lazy muted loop playsinline>
             <source src="/assets/video/before.mp4" type="video/mp4">
           </video>
         </div>
         <div class="about-video-card">
-          <video data-lazy muted loop playsinline class="img-cinematic">
+          <video data-lazy muted loop playsinline>
             <source src="/assets/video/after.mp4" type="video/mp4">
           </video>
         </div>

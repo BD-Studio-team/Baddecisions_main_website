@@ -41,7 +41,7 @@
   }
   </script>
 </head>
-<body>
+<body data-page="learn">
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
   <!-- ─── NAV STYLES (scoped to .site-nav) ────────────────────── -->
@@ -62,7 +62,7 @@
     }
     .site-nav.scrolled {
       background: rgba(5,5,5,0.85);
-      border-bottom-color: rgba(245,242,237,0.06);
+      border-bottom-color: var(--border-cream-faint);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
@@ -192,6 +192,19 @@
       transition: color 120ms ease;
     }
     .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow); }
+
+    /* Account utility item — demoted below primary discovery links */
+    .site-nav .nav-dd-divider {
+      height: 1px;
+      background: rgba(245,242,234,0.08);
+      margin: 4px 8px;
+    }
+    .site-nav .nav-dd-item--utility .nav-dd-label {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-ash);
+    }
 
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
@@ -386,7 +399,8 @@
           <a href="/learn" class="nav-dd-item">
             <div class="nav-dd-label">Free Learning</div>
           </a>
-          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item">
+          <div class="nav-dd-divider" aria-hidden="true"></div>
+          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item nav-dd-item--utility">
             <div class="nav-dd-label">Student Login</div>
           </a>
         </div>
@@ -410,8 +424,8 @@
       </li>
     </ul>
 
-    <!-- CTA -->
-    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn">Learn AI &rarr;</a>
+    <!-- CTA (context-aware via data-page on <body>) -->
+    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn" id="navCta">Learn AI &rarr;</a>
 
     <!-- Mobile burger -->
     <button type="button" class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
@@ -435,7 +449,7 @@
       <a href="/work-with-us/media-partnerships" class="nav-delay-8">Media Partnerships</a>
       <a href="/work-with-us/open-roles" class="nav-delay-9">Open Roles</a>
     </div>
-    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10">Learn AI &rarr;</a>
+    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10" id="navCtaMobile">Learn AI &rarr;</a>
   </div>
 
   <!-- Nav script -->
@@ -444,6 +458,25 @@
     var nav = document.getElementById('nav');
     var burger = document.getElementById('navBurger');
     var overlay = document.getElementById('navMobileOverlay');
+
+    // Context-aware CTA — swap copy + href based on <body data-page="…">
+    var page = (document.body && document.body.getAttribute('data-page')) || '';
+    var ctaMap = {
+      'services':           { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' },
+      'media-partnerships': { label: 'Start a Partnership →', href: 'mailto:create@baddecisions.studio' },
+      'open-roles':         { label: 'Apply →',                href: 'mailto:create@baddecisions.studio' },
+      'work-with-us':       { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' }
+    };
+    var ctaSwap = ctaMap[page];
+    if (ctaSwap) {
+      ['navCta', 'navCtaMobile'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = ctaSwap.label;
+        el.setAttribute('href', ctaSwap.href);
+        el.removeAttribute('target');
+      });
+    }
 
     // Scroll state
     if (nav) {
@@ -492,7 +525,7 @@
       <div class="learn-row reveal">
         <div class="container">
           <div class="learn-row-header">
-            <h3 class="learn-row-title">Premium Programs</h3>
+            <h2 class="learn-row-title">Premium Programs</h2>
           </div>
           <div class="premium-duo">
             <a href="https://learn.baddecisions.studio" target="_self" class="premium-card premium-card-ue">
@@ -501,8 +534,8 @@
               </video>
               <div class="premium-card-overlay"></div>
               <div class="premium-card-content">
-                <img src="/assets/client-logos/unreal-engine-full.svg" alt="Unreal Engine" class="premium-card-logo" width="200" height="100" loading="lazy">
-                <h2>Learn Unreal Engine<br>in <em>14 Days</em></h2>
+                <img src="/assets/client-logos/unreal-engine.svg" alt="Unreal Engine" class="premium-card-logo" width="200" height="100" loading="lazy">
+                <h3>Learn Unreal Engine<br>in <em>14 Days</em></h3>
                 <p>step-by-step program teaching you the most powerful 3D software, for beginners and pros who want portfolio-ready results!</p>
                 <div class="premium-card-stats">
                   <div><strong>55+</strong> Lessons</div>
@@ -515,7 +548,7 @@
               <div class="premium-card-glow premium-card-glow-ai"></div>
               <div class="premium-card-content">
                 <div class="premium-card-ai-icon">AI</div>
-                <h2>Become Irreplaceable<br>with <em>AI</em></h2>
+                <h3>Become Irreplaceable<br>with <em>AI</em></h3>
                 <p>Hands-on AI workflows, curated tool picks, and step-by-step playbooks to help you save time, win clients, and actually get ahead.</p>
                 <div class="premium-card-stats">
                   <div><strong>Foundation</strong></div>
@@ -539,66 +572,203 @@
           </div>
         </div>
 
-        <!-- Hero banner - featured free playlist -->
-        <a href="https://www.youtube.com/watch?v=L9qixi858Ag&list=PLIn-yd4vnXbjWeYqU7epakdnVzoysMToy" target="_blank" rel="noopener noreferrer" class="learn-hero reveal">
-          <img src="/assets/learn/ue5-beginner-series.jpg" alt="UE5 Beginner Series" class="learn-hero-bg" width="1280" height="720" loading="lazy">
-          <div class="learn-hero-overlay"></div>
-          <div class="learn-hero-content">
-            <span class="playlist-badge">Most Popular Series</span>
-            <h2>UE5 Beginner Series</h2>
-            <p>Start from zero and build cinematic Star Wars worlds in Unreal Engine 5. The most-watched free UE5 series on YouTube &mdash; 2.5M+ views.</p>
-            <span class="learn-hero-cta">Watch Now ▶</span>
-          </div>
-        </a>
+        <!-- Free guides — horizontal editorial rows -->
+        <div class="learn-free-list reveal">
 
-        <!-- Free Series grid -->
-        <div class="learn-row reveal">
-          <div class="learn-row-header">
-            <h3 class="learn-row-title">Other Free Guides</h3>
-          </div>
-          <div class="learn-grid">
-            <a href="https://www.youtube.com/watch?v=gqV4pC425gI&list=PLIn-yd4vnXbhFAzPbSN1I8C3A8XlI73xx" target="_blank" rel="noopener noreferrer" class="learn-card">
-              <div class="learn-card-thumb">
-                <img src="/assets/learn/dune-remake.jpg" alt="Dune Remake" width="1280" height="720" loading="lazy">
-                <div class="learn-card-play">▶</div>
+          <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbifBFXcDE9pC6Ligg3ha5Ev" target="_blank" rel="noopener noreferrer" class="learn-free-row">
+            <div class="learn-free-thumb">
+              <img src="/assets/learn/ue5-2026-beginner.jpg" alt="Unreal Engine 5 2026 Beginner Challenge thumbnail" width="1280" height="720" loading="lazy">
+            </div>
+            <div class="learn-free-body">
+              <div class="learn-free-eyebrow">
+                <span class="learn-free-eyebrow-rule" aria-hidden="true"></span>
+                <span>UE5</span>
+                <span class="learn-free-eyebrow-sep" aria-hidden="true">·</span>
+                <span class="learn-free-eyebrow-sec">5-day challenge</span>
               </div>
-              <div class="learn-card-info">
-                <h4>Dune Remake</h4>
-                <span>Unreal Engine 5</span>
+              <h3 class="learn-free-title">Unreal Engine 5, <em>from zero,</em> in five days.</h3>
+              <div class="learn-free-foot">
+                <p class="learn-free-byline">Five days, no prior 3D experience. The free 2026 beginner challenge &mdash; Unreal Engine 5 from scratch.</p>
               </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=U3ipg5pG39k&list=PLIn-yd4vnXbiJMd3EwkYB8FeUlJVQAFIz" target="_blank" rel="noopener noreferrer" class="learn-card">
-              <div class="learn-card-thumb">
-                <img src="/assets/learn/gaussian-splatting.jpg" alt="Gaussian Splatting" width="1280" height="720" loading="lazy">
-                <div class="learn-card-play">▶</div>
+            </div>
+            <div class="learn-free-action">
+              <span class="learn-free-action-label">Watch</span>
+              <span class="learn-free-action-arrow" aria-hidden="true">
+                <svg viewBox="0 0 16 16" role="presentation"><path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbhFAzPbSN1I8C3A8XlI73xx" target="_blank" rel="noopener noreferrer" class="learn-free-row">
+            <div class="learn-free-thumb">
+              <img src="/assets/learn/dune-remake.jpg" alt="Unreal Engine 5 Dune remake thumbnail" width="1280" height="720" loading="lazy">
+            </div>
+            <div class="learn-free-body">
+              <div class="learn-free-eyebrow">
+                <span class="learn-free-eyebrow-rule" aria-hidden="true"></span>
+                <span>UE5</span>
+                <span class="learn-free-eyebrow-sep" aria-hidden="true">·</span>
+                <span class="learn-free-eyebrow-sec">Cinematic remake</span>
               </div>
-              <div class="learn-card-info">
-                <h4>Gaussian Splatting</h4>
-                <span>3D Capture</span>
+              <h3 class="learn-free-title">Recreating <em>Dune,</em> shot by shot.</h3>
+              <div class="learn-free-foot">
+                <p class="learn-free-byline">Four cinematic shots from Dune, rebuilt inside Unreal Engine 5 &mdash; block-in, lighting, and final render. Completely free.</p>
               </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=7lAWhk_aVvc&list=PLIn-yd4vnXbjwxPNYeHz4Ac3le_zIZc-P" target="_blank" rel="noopener noreferrer" class="learn-card">
-              <div class="learn-card-thumb">
-                <img src="/assets/learn/create-your-metahuman.jpg" alt="Create Your MetaHuman" width="1280" height="720" loading="lazy">
-                <div class="learn-card-play">▶</div>
+            </div>
+            <div class="learn-free-action">
+              <span class="learn-free-action-label">Watch</span>
+              <span class="learn-free-action-arrow" aria-hidden="true">
+                <svg viewBox="0 0 16 16" role="presentation"><path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbjwxPNYeHz4Ac3le_zIZc-P" target="_blank" rel="noopener noreferrer" class="learn-free-row">
+            <div class="learn-free-thumb">
+              <img src="/assets/learn/create-your-metahuman.jpg" alt="Create and customise your MetaHuman thumbnail" width="1280" height="720" loading="lazy">
+            </div>
+            <div class="learn-free-body">
+              <div class="learn-free-eyebrow">
+                <span class="learn-free-eyebrow-rule" aria-hidden="true"></span>
+                <span>MetaHuman</span>
+                <span class="learn-free-eyebrow-sep" aria-hidden="true">·</span>
+                <span class="learn-free-eyebrow-sec">UE5</span>
               </div>
-              <div class="learn-card-info">
-                <h4>Create Your MetaHuman</h4>
-                <span>1.7M+ views</span>
+              <h3 class="learn-free-title">Create and customise your <em>MetaHuman.</em></h3>
+              <div class="learn-free-foot">
+                <p class="learn-free-byline">Build a MetaHuman in Unreal Engine 5, then customise it, rig it, and bring it to life.</p>
               </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=L9qixi858Ag&list=PLIn-yd4vnXbjWeYqU7epakdnVzoysMToy" target="_blank" rel="noopener noreferrer" class="learn-card">
-              <div class="learn-card-thumb">
-                <img src="/assets/learn/star-wars-beginner.jpg" alt="Star Wars Beginner Series" width="1280" height="720" loading="lazy">
-                <div class="learn-card-play">▶</div>
+            </div>
+            <div class="learn-free-action">
+              <span class="learn-free-action-label">Watch</span>
+              <span class="learn-free-action-arrow" aria-hidden="true">
+                <svg viewBox="0 0 16 16" role="presentation"><path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbiJMd3EwkYB8FeUlJVQAFIz" target="_blank" rel="noopener noreferrer" class="learn-free-row">
+            <div class="learn-free-thumb">
+              <img src="/assets/learn/gaussian-splatting.jpg" alt="3D Gaussian Splatting thumbnail" width="1280" height="720" loading="lazy">
+            </div>
+            <div class="learn-free-body">
+              <div class="learn-free-eyebrow">
+                <span class="learn-free-eyebrow-rule" aria-hidden="true"></span>
+                <span>3D capture</span>
+                <span class="learn-free-eyebrow-sep" aria-hidden="true">·</span>
+                <span class="learn-free-eyebrow-sec">Deep dive</span>
               </div>
-              <div class="learn-card-info">
-                <h4>Star Wars Beginner Series</h4>
-                <span>2.5M+ views</span>
+              <h3 class="learn-free-title"><em>Gaussian Splatting,</em> end to end.</h3>
+              <div class="learn-free-foot">
+                <p class="learn-free-byline">How to capture and create 3D Gaussian Splatting scans &mdash; the full pipeline from phone to scene.</p>
               </div>
-            </a>
-          </div>
+            </div>
+            <div class="learn-free-action">
+              <span class="learn-free-action-label">Watch</span>
+              <span class="learn-free-action-arrow" aria-hidden="true">
+                <svg viewBox="0 0 16 16" role="presentation"><path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbjWeYqU7epakdnVzoysMToy" target="_blank" rel="noopener noreferrer" class="learn-free-row">
+            <div class="learn-free-thumb">
+              <img src="/assets/learn/ue5-beginner-course.jpg" alt="Unreal Engine 5 beginner course thumbnail" width="1280" height="720" loading="lazy">
+            </div>
+            <div class="learn-free-body">
+              <div class="learn-free-eyebrow">
+                <span class="learn-free-eyebrow-rule" aria-hidden="true"></span>
+                <span>UE5</span>
+                <span class="learn-free-eyebrow-sep" aria-hidden="true">·</span>
+                <span class="learn-free-eyebrow-sec">Beginner course</span>
+              </div>
+              <h3 class="learn-free-title">The <em>most complete</em> UE5 tutorial.</h3>
+              <div class="learn-free-foot">
+                <p class="learn-free-byline">The most complete Unreal Engine 5 tutorial on the internet. Every fundamental, every shortcut, every mistake &mdash; in order.</p>
+              </div>
+            </div>
+            <div class="learn-free-action">
+              <span class="learn-free-action-label">Watch</span>
+              <span class="learn-free-action-arrow" aria-hidden="true">
+                <svg viewBox="0 0 16 16" role="presentation"><path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </span>
+            </div>
+          </a>
+
         </div>
+      </div>
+    </div>
+  </section>
+    <!-- ─── TESTIMONIAL BAND (shared) ────────────────────────────
+       Drop in a single attributed quote between dense card grids on
+       conversion pages (Learn, Services, Media Partnerships).
+
+       USAGE: Replace the placeholder quote and attribution before
+       including. Quote should be ~20-40 words. Attribution should
+       include name + role/company.
+
+       BACKGROUND: Defaults to .bg-dark. Override by adding .bg-light,
+       .bg-green, etc. on the <section> wrapper if needed.
+  ──────────────────────────────────────────────────────────── -->
+  <section class="testimonial-band bg-dark">
+    <div class="container">
+      <div class="testimonial-band__inner reveal">
+        <blockquote class="testimonial-band__quote">
+          &ldquo;Replace this with a real quote from a partner, student,
+          or guest. Keep it punchy &mdash; one or two sentences that say
+          <em>something specific</em> about working with Bad Decisions.&rdquo;
+        </blockquote>
+        <div class="testimonial-band__attribution">
+          <strong>Name Surname</strong>
+          <span class="testimonial-band__sep" aria-hidden="true"></span>
+          <span>Role &middot; Company</span>
+        </div>
+      </div>
+    </div>
+  </section>
+    <!-- ─── TRUST LOGOS (shared) ─────────────────────────────────
+       Reusable "trusted by / featured on" logo strip. Drop near the
+       top of conversion pages (Services, Learn) to build credibility
+       above the fold.
+
+       USAGE: Update the heading copy if needed. Add or remove logo
+       cells. Logos auto-adapt color filter based on parent .bg-* class
+       (greyscale on dark, true color on light).
+  ──────────────────────────────────────────────────────────── -->
+  <section class="trust-logos bg-dark">
+    <div class="container">
+      <div class="trust-logos__header reveal">
+        <div class="label section-label">Trusted by</div>
+      </div>
+      <div class="trust-logos__grid reveal">
+        <div class="trust-logos__cell"><img src="/assets/client-logos/epic-games-featured.svg" alt="Epic Games" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/dell-technologies.svg" alt="Dell Technologies" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/youtube.svg" alt="YouTube" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/snapchat-featured.svg" alt="Snapchat" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/autodesk.svg" alt="Autodesk" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/metahuman.svg" alt="MetaHuman" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/unreal-engine.svg" alt="Unreal Engine" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/move-ai.svg" alt="Move AI" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/80lv.svg" alt="80 Level" loading="lazy"></div>
+        <div class="trust-logos__cell"><img src="/assets/client-logos/polycam.svg" alt="Polycam" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+    <!-- ─── CTA BAND (shared) ────────────────────────────────────
+       Reusable closing CTA. Drop in before the newsletter/footer on pages
+       that lack their own CTA closer. For page-specific CTAs (services,
+       open-roles, media-partnerships), use the inline per-page section
+       instead of this shared band.
+  ──────────────────────────────────────────────────────────── -->
+  <section class="cta-band bg-ember">
+    <div class="container">
+      <div class="reveal text-center cta-band__inner">
+        <div class="label section-label">Let's Talk</div>
+        <h2 class="heading-section cta-band__heading">Have an idea? <em>Let's build it together.</em></h2>
+        <p class="body-text text-center-readable mb-md">
+          Whether it's a podcast sponsorship, a production brief, a training program, or something we haven't thought of yet &mdash; reach out.
+        </p>
+        <a href="mailto:create@baddecisions.studio" class="btn-primary">Get in Touch &rarr;</a>
       </div>
     </div>
   </section>

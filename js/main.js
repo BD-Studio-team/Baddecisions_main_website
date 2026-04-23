@@ -141,11 +141,19 @@ function initStaggeredReveal() {
 }
 
 function initPodcastData() {
+  var podSection = document.getElementById('podcast');
+  // Mark loading state — CSS / debugging hook. Static HTML always shows
+  // as fallback content if fetch fails, so users see episodes either way.
+  if (podSection) podSection.setAttribute('data-podcast-state', 'loading');
+
   fetch('/api/podcast').then(function(res) {
     if (!res.ok) throw new Error('API ' + res.status);
     return res.json();
   }).then(function(data) {
-    if (!data.episodes || data.episodes.length === 0) return;
+    if (!data.episodes || data.episodes.length === 0) {
+      if (podSection) podSection.setAttribute('data-podcast-state', 'empty');
+      return;
+    }
 
     var featuredEpisode = data.episodes[0];
     var podHero = document.querySelector('.pod-hero');
@@ -161,9 +169,10 @@ function initPodcastData() {
         heroBg.alt = (featuredEpisode.title || 'Featured podcast episode') + ' thumbnail';
       }
 
-      var badge = podHero.querySelector('.playlist-badge');
-      if (badge) {
-        badge.textContent = featuredEpisode.episodeNumber
+      var badgeText = podHero.querySelector('.playlist-badge-text')
+        || podHero.querySelector('.playlist-badge');
+      if (badgeText) {
+        badgeText.textContent = featuredEpisode.episodeNumber
           ? 'Latest \u00b7 Ep. ' + featuredEpisode.episodeNumber
           : 'Latest';
       }
@@ -188,7 +197,7 @@ function initPodcastData() {
         cardImg.alt = (episode.title || 'Podcast episode') + ' thumbnail';
       }
 
-      var cardTitle = cards[i].querySelector('.pod-showcase-name h4');
+      var cardTitle = cards[i].querySelector('.pod-showcase-name h3, .pod-showcase-name h4');
       if (cardTitle) {
         cardTitle.textContent = episode.title || '';
       }
@@ -198,8 +207,11 @@ function initPodcastData() {
         cardMeta.textContent = episode.episodeNumber ? 'Ep. ' + episode.episodeNumber : '';
       }
     }
+
+    if (podSection) podSection.setAttribute('data-podcast-state', 'live');
   }).catch(function(err) {
-    console.warn('Podcast refresh skipped:', err.message);
+    console.warn('Podcast refresh skipped (showing static fallback episodes):', err.message);
+    if (podSection) podSection.setAttribute('data-podcast-state', 'error');
   });
 }
 

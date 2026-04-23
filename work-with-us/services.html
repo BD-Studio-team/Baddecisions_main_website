@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services | Bad Decisions Studio</title>
   <meta name="description" content="Creative technology services from Bad Decisions Studio. Cinematic production, AI integration, corporate training, and more." />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://www.baddecisions.studio/work-with-us/services" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="/css/globals.css" />
   <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
 </head>
-<body>
+<body data-page="services">
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
   <!-- ─── NAV STYLES (scoped to .site-nav) ────────────────────── -->
@@ -44,7 +44,7 @@
     }
     .site-nav.scrolled {
       background: rgba(5,5,5,0.85);
-      border-bottom-color: rgba(245,242,237,0.06);
+      border-bottom-color: var(--border-cream-faint);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
@@ -174,6 +174,19 @@
       transition: color 120ms ease;
     }
     .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow); }
+
+    /* Account utility item — demoted below primary discovery links */
+    .site-nav .nav-dd-divider {
+      height: 1px;
+      background: rgba(245,242,234,0.08);
+      margin: 4px 8px;
+    }
+    .site-nav .nav-dd-item--utility .nav-dd-label {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-ash);
+    }
 
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
@@ -368,7 +381,8 @@
           <a href="/learn" class="nav-dd-item">
             <div class="nav-dd-label">Free Learning</div>
           </a>
-          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item">
+          <div class="nav-dd-divider" aria-hidden="true"></div>
+          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item nav-dd-item--utility">
             <div class="nav-dd-label">Student Login</div>
           </a>
         </div>
@@ -392,8 +406,8 @@
       </li>
     </ul>
 
-    <!-- CTA -->
-    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn">Learn AI &rarr;</a>
+    <!-- CTA (context-aware via data-page on <body>) -->
+    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn" id="navCta">Learn AI &rarr;</a>
 
     <!-- Mobile burger -->
     <button type="button" class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
@@ -417,7 +431,7 @@
       <a href="/work-with-us/media-partnerships" class="nav-delay-8">Media Partnerships</a>
       <a href="/work-with-us/open-roles" class="nav-delay-9">Open Roles</a>
     </div>
-    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10">Learn AI &rarr;</a>
+    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10" id="navCtaMobile">Learn AI &rarr;</a>
   </div>
 
   <!-- Nav script -->
@@ -426,6 +440,25 @@
     var nav = document.getElementById('nav');
     var burger = document.getElementById('navBurger');
     var overlay = document.getElementById('navMobileOverlay');
+
+    // Context-aware CTA — swap copy + href based on <body data-page="…">
+    var page = (document.body && document.body.getAttribute('data-page')) || '';
+    var ctaMap = {
+      'services':           { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' },
+      'media-partnerships': { label: 'Start a Partnership →', href: 'mailto:create@baddecisions.studio' },
+      'open-roles':         { label: 'Apply →',                href: 'mailto:create@baddecisions.studio' },
+      'work-with-us':       { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' }
+    };
+    var ctaSwap = ctaMap[page];
+    if (ctaSwap) {
+      ['navCta', 'navCtaMobile'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = ctaSwap.label;
+        el.setAttribute('href', ctaSwap.href);
+        el.removeAttribute('target');
+      });
+    }
 
     // Scroll state
     if (nav) {
@@ -470,37 +503,84 @@
         </p>
       </div>
 
-      <div class="services-grid reveal">
-        <div class="service-card">
-          <div class="service-icon">💡</div>
-          <h3 class="heading-card">Consulting</h3>
-          <p>Strategic consulting across AI adoption, workflow design, content systems, and technology execution.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🎬</div>
-          <h3 class="heading-card">Cinematic Production</h3>
-          <p>High-end cinematic production using Unreal Engine and modern workflows, from concept to final delivery.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🤖</div>
-          <h3 class="heading-card">AI-Enabled Solutions</h3>
-          <p>Custom AI-enabled solutions for content, automation, internal tools, and modern creative workflows.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🎓</div>
-          <h3 class="heading-card">Corporate Training</h3>
-          <p>Tailored training programs in AI, Unreal Engine, and emerging tools for teams, studios, and organizations.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🎮</div>
-          <h3 class="heading-card">Interactive Experiences</h3>
-          <p>Interactive experiences built with real-time technology, from virtual production to immersive installations and spatial concepts.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">📱</div>
-          <h3 class="heading-card">Content Strategy</h3>
-          <p>Content strategy for brands and founders who want sharper positioning, better distribution, and stronger output.</p>
-        </div>
+      <!-- Bento spread — hero card + 4 supporting cards -->
+      <div class="services-bento reveal">
+
+        <!-- 01 — HERO: Consulting -->
+        <a href="mailto:create@baddecisions.studio?subject=Consulting" class="services-card services-card--hero services-card--hero-text">
+          <div class="services-card__bg" aria-hidden="true"></div>
+          <div class="services-card__body">
+            <div class="services-card__meta">
+              <span class="services-card__num">01</span>
+              <span class="services-card__eyebrow">Strategy</span>
+            </div>
+            <div class="services-card__hero-content">
+              <h2 class="services-card__title services-card__title--hero">
+                <em>Consulting.</em>
+              </h2>
+              <p class="services-card__desc">
+                Strategic consulting across AI adoption, workflow design, content systems, and technology execution. We embed with founders, operators, and leadership teams to build the systems and decisions that move you forward.
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- 02 — AI-Enabled Solutions -->
+        <a href="mailto:create@baddecisions.studio?subject=AI-Enabled%20Solutions" class="services-card">
+          <div class="services-card__body">
+            <div class="services-card__meta">
+              <span class="services-card__num">02</span>
+              <span class="services-card__eyebrow">AI</span>
+            </div>
+            <h3 class="services-card__title">AI-Enabled Solutions</h3>
+            <p class="services-card__desc">
+              Custom AI-enabled solutions for content, automation, internal tools, and modern creative workflows.
+            </p>
+          </div>
+        </a>
+
+        <!-- 03 — Corporate Training -->
+        <a href="mailto:create@baddecisions.studio?subject=Corporate%20Training" class="services-card">
+          <div class="services-card__body">
+            <div class="services-card__meta">
+              <span class="services-card__num">03</span>
+              <span class="services-card__eyebrow">Training</span>
+            </div>
+            <h3 class="services-card__title">Corporate Training</h3>
+            <p class="services-card__desc">
+              Tailored programs in AI, Unreal Engine, and emerging tools for teams, studios, and organizations.
+            </p>
+          </div>
+        </a>
+
+        <!-- 04 — Interactive Experiences -->
+        <a href="mailto:create@baddecisions.studio?subject=Interactive%20Experiences" class="services-card">
+          <div class="services-card__body">
+            <div class="services-card__meta">
+              <span class="services-card__num">04</span>
+              <span class="services-card__eyebrow">Real-time</span>
+            </div>
+            <h3 class="services-card__title">Interactive Experiences</h3>
+            <p class="services-card__desc">
+              Real-time interactive work &mdash; from virtual production to immersive installations and spatial concepts.
+            </p>
+          </div>
+        </a>
+
+        <!-- 05 — Content Strategy -->
+        <a href="mailto:create@baddecisions.studio?subject=Content%20Strategy" class="services-card">
+          <div class="services-card__body">
+            <div class="services-card__meta">
+              <span class="services-card__num">05</span>
+              <span class="services-card__eyebrow">Content</span>
+            </div>
+            <h3 class="services-card__title">Content Strategy</h3>
+            <p class="services-card__desc">
+              Content strategy for brands and founders who want sharper positioning, better distribution, and stronger output.
+            </p>
+          </div>
+        </a>
+
       </div>
 
     </div>
@@ -513,11 +593,11 @@
         <div class="label section-label">Trusted by</div>
       </div>
       <div class="sponsors-logo-grid reveal">
-        <div class="sponsors-logo-cell"><img src="/assets/client-logos/epic-games.png" alt="Epic Games" width="180" height="60" loading="lazy"></div>
-        <div class="sponsors-logo-cell"><img src="/assets/client-logos/dell.svg" alt="Dell" width="180" height="60" loading="lazy"></div>
+        <div class="sponsors-logo-cell"><img src="/assets/client-logos/epic-games-featured.svg" alt="Epic Games" width="180" height="60" loading="lazy"></div>
+        <div class="sponsors-logo-cell"><img src="/assets/client-logos/dell-technologies.svg" alt="Dell Technologies" width="180" height="60" loading="lazy"></div>
         <div class="sponsors-logo-cell"><img src="/assets/client-logos/youtube.svg" alt="YouTube" width="180" height="60" loading="lazy"></div>
-        <div class="sponsors-logo-cell"><img src="/assets/client-logos/snapchat.svg" alt="Snapchat" width="180" height="60" loading="lazy"></div>
-        <div class="sponsors-logo-cell"><img src="/assets/client-logos/dubai-police.png" alt="Dubai Police" width="180" height="60" loading="lazy"></div>
+        <div class="sponsors-logo-cell"><img src="/assets/client-logos/snapchat-featured.svg" alt="Snapchat" width="180" height="60" loading="lazy"></div>
+        <div class="sponsors-logo-cell"><img src="/assets/client-logos/dubai-police.svg" alt="Dubai Police" width="180" height="60" loading="lazy"></div>
         <div class="sponsors-logo-cell"><img src="/assets/client-logos/a2rl.svg" alt="A2RL" width="180" height="60" loading="lazy"></div>
         <div class="sponsors-logo-cell"><img src="/assets/client-logos/autodesk.svg" alt="Autodesk" width="180" height="60" loading="lazy"></div>
         <div class="sponsors-logo-cell"><img src="/assets/client-logos/metahuman.svg" alt="MetaHuman" width="180" height="60" loading="lazy"></div>
@@ -541,6 +621,33 @@
           Whether you need consulting, production, training, or custom solutions, Bad Decisions can help you move faster and build better.
         </p>
         <a href="mailto:create@baddecisions.studio" class="btn-primary">Start a Project &rarr;</a>
+      </div>
+    </div>
+  </section>
+    <!-- ─── TESTIMONIAL BAND (shared) ────────────────────────────
+       Drop in a single attributed quote between dense card grids on
+       conversion pages (Learn, Services, Media Partnerships).
+
+       USAGE: Replace the placeholder quote and attribution before
+       including. Quote should be ~20-40 words. Attribution should
+       include name + role/company.
+
+       BACKGROUND: Defaults to .bg-dark. Override by adding .bg-light,
+       .bg-green, etc. on the <section> wrapper if needed.
+  ──────────────────────────────────────────────────────────── -->
+  <section class="testimonial-band bg-dark">
+    <div class="container">
+      <div class="testimonial-band__inner reveal">
+        <blockquote class="testimonial-band__quote">
+          &ldquo;Replace this with a real quote from a partner, student,
+          or guest. Keep it punchy &mdash; one or two sentences that say
+          <em>something specific</em> about working with Bad Decisions.&rdquo;
+        </blockquote>
+        <div class="testimonial-band__attribution">
+          <strong>Name Surname</strong>
+          <span class="testimonial-band__sep" aria-hidden="true"></span>
+          <span>Role &middot; Company</span>
+        </div>
       </div>
     </div>
   </section>

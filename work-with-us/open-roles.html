@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Open Roles | Bad Decisions Studio</title>
   <meta name="description" content="Join Bad Decisions Studio. Open positions in video editing, Unreal Engine, community management, and AI engineering." />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://www.baddecisions.studio/work-with-us/open-roles" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="/css/globals.css" />
   <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
 </head>
-<body>
+<body data-page="open-roles">
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
   <!-- ─── NAV STYLES (scoped to .site-nav) ────────────────────── -->
@@ -44,7 +44,7 @@
     }
     .site-nav.scrolled {
       background: rgba(5,5,5,0.85);
-      border-bottom-color: rgba(245,242,237,0.06);
+      border-bottom-color: var(--border-cream-faint);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
@@ -174,6 +174,19 @@
       transition: color 120ms ease;
     }
     .site-nav .nav-dd-item:hover .nav-dd-label { color: var(--color-yellow); }
+
+    /* Account utility item — demoted below primary discovery links */
+    .site-nav .nav-dd-divider {
+      height: 1px;
+      background: rgba(245,242,234,0.08);
+      margin: 4px 8px;
+    }
+    .site-nav .nav-dd-item--utility .nav-dd-label {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-ash);
+    }
 
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
@@ -368,7 +381,8 @@
           <a href="/learn" class="nav-dd-item">
             <div class="nav-dd-label">Free Learning</div>
           </a>
-          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item">
+          <div class="nav-dd-divider" aria-hidden="true"></div>
+          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item nav-dd-item--utility">
             <div class="nav-dd-label">Student Login</div>
           </a>
         </div>
@@ -392,8 +406,8 @@
       </li>
     </ul>
 
-    <!-- CTA -->
-    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn">Learn AI &rarr;</a>
+    <!-- CTA (context-aware via data-page on <body>) -->
+    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn" id="navCta">Learn AI &rarr;</a>
 
     <!-- Mobile burger -->
     <button type="button" class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
@@ -417,7 +431,7 @@
       <a href="/work-with-us/media-partnerships" class="nav-delay-8">Media Partnerships</a>
       <a href="/work-with-us/open-roles" class="nav-delay-9">Open Roles</a>
     </div>
-    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10">Learn AI &rarr;</a>
+    <a href="https://ai.baddecisions.studio" target="_self" class="mobile-cta nav-delay-10" id="navCtaMobile">Learn AI &rarr;</a>
   </div>
 
   <!-- Nav script -->
@@ -426,6 +440,25 @@
     var nav = document.getElementById('nav');
     var burger = document.getElementById('navBurger');
     var overlay = document.getElementById('navMobileOverlay');
+
+    // Context-aware CTA — swap copy + href based on <body data-page="…">
+    var page = (document.body && document.body.getAttribute('data-page')) || '';
+    var ctaMap = {
+      'services':           { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' },
+      'media-partnerships': { label: 'Start a Partnership →', href: 'mailto:create@baddecisions.studio' },
+      'open-roles':         { label: 'Apply →',                href: 'mailto:create@baddecisions.studio' },
+      'work-with-us':       { label: 'Start a Project →',     href: 'mailto:create@baddecisions.studio' }
+    };
+    var ctaSwap = ctaMap[page];
+    if (ctaSwap) {
+      ['navCta', 'navCtaMobile'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = ctaSwap.label;
+        el.setAttribute('href', ctaSwap.href);
+        el.removeAttribute('target');
+      });
+    }
 
     // Scroll state
     if (nav) {
@@ -474,9 +507,9 @@
   <section class="open-roles-list-section">
     <div class="container">
       <div class="careers-list reveal">
-        <div class="career-card">
+        <div class="card career-card">
           <div class="career-info">
-            <h3 class="heading-card">Video Editor</h3>
+            <h2 class="heading-card">Video Editor</h2>
             <p>Edit podcast episodes, YouTube content, and social media clips. Proficiency in Premiere Pro or DaVinci Resolve required.</p>
           </div>
           <div class="career-meta">
@@ -484,9 +517,9 @@
             <span class="career-tag">Part-time</span>
           </div>
         </div>
-        <div class="career-card">
+        <div class="card career-card">
           <div class="career-info">
-            <h3 class="heading-card">Unreal Engine Artist</h3>
+            <h2 class="heading-card">Unreal Engine Artist</h2>
             <p>Create cinematic environments and characters in UE5 for course content and client projects. Strong portfolio required.</p>
           </div>
           <div class="career-meta">
@@ -494,9 +527,9 @@
             <span class="career-tag">Contract</span>
           </div>
         </div>
-        <div class="career-card">
+        <div class="card career-card">
           <div class="career-info">
-            <h3 class="heading-card">Community Manager</h3>
+            <h2 class="heading-card">Community Manager</h2>
             <p>Manage Discord, Instagram, and YouTube communities. Engage with students and creators across all platforms.</p>
           </div>
           <div class="career-meta">
@@ -504,9 +537,9 @@
             <span class="career-tag">Full-time</span>
           </div>
         </div>
-        <div class="career-card">
+        <div class="card career-card">
           <div class="career-info">
-            <h3 class="heading-card">AI Engineer</h3>
+            <h2 class="heading-card">AI Engineer</h2>
             <p>Build and maintain proprietary AI tools for content generation, podcast automation, and creative workflows.</p>
           </div>
           <div class="career-meta">
@@ -521,7 +554,7 @@
   <section class="open-roles-cta bg-ember">
     <div class="container">
       <div class="reveal careers-cta-section">
-        <h3 class="careers-cta-heading">Don't see your role? <em>Reach out anyway.</em></h3>
+        <h2 class="careers-cta-heading">Don't see your role? <em>Reach out anyway.</em></h2>
         <p class="body-text mb-md">We're always open to hearing from talented people.</p>
         <a href="mailto:create@baddecisions.studio" class="btn-primary">Get in Touch &rarr;</a>
       </div>

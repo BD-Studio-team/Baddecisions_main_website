@@ -136,9 +136,9 @@ Homepage rotates through distinct backgrounds — no two adjacent sections share
 
 `globals.css` provides atmospheric utility classes: `.bg-glow-gold`, `.bg-glow-blue`, `.bg-glow-peach`, `.bg-diagonal`, `.bg-vignette`, `.bg-horizon`, `.bg-ember`, `.bg-mesh`, `.bg-topwash`, `.bg-paper-texture`
 
-### Image Treatment Classes
+### Image Treatment
 
-`.img-cinematic` (desaturated, darkened) and `.img-warm` (warm cinematic with sepia) with hover restore.
+Per CLAUDE.md, images render at natural saturation. Use gradient overlays (`linear-gradient(transparent → void)`) for text legibility on hero backgrounds rather than CSS filters. The `.img-cinematic` / `.img-warm` filter classes were removed (2026-04-23).
 
 ## Navigation
 

@@ -117,7 +117,6 @@ The site should feel like opening a premium publication meets a cinematic studio
 
 **Critical rules:**
 - No two adjacent sections should use the same layout pattern. Alternate between full-bleed imagery, tight text blocks, asymmetric splits, stat strips, and editorial breaks.
-- Every page must use at least 3 different background colors from the palette.
 - The eye should never be able to predict what's coming next as it scrolls.
 
 ---
@@ -586,6 +585,34 @@ vercel deploy --prod
 ```
 
 Vercel runs `npm run build` automatically via `vercel.json` `buildCommand`.
+
+---
+
+## CSS Naming Convention
+
+**All class names use kebab-case with prefix-based namespacing.** No BEM `__element` / `--modifier` syntax, no camelCase, no snake_case. Section-specific classes are prefixed with the section's short identifier so styles are easy to grep:
+
+| Prefix | Owner | Example |
+|--------|-------|---------|
+| `pod-*`  | `sections/podcast.html` and podcast partials | `.pod-hero`, `.pod-showcase-card`, `.pod-platforms` |
+| `mp-*`   | `sections/work-with-us/media-partnerships.html` | `.mp-hero`, `.mp-platform-card`, `.mp-cta-grid` |
+| `wwu-*`  | `sections/work-with-us.html` (hub) | `.wwu-card`, `.wwu-card-media` |
+| `learn-*` | `sections/learn.html` | `.learn-row`, `.learn-card` |
+| `pillar-*` | `sections/pillars.html` | `.pillar-panel`, `.pillar-panel-img` |
+| `nl-*`   | `sections/newsletter.html` | `.nl-shell`, `.nl-submit` |
+| `nav-*` / `site-nav` | `sections/nav.html` | `.nav-cta-btn`, `.site-nav` |
+| `find-us-*` | `sections/find-us.html` | `.find-us-bar` |
+| `cta-band__*` | `sections/_cta-band.html` (shared) | `.cta-band__inner`, `.cta-band__heading` |
+| `testimonial-band__*` | `sections/_testimonial-band.html` | `.testimonial-band__quote` |
+| `trust-logos__*` | `sections/_trust-logos.html` | `.trust-logos__grid`, `.trust-logos__cell` |
+
+**Conventions:**
+- Section prefix → child element: `parent-child` (e.g., `mp-platform-card`, `mp-platform-head`).
+- Modifier on a child: append after another hyphen — `mp-platform-icon--show` is the only exception (true BEM modifier with `--`).
+- Shared utility classes from `globals.css` are short and unprefixed: `.card`, `.label`, `.btn-primary`, `.bg-dark`, `.container`, `.reveal`.
+- Avoid inventing new top-level prefixes for one-off elements. Reuse an existing prefix or use `globals.css` utilities.
+
+When adding a new section partial, pick a 2–4 letter prefix and use it consistently for every class in that section.
 
 ---
 
