@@ -51,11 +51,12 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      height: 64px;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
+      gap: 24px;
+      padding: 0 28px;
       background: transparent;
       border-bottom: 1px solid transparent;
       transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
@@ -65,6 +66,14 @@
       border-bottom-color: var(--border-cream-faint);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
+    }
+
+    .site-nav .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
     /* ── Logo ── */
@@ -85,16 +94,16 @@
     .site-nav .nav-center {
       display: flex;
       align-items: center;
-      gap: 2px;
+      gap: 0;
       list-style: none;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 100%;
+      position: static;
+      transform: none;
+      height: auto;
+      flex-wrap: nowrap;
     }
     .site-nav .nav-item {
       position: relative;
-      height: 100%;
+      height: auto;
       display: flex;
       align-items: center;
     }
@@ -116,15 +125,16 @@
       align-items: center;
       gap: 6px;
       font-family: var(--font-body);
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 550;
       letter-spacing: 0.01em;
       color: var(--color-fog);
-      padding: 0 15px;
-      height: 100%;
+      padding: 0 14px;
+      height: auto;
       text-decoration: none;
       transition: color 150ms ease;
       white-space: nowrap;
+      line-height: 1;
     }
     .site-nav .nav-item > a:hover,
     .site-nav .nav-item:hover > a {
@@ -154,7 +164,7 @@
     /* ── Dropdown ── */
     .site-nav .nav-dropdown {
       position: absolute;
-      top: calc(100% + 4px);
+      top: calc(100% + 20px);
       left: 50%;
       transform: translateX(-50%) translateY(-8px);
       min-width: 220px;
@@ -206,6 +216,14 @@
       color: var(--color-ash);
     }
 
+    .site-nav .nav-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      flex: 0 0 auto;
+    }
+
     /* ── CTA ── */
     .site-nav .nav-cta-btn {
       font-family: var(--font-body);
@@ -214,7 +232,7 @@
       letter-spacing: 0.01em;
       color: var(--color-void);
       background: var(--color-yellow);
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: var(--radius-button);
       text-decoration: none;
       flex-shrink: 0;
@@ -259,8 +277,12 @@
       z-index: 99;
       padding: 80px 32px 32px;
       overflow-y: auto;
+      flex-direction: column;
+      gap: 8px;
     }
-    .nav-mobile-overlay.open { display: block; }
+    .nav-mobile-overlay.open {
+      display: flex;
+    }
 
     .nav-mobile-overlay .mobile-link {
       display: block;
@@ -269,10 +291,14 @@
       font-weight: 400;
       color: var(--color-cream);
       text-decoration: none;
-      padding: 16px 0;
+      padding: 14px 0 10px;
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 0.3s ease, transform 0.3s ease, color 0.15s ease;
+      border-top: 1px solid rgba(245,242,234,0.06);
+    }
+    .nav-mobile-overlay .mobile-link:first-child {
+      border-top: 0;
     }
     .nav-mobile-overlay.open .mobile-link {
       opacity: 1;
@@ -280,39 +306,47 @@
     }
     .nav-mobile-overlay .mobile-link:hover { color: var(--color-yellow); }
 
-    .site-nav .mobile-sublinks {
-      padding: 0 0 12px 20px;
+    .nav-mobile-overlay .mobile-sublinks {
+      padding: 4px 0 18px 18px;
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: 8px;
     }
-    .site-nav .mobile-sublinks.education-sub {
-      border-left: 1px solid var(--color-stone);
+    .nav-mobile-overlay .mobile-sublinks.education-sub {
+      border-left: 1px solid rgba(245,242,234,0.12);
     }
-    .site-nav .mobile-sublinks.work-sub {
+    .nav-mobile-overlay .mobile-sublinks.work-sub {
       border-left: 2px solid var(--color-yellow);
     }
-    .site-nav .mobile-sublinks a {
-      display: block;
+    .nav-mobile-overlay .mobile-sublinks a {
+      display: flex;
+      align-items: center;
       font-family: var(--font-body);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--color-fog);
       text-decoration: none;
-      padding: 10px 16px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
       opacity: 0;
       transform: translateY(16px);
-      transition: opacity 0.3s ease, transform 0.3s ease, color 0.15s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease, color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
     }
     .nav-mobile-overlay.open .mobile-sublinks a {
       opacity: 1;
       transform: translateY(0);
     }
-    .site-nav .mobile-sublinks a:hover { color: var(--color-cream); }
+    .nav-mobile-overlay .mobile-sublinks a:hover {
+      color: var(--color-cream);
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+    }
 
     .site-nav .mobile-cta {
       display: inline-block;
-      margin-top: 32px;
+      margin-top: 12px;
       font-family: var(--font-body);
       font-size: 13px;
       font-weight: 700;
@@ -339,6 +373,9 @@
         padding: 0 16px;
         height: 56px;
       }
+      .site-nav .nav-left {
+        gap: 0;
+      }
       .site-nav .nav-logo img {
         height: 20px;
       }
@@ -350,19 +387,19 @@
       }
       .nav-mobile-overlay .mobile-link {
         font-size: clamp(22px, 7vw, 26px);
-        padding: 14px 0;
+        padding: 14px 0 10px;
       }
-      .site-nav .mobile-sublinks {
-        padding: 2px 0 10px 16px;
+      .nav-mobile-overlay .mobile-sublinks {
+        padding: 2px 0 14px 14px;
       }
-      .site-nav .mobile-sublinks a {
+      .nav-mobile-overlay .mobile-sublinks a {
         font-size: 13px;
-        padding: 9px 14px;
+        padding: 9px 12px;
       }
       .site-nav .mobile-cta {
         width: 100%;
         text-align: center;
-        margin-top: 28px;
+        margin-top: 16px;
         padding: 14px 18px;
       }
     }
@@ -373,64 +410,67 @@
 
   <!-- ─── NAV HTML ────────────────────────────────────────────── -->
   <nav class="site-nav" id="nav" aria-label="Primary">
+    <div class="nav-left">
+      <!-- Logo: BD mark + text -->
+      <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
+        <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
+      </a>
 
-    <!-- Logo: BD mark + text -->
-    <a href="/" class="nav-logo" aria-label="Bad Decisions Studio home">
-      <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions Studio" width="168" height="26" loading="eager">
-    </a>
+      <!-- Primary links -->
+      <ul class="nav-center">
+        <li class="nav-item">
+          <a href="/podcast">Watch</a>
+        </li>
+        <li class="nav-item">
+          <a href="/learn">
+            Learn
+            <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="https://ai.baddecisions.studio" target="_self" class="nav-dd-item">
+              <div class="nav-dd-label">AI Program</div>
+            </a>
+            <a href="https://learn.baddecisions.studio" target="_self" class="nav-dd-item">
+              <div class="nav-dd-label">Unreal Engine</div>
+            </a>
+            <a href="/learn" class="nav-dd-item">
+              <div class="nav-dd-label">Free Learning</div>
+            </a>
+            <div class="nav-dd-divider" aria-hidden="true"></div>
+            <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item nav-dd-item--utility">
+              <div class="nav-dd-label">Student Login</div>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="/work-with-us">
+            Work With Us
+            <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="/work-with-us/services" class="nav-dd-item">
+              <div class="nav-dd-label">Services</div>
+            </a>
+            <a href="/work-with-us/media-partnerships" class="nav-dd-item">
+              <div class="nav-dd-label">Media Partnerships</div>
+            </a>
+            <a href="/work-with-us/open-roles" class="nav-dd-item">
+              <div class="nav-dd-label">Open Roles</div>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-    <!-- Center links -->
-    <ul class="nav-center">
-      <li class="nav-item">
-        <a href="/podcast">Watch</a>
-      </li>
-      <li class="nav-item">
-        <a href="/learn">
-          Learn
-          <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
-        </a>
-        <div class="nav-dropdown">
-          <a href="https://ai.baddecisions.studio" target="_self" class="nav-dd-item">
-            <div class="nav-dd-label">AI Program</div>
-          </a>
-          <a href="https://learn.baddecisions.studio" target="_self" class="nav-dd-item">
-            <div class="nav-dd-label">Unreal Engine</div>
-          </a>
-          <a href="/learn" class="nav-dd-item">
-            <div class="nav-dd-label">Free Learning</div>
-          </a>
-          <div class="nav-dd-divider" aria-hidden="true"></div>
-          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer" class="nav-dd-item nav-dd-item--utility">
-            <div class="nav-dd-label">Student Login</div>
-          </a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a href="/work-with-us">
-          Work With Us
-          <svg class="nav-chevron" viewBox="0 0 12 12"><polyline points="2 4 6 8 10 4"/></svg>
-        </a>
-        <div class="nav-dropdown">
-          <a href="/work-with-us/services" class="nav-dd-item">
-            <div class="nav-dd-label">Services</div>
-          </a>
-          <a href="/work-with-us/media-partnerships" class="nav-dd-item">
-            <div class="nav-dd-label">Media Partnerships</div>
-          </a>
-          <a href="/work-with-us/open-roles" class="nav-dd-item">
-            <div class="nav-dd-label">Open Roles</div>
-          </a>
-        </div>
-      </li>
-    </ul>
+    <div class="nav-right">
+      <!-- CTA (context-aware via data-page on <body>) -->
+      <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn" id="navCta">Learn AI &rarr;</a>
 
-    <!-- CTA (context-aware via data-page on <body>) -->
-    <a href="https://ai.baddecisions.studio" target="_self" class="nav-cta-btn" id="navCta">Learn AI &rarr;</a>
-
-    <!-- Mobile burger -->
-    <button type="button" class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+      <!-- Mobile burger -->
+      <button type="button" class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile overlay -->
@@ -516,7 +556,7 @@
         <div class="section-header reveal">
           <div class="section-header-left">
             <div class="label section-label">Education</div>
-            <h1 class="heading-section">Learn to build<br><em>extraordinary</em> things.</h1>
+            <h1 class="heading-section">Learn to build <em>extraordinary</em> things.</h1>
           </div>
         </div>
       </div>
@@ -535,7 +575,7 @@
               <div class="premium-card-overlay"></div>
               <div class="premium-card-content">
                 <img src="/assets/client-logos/unreal-engine.svg" alt="Unreal Engine" class="premium-card-logo" width="200" height="100" loading="lazy">
-                <h3>Learn Unreal Engine<br>in <em>14 Days</em></h3>
+                <h3>Learn Unreal Engine in <em>14 Days</em></h3>
                 <p>step-by-step program teaching you the most powerful 3D software, for beginners and pros who want portfolio-ready results!</p>
                 <div class="premium-card-stats">
                   <div><strong>55+</strong> Lessons</div>
@@ -548,7 +588,7 @@
               <div class="premium-card-glow premium-card-glow-ai"></div>
               <div class="premium-card-content">
                 <div class="premium-card-ai-icon">AI</div>
-                <h3>Become Irreplaceable<br>with <em>AI</em></h3>
+                <h3>Become Irreplaceable with <em>AI</em></h3>
                 <p>Hands-on AI workflows, curated tool picks, and step-by-step playbooks to help you save time, win clients, and actually get ahead.</p>
                 <div class="premium-card-stats">
                   <div><strong>Foundation</strong></div>
@@ -568,7 +608,7 @@
         <div class="section-header reveal learn-section-header">
           <div class="section-header-left">
             <div class="label section-label">Free Learning</div>
-            <h2 class="heading-section">Start with the series<br><em>everyone shares.</em></h2>
+            <h2 class="heading-section">Start with the series <em>everyone shares.</em></h2>
           </div>
         </div>
 
@@ -785,7 +825,7 @@
             <span class="nl-eyebrow-text">The Newsletter</span>
           </div>
           <h2 class="nl-heading">
-            Get our best work<br>in your <em>inbox.</em>
+            Get our best work in your <em>inbox.</em>
           </h2>
           <p class="nl-body">
             New episodes, course drops, and field notes from the studio. No fluff, no spam &mdash; unsubscribe anytime.
@@ -971,14 +1011,14 @@
           <p class="footer-tagline">Premium podcast, education, and creative technology work for artists, founders, and ambitious teams.</p>
           <div class="footer-brand-location">Vancouver &middot; Dubai</div>
           <div class="footer-social-row">
-            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-instagram"/></svg></a>
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-youtube"/></svg></a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-spotify"/></svg></a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-apple-podcasts"/></svg></a>
-            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-x"/></svg></a>
-            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-tiktok"/></svg></a>
-            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-linkedin"/></svg></a>
-            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><svg class="pi pi-sm"><use href="/assets/platform-logos/sprite.svg#icon-discord"/></svg></a>
+            <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platform-logos/instagram-glyph-gradient.svg" alt="Instagram" class="footer-social-icon footer-social-icon--instagram" loading="lazy"></a>
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><img src="/assets/platform-logos/youtube-icon.svg" alt="YouTube" class="footer-social-icon footer-social-icon--youtube" loading="lazy"></a>
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><img src="/assets/platform-logos/spotify-icon.svg" alt="Spotify" class="footer-social-icon footer-social-icon--spotify" loading="lazy"></a>
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="footer-social-icon footer-social-icon--apple" loading="lazy"></a>
+            <a href="https://x.com/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X"><img src="/assets/platform-logos/x-icon-white.svg" alt="X" class="footer-social-icon footer-social-icon--x" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok"><img src="/assets/platform-logos/tiktok-icon-white.svg" alt="TikTok" class="footer-social-icon footer-social-icon--tiktok" loading="lazy"></a>
+            <a href="https://ca.linkedin.com/company/badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><img src="/assets/platform-logos/linkedin-icon.svg" alt="LinkedIn" class="footer-social-icon footer-social-icon--linkedin" loading="lazy"></a>
+            <a href="https://discord.gg/bWCBcmqYh9" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Discord"><img src="/assets/platform-logos/discord-icon.svg" alt="Discord" class="footer-social-icon footer-social-icon--discord" loading="lazy"></a>
           </div>
         </div>
         <div>
