@@ -3,6 +3,7 @@ module.exports = {
     youtube: {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0',
       asset: '/assets/platform-logos/youtube-icon.svg',
+      lockupAsset: '/assets/platform-logos/youtube.png',
       alt: 'YouTube'
     },
     instagram: {
@@ -51,7 +52,6 @@ module.exports = {
   footerSocialOrder: ['instagram', 'youtube', 'spotify', 'apple', 'x', 'tiktok', 'linkedin', 'discord'],
   findUsOrder: ['youtube', 'instagram', 'spotify', 'x', 'linkedin', 'tiktok', 'threads', 'apple'],
   podcastPlatformOrder: ['youtube', 'spotify', 'apple'],
-  mediaPlatformOrder: ['youtube', 'spotify', 'apple'],
 
   learnFreeRows: [
     {

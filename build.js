@@ -22,11 +22,37 @@ function escapeHtml(value) {
 function renderPodcastPlatformButtons() {
   return siteContent.podcastPlatformOrder.map(function(key) {
     var platform = siteContent.platforms[key];
-    var modifier = key === 'youtube' ? ' pod-platforms-logo--youtube' : key === 'apple' ? ' pod-platforms-logo--apple' : '';
     var label = key === 'youtube' ? 'Watch on YouTube' : 'Listen on ' + platform.alt;
+    var lockup = '';
+
+    if (key === 'apple') {
+      lockup = [
+        '              <span class="pod-platforms-lockup pod-platforms-lockup--apple">',
+        '                <img src="' + escapeHtml(platform.asset) + '" alt="' + escapeHtml(platform.alt) + '" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">',
+        '                <span class="pod-platforms-stack">',
+        '                  <span class="pod-platforms-overline">Watch on</span>',
+        '                  <span class="pod-platforms-wordmark">Apple Podcasts</span>',
+        '                </span>',
+        '              </span>'
+      ].join('\n');
+    } else if (key === 'youtube' && platform.lockupAsset) {
+      lockup = [
+        '              <span class="pod-platforms-lockup pod-platforms-lockup--youtube">',
+        '                <img src="' + escapeHtml(platform.lockupAsset) + '" alt="' + escapeHtml(platform.alt) + '" class="pod-platforms-logo pod-platforms-logo--youtube-lockup" loading="lazy">',
+        '              </span>'
+      ].join('\n');
+    } else {
+      lockup = [
+        '              <span class="pod-platforms-lockup pod-platforms-lockup--' + key + '">',
+        '                <img src="' + escapeHtml(platform.asset) + '" alt="' + escapeHtml(platform.alt) + '" class="pod-platforms-logo pod-platforms-logo--' + key + '" loading="lazy">',
+        '                <span class="pod-platforms-wordmark">' + escapeHtml(platform.alt) + '</span>',
+        '              </span>'
+      ].join('\n');
+    }
+
     return [
-      '            <a href="' + escapeHtml(platform.href) + '" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="' + escapeHtml(label) + '">',
-      '              <img src="' + escapeHtml(platform.asset) + '" alt="' + escapeHtml(platform.alt) + '" class="pod-platforms-logo' + modifier + '" loading="lazy">',
+      '            <a href="' + escapeHtml(platform.href) + '" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--' + key + '" aria-label="' + escapeHtml(label) + '">',
+      lockup,
       '            </a>'
     ].join('\n');
   }).join('\n');
@@ -53,13 +79,6 @@ function renderFindUsIcons() {
       '            <img src="' + escapeHtml(platform.asset) + '" alt="' + escapeHtml(platform.alt) + '" class="find-us-icon-img find-us-icon-img--' + key + '" loading="lazy">\n' +
       '          </a>';
   }).join('\n          ');
-}
-
-function renderMediaPlatformLogos() {
-  return siteContent.mediaPlatformOrder.map(function(key) {
-    var platform = siteContent.platforms[key];
-    return '<img src="' + escapeHtml(platform.asset) + '" alt="" loading="lazy">';
-  }).join('\n                ');
 }
 
 function renderLearnFreeRows() {
@@ -136,8 +155,7 @@ function applyDataReplacements(html) {
     .replace(/\{\{podcast_platform_buttons\}\}/g, renderPodcastPlatformButtons())
     .replace(/\{\{footer_podcast_links\}\}/g, renderFooterPodcastLinks())
     .replace(/\{\{footer_social_buttons\}\}/g, renderFooterSocialButtons())
-    .replace(/\{\{find_us_icons\}\}/g, renderFindUsIcons())
-    .replace(/\{\{media_platform_logos\}\}/g, renderMediaPlatformLogos());
+    .replace(/\{\{find_us_icons\}\}/g, renderFindUsIcons());
 }
 
 // Regex to match <div data-include="/sections/xyz.html"></div>

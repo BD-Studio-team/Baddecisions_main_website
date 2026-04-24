@@ -60,8 +60,9 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 │   └── work-with-us/
 │       ├── open-roles.html
 │       ├── services.html
-│       ├── media-partnerships-cta.html
 │       └── media-partnerships.html
+├── data/
+│   └── site-content.js       Canonical source for platform links/assets, learn rows, podcast episodes, guests. Rendered into sections at build time via {{tokens}}.
 ├── css/
 │   ├── globals.css           Design system tokens, @font-face, typography, buttons, badges
 │   ├── style.css             Section-specific layouts and responsive rules
@@ -86,7 +87,9 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 └── README.md
 ```
 
-**Build flow:** Edit `sections/` or `templates/` → run `npm run build` → outputs pre-rendered HTML to root. Do NOT edit root `.html` files directly.
+**Build flow:** Edit `sections/`, `templates/`, or `data/site-content.js` → run `npm run build` → outputs pre-rendered HTML to root. Do NOT edit root `.html` files directly.
+
+**Build-time tokens:** Sections may include `{{token}}` placeholders (e.g. `{{podcast_guest_tiles}}`, `{{footer_social_buttons}}`, `{{learn_free_rows}}`, `{{find_us_icons}}`, `{{footer_podcast_links}}`, `{{podcast_platform_buttons}}`, `{{podcast_recent_cards}}`). The build script resolves these from `data/site-content.js`. To add/edit guest tiles, free-learning rows, or platform links, edit `data/site-content.js` — not the HTML partials.
 
 ---
 
@@ -170,8 +173,59 @@ All design tokens live in `globals.css` as CSS custom properties on `:root`. Eve
   --font-editorial:    'PP Editorial New', Georgia, serif;
   --font-body:         'Inter', -apple-system, sans-serif;
   --font-mono:         'Azeret Mono', 'DM Mono', 'Courier New', monospace;
+
+  /* ── Surface / Text / Border aliases ── */
+  --bg-dark:           var(--color-void);
+  --bg-dark-elevated:  var(--color-ink);
+  --bg-dark-surface:   var(--color-soot);
+  --bg-light:          var(--color-tan);
+  --bg-light-elevated: #FFFFFF;
+  --surface-dark:      #141311;
+  --surface-light:     #FFFFFF;
+  --surface-dark-soft: rgba(255,255,255,0.03);
+  --text-dark-primary:   var(--color-cream);
+  --text-dark-secondary: var(--color-fog);
+  --text-dark-tertiary:  var(--color-ash);
+  --text-light-primary:   var(--color-void);
+  --text-light-secondary: var(--color-ash);
+  --text-light-tertiary:  var(--color-stone);
+  --border-dark:        var(--color-stone);
+  --border-cream-faint: rgba(245,242,237,0.06);
+  --border-cream-soft:  rgba(245,242,237,0.08);
+  --border-yellow-soft: rgba(255,239,123,0.18);
+
+  /* ── Shadows ── */
+  --shadow-card:         0 18px 40px rgba(0,0,0,0.12);
+  --shadow-card-hover:   0 24px 56px rgba(0,0,0,0.18);
+  --shadow-button:       0 10px 24px rgba(0,0,0,0.16);
+  --shadow-button-hover: 0 14px 28px rgba(0,0,0,0.22);
+
+  /* ── Transitions ── */
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast:  150ms;
+  --duration-base:  250ms;
+
+  /* ── Layout ── */
+  --container-max:     1280px;
+  --container-padding: 48px;  /* 32px @ ≤1024px, 20px @ ≤768px */
 }
 ```
+
+### Context-aware tokens (`--ctx-*`)
+
+Every section that declares a background recipe gets a set of `--ctx-*` CSS custom properties scoped to that section. Components (buttons, cards, labels) read from `--ctx-*` instead of hardcoding colors, so one set of shared component styles adapts automatically to whatever `.bg-*` class wraps them.
+
+The `.bg-*` classes in `globals.css` export these tokens:
+- `--ctx-heading`, `--ctx-body`, `--ctx-muted` — text
+- `--ctx-label` — eyebrows / section labels
+- `--ctx-border`, `--ctx-border-hover` — card and surface borders
+- `--ctx-card-bg` — card/box background for this context
+- `--ctx-btn-primary-bg`, `--ctx-btn-primary-text` — primary button colors
+- `--ctx-btn-secondary-border`, `--ctx-btn-secondary-text` — secondary/outline button colors
+
+Available context classes: `.bg-dark`, `.bg-light`, `.bg-green`, `.bg-yellow`, `.bg-blue`, `.bg-peach`, `.bg-brown`. Wrap the section's root element with one — children inherit the tokens.
+
+**Rule:** When building a new component, reach for `--ctx-*` first. Only hardcode a brand color when the element must visually lock to that color regardless of context (e.g. a yellow callout chip).
 
 ### CRITICAL — Contrast Rules
 
@@ -218,12 +272,49 @@ These are non-negotiable. Every text/background pairing must pass WCAG AA (4.5:1
 | Labels, meta, timestamps | Azeret Mono | `--font-mono` | 10–11px, uppercase, letter-spacing 0.15em–0.2em |
 
 **Type scale (serif display):**
-- Hero: clamp(48px, 7vw, 96px)
-- Section title: clamp(28px, 3.5vw, 44px)
-- Card heading: 16–28px
-- Editorial break (full-width statement): clamp(36px, 5.5vw, 80px)
+- Hero: `clamp(48px, 5vw, 72px)` (`.heading-hero`)
+- Section title: `clamp(32px, 3.5vw, 48px)` (`.heading-section`)
+- Card heading: 16–28px (`.heading-card`)
+- Editorial break (full-width statement): `clamp(36px, 5.5vw, 80px)`
 
 **Rule:** PP Editorial New italic at large scale should be used for "confidence moments" — full-width one-liners like *"103 episodes and counting."* that break the card rhythm. Use at least one per page.
+
+### Page-hero standard (top-of-page H1)
+
+Every page hero must follow this pattern — no exceptions. Deviating breaks the cross-page cohesion. If you need a different hero treatment (e.g., full-bleed video on `/`), keep the *structure* even if the visual layering differs.
+
+- **Alignment:** centered (text-align: center, children margin-centered).
+- **Eyebrow label** above the H1: `.label.section-label` (mono, 11px, uppercase, 0.15em tracking). Color inherited from `--ctx-label` per section background. The home `/` hero is the exception — it uses the `hero-eyebrow` variant with a short yellow line before the text.
+- **H1:** class `.heading-hero` (PP Editorial New, `clamp(48px, 5vw, 72px)`, wt 300). Every hero H1 must contain at least one `<em>` accent wrapping the emotional or identifying phrase.
+- **Italic color** is automatic via `.heading-hero em` in `globals.css`: yellow on dark contexts, green on light.
+- **Subhead:** body copy, max-width ~640px, centered, `--color-fog` on dark / `--color-ash` on light.
+- **CTA row** (optional): centered `flex` row of buttons.
+
+Opt-out: the `/work-with-us/media-partnerships` hero intentionally omits the eyebrow label (product decision). Match this only when explicitly requested.
+
+### Section-title standard (in-page H2s)
+
+For section-level titles — the H2 at the top of a content section below the hero — use this pattern. Same rationale as heroes: cohesion across pages, one obvious way to do it.
+
+```html
+<div class="section-header section-header-left reveal">
+  <div class="label section-label">Eyebrow Label</div>
+  <h2 class="heading-section">Title with <em>italic accent</em>.</h2>
+</div>
+```
+
+- **Wrapper:** `.section-header.section-header-left` (max-width 580px, left-aligned) for standard content sections. Use `.section-header-center` when the content below is centered (e.g., a centered logo grid).
+- **Eyebrow:** `.label.section-label` (mono, 11px, uppercase, 0.15em tracking, 16px margin-bottom). Color inherits from `--ctx-label` per section background.
+- **H2:** `.heading-section` (PP Editorial New, `clamp(32px, 3.5vw, 48px)`, wt 300). Every section H2 must contain one `<em>` accent.
+- **Italic color:** yellow on dark contexts via `.heading-section em` in `globals.css`. On light contexts (tan/paper), scope a section-level override so `em` is `--color-green`.
+
+**Exempt by design — don't force these into the pattern:**
+- **Hero sections** — use the page-hero standard above.
+- **CTA sections** — standalone components with their own identity (`.newsletter`, `.mp-cta`, `.services-cta`, `.open-roles-cta`). Different layout rhythm, different headlines, no eyebrow. Let them breathe.
+- **Editorial confidence moments** — full-bleed one-liners like "*103 episodes and counting.*" break the card rhythm by design.
+- **Asymmetric two-column headers** — e.g., `.mp-why-header` where the H2 sits left and a body lede sits right. Keep the asymmetric layout but still use `.heading-section` as the H2 class.
+
+**Don't invent a custom `.foo-title` class just to set size/weight/color.** The `.heading-section` class already does that, and context classes (`.bg-green`, `.bg-light`, etc.) handle color via `--ctx-*` tokens. Scope overrides to the section wrapper (e.g., `.pod-guests-section .heading-section { color: var(--color-void) }`) only when the context recipe isn't sufficient.
 
 All fonts are self-hosted in `assets/fonts-web/` and loaded via `@font-face` in `globals.css`.
 
@@ -293,8 +384,11 @@ Accent/Italic: --color-green
 Body:       --color-ash (font-weight: 500 if under 16px)
 Eyebrow:    --color-green
 Box/Card:   #FFFFFF + 1px solid rgba(58,93,91,0.1) + subtle shadow
-Button:     --color-green bg, --color-tan text
+Button:     --color-peach bg, --color-tan text (primary)
+            --color-brown text on transparent (secondary)
 ```
+
+> **Note:** The primary CTA on light sections moved from green → peach. This is driven by `.bg-light { --ctx-btn-primary-bg: var(--color-peach) }` in `globals.css`. The contrast-rules table still lists brown as banned on tan — that rule remains true for body text, but the secondary button in this recipe uses brown as a deliberate exception. Treat brown-on-tan as button-only.
 
 ### Recipe: Green
 **Use for:** Education features, trust sections, stat strips, schedule bars
@@ -459,17 +553,18 @@ Use images at their natural saturation and brightness. Do not apply global `.img
 
 ## Navigation
 
-**Desktop (64px height):**
-- Logo left: BD mark (yellow square, 4px radius) + "BAD DECISIONS" in `--font-body` uppercase bold, `--color-yellow`
+**Desktop (72px height):**
+- Logo left: horizontal Bad Decisions wordmark SVG (`/assets/bd-logo/bd-logo-horizontal.svg`), 24px tall
 - Center: Watch (plain link), Learn (dropdown), Work With Us (dropdown)
-- CTA right: "Learn AI →" yellow button
-- Transparent on load, `rgba(5,5,5,0.8)` + `backdrop-filter: blur(24px)` on scroll
-- Active page link: `--color-cream`. Others: `--color-fog`
+- Right: burger on mobile only — **no primary CTA button** on desktop
+- Persistent `rgba(5,5,5,0.84)` + `backdrop-filter: blur(18px)`, 1px bottom border in `--border-cream-soft`
+- Hover/focus on any nav-item lifts text to `--color-cream` and rotates chevron 180°. Default link color: `--color-fog`
+- Dropdown has an invisible `::after` hover-bridge below the trigger so moving into the menu doesn't close it
 
-**Education dropdown:** AI Programs, Unreal Engine, Free Learning
+**Education dropdown:** AI Program, Unreal Engine, Free Learning, Student Login (utility style, divided)
 **Work With Us dropdown:** Services, Media Partnerships, Open Roles
 
-**Mobile (below 768px):** Full-screen overlay, links in PP Editorial New at 26px, stagger animation.
+**Mobile (below 768px):** 56px bar with burger → full-screen overlay. Top-level links in PP Editorial New at `clamp(24px, 7vw, 28px)`. Sub-links in Inter 13px inside rounded cards under each group. Closing on link-click, Escape, or resize above 768px.
 
 ---
 

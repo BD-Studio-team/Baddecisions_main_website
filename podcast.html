@@ -61,7 +61,7 @@
 
       <ul class="nav-center">
         <li class="nav-item">
-          <a href="/podcast">Watch</a>
+          <a href="/podcast">Podcast</a>
         </li>
         <li class="nav-item">
           <a href="/learn">
@@ -114,25 +114,33 @@
 
 <div class="nav-mobile-overlay" id="navMobileOverlay" aria-hidden="true">
   <div class="container nav-mobile-shell">
-    <a href="/podcast" class="mobile-link">Watch</a>
+    <div class="mobile-nav-list">
+      <a href="/podcast" class="mobile-row-link">Podcast</a>
 
-    <div class="mobile-group">
-      <a href="/learn" class="mobile-link">Learn</a>
-      <div class="mobile-sublinks">
-        <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
-        <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
-        <a href="/learn">Free Learning</a>
-        <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a>
-      </div>
-    </div>
+      <details class="mobile-accordion">
+        <summary class="mobile-row-toggle">
+          <span>Learn</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+        </summary>
+        <div class="mobile-panel">
+          <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
+          <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
+          <a href="/learn">Free Learning</a>
+          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a>
+        </div>
+      </details>
 
-    <div class="mobile-group">
-      <a href="/work-with-us" class="mobile-link">Work With Us</a>
-      <div class="mobile-sublinks">
-        <a href="/work-with-us/services">Services</a>
-        <a href="/work-with-us/media-partnerships">Media Partnerships</a>
-        <a href="/work-with-us/open-roles">Open Roles</a>
-      </div>
+      <details class="mobile-accordion">
+        <summary class="mobile-row-toggle">
+          <span>Work With Us</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+        </summary>
+        <div class="mobile-panel">
+          <a href="/work-with-us/services">Services</a>
+          <a href="/work-with-us/media-partnerships">Media Partnerships</a>
+          <a href="/work-with-us/open-roles">Open Roles</a>
+        </div>
+      </details>
     </div>
   </div>
 </div>
@@ -144,9 +152,9 @@
       <!-- Page header -->
       <div class="reveal podcast-page-header">
         <div class="label section-label">The Bad Decisions Podcast</div>
-        <h1 class="heading-section">A practical guide to <em>modern tech, AI, and business.</em></h1>
+        <h1 class="heading-hero">A practical guide to <em>modern tech, AI, and business.</em></h1>
         <p class="body-text text-center-readable podcast-page-copy">
-          We focus on what actually matters. Every episode is created to help you understand what’s changing and how to act on it.
+          We focus on what actually matters. Every episode is created to help you understand what&rsquo;s changing and how to act on it.
         </p>
       </div>
 
@@ -208,14 +216,25 @@
         <div class="pod-platforms pod-platforms--center pod-platforms--inline reveal">
           <div class="pod-platforms-label">Watch on:</div>
           <div class="pod-platforms-grid">
-            <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Watch on YouTube">
-              <img src="/assets/platform-logos/youtube-icon.svg" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube" loading="lazy">
+            <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--youtube" aria-label="Watch on YouTube">
+              <span class="pod-platforms-lockup pod-platforms-lockup--youtube">
+                <img src="/assets/platform-logos/youtube.png" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube-lockup" loading="lazy">
+              </span>
             </a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Spotify">
-              <img src="/assets/platform-logos/spotify-icon.svg" alt="Spotify" class="pod-platforms-logo" loading="lazy">
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--spotify" aria-label="Listen on Spotify">
+              <span class="pod-platforms-lockup pod-platforms-lockup--spotify">
+                <img src="/assets/platform-logos/spotify-icon.svg" alt="Spotify" class="pod-platforms-logo pod-platforms-logo--spotify" loading="lazy">
+                <span class="pod-platforms-wordmark">Spotify</span>
+              </span>
             </a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Apple Podcasts">
-              <img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--apple" aria-label="Listen on Apple Podcasts">
+              <span class="pod-platforms-lockup pod-platforms-lockup--apple">
+                <img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">
+                <span class="pod-platforms-stack">
+                  <span class="pod-platforms-overline">Watch on</span>
+                  <span class="pod-platforms-wordmark">Apple Podcasts</span>
+                </span>
+              </span>
             </a>
           </div>
         </div>
@@ -228,8 +247,8 @@
   <section class="pod-guests-section">
     <div class="container">
       <div class="reveal pod-guests-header">
-        <div class="pod-guests-kicker">Guests on the Podcast</div>
-        <h2 class="pod-guests-title">Conversations with Founders, creators, and leaders across tech, AI, and creative industries.</h2>
+        <div class="label section-label">Guests on the Podcast</div>
+        <h2 class="heading-section">Conversations with <em>Founders, creators, and leaders</em> across tech, AI, and creative industries.</h2>
       </div>
       <div class="pod-guest-grid">
         <a href="https://www.youtube.com/watch?v=cfPeP0s8EKU" target="_blank" rel="noopener noreferrer" class="pod-guest-tile reveal">

@@ -15,6 +15,12 @@ function initNav() {
     overlay.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
     burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     document.body.classList.toggle('nav-open', isOpen);
+
+    if (!isOpen) {
+      overlay.querySelectorAll('details[open]').forEach(function(item) {
+        item.removeAttribute('open');
+      });
+    }
   }
 
   burger.addEventListener('click', function() {

@@ -83,7 +83,7 @@
 
       <ul class="nav-center">
         <li class="nav-item">
-          <a href="/podcast">Watch</a>
+          <a href="/podcast">Podcast</a>
         </li>
         <li class="nav-item">
           <a href="/learn">
@@ -136,25 +136,33 @@
 
 <div class="nav-mobile-overlay" id="navMobileOverlay" aria-hidden="true">
   <div class="container nav-mobile-shell">
-    <a href="/podcast" class="mobile-link">Watch</a>
+    <div class="mobile-nav-list">
+      <a href="/podcast" class="mobile-row-link">Podcast</a>
 
-    <div class="mobile-group">
-      <a href="/learn" class="mobile-link">Learn</a>
-      <div class="mobile-sublinks">
-        <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
-        <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
-        <a href="/learn">Free Learning</a>
-        <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a>
-      </div>
-    </div>
+      <details class="mobile-accordion">
+        <summary class="mobile-row-toggle">
+          <span>Learn</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+        </summary>
+        <div class="mobile-panel">
+          <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
+          <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
+          <a href="/learn">Free Learning</a>
+          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a>
+        </div>
+      </details>
 
-    <div class="mobile-group">
-      <a href="/work-with-us" class="mobile-link">Work With Us</a>
-      <div class="mobile-sublinks">
-        <a href="/work-with-us/services">Services</a>
-        <a href="/work-with-us/media-partnerships">Media Partnerships</a>
-        <a href="/work-with-us/open-roles">Open Roles</a>
-      </div>
+      <details class="mobile-accordion">
+        <summary class="mobile-row-toggle">
+          <span>Work With Us</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+        </summary>
+        <div class="mobile-panel">
+          <a href="/work-with-us/services">Services</a>
+          <a href="/work-with-us/media-partnerships">Media Partnerships</a>
+          <a href="/work-with-us/open-roles">Open Roles</a>
+        </div>
+      </details>
     </div>
   </div>
 </div>
@@ -218,6 +226,9 @@
             <div class="featured-logo-slot is-horizontal">
               <img src="/assets/client-logos/autodesk.svg" alt="Autodesk" loading="lazy">
             </div>
+            <div class="featured-logo-slot is-horizontal">
+              <img src="/assets/client-logos/polycam.svg" alt="Polycam" loading="lazy">
+            </div>
 
             <div class="featured-logo-slot is-horizontal">
               <img src="/assets/client-logos/metahuman.svg" alt="MetaHuman" loading="lazy">
@@ -243,6 +254,9 @@
             <div class="featured-logo-slot is-horizontal">
               <img src="/assets/client-logos/autodesk.svg" alt="Autodesk" loading="lazy">
             </div>
+            <div class="featured-logo-slot is-horizontal">
+              <img src="/assets/client-logos/polycam.svg" alt="Polycam" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
@@ -260,7 +274,7 @@
 
       <div class="pillars-grid">
         <a href="/podcast" class="pillar-panel pillar-panel--watch reveal">
-          <video class="pillar-panel-img" data-lazy muted loop playsinline poster="/assets/podcast/ep79.jpg" aria-label="Bad Decisions Podcast preview">
+          <video class="pillar-panel-img" data-lazy muted loop playsinline aria-label="Bad Decisions Podcast preview">
             <source src="/assets/video/podcast-reel.mp4" type="video/mp4">
           </video>
           <div class="pillar-panel-content">
@@ -271,7 +285,7 @@
         </a>
 
         <a href="/learn" class="pillar-panel pillar-panel--learn reveal reveal-delay-1">
-          <video class="pillar-panel-img" data-lazy muted loop playsinline poster="/assets/podcast/ep77.jpg" aria-label="Bad Decisions Education preview">
+          <video class="pillar-panel-img" data-lazy muted loop playsinline aria-label="Bad Decisions Education preview">
             <source src="/assets/video/education-reel.mp4" type="video/mp4">
           </video>
           <div class="pillar-panel-content">
@@ -342,8 +356,8 @@
 
         <!-- Content -->
         <div class="pod-landing-content">
-          <div class="label section-label" style="color: var(--color-blue);">Watch</div>
-          <h2 class="pod-landing-title" style="color: var(--color-cream);">The Bad Decisions <em style="color: var(--color-blue);">Podcast</em></h2>
+          <div class="label section-label">Watch</div>
+          <h2 class="heading-section">The Bad Decisions <em>Podcast</em></h2>
           <p class="pod-landing-desc">
             A practical guide to modern tech, AI, and business.
           </p>
@@ -357,14 +371,25 @@
           <div class="pod-platforms">
             <div class="pod-platforms-label">Watch on:</div>
             <div class="pod-platforms-grid">
-            <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Watch on YouTube">
-              <img src="/assets/platform-logos/youtube-icon.svg" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube" loading="lazy">
+            <a href="https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--youtube" aria-label="Watch on YouTube">
+              <span class="pod-platforms-lockup pod-platforms-lockup--youtube">
+                <img src="/assets/platform-logos/youtube.png" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube-lockup" loading="lazy">
+              </span>
             </a>
-            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Spotify">
-              <img src="/assets/platform-logos/spotify-icon.svg" alt="Spotify" class="pod-platforms-logo" loading="lazy">
+            <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--spotify" aria-label="Listen on Spotify">
+              <span class="pod-platforms-lockup pod-platforms-lockup--spotify">
+                <img src="/assets/platform-logos/spotify-icon.svg" alt="Spotify" class="pod-platforms-logo pod-platforms-logo--spotify" loading="lazy">
+                <span class="pod-platforms-wordmark">Spotify</span>
+              </span>
             </a>
-            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn" aria-label="Listen on Apple Podcasts">
-              <img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">
+            <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--apple" aria-label="Listen on Apple Podcasts">
+              <span class="pod-platforms-lockup pod-platforms-lockup--apple">
+                <img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">
+                <span class="pod-platforms-stack">
+                  <span class="pod-platforms-overline">Watch on</span>
+                  <span class="pod-platforms-wordmark">Apple Podcasts</span>
+                </span>
+              </span>
             </a>
             </div>
           </div>

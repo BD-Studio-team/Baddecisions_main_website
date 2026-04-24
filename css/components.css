@@ -46,9 +46,7 @@ section {
   .workhub-service-card,
   .workhub-engagement-card,
   .workhub-sponsor-card,
-  .workhub-inquiry-card,
-  .mp-visual-card,
-  .mp-stat-card
+  .workhub-inquiry-card
 ) {
   box-shadow: var(--shadow-card);
 }
@@ -67,9 +65,7 @@ section {
   .workhub-service-card,
   .workhub-engagement-card,
   .workhub-sponsor-card,
-  .workhub-inquiry-card,
-  .mp-visual-card,
-  .mp-stat-card
+  .workhub-inquiry-card
 ):hover {
   box-shadow: var(--shadow-card-hover);
 }

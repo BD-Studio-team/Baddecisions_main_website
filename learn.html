@@ -56,7 +56,7 @@
 
       <ul class="nav-center">
         <li class="nav-item">
-          <a href="/podcast">Watch</a>
+          <a href="/podcast">Podcast</a>
         </li>
         <li class="nav-item">
           <a href="/learn">
@@ -109,25 +109,33 @@
 
 <div class="nav-mobile-overlay" id="navMobileOverlay" aria-hidden="true">
   <div class="container nav-mobile-shell">
-    <a href="/podcast" class="mobile-link">Watch</a>
+    <div class="mobile-nav-list">
+      <a href="/podcast" class="mobile-row-link">Podcast</a>
 
-    <div class="mobile-group">
-      <a href="/learn" class="mobile-link">Learn</a>
-      <div class="mobile-sublinks">
-        <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
-        <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
-        <a href="/learn">Free Learning</a>
-        <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a>
-      </div>
-    </div>
+      <details class="mobile-accordion">
+        <summary class="mobile-row-toggle">
+          <span>Learn</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+        </summary>
+        <div class="mobile-panel">
+          <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
+          <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
+          <a href="/learn">Free Learning</a>
+          <a href="https://academy.baddecisions.studio" target="_blank" rel="noopener noreferrer">Student Login</a>
+        </div>
+      </details>
 
-    <div class="mobile-group">
-      <a href="/work-with-us" class="mobile-link">Work With Us</a>
-      <div class="mobile-sublinks">
-        <a href="/work-with-us/services">Services</a>
-        <a href="/work-with-us/media-partnerships">Media Partnerships</a>
-        <a href="/work-with-us/open-roles">Open Roles</a>
-      </div>
+      <details class="mobile-accordion">
+        <summary class="mobile-row-toggle">
+          <span>Work With Us</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
+        </summary>
+        <div class="mobile-panel">
+          <a href="/work-with-us/services">Services</a>
+          <a href="/work-with-us/media-partnerships">Media Partnerships</a>
+          <a href="/work-with-us/open-roles">Open Roles</a>
+        </div>
+      </details>
     </div>
   </div>
 </div>
@@ -136,11 +144,9 @@
   <section id="learn">
     <div class="learn-premium-section bg-glow-gold">
       <div class="container">
-        <div class="section-header reveal">
-          <div class="section-header-left">
-            <div class="label section-label">Education</div>
-            <h1 class="heading-section">Learn to build with modern technology that leads to real opportunities</h1>
-          </div>
+        <div class="section-header section-header-center reveal">
+          <div class="label section-label">Education</div>
+          <h1 class="heading-hero">Learn to build with <em>modern technology</em> that leads to real opportunities.</h1>
         </div>
       </div>
 
@@ -152,7 +158,7 @@
           </div>
           <div class="premium-duo">
             <a href="https://learn.baddecisions.studio" target="_self" class="premium-card premium-card-ue">
-              <video class="premium-card-video premium-card-cycle" data-autoplay muted playsinline data-videos="/assets/video/ue-virtual-prod.mp4,/assets/video/ue-metahuman.mp4,/assets/video/ue-world-building.mp4" poster="/assets/podcast/ep77.jpg">
+              <video class="premium-card-video premium-card-cycle" data-autoplay muted playsinline data-videos="/assets/video/ue-virtual-prod.mp4,/assets/video/ue-metahuman.mp4,/assets/video/ue-world-building.mp4">
                 <source src="/assets/video/ue-virtual-prod.mp4" type="video/mp4">
               </video>
               <div class="premium-card-overlay"></div>
