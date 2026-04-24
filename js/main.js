@@ -249,8 +249,95 @@ function initPodcastData() {
   });
 }
 
+function initMobileSwipeTracks() {
+  var tracks = document.querySelectorAll('.mobile-swipe-track[data-mobile-slider]');
+  if (tracks.length === 0) return;
+
+  var isMobile = window.matchMedia('(max-width: 640px)');
+
+  tracks.forEach(function(track) {
+    var sliderName = track.getAttribute('data-mobile-slider');
+    var dotsRoot = document.querySelector('.mobile-swipe-dots[data-slider-dots="' + sliderName + '"]');
+    if (!dotsRoot) return;
+
+    var items = Array.prototype.slice.call(track.children);
+    if (items.length === 0) return;
+
+    var dots = [];
+    var ticking = false;
+
+    function getActiveIndex() {
+      var currentLeft = track.scrollLeft;
+      var activeIndex = 0;
+      var closestDistance = Infinity;
+
+      items.forEach(function(item, index) {
+        var distance = Math.abs(item.offsetLeft - currentLeft);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          activeIndex = index;
+        }
+      });
+
+      return activeIndex;
+    }
+
+    function updateDots() {
+      if (!isMobile.matches) return;
+      var activeIndex = getActiveIndex();
+      dots.forEach(function(dot, index) {
+        dot.classList.toggle('is-active', index === activeIndex);
+      });
+    }
+
+    function requestDotUpdate() {
+      if (!isMobile.matches || ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function() {
+        updateDots();
+        ticking = false;
+      });
+    }
+
+    items.forEach(function(item, index) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'mobile-swipe-dot';
+      dot.setAttribute('aria-label', 'Go to item ' + (index + 1));
+      dot.addEventListener('click', function() {
+        track.scrollTo({
+          left: item.offsetLeft,
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      });
+      dotsRoot.appendChild(dot);
+      dots.push(dot);
+    });
+
+    track.addEventListener('scroll', requestDotUpdate, { passive: true });
+
+    var refresh = function() {
+      if (!isMobile.matches) {
+        dots.forEach(function(dot) { dot.classList.remove('is-active'); });
+        return;
+      }
+      updateDots();
+    };
+
+    if (typeof isMobile.addEventListener === 'function') {
+      isMobile.addEventListener('change', refresh);
+    } else if (typeof isMobile.addListener === 'function') {
+      isMobile.addListener(refresh);
+    }
+
+    window.addEventListener('resize', refresh);
+    refresh();
+  });
+}
+
 function initBDS() {
   initNav();
+  initMobileSwipeTracks();
   initReveal();
   initSmoothScroll();
   initHeroRotation();

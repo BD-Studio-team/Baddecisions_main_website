@@ -211,6 +211,20 @@ All design tokens live in `globals.css` as CSS custom properties on `:root`. Eve
 }
 ```
 
+### Section spacing standard
+
+Every `<section>` inherits a default vertical padding scale. Custom sections should match this scale unless there's a specific reason to deviate — and if they deviate at desktop, they must still provide explicit mobile overrides that land on the standard.
+
+| Breakpoint | `section` padding (top / bottom) |
+|---|---|
+| Desktop (≥1024px) | 120px / 120px |
+| Tablet/Mobile (≤768px) | 72px / 72px |
+| Small mobile (≤480px) | 56px / 56px |
+
+Nav height is 72px on desktop, 56px on mobile. Pages don't need extra top padding for the nav — it's sticky/overlaying, not document flow.
+
+**Rule:** if you write a custom section padding like `.foo { padding: 100px 0 80px }`, you must also write the two mobile overrides so the section collapses to 72px/56px on narrow viewports. Sections that skip the mobile override create the "oversized hero on phone" problem.
+
 ### Context-aware tokens (`--ctx-*`)
 
 Every section that declares a background recipe gets a set of `--ctx-*` CSS custom properties scoped to that section. Components (buttons, cards, labels) read from `--ctx-*` instead of hardcoding colors, so one set of shared component styles adapts automatically to whatever `.bg-*` class wraps them.
