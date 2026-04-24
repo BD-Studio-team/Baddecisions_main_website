@@ -1,7 +1,7 @@
 module.exports = {
   platforms: {
     youtube: {
-      href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbg49orM_CENby6YNGK8k-U0',
+      href: 'https://www.youtube.com/@badxstudio',
       asset: '/assets/platform-logos/youtube-icon.svg',
       lockupAsset: '/assets/platform-logos/youtube.png',
       alt: 'YouTube'

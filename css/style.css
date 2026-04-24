@@ -2034,12 +2034,13 @@
        One component, one markup, one place to style. */
     .pod-platforms {
       margin-top: 48px;
+      margin-bottom: 48px;
     }
     .pod-platforms-label {
       font-family: var(--font-mono);
       font-size: 10px;
-      font-weight: 500;
-      color: var(--color-ash);
+      font-weight: 700;
+      color: var(--color-fog);
       letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-bottom: 16px;
