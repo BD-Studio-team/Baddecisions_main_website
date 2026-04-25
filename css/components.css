@@ -610,11 +610,6 @@ section {
     padding: 20px;
   }
 
-  .pillar-panel-arrow {
-    width: 40px;
-    height: 40px;
-  }
-
   .newsletter {
     padding-top: var(--section-space-md);
     padding-bottom: var(--section-space-md);
@@ -644,12 +639,15 @@ section {
   }
 
   .pod-platforms-grid {
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 20px;
+    overflow-x: visible;
   }
 
   .pod-platforms-btn {
-    min-height: 60px;
-    padding: 14px;
+    min-height: 0;
+    padding: 0;
   }
 
   .pod-hero {
@@ -657,13 +655,11 @@ section {
   }
 
   .pod-hero-content {
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
+    padding: 12px 0 0;
   }
 
   .pod-hero-content h2 {
-    margin: 10px 0 14px;
+    margin: 0;
   }
 
   .pod-guest-grid {

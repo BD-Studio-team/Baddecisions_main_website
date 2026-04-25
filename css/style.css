@@ -387,9 +387,20 @@
       height: 3px;
       z-index: 3;
     }
-    .pillar-panel--watch::after    { background: var(--color-yellow); }
-    .pillar-panel--learn::after    { background: var(--color-blue); }
-    .pillar-panel--services::after { background: var(--color-green); }
+    .pillar-panel--watch {
+      --pillar-accent: var(--color-yellow);
+    }
+    .pillar-panel--learn {
+      --pillar-accent: var(--color-blue);
+    }
+    .pillar-panel--services {
+      --pillar-accent: var(--color-green);
+    }
+    .pillar-panel--watch::after,
+    .pillar-panel--learn::after,
+    .pillar-panel--services::after {
+      background: var(--pillar-accent);
+    }
 
     /* Video / poster at top — natural aspect ratio, no filter */
     .pillar-panel-img {
@@ -439,28 +450,20 @@
     }
 
     .pillar-panel-arrow {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
+      display: inline-block;
+      width: fit-content;
       margin-top: auto;
-      border: 1px solid var(--color-cream);
-      border-radius: 50%;
-      background: transparent;
-      color: var(--color-cream);
-      font-size: 18px;
+      font-family: var(--font-body);
+      font-size: 24px;
+      font-weight: 500;
       line-height: 1;
+      color: var(--color-cream);
       transition:
-        background 0.4s var(--ease-out-expo),
-        color 0.4s var(--ease-out-expo),
-        border-color 0.4s var(--ease-out-expo),
-        transform 0.4s var(--ease-out-expo);
+        color 0.35s var(--ease-out-expo),
+        transform 0.35s var(--ease-out-expo);
     }
     .pillar-panel:hover .pillar-panel-arrow {
-      background: var(--color-yellow);
-      color: var(--color-void);
-      border-color: var(--color-yellow);
+      color: var(--pillar-accent, var(--color-yellow));
       transform: translateX(6px);
     }
 
@@ -2213,6 +2216,13 @@
       color: #1ED760;
     }
 
+    .pod-landing-schedule-accent {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ctx-label, var(--color-yellow));
+    }
+
     /* Center alignment modifier (used on /podcast page) */
     .pod-platforms--center { text-align: center; }
     .pod-platforms--center .pod-platforms-grid { justify-content: center; }
@@ -2263,28 +2273,51 @@
 	    @media (max-width: 768px) {
 	      .pod-platforms {
 	        flex-direction: column;
-	        align-items: flex-start;
+	        align-items: center;
+	        width: 100%;
 	        gap: 14px;
 	      }
 	      .pod-platforms-grid {
 	        flex-direction: row;
-	        flex-wrap: nowrap;
+	        flex-wrap: wrap;
 	        width: 100%;
-	        gap: 18px;
-	        overflow-x: auto;
-	        padding-bottom: 4px;
+	        max-width: 100%;
+	        justify-content: center;
+	        gap: 18px 22px;
+	        overflow-x: visible;
+	        padding-bottom: 0;
 	      }
 	      .pod-platforms-btn {
 	        width: auto;
+	        max-width: 100%;
+	        flex: 0 1 auto;
 	        min-width: 0;
 	      }
+      .pod-platforms-logo--youtube {
+        height: 20px;
+      }
+      .pod-platforms-logo--youtube-lockup {
+        height: 28px;
+      }
+      .pod-platforms-logo--spotify {
+        height: 24px;
+      }
+      .pod-platforms-logo--apple {
+        height: 23px;
+      }
+      .pod-platforms-wordmark {
+        font-size: 14px;
+      }
+      .pod-platforms-overline {
+        font-size: 8px;
+      }
       .pod-platforms--inline {
         gap: 14px;
       }
 	      .pod-platforms--inline .pod-platforms-grid {
 	        width: auto;
 	        flex-direction: row;
-	        flex-wrap: nowrap;
+	        flex-wrap: wrap;
 	        justify-content: center;
 	        gap: 12px;
 	        overflow-x: visible;
@@ -2356,8 +2389,7 @@
       color: var(--ctx-body);
     }
     #podcast.surface-premium .pod-hero {
-      border-color: var(--ctx-border);
-      background: var(--ctx-card-bg);
+      background: transparent;
     }
     #podcast.surface-premium .pod-section-label {
       color: var(--ctx-label);
@@ -3440,18 +3472,23 @@
     .pod-hero {
       display: block;
       position: relative;
-      aspect-ratio: 16/9;
       margin-bottom: 28px;
+      overflow: visible;
+      border-radius: 0;
+      border: 0;
+      background: transparent;
+      text-decoration: none;
+      color: inherit;
+    }
+    .pod-hero-media {
+      position: relative;
+      aspect-ratio: 16/9;
       overflow: hidden;
       border-radius: var(--radius-card);
       border: 1px solid var(--ctx-border);
       background: var(--color-ink);
-      text-decoration: none;
-      color: inherit;
     }
     .pod-hero-bg {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -3459,17 +3496,9 @@
       transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .pod-hero:hover .pod-hero-bg { transform: scale(1.03); }
-    .pod-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(5,5,5,0.74) 0%, rgba(5,5,5,0.34) 48%, transparent 78%),
-        linear-gradient(0deg, rgba(5,5,5,0.46) 0%, transparent 42%);
-    }
     .pod-hero-content {
-      position: absolute;
-      left: 56px;
-      bottom: 56px;
+      position: relative;
+      padding: 18px 0 0;
       max-width: 640px;
     }
     .pod-hero-content h2 {
@@ -3479,7 +3508,7 @@
       line-height: 1.05;
       letter-spacing: -0.028em;
       color: var(--color-cream);
-      margin: 22px 0 26px;
+      margin: 0;
     }
     .pod-hero-content h2 em {
       font-style: italic;
@@ -3636,14 +3665,12 @@
 
 	    @media (max-width: 768px) {
       .pod-hero-content {
-        left: 24px;
-        right: 24px;
-        bottom: 24px;
+        padding: 14px 0 0;
         max-width: none;
       }
       .pod-hero-content h2 {
         font-size: 28px;
-        margin: 18px 0 20px;
+        margin: 0;
       }
       .pod-hero-cta {
         padding: 12px 18px;
@@ -3708,9 +3735,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 8px;
+        flex-wrap: nowrap;
+        gap: 7px;
         margin-top: 16px;
+        max-width: 100%;
+        overflow: hidden;
       }
       .mobile-swipe-dot {
         width: 6px;
@@ -3725,6 +3754,12 @@
       .mobile-swipe-dot.is-active {
         background: var(--color-yellow);
         transform: scale(1.35);
+      }
+      .surface-editorial .mobile-swipe-dot {
+        background: rgba(58, 93, 91, 0.22);
+      }
+      .surface-editorial .mobile-swipe-dot.is-active {
+        background: var(--ctx-label, var(--color-green));
       }
     }
 
@@ -4748,13 +4783,11 @@
         line-height: 1.6;
       }
       .pod-hero-content {
-        left: 18px;
-        right: 18px;
-        bottom: 18px;
+        padding: 12px 0 0;
       }
       .pod-hero-content h2 {
         font-size: 22px;
-        margin: 14px 0 16px;
+        margin: 0;
       }
       .pod-hero-cta {
         padding: 10px 16px;
