@@ -22,7 +22,7 @@ function escapeHtml(value) {
 function renderPodcastPlatformButtons() {
   return siteContent.podcastPlatformOrder.map(function(key) {
     var platform = siteContent.platforms[key];
-    var label = key === 'youtube' ? 'Watch on YouTube' : 'Listen on ' + platform.alt;
+    var label = key === 'youtube' ? 'Podcast on YouTube' : 'Listen on ' + platform.alt;
     var lockup = '';
 
     if (key === 'apple') {
@@ -30,7 +30,7 @@ function renderPodcastPlatformButtons() {
         '              <span class="pod-platforms-lockup pod-platforms-lockup--apple">',
         '                <img src="' + escapeHtml(platform.asset) + '" alt="' + escapeHtml(platform.alt) + '" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">',
         '                <span class="pod-platforms-stack">',
-        '                  <span class="pod-platforms-overline">Watch on</span>',
+        '                  <span class="pod-platforms-overline">Podcast on</span>',
         '                  <span class="pod-platforms-wordmark">Apple Podcasts</span>',
         '                </span>',
         '              </span>'
@@ -101,7 +101,7 @@ function renderLearnFreeRows() {
       '              </div>',
       '            </div>',
       '            <div class="learn-free-action">',
-      '              <span class="learn-free-action-label">Watch</span>',
+      '              <span class="learn-free-action-label">Podcast</span>',
       '              <span class="learn-free-action-arrow" aria-hidden="true">',
       '                <svg viewBox="0 0 16 16" role="presentation"><path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>',
       '              </span>',

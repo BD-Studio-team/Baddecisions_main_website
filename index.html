@@ -87,7 +87,7 @@
         </li>
         <li class="nav-item">
           <a href="/learn">
-            Learn
+            Education
             <svg class="nav-chevron" viewBox="0 0 12 12" aria-hidden="true"><polyline points="2 4 6 8 10 4"/></svg>
           </a>
           <div class="nav-dropdown">
@@ -139,7 +139,7 @@
     <div class="mobile-nav-list">
       <a href="/podcast" class="mobile-row-link">Podcast</a>
 
-      <a href="/learn" class="mobile-row-link">Learn</a>
+      <a href="/learn" class="mobile-row-link">Education</a>
       <div class="mobile-panel mobile-panel--standalone">
         <a href="https://ai.baddecisions.studio" target="_self">AI Program</a>
         <a href="https://learn.baddecisions.studio" target="_self">Unreal Engine</a>
@@ -165,9 +165,9 @@
     <!-- ─── HERO ──────────────────────────────────────────────────── -->
   <section id="hero" class="bg-glow-gold bg-vignette">
     <div class="hero-bg">
-      <video data-autoplay muted loop playsinline preload="metadata" class="hero-bg-video">
-        <source src="/assets/video/hero-video.webm" type="video/webm">
+      <video data-autoplay autoplay muted loop playsinline preload="auto" class="hero-bg-video">
         <source src="/assets/video/hero-video.mp4" type="video/mp4">
+        <source src="/assets/video/hero-video.webm" type="video/webm">
       </video>
       <div class="hero-bg-overlay"></div>
     </div>
@@ -181,8 +181,8 @@
           Content. Education. Execution. Built around AI, real-time technology, and modern workflows.
         </p>
         <div class="hero-actions">
-          <a href="/podcast" class="btn-primary">Watch</a>
-          <a href="/learn" class="btn-secondary">Learn</a>
+          <a href="/podcast" class="btn-primary">Podcast</a>
+          <a href="/learn" class="btn-secondary">Education</a>
           <a href="/work-with-us" class="btn-secondary">Work With Us</a>
         </div>
       </div>
@@ -258,7 +258,7 @@
     <div class="container">
 	      <div class="section-header reveal">
 	        <div class="section-header-left">
-	          <h2 class="heading-section">Watch, learn, or <em>services</em>.</h2>
+	          <h2 class="heading-section">Bad Decisions's Eco System</h2>
 	        </div>
       </div>
 
@@ -268,7 +268,7 @@
             <source src="/assets/video/podcast-reel.mp4" type="video/mp4">
           </video>
           <div class="pillar-panel-content">
-            <h3 class="pillar-panel-title">Watch</h3>
+            <h3 class="pillar-panel-title">Podcast</h3>
             <p class="pillar-panel-desc">Conversations and breakdowns on AI, tech, and how things actually work.</p>
             <span class="pillar-panel-arrow" aria-hidden="true">&rarr;</span>
           </div>
@@ -279,7 +279,7 @@
             <source src="/assets/video/education-reel.mp4" type="video/mp4">
           </video>
           <div class="pillar-panel-content">
-            <h3 class="pillar-panel-title">Learn</h3>
+            <h3 class="pillar-panel-title">Education</h3>
             <p class="pillar-panel-desc">Practical education for AI, Unreal Engine and modern tools. Built on real workflows, not theory.</p>
             <span class="pillar-panel-arrow" aria-hidden="true">&rarr;</span>
           </div>
@@ -358,9 +358,9 @@
           </p>
 
           <div class="pod-platforms">
-            <div class="pod-platforms-label">Watch on:</div>
+            <div class="pod-platforms-label">Podcast on:</div>
             <div class="pod-platforms-grid">
-            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--youtube" aria-label="Watch on YouTube">
+            <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="pod-platforms-btn pod-platforms-btn--youtube" aria-label="Podcast on YouTube">
               <span class="pod-platforms-lockup pod-platforms-lockup--youtube">
                 <img src="/assets/platform-logos/youtube.png" alt="YouTube" class="pod-platforms-logo pod-platforms-logo--youtube-lockup" loading="lazy">
               </span>
@@ -375,7 +375,7 @@
               <span class="pod-platforms-lockup pod-platforms-lockup--apple">
                 <img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="pod-platforms-logo pod-platforms-logo--apple" loading="lazy">
                 <span class="pod-platforms-stack">
-                  <span class="pod-platforms-overline">Watch on</span>
+                  <span class="pod-platforms-overline">Podcast on</span>
                   <span class="pod-platforms-wordmark">Apple Podcasts</span>
                 </span>
               </span>
@@ -458,7 +458,7 @@
       var path = (window.location.pathname || '/').toLowerCase();
       if (path === '/' || path === '') return 'BD Studio Homepage';
       if (path.indexOf('/podcast') === 0) return 'BD Studio Podcast';
-      if (path.indexOf('/learn') === 0) return 'BD Studio Learn';
+      if (path.indexOf('/learn') === 0) return 'BD Studio Education';
       if (path.indexOf('/work-with-us/services') === 0) return 'BD Studio Services';
       if (path.indexOf('/work-with-us/media-partnerships') === 0) return 'BD Studio Media Partnerships';
       if (path.indexOf('/work-with-us/open-roles') === 0) return 'BD Studio Open Roles';
@@ -593,12 +593,7 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <div class="footer-brand-lockup">
-            <img src="/assets/bd-logo/bd-mark.svg" alt="BD" class="footer-bd-mark" width="28" height="28" loading="lazy">
-            <div class="footer-brand-text">BAD DECISIONS STUDIO</div>
-          </div>
-          <p class="footer-tagline">Content, education, and execution in the age of AI.</p>
-          <div class="footer-brand-location">Vancouver &middot; Dubai</div>
+          <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="Bad Decisions" class="footer-brand-logo" width="1131" height="187" loading="lazy">
           <div class="footer-social-row">
 <a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platform-logos/instagram-glyph-gradient.svg" alt="Instagram" class="footer-social-icon footer-social-icon--instagram" loading="lazy"></a>
             <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><img src="/assets/platform-logos/youtube-icon.svg" alt="YouTube" class="footer-social-icon footer-social-icon--youtube" loading="lazy"></a>
@@ -638,9 +633,6 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-copyright">&copy; 2026 Bad Decisions Studio. All rights reserved.</div>
-      </div>
-      <div class="footer-signoff" aria-hidden="true">
-        <img src="/assets/bd-logo/bd-logo-horizontal.svg" alt="" class="footer-signoff-logo" loading="lazy">
       </div>
     </div>
   </footer>

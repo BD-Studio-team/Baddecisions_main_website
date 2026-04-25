@@ -61,7 +61,7 @@ module.exports = {
       eyebrowPrimary: 'UE5',
       eyebrowSecondary: '5-day challenge',
       titleHtml: 'Unreal Engine 5 <em>Beginner Tutorial 2026</em>',
-      subtitle: 'Learn Unreal Engine 5 from scratch with this free 5-day beginner challenge.'
+      subtitle: 'Education on Unreal Engine 5 from scratch with this free 5-day beginner challenge.'
     },
     {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbhFAzPbSN1I8C3A8XlI73xx',
@@ -79,7 +79,7 @@ module.exports = {
       eyebrowPrimary: 'MetaHuman',
       eyebrowSecondary: 'UE5',
       titleHtml: 'Create &amp; Customise Your <em>MetaHuman</em>',
-      subtitle: 'Learn how to create a MetaHuman in Unreal Engine 5 and then customise and animate it'
+      subtitle: 'Education on how to create a MetaHuman in Unreal Engine 5 and then customise and animate it'
     },
     {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbiJMd3EwkYB8FeUlJVQAFIz',

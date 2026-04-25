@@ -117,7 +117,9 @@ function safePlay(video) {
 
 function initManagedVideos() {
   document.querySelectorAll('video').forEach(function(video) {
-    if (prefersReducedMotion) {
+    var shouldForcePlay = video.classList.contains('hero-bg-video');
+
+    if (prefersReducedMotion && !shouldForcePlay) {
       video.pause();
       video.removeAttribute('autoplay');
       return;
@@ -125,9 +127,21 @@ function initManagedVideos() {
 
     if (video.hasAttribute('data-autoplay')) {
       video.muted = true;
+      video.defaultMuted = true;
+      video.autoplay = true;
+      video.playsInline = true;
       safePlay(video);
     }
   });
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState !== 'visible') return;
+    document.querySelectorAll('.hero-bg-video').forEach(safePlay);
+  });
+
+  window.addEventListener('touchstart', function() {
+    document.querySelectorAll('.hero-bg-video').forEach(safePlay);
+  }, { once: true, passive: true });
 }
 
 function initVideoCycling() {
