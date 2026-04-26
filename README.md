@@ -2,7 +2,7 @@
 
 Static marketing site for [Bad Decisions Studio](https://www.baddecisions.studio), built around three public paths:
 - `Podcast`
-- `Learn`
+- `Education`
 - `Work With Us`
 
 The project is intentionally simple: reusable HTML sections, page templates, one build step, and vanilla CSS/JS.
@@ -24,7 +24,7 @@ Main/
 │   └── site-content.js       Shared content/config for platform links, podcast cards, guests, learn rows
 ├── templates/                Page templates (head/meta/layout)
 │   ├── index.html
-│   ├── learn.html
+│   ├── education.html
 │   ├── podcast.html
 │   ├── work-with-us.html
 │   └── work-with-us/
@@ -41,7 +41,7 @@ Main/
 │   ├── about.html
 │   ├── trusted-marquee.html
 │   ├── footer.html
-│   ├── learn.html
+│   ├── education.html
 │   ├── podcast.html
 │   ├── work-with-us.html
 │   └── work-with-us/
@@ -69,7 +69,7 @@ Main/
 ├── docs/
 │   └── AUDIT.md              Historical audit notes
 ├── index.html                Generated output
-├── learn.html                Generated output
+├── education.html                Generated output
 ├── podcast.html              Generated output
 ├── work-with-us.html         Generated output
 ├── work-with-us/
@@ -101,7 +101,7 @@ npm run build
 
 Do not hand-edit generated pages at the root like:
 - `index.html`
-- `learn.html`
+- `education.html`
 - `podcast.html`
 - `work-with-us/*.html`
 

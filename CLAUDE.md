@@ -37,7 +37,7 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 ├── build.js                  Build script — inlines section partials into pages
 ├── templates/                Source page templates (head, meta, layout)
 │   ├── index.html
-│   ├── learn.html
+│   ├── education.html
 │   ├── podcast.html
 │   ├── work-with-us.html
 │   └── work-with-us/
@@ -54,7 +54,7 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 │   ├── about.html
 │   ├── trusted-marquee.html  Shared trusted-by logo marquee
 │   ├── footer.html
-│   ├── learn.html
+│   ├── education.html
 │   ├── podcast.html
 │   ├── work-with-us.html
 │   └── work-with-us/
@@ -99,7 +99,7 @@ Do not replace Services with Projects. Do not use Media as the main label. Do no
 |------|-----|---------|
 | Home | `/` | Explain what BDS is, build trust, show 3 paths, prove credibility |
 | Podcast | `/podcast` | Premium content destination — explain the show, recent episodes, platforms, guest credibility |
-| Learn | `/learn` | Premium programs + free series |
+| Learn | `/education` | Premium programs + free series |
 | Work With Us | `/work-with-us` | Commercial hub — services, media partnerships, open roles |
 | Services | `/work-with-us/services` | Detailed services offering |
 | Media Partnerships | `/work-with-us/media-partnerships` | Multi-platform sponsorship packages + stats |
@@ -611,7 +611,7 @@ Use images at their natural saturation and brightness. Do not apply global `.img
 
 **Observability:** Responses include `X-Cache` and `X-Cache-Age` headers for debugging.
 
-**Dynamic / static split:** Only the **top section of `/podcast`** is dynamic. The featured hero (`.pod-hero`) and recent episodes grid (`.pod-4grid .pod-showcase-card`) are updated at runtime from this API. The **8 guest cards** are static — thumbnails are downloaded once to `/assets/podcast/guests/*.jpg` and referenced as local files. Same for `/learn` free-series thumbnails in `/assets/learn/*.jpg`.
+**Dynamic / static split:** Only the **top section of `/podcast`** is dynamic. The featured hero (`.pod-hero`) and recent episodes grid (`.pod-4grid .pod-showcase-card`) are updated at runtime from this API. The **8 guest cards** are static — thumbnails are downloaded once to `/assets/podcast/guests/*.jpg` and referenced as local files. Same for `/education` free-series thumbnails in `/assets/learn/*.jpg`.
 
 ```json
 {
@@ -705,7 +705,7 @@ Vercel runs `npm run build` automatically via `vercel.json` `buildCommand`.
 | `pod-*`  | `sections/podcast.html` and podcast partials | `.pod-hero`, `.pod-showcase-card`, `.pod-platforms` |
 | `mp-*`   | `sections/work-with-us/media-partnerships.html` | `.mp-hero`, `.mp-platform-card`, `.mp-cta-grid` |
 | `wwu-*`  | `sections/work-with-us.html` (hub) | `.wwu-card`, `.wwu-card-media` |
-| `learn-*` | `sections/learn.html` | `.learn-row`, `.learn-card` |
+| `learn-*` | `sections/education.html` | `.learn-row`, `.learn-card` |
 | `pillar-*` | `sections/pillars.html` | `.pillar-panel`, `.pillar-panel-img` |
 | `nl-*`   | `sections/newsletter.html` | `.nl-shell`, `.nl-submit` |
 | `nav-*` / `site-nav` | `sections/nav.html` | `.nav-dropdown`, `.site-nav` |

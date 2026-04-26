@@ -552,7 +552,7 @@ Likely files:
 
 Appears in:
 
-- `.label`, `.section-label`, `.nl-eyebrow-text`, `.pod-section-label`, `.learn-free-eyebrow`, `.services-card__eyebrow`, `.mp-why-eyebrow`, `.career-apply-btn`, `.footer-col-title`
+- `.label`, `.section-label`, `.nl-eyebrow-text`, `.pod-section-label`, `.services-card__eyebrow`, `.mp-why-eyebrow`, `.career-apply-btn`, `.footer-col-title`
 
 What feels inconsistent:
 

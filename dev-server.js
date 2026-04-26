@@ -63,11 +63,21 @@ function resolvePath(reqUrl) {
   const candidatePath = safeJoin(ROOT, p);
   if (!candidatePath) return null;
 
-  // 1. Direct file hit (e.g. /css/style.css, /favicon.svg)
-  let resolved = tryFile(candidatePath);
+  const hasExtension = path.extname(candidatePath) !== '';
+
+  // 1. cleanUrls first for extensionless routes (e.g. /education -> /education.html)
+  // This avoids accidental extensionless files shadowing real page routes.
+  let resolved = null;
+  if (!hasExtension) {
+    resolved = tryFile(candidatePath + '.html');
+    if (resolved) return resolved;
+  }
+
+  // 2. Direct file hit (e.g. /css/style.css, /favicon.svg)
+  resolved = tryFile(candidatePath);
   if (resolved) return resolved;
 
-  // 2. Directory → look for index.html
+  // 3. Directory → look for index.html
   try {
     const stat = fs.statSync(candidatePath);
     if (stat.isDirectory()) {
@@ -76,7 +86,7 @@ function resolvePath(reqUrl) {
     }
   } catch (_) {}
 
-  // 3. cleanUrls: append .html (e.g. /podcast → /podcast.html)
+  // 4. cleanUrls fallback (e.g. /podcast → /podcast.html)
   resolved = tryFile(candidatePath + '.html');
   if (resolved) return resolved;
 
@@ -125,7 +135,7 @@ server.listen(PORT, () => {
   console.log('  Try:');
   console.log('    http://localhost:' + PORT + '/');
   console.log('    http://localhost:' + PORT + '/podcast');
-  console.log('    http://localhost:' + PORT + '/learn');
+  console.log('    http://localhost:' + PORT + '/education');
   console.log('    http://localhost:' + PORT + '/work-with-us/services');
   console.log('');
   console.log('  Note: /api/podcast is a Vercel serverless function and will 404 here.');

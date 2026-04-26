@@ -3,6 +3,11 @@
   "outputDirectory": ".",
   "redirects": [
     {
+      "source": "/learn",
+      "destination": "/education",
+      "permanent": true
+    },
+    {
       "source": "/careers",
       "destination": "/work-with-us",
       "permanent": true

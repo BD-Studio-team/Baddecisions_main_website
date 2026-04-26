@@ -58,8 +58,6 @@ module.exports = {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbifBFXcDE9pC6Ligg3ha5Ev',
       image: '/assets/learn/ue5-2026-beginner.jpg',
       imageAlt: 'Unreal Engine 5 2026 Beginner Challenge thumbnail',
-      eyebrowPrimary: 'UE5',
-      eyebrowSecondary: '5-day challenge',
       titleHtml: 'Unreal Engine 5 <em>Beginner Tutorial 2026</em>',
       subtitle: 'Education on Unreal Engine 5 from scratch with this free 5-day beginner challenge.'
     },
@@ -67,8 +65,6 @@ module.exports = {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbhFAzPbSN1I8C3A8XlI73xx',
       image: '/assets/learn/dune-remake.jpg',
       imageAlt: 'Unreal Engine 5 Dune remake thumbnail',
-      eyebrowPrimary: 'UE5',
-      eyebrowSecondary: 'Cinematic remake',
       titleHtml: 'Recreating <em>Dune,</em> shot by shot.',
       subtitle: 'Recreate 4 cinematic shots from Dune inside Unreal Engine 5 completely for FREE.'
     },
@@ -76,8 +72,6 @@ module.exports = {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbjwxPNYeHz4Ac3le_zIZc-P',
       image: '/assets/learn/create-your-metahuman.jpg',
       imageAlt: 'Create and customise your MetaHuman thumbnail',
-      eyebrowPrimary: 'MetaHuman',
-      eyebrowSecondary: 'UE5',
       titleHtml: 'Create &amp; Customise Your <em>MetaHuman</em>',
       subtitle: 'Education on how to create a MetaHuman in Unreal Engine 5 and then customise and animate it'
     },
@@ -85,8 +79,6 @@ module.exports = {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbiJMd3EwkYB8FeUlJVQAFIz',
       image: '/assets/learn/gaussian-splatting.jpg',
       imageAlt: '3D Gaussian Splatting thumbnail',
-      eyebrowPrimary: '3D capture',
-      eyebrowSecondary: 'Deep dive',
       titleHtml: '3D <em>Gaussian Splatting</em>',
       subtitle: 'How to capture and create 3D Gaussian Splatting scans'
     },
@@ -94,8 +86,6 @@ module.exports = {
       href: 'https://www.youtube.com/playlist?list=PLIn-yd4vnXbjWeYqU7epakdnVzoysMToy',
       image: '/assets/learn/ue5-beginner-course.jpg',
       imageAlt: 'Unreal Engine 5 beginner course thumbnail',
-      eyebrowPrimary: 'UE5',
-      eyebrowSecondary: 'Beginner course',
       titleHtml: 'The <em>most complete</em> UE5 tutorial.',
       subtitle: 'This is the MOST COMPLETE Unreal Engine 5 Tutorial for Beginners.'
     }

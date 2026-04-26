@@ -477,7 +477,6 @@ section {
   .label,
   .section-label,
   .pod-section-label,
-  .learn-free-eyebrow,
   .pod-card-meta,
   .services-card__num,
   .services-card__eyebrow,
@@ -541,7 +540,6 @@ section {
   .label,
   .section-label,
   .pod-section-label,
-  .learn-free-eyebrow,
   .pod-card-meta,
   .services-card__num,
   .services-card__eyebrow,
@@ -674,10 +672,6 @@ section {
     gap: 16px;
     padding-top: 24px;
     padding-bottom: 24px;
-  }
-
-  .learn-free-eyebrow {
-    margin-bottom: 12px;
   }
 
   .learn-free-title {
