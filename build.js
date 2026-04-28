@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const siteContent = require(path.join(__dirname, 'data', 'site-content.js'));
 
 const ROOT = __dirname;
@@ -273,7 +274,8 @@ function applyDataReplacements(html) {
     .replace(/\{\{podcast_platform_buttons\}\}/g, renderPodcastPlatformButtons())
     .replace(/\{\{footer_podcast_links\}\}/g, renderFooterPodcastLinks())
     .replace(/\{\{footer_social_buttons\}\}/g, renderFooterSocialButtons())
-    .replace(/\{\{find_us_icons\}\}/g, renderFindUsIcons());
+    .replace(/\{\{find_us_icons\}\}/g, renderFindUsIcons())
+    .replace(/\{\{footer_year\}\}/g, String(new Date().getFullYear()));
 }
 
 // Regex to match <div data-include="/sections/xyz.html"></div>
@@ -284,6 +286,26 @@ const LOADER_IIFE_RE = /\s*<script>\s*\(function\(\)\s*\{[\s\S]*?sections-loaded
 
 // Regex to match <script src="/js/loader.js"></script>
 const LOADER_SCRIPT_RE = /\s*<script\s+src="\/js\/loader\.js"\s*><\/script>/;
+
+// Content-hash cache buster for static assets we serve immutable.
+// We don't rename files (Vercel cleanUrls + simple hosting), we append ?v=<hash>.
+const ASSET_HASHES = {};
+function assetHash(relPath) {
+  if (ASSET_HASHES[relPath]) return ASSET_HASHES[relPath];
+  var full = path.join(ROOT, relPath);
+  if (!fs.existsSync(full)) { ASSET_HASHES[relPath] = ''; return ''; }
+  var hash = crypto.createHash('md5').update(fs.readFileSync(full)).digest('hex').slice(0, 10);
+  ASSET_HASHES[relPath] = hash;
+  return hash;
+}
+
+function bustAssetUrls(html) {
+  // CSS + JS only — fonts, images, and videos use long-cache via /assets/* immutable rule.
+  return html.replace(/(href|src)="(\/(?:css|js)\/[^"?#]+\.(?:css|js))"/g, function(_, attr, url) {
+    var h = assetHash(url);
+    return h ? attr + '="' + url + '?v=' + h + '"' : attr + '="' + url + '"';
+  });
+}
 
 // Inject shared CSS around style.css (regex matches both plain and fetchpriority variants)
 const STYLE_LINK_RE = /<link rel="stylesheet" href="\/css\/style\.css"([^>]*?)\s*\/?\s*>/;
@@ -330,7 +352,10 @@ function buildPage(templateFile) {
   // 5. Replace build-time content tokens
   html = applyDataReplacements(html);
 
-  // 6. Write to output (preserving subdirectory structure)
+  // 6. Append content hashes to /css/* and /js/* references so they can cache immutable
+  html = bustAssetUrls(html);
+
+  // 7. Write to output (preserving subdirectory structure)
   const outPath = path.join(ROOT, templateFile);
   const outDir = path.dirname(outPath);
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
@@ -354,6 +379,32 @@ function findTemplates(dir, prefix) {
   return results;
 }
 
+function buildSitemap() {
+  var today = new Date().toISOString().slice(0, 10);
+  var entries = [
+    { loc: 'https://www.baddecisions.studio/',                                    changefreq: 'weekly',  priority: '1.0' },
+    { loc: 'https://www.baddecisions.studio/podcast',                             changefreq: 'weekly',  priority: '0.8' },
+    { loc: 'https://www.baddecisions.studio/education',                           changefreq: 'monthly', priority: '0.8' },
+    { loc: 'https://www.baddecisions.studio/work-with-us',                        changefreq: 'monthly', priority: '0.7' },
+    { loc: 'https://www.baddecisions.studio/work-with-us/services',               changefreq: 'monthly', priority: '0.7' },
+    { loc: 'https://www.baddecisions.studio/work-with-us/media-partnerships',     changefreq: 'monthly', priority: '0.7' },
+    { loc: 'https://www.baddecisions.studio/work-with-us/open-roles',             changefreq: 'monthly', priority: '0.5' }
+  ];
+  var urlBlocks = entries.map(function(e) {
+    return [
+      '  <url>',
+      '    <loc>' + e.loc + '</loc>',
+      '    <lastmod>' + today + '</lastmod>',
+      '    <changefreq>' + e.changefreq + '</changefreq>',
+      '    <priority>' + e.priority + '</priority>',
+      '  </url>'
+    ].join('\n');
+  }).join('\n');
+  var xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urlBlocks + '\n</urlset>\n';
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml, 'utf8');
+  console.log('  Built: sitemap.xml');
+}
+
 async function main() {
   console.log('Building BDS pages...');
   await refreshPodcastRecentEpisodes();
@@ -366,6 +417,7 @@ async function main() {
   }
 
   templates.forEach(buildPage);
+  buildSitemap();
   console.log(`Done. ${templates.length} pages built.`);
 }
 

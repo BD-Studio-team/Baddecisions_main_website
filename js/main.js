@@ -82,6 +82,7 @@ function initSmoothScroll() {
 }
 
 var heroRotationInterval = null;
+var heroRotationTick = null;
 function initHeroRotation() {
   if (prefersReducedMotion) return;
 
@@ -91,14 +92,31 @@ function initHeroRotation() {
   var words = ['artists.', 'builders.', 'studios.', 'brands.', 'founders.', 'teams.'];
   var wordIndex = 0;
 
-  heroRotationInterval = setInterval(function() {
+  heroRotationTick = function() {
     rotatingWord.classList.add('fade-out');
     setTimeout(function() {
       wordIndex = (wordIndex + 1) % words.length;
       rotatingWord.textContent = words[wordIndex];
       rotatingWord.classList.remove('fade-out');
     }, 400);
-  }, 2500);
+  };
+
+  function startRotation() {
+    if (heroRotationInterval) return;
+    heroRotationInterval = setInterval(heroRotationTick, 2500);
+  }
+  function stopRotation() {
+    if (!heroRotationInterval) return;
+    clearInterval(heroRotationInterval);
+    heroRotationInterval = null;
+  }
+
+  startRotation();
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') startRotation();
+    else stopRotation();
+  });
 }
 // Cleanup helper for future SPA use
 function destroyHeroRotation() {

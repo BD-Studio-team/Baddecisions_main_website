@@ -11,7 +11,9 @@ const path = require('path');
 const url  = require('url');
 
 const ROOT = __dirname;
-const PORT = parseInt(process.argv[2], 10) || 8000;
+const PORT = parseInt(process.env.PORT || process.argv[2], 10) || 8000;
+const VERBOSE = !!process.env.DEBUG;
+const log = VERBOSE ? console.log.bind(console) : function() {};
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -102,7 +104,7 @@ const server = http.createServer((req, res) => {
   if (!filePath) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('404 Not Found\n');
-    console.log(`404 ${req.method} ${req.url}`);
+    log(`404 ${req.method} ${req.url}`);
     return;
   }
 
@@ -113,7 +115,7 @@ const server = http.createServer((req, res) => {
     if (err) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('500 Internal Server Error\n');
-      console.log(`500 ${req.method} ${req.url} :: ${err.message}`);
+      log(`500 ${req.method} ${req.url} :: ${err.message}`);
       return;
     }
     res.writeHead(200, {
@@ -121,7 +123,7 @@ const server = http.createServer((req, res) => {
       'Cache-Control': 'no-store',
     });
     res.end(data);
-    console.log(`200 ${req.method} ${req.url} -> ${path.relative(ROOT, filePath)}`);
+    log(`200 ${req.method} ${req.url} -> ${path.relative(ROOT, filePath)}`);
   });
 });
 

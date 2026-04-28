@@ -1,6 +1,8 @@
 // Vercel Cron endpoint: trigger a production rebuild so podcast episodes are
 // refreshed at build time and served as static HTML.
 
+import crypto from 'node:crypto';
+
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
@@ -11,8 +13,9 @@ export default async function handler(req, res) {
     return res.status(500).json({ ok: false, error: 'CRON_SECRET is not configured' });
   }
 
-  var expected = 'Bearer ' + process.env.CRON_SECRET;
-  if (req.headers.authorization !== expected) {
+  var provided = Buffer.from(req.headers.authorization || '');
+  var expected = Buffer.from('Bearer ' + process.env.CRON_SECRET);
+  if (provided.length !== expected.length || !crypto.timingSafeEqual(provided, expected)) {
     return res.status(401).json({ ok: false, error: 'Unauthorized' });
   }
 

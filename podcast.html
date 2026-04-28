@@ -11,13 +11,13 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="The Bad Decisions Podcast | AI, Tech, and Business">
   <meta property="og:description" content="A practical guide to modern tech, AI, and business with breakdowns, bold claims tested in public, and conversations with founders, CEOs, and industry leaders.">
-  <meta property="og:image" content="/og-image.png">
+  <meta property="og:image" content="https://www.baddecisions.studio/og-image.png">
   <meta property="og:url" content="https://www.baddecisions.studio/podcast">
   <meta property="og:site_name" content="Bad Decisions Studio">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Bad Decisions Podcast | AI, Tech, and Business">
   <meta name="twitter:description" content="A practical guide to modern tech, AI, and business with breakdowns, bold claims tested in public, and conversations with founders, CEOs, and industry leaders.">
-  <meta name="twitter:image" content="/og-image.png">
+  <meta name="twitter:image" content="https://www.baddecisions.studio/og-image.png">
   <meta name="theme-color" content="#050505">
   <!-- Preconnect to YouTube CDN for thumbnails -->
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
@@ -27,10 +27,10 @@
   <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/globals.css" />
-  <link rel="stylesheet" href="/css/style.css" fetchpriority="high" />
-  <link rel="stylesheet" href="/css/components.css" />
-  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/globals.css?v=7d5e0867a7" />
+  <link rel="stylesheet" href="/css/style.css?v=d555f66046" fetchpriority="high" />
+  <link rel="stylesheet" href="/css/components.css?v=ac65447daf" />
+  <link rel="stylesheet" href="/css/nav.css?v=57d87f4c3e" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -502,139 +502,6 @@
       </div>
     </div>
   </section>
-
-  <script>
-  (function() {
-    /* ── Klaviyo config ──────────────────────────────────
-       These are PUBLIC client-side identifiers, not secrets.
-       See https://developers.klaviyo.com/en/reference/create_client_subscription
-       Bump the API revision when upgrading. */
-    var KLAVIYO_PUBLIC_KEY = 'Tir9Yi';
-    var KLAVIYO_LIST_ID = 'UWvYjQ';
-    var KLAVIYO_API_REVISION = '2024-02-15';
-    var SUBMIT_COOLDOWN_MS = 5000;
-
-    /* Per-form state so multiple newsletter forms on the same page
-       (e.g. homepage + footer) each have their own cooldown. */
-    var lastSubmitTime = new WeakMap();
-
-    function isValidEmail(value) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    }
-
-    function detectSource() {
-      var path = (window.location.pathname || '/').toLowerCase();
-      if (path === '/' || path === '') return 'BD Studio Homepage';
-      if (path.indexOf('/podcast') === 0) return 'BD Studio Podcast';
-      if (path.indexOf('/education') === 0) return 'BD Studio Education';
-      if (path.indexOf('/work-with-us/services') === 0) return 'BD Studio Services';
-      if (path.indexOf('/work-with-us/media-partnerships') === 0) return 'BD Studio Media Partnerships';
-      if (path.indexOf('/work-with-us/open-roles') === 0) return 'BD Studio Open Roles';
-      if (path.indexOf('/work-with-us') === 0) return 'BD Studio Work With Us';
-      return 'BD Studio' + path;
-    }
-
-    function showError(form, message) {
-      var errBox = form.querySelector('.nl-error');
-      var errText = form.querySelector('.nl-error-text');
-      var success = form.querySelector('.nl-success');
-      if (success) success.hidden = true;
-      if (errText && message) errText.textContent = message;
-      if (errBox) errBox.hidden = false;
-    }
-
-    function showSuccess(form) {
-      var success = form.querySelector('.nl-success');
-      var errBox = form.querySelector('.nl-error');
-      var fineprint = form.querySelector('.nl-fineprint');
-      if (errBox) errBox.hidden = true;
-      if (fineprint) fineprint.hidden = true;
-      if (success) success.hidden = false;
-    }
-
-    function setSubmitting(btn, state) {
-      if (!btn) return;
-      btn.disabled = state;
-      var text = btn.querySelector('.nl-submit-text');
-      if (text) text.textContent = state ? 'Subscribing...' : 'Subscribe';
-    }
-
-    function handleSubmit(e) {
-      e.preventDefault();
-      var form = e.currentTarget;
-
-      /* Honeypot: if a bot filled the hidden field, silently succeed */
-      var honeypot = form.querySelector('.nl-honeypot');
-      if (honeypot && honeypot.value) return;
-
-      /* Debounce rapid submissions */
-      var now = Date.now();
-      var last = lastSubmitTime.get(form) || 0;
-      if (now - last < SUBMIT_COOLDOWN_MS) {
-        showError(form, 'Please wait a few seconds before trying again.');
-        return;
-      }
-
-      var nameInput = form.querySelector('input[name="name"]');
-      var emailInput = form.querySelector('input[name="email"]');
-      var name = nameInput ? nameInput.value.trim() : '';
-      var email = emailInput ? emailInput.value.trim() : '';
-
-      if (name.length < 2) { showError(form, 'Please enter your name.'); return; }
-      if (!isValidEmail(email)) { showError(form, 'Please enter a valid email.'); return; }
-
-      lastSubmitTime.set(form, now);
-      var submitBtn = form.querySelector('.nl-submit');
-      setSubmitting(submitBtn, true);
-
-      var source = form.getAttribute('data-source') || detectSource();
-      var payload = {
-        data: {
-          type: 'subscription',
-          attributes: {
-            profile: {
-              data: {
-                type: 'profile',
-                attributes: { email: email, first_name: name }
-              }
-            },
-            custom_source: source
-          },
-          relationships: {
-            list: {
-              data: { type: 'list', id: KLAVIYO_LIST_ID }
-            }
-          }
-        }
-      };
-
-      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'revision': KLAVIYO_API_REVISION
-        },
-        body: JSON.stringify(payload)
-      }).then(function(res) {
-        if (!res.ok) throw new Error('status_' + res.status);
-        form.reset();
-        showSuccess(form);
-      }).catch(function(err) {
-        var isNetwork = err && err.message === 'Failed to fetch';
-        showError(form, isNetwork
-          ? 'Network error — check your connection and try again.'
-          : 'Something went wrong. Please try again.');
-      }).then(function() {
-        setSubmitting(submitBtn, false);
-      });
-    }
-
-    var forms = document.querySelectorAll('.nl-form');
-    forms.forEach(function(form) {
-      form.addEventListener('submit', handleSubmit);
-    });
-  })();
-  </script>
   </main>
   <!-- ─── FOOTER ──────────────────────────────────────────────────── -->
   <footer class="surface-premium">
@@ -645,7 +512,7 @@
           <p class="footer-tagline">Content, education, and execution in the age of AI.</p>
           <div class="footer-brand-location">Vancouver &middot; Dubai</div>
           <div class="footer-social-row">
-<a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platform-logos/instagram-glyph-gradient.svg" alt="Instagram" class="footer-social-icon footer-social-icon--instagram" loading="lazy"></a>
+<a href="https://www.instagram.com/badxstudio/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram"><img src="/assets/platform-logos/instagram-glyph-gradient.png" alt="Instagram" class="footer-social-icon footer-social-icon--instagram" loading="lazy"></a>
             <a href="https://www.youtube.com/@badxstudio" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube"><img src="/assets/platform-logos/youtube-icon.svg" alt="YouTube" class="footer-social-icon footer-social-icon--youtube" loading="lazy"></a>
             <a href="https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Spotify"><img src="/assets/platform-logos/spotify-icon.svg" alt="Spotify" class="footer-social-icon footer-social-icon--spotify" loading="lazy"></a>
             <a href="https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Apple Podcasts"><img src="/assets/platform-logos/apple-podcast-icon-rgb.png" alt="Apple Podcasts" class="footer-social-icon footer-social-icon--apple" loading="lazy"></a>
@@ -686,6 +553,7 @@
       </div>
     </div>
   </footer>
-  <script src="/js/main.js" defer></script>
+  <script src="/js/main.js?v=b33e0b0e81" defer></script>
+  <script src="/js/newsletter.js?v=3fd2245ebc" defer></script>
 </body>
 </html>

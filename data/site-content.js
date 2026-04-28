@@ -8,7 +8,7 @@ module.exports = {
     },
     instagram: {
       href: 'https://www.instagram.com/badxstudio/',
-      asset: '/assets/platform-logos/instagram-glyph-gradient.svg',
+      asset: '/assets/platform-logos/instagram-glyph-gradient.png',
       alt: 'Instagram'
     },
     spotify: {
