@@ -956,6 +956,10 @@
       position: relative;
       z-index: 2;
       width: 100%;
+      height: 100%;
+      display: grid;
+      align-content: start;
+      grid-template-rows: auto auto auto auto auto;
     }
     .wwu-card-title {
       font-family: var(--font-body);
@@ -965,6 +969,9 @@
       letter-spacing: -0.025em;
       color: var(--color-cream);
       margin: 0 0 14px;
+      min-height: 2.05em;
+      display: flex;
+      align-items: flex-end;
       max-width: 16ch;
       text-wrap: balance;
       text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
@@ -984,6 +991,7 @@
       font-weight: 400;
       color: var(--color-bone);
       margin: 0 0 22px;
+      min-height: 4.8em;
       max-width: 40ch;
       text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
     }
@@ -991,7 +999,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      margin: 0 0 18px;
+      margin: 0 0 20px;
       border-radius: var(--radius-card);
       overflow: hidden;
       border: 1px solid var(--border-cream-soft);
@@ -1001,6 +1009,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center center;
       display: block;
       filter: saturate(0.75) brightness(0.78) contrast(1.08);
       transition: transform 0.8s var(--transition), filter 0.4s ease;
@@ -1039,8 +1048,10 @@
     .wwu-card-tags {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 8px;
       margin-bottom: 22px;
+      min-height: 34px;
     }
     .premium-card-tag,
     .wwu-card-tag {
@@ -1130,36 +1141,13 @@
       flex: 1;
       min-width: 0;
     }
-    .wwu-roles-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      background: var(--glow-yellow);
-      border: 1px solid rgba(255,239,123,0.16);
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-yellow);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .wwu-roles-dot {
-      width: 5px;
-      height: 5px;
-      background: var(--color-yellow);
-      border-radius: 50%;
-      animation: pulse-dot 2.2s ease-in-out infinite;
-    }
     .wwu-roles-title {
       display: block;
-      font-family: var(--font-editorial);
-      font-size: clamp(18px, 1.9vw, 24px);
-      font-weight: 300;
-      line-height: 1.25;
+      font-family: var(--font-body);
+      font-size: clamp(28px, 3.2vw, 36px);
+      font-weight: 650;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
       color: var(--color-cream);
     }
     .wwu-roles-copy {
@@ -1263,8 +1251,8 @@
       box-shadow: var(--shadow-card-quiet);
     }
     .workhub-page.surface-premium .wwu-roles-title {
-      font-family: var(--font-editorial);
-      font-weight: 300;
+      font-family: var(--font-body);
+      font-weight: 650;
       color: var(--ctx-card-heading);
     }
     .workhub-page.surface-premium .wwu-roles-copy {
@@ -1280,6 +1268,9 @@
       .wwu-grid { grid-template-columns: 1fr; gap: 16px; }
       .wwu-card { min-height: 500px; padding: 40px; }
       .wwu-card-title { font-size: clamp(28px, 3.4vw, 36px); }
+      .wwu-card-title,
+      .wwu-card-copy,
+      .wwu-card-tags { min-height: 0; }
     }
     @media (max-width: 640px) {
       .wwu-card { min-height: 440px; padding: 32px 28px; border-radius: var(--radius-card); }
@@ -1294,13 +1285,6 @@
     #podcast {
       background: var(--color-ink);
       padding-top: var(--section-space-lg);
-    }
-
-    .podcast-featured {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 2px;
     }
 
     .ep-featured-card {
@@ -2099,30 +2083,6 @@
 
 	    /* Footer brand (legacy selectors removed — see FOOTER block) */
 
-    /* Careers section helpers (replaces inline styles) */
-    .careers-client-logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 64px;
-      flex-wrap: wrap;
-    }
-    .careers-cta-section {
-      text-align: center;
-      padding: 64px 0 0;
-    }
-    .careers-cta-heading {
-      font-family: var(--font-editorial);
-      font-size: clamp(20px, 2.5vw, 30px);
-      font-weight: 300;
-      line-height: 1.08;
-      margin-bottom: 12px;
-    }
-    .careers-cta-section .body-text {
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
     /* Podcast section helpers (replaces inline styles) */
     .pod-section-header {
       display: flex;
@@ -2237,7 +2197,7 @@
     .pod-platforms--inline {
       --pod-platform-rail: 42px;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       gap: 22px;
       flex-wrap: wrap;
@@ -2250,6 +2210,7 @@
       flex-shrink: 0;
       min-height: var(--pod-platform-rail);
       transform: none;
+      padding-bottom: 6px;
     }
     .pod-platforms--inline .pod-platforms-grid {
       gap: 22px;
@@ -2348,8 +2309,12 @@
       }
       .pod-platforms--inline {
         --pod-platform-rail: 38px;
+        align-items: center;
         gap: 14px;
         margin-top: 36px;
+      }
+      .pod-platforms--inline .pod-platforms-label {
+        padding-bottom: 0;
       }
 	      .pod-platforms--inline .pod-platforms-grid {
 	        width: auto;
@@ -3919,69 +3884,6 @@
       color: var(--ctx-body);
     }
 
-    /* ── About Us (services) ── */
-    .services-about {
-      padding: var(--section-space-lg) 0;
-    }
-    .services-about.surface-editorial {
-      background: var(--surface-editorial);
-    }
-    .services-about-header {
-      margin-bottom: 56px;
-    }
-    .services-about-header .section-label {
-      margin-bottom: 18px;
-    }
-    .services-about-header .heading-section {
-      max-width: 1040px;
-      margin: 0;
-    }
-    .services-about.surface-editorial .section-label,
-    .services-about.surface-editorial .heading-section em,
-    .services-about.surface-editorial .services-about-lede em {
-      color: var(--ctx-label);
-    }
-    .services-about.surface-editorial .heading-section,
-    .services-about.surface-editorial .services-about-lede {
-      color: var(--ctx-heading);
-    }
-    .services-about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: clamp(40px, 5vw, 80px);
-      align-items: start;
-    }
-    .services-about-lede {
-      margin: 0;
-      font-family: var(--font-body);
-      font-weight: 400;
-      font-size: clamp(22px, 2vw, 30px);
-      line-height: 1.3;
-      color: var(--color-cream);
-    }
-    .services-about-lede em {
-      font-family: var(--font-editorial);
-      font-style: italic;
-      font-weight: 300;
-      color: var(--color-yellow);
-    }
-    .services-about-body {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .services-about-body p {
-      margin: 0;
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.68;
-      color: var(--ctx-body, var(--color-fog));
-    }
-    @media (max-width: 900px) {
-      .services-about-grid { grid-template-columns: 1fr; }
-    }
-
     /* ── Tech Stack (services) ── */
     .services-stack {
       padding: var(--section-space-lg) 0;
@@ -4083,12 +3985,17 @@
     }
     .services-stack-tile-logo {
       display: block;
-      width: auto;
-      max-width: 100%;
-      height: auto;
+      width: 42px;
+      height: 42px;
+      max-width: 42px;
       max-height: 42px;
       object-fit: contain;
       object-position: center;
+      flex: 0 0 auto;
+    }
+    .services-stack-tile-logo[alt="Polycam logo"],
+    .services-stack-tile-logo[alt="ManyChat logo"] {
+      filter: brightness(0) invert(1);
     }
     .services-stack-tile-name {
       font-family: var(--font-body);
@@ -4133,6 +4040,9 @@
         height: auto;
       }
       body[data-page="services"] .services-stack-group .services-stack-tile-logo {
+        width: 34px;
+        height: 34px;
+        max-width: 34px;
         max-height: 34px;
       }
     }
@@ -4471,29 +4381,9 @@
     .open-roles-list-section.surface-premium {
       background: var(--surface-premium);
     }
-    .open-roles-cta {
-      padding: var(--section-space-lg) 0;
-    }
-    .open-roles-cta.surface-premium {
-      background: var(--surface-premium);
-    }
-    .open-roles-cta.surface-premium .careers-cta-heading {
-      color: var(--ctx-heading);
-    }
-    .open-roles-cta.surface-premium .body-text {
-      color: var(--ctx-body);
-    }
-    .open-roles-cta.surface-premium .careers-cta-heading em {
-      color: var(--ctx-label);
-    }
-    .open-roles-cta.surface-premium .btn-primary {
-      background: var(--ctx-btn-primary-bg);
-      color: var(--ctx-btn-primary-text);
-    }
     @media (max-width: 640px) {
       .open-roles-header { padding: var(--section-space-sm) 0 var(--section-space-xs); }
       .open-roles-list-section { padding: var(--section-space-xs) 0 var(--section-space-md); }
-      .open-roles-cta { padding: var(--section-space-md) 0; }
     }
 
     .or-list {
@@ -4846,7 +4736,6 @@
     @media (max-width: 1024px) {
       .hero-content { padding-top: 100px; }
       .pillars-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-      .podcast-featured { grid-template-columns: 1fr; }
       .course-hero { grid-template-columns: 1fr; }
       .course-visual { min-height: 300px; }
       .tutorials-strip { grid-template-columns: 1fr 1fr; }

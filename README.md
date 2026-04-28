@@ -66,11 +66,12 @@ Main/
 │   ├── learn/
 │   ├── platform-logos/
 │   ├── podcast/
+│   ├── tech-logos/
 │   └── video/
 ├── docs/
 │   └── AUDIT.md              Historical audit notes
 ├── index.html                Generated output
-├── education.html                Generated output
+├── education.html            Generated output
 ├── podcast.html              Generated output
 ├── work-with-us.html         Generated output
 ├── work-with-us/
@@ -107,6 +108,16 @@ Do not hand-edit generated pages at the root like:
 - `work-with-us/*.html`
 
 They are overwritten by the build.
+
+## Current page notes
+
+- `/work-with-us/open-roles` uses a compact header and role list only (bottom CTA removed).
+- `/work-with-us/services` currently includes:
+  - services cards
+  - technology stack
+  - final contact CTA
+  - (the previous long About section was removed)
+- Technology stack logos are served from `assets/tech-logos/` and rendered via shared `.services-stack-*` classes.
 
 ## Development
 

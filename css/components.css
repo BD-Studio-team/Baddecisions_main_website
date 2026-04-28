@@ -137,7 +137,6 @@ section {
   #pillars .section-header,
   .podcast-page-header,
   .pod-guests-header,
-  .services-about-header,
   .services-stack-header,
 	  .sponsors-header,
 	  .workhub-hero,
@@ -202,22 +201,18 @@ section {
   margin-bottom: 16px;
 }
 
-.services-about-grid {
-  gap: clamp(28px, 4vw, 56px);
-}
-
 .footer-top {
   gap: clamp(28px, 5vw, 40px);
   margin-bottom: 36px;
 }
 
 /* Final CTA system: compact, centered, and consistent across pages. */
-:is(.services-cta, .open-roles-cta, .mp-cta) {
+:is(.services-cta, .mp-cta) {
   padding-top: var(--section-space-md);
   padding-bottom: var(--section-space-md);
 }
 
-:is(.services-cta .reveal, .careers-cta-section, .mp-cta-shell) {
+:is(.services-cta .reveal, .mp-cta-shell) {
   max-width: 760px;
   margin-right: auto;
   margin-left: auto;
@@ -225,7 +220,7 @@ section {
   text-align: center;
 }
 
-:is(.services-cta-heading, .careers-cta-heading, .mp-cta-heading) {
+:is(.services-cta-heading, .mp-cta-heading) {
   margin: 0 0 18px;
   font-family: var(--font-body);
   font-size: clamp(32px, 4.4vw, 56px);
@@ -236,14 +231,14 @@ section {
   text-wrap: balance;
 }
 
-:is(.services-cta-heading, .careers-cta-heading, .mp-cta-heading) em {
+:is(.services-cta-heading, .mp-cta-heading) em {
   font-family: var(--font-editorial);
   font-weight: 300;
   font-style: italic;
   color: var(--ctx-label, var(--color-yellow));
 }
 
-:is(.services-cta, .open-roles-cta, .mp-cta) .body-text {
+:is(.services-cta, .mp-cta) .body-text {
   max-width: 680px;
   margin-right: auto;
   margin-left: auto;
@@ -251,7 +246,7 @@ section {
   color: var(--ctx-body, var(--color-fog));
 }
 
-:is(.services-cta, .open-roles-cta, .mp-cta) .btn-primary {
+:is(.services-cta, .mp-cta) .btn-primary {
   justify-content: center;
 }
 
@@ -369,17 +364,17 @@ body:not([data-page="home"]) :is(
     margin-bottom: 24px;
   }
 
-  :is(.services-cta, .open-roles-cta, .mp-cta) {
+  :is(.services-cta, .mp-cta) {
     padding-top: var(--section-space-sm);
     padding-bottom: var(--section-space-sm);
   }
 
-  :is(.services-cta-heading, .careers-cta-heading, .mp-cta-heading) {
+  :is(.services-cta-heading, .mp-cta-heading) {
     font-size: clamp(30px, 9vw, 42px);
     margin-bottom: 16px;
   }
 
-  :is(.services-cta, .open-roles-cta, .mp-cta) .btn-primary {
+  :is(.services-cta, .mp-cta) .btn-primary {
     width: 100%;
   }
 
@@ -460,8 +455,7 @@ body:not([data-page="home"]) :is(
   }
 
   .heading-section,
-  .mp-cta-heading,
-  .careers-cta-heading {
+  .mp-cta-heading {
     font-size: 32px;
     line-height: 1.14;
   }
@@ -522,8 +516,7 @@ body:not([data-page="home"]) :is(
   }
 
   .heading-section,
-  .mp-cta-heading,
-  .careers-cta-heading {
+  .mp-cta-heading {
     font-size: 28px;
     line-height: 1.16;
   }
