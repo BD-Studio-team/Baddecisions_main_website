@@ -889,6 +889,9 @@
       border-color: var(--border-yellow-soft);
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.55);
     }
+    .wwu-card--services:hover {
+      border-color: rgba(193, 126, 89, 0.28);
+    }
     .feature-card-corner {
       position: absolute;
       top: 24px;
@@ -920,6 +923,10 @@
     :is(.premium-card, .wwu-card):hover .feature-card-corner {
       opacity: 1;
       transform: translate(0, 0);
+    }
+    .wwu-card--services .feature-card-corner::before,
+    .wwu-card--services .feature-card-corner::after {
+      background: var(--color-peach);
     }
 
     .wwu-card--services {
@@ -1052,7 +1059,7 @@
       transition: background var(--duration-base) ease, border-color var(--duration-base) ease, color var(--duration-base) ease;
     }
     .premium-card-ue .premium-card-tag,
-    .wwu-card--media .wwu-card-tag {
+    .wwu-card--services .wwu-card-tag {
       background: rgba(193, 126, 89, 0.12);
       border-color: rgba(193, 126, 89, 0.28);
       color: var(--color-peach-light);
@@ -1064,20 +1071,20 @@
       color: var(--color-yellow);
     }
     .premium-card-ue:hover .premium-card-tag,
-    .wwu-card--media:hover .wwu-card-tag {
+    .wwu-card--services:hover .wwu-card-tag {
       background: rgba(193, 126, 89, 0.18);
       border-color: rgba(193, 126, 89, 0.42);
       color: var(--color-peach-light);
     }
     .wwu-card--services .wwu-card-cta {
-      background: var(--color-yellow);
-      color: var(--color-void);
-    }
-    .wwu-card--media .wwu-card-cta {
       background: var(--color-peach);
       color: var(--color-cream);
     }
-    .wwu-card--media:hover .wwu-card-cta {
+    .wwu-card--media .wwu-card-cta {
+      background: var(--color-yellow);
+      color: var(--color-void);
+    }
+    .wwu-card--services:hover .wwu-card-cta {
       box-shadow: 0 4px 20px rgba(193, 126, 89, 0.32);
     }
 
@@ -1117,8 +1124,9 @@
     .wwu-roles:hover::before { transform: scaleY(1); }
     .wwu-roles-left {
       display: flex;
-      align-items: center;
-      gap: 28px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
       flex: 1;
       min-width: 0;
     }
@@ -1147,11 +1155,21 @@
       animation: pulse-dot 2.2s ease-in-out infinite;
     }
     .wwu-roles-title {
+      display: block;
       font-family: var(--font-editorial);
       font-size: clamp(18px, 1.9vw, 24px);
       font-weight: 300;
       line-height: 1.25;
       color: var(--color-cream);
+    }
+    .wwu-roles-copy {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--color-fog);
+      max-width: 70ch;
     }
     .wwu-roles-title em {
       font-style: italic;
@@ -1182,15 +1200,23 @@
       color: var(--ctx-body);
     }
     .workhub-page.surface-premium .workhub-hero-title em,
-    .workhub-page.surface-premium .wwu-card-title em,
     .workhub-page.surface-premium .wwu-roles-title em {
       color: var(--ctx-label);
+    }
+    .workhub-page.surface-premium .wwu-card--media .wwu-card-title em {
+      color: var(--color-yellow);
+    }
+    .workhub-page.surface-premium .wwu-card--services .wwu-card-title em {
+      color: var(--color-peach-light);
     }
     .workhub-page.surface-premium .wwu-card {
       border-color: var(--ctx-border);
     }
     .workhub-page.surface-premium .wwu-card:hover {
       border-color: var(--ctx-border-hover);
+    }
+    .workhub-page.surface-premium .wwu-card--services:hover {
+      border-color: rgba(193, 126, 89, 0.28);
     }
     .workhub-page.surface-premium .wwu-card-title {
       font-family: var(--font-body);
@@ -1216,12 +1242,12 @@
       background: rgba(255, 239, 123, 0.11);
       color: var(--color-yellow);
     }
-    .workhub-page.surface-premium .wwu-card--media .wwu-card-tag {
+    .workhub-page.surface-premium .wwu-card--services .wwu-card-tag {
       border-color: rgba(193, 126, 89, 0.28);
       background: rgba(193, 126, 89, 0.12);
       color: var(--color-peach-light);
     }
-    .workhub-page.surface-premium .wwu-card--media:hover .wwu-card-tag {
+    .workhub-page.surface-premium .wwu-card--services:hover .wwu-card-tag {
       border-color: rgba(193, 126, 89, 0.42);
       background: rgba(193, 126, 89, 0.18);
       color: var(--color-peach-light);
@@ -1237,9 +1263,12 @@
       box-shadow: var(--shadow-card-quiet);
     }
     .workhub-page.surface-premium .wwu-roles-title {
-      font-family: var(--font-body);
-      font-weight: 650;
+      font-family: var(--font-editorial);
+      font-weight: 300;
       color: var(--ctx-card-heading);
+    }
+    .workhub-page.surface-premium .wwu-roles-copy {
+      color: var(--ctx-card-body);
     }
     .workhub-page.surface-premium .wwu-roles-link {
       color: var(--ctx-body);
@@ -4042,19 +4071,24 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-card);
-      background: rgba(255,239,123,0.08);
-      border: 1px solid rgba(255,239,123,0.18);
-      font-family: var(--font-editorial);
-      font-weight: 300;
-      font-size: 22px;
-      color: var(--color-yellow);
+      width: auto;
+      height: auto;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
     }
     .services-stack.surface-premium .services-stack-tile-mark {
-      background: rgba(255,239,123,0.08);
-      border-color: var(--ctx-border-hover);
+      color: var(--ctx-label);
+    }
+    .services-stack-tile-logo {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 42px;
+      object-fit: contain;
+      object-position: center;
     }
     .services-stack-tile-name {
       font-family: var(--font-body);
@@ -4071,6 +4105,36 @@
     }
     @media (max-width: 480px) {
       .services-stack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      body[data-page="services"] .services-stack-group .services-stack-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 2px 8px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      body[data-page="services"] .services-stack-group .services-stack-grid::-webkit-scrollbar {
+        display: none;
+      }
+      body[data-page="services"] .services-stack-group .services-stack-tile {
+        flex: 0 0 calc((100% - 24px) / 3);
+        max-width: calc((100% - 24px) / 3);
+        min-width: 0;
+        scroll-snap-align: start;
+        padding: 18px 10px;
+      }
+      body[data-page="services"] .services-stack-group .services-stack-tile-mark {
+        width: auto;
+        height: auto;
+      }
+      body[data-page="services"] .services-stack-group .services-stack-tile-logo {
+        max-height: 34px;
+      }
     }
 
     .services-cta {
@@ -4432,168 +4496,254 @@
       .open-roles-cta { padding: var(--section-space-md) 0; }
     }
 
-    .careers-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .or-list {
+      border-top: 1px solid var(--ctx-border, rgba(245,242,237,0.1));
     }
-    .career-card {
-      background: var(--color-soot);
-      border: 1px solid var(--border-cream-faint);
-      border-radius: var(--radius-card);
-      padding: 0;
-      transition: border-color 0.3s ease, background-color 0.3s ease;
-      overflow: hidden;
+    .or-row {
+      border-bottom: 1px solid var(--ctx-border, rgba(245,242,237,0.1));
+      transition: background-color 0.3s ease;
     }
-    .open-roles-list-section.surface-premium .career-card {
-      background: var(--ctx-card-bg);
-      border-color: var(--ctx-border);
-      box-shadow: var(--shadow-card-quiet);
-    }
-    .career-card:hover,
-    .career-card[open] {
-      border-color: rgba(151,199,205,0.3);
-      background: rgba(21,21,21,0.96);
-    }
-    .open-roles-list-section.surface-premium .career-card:hover,
-    .open-roles-list-section.surface-premium .career-card[open] {
-      background: var(--ctx-card-bg);
-      border-color: rgba(255, 239, 123, 0.28);
-    }
-    .career-card summary::-webkit-details-marker {
+    .or-row summary::-webkit-details-marker {
       display: none;
     }
-    .career-summary {
+    .or-row-summary {
       list-style: none;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) auto 44px;
+      gap: 32px;
       align-items: center;
-      gap: 24px;
-      padding: 28px 32px;
+      width: 100%;
+      padding: 32px 0;
+      color: inherit;
       cursor: pointer;
+      user-select: none;
     }
-    .career-summary-main {
-      min-width: 0;
-      flex: 1 1 auto;
+    .or-row-num {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--ctx-label, var(--color-yellow));
     }
-    .career-summary-main h2,
-    .career-summary-main .heading-card,
-    .career-info h3 {
-      font-family: var(--font-body);
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      margin-bottom: 6px;
-    }
-    .open-roles-list-section.surface-premium .career-summary-main h2,
-    .open-roles-list-section.surface-premium .career-summary-main .heading-card,
-    .open-roles-list-section.surface-premium .career-info h3 {
-      color: var(--ctx-card-heading);
-    }
-    .career-summary-main p,
-    .career-info p {
-      font-size: 14px;
-      line-height: 1.6;
-      font-weight: 400;
-      color: var(--ctx-card-body, var(--ctx-body, var(--color-fog)));
-      margin: 0;
-    }
-    .career-summary-actions {
+    .or-row-body {
       display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .or-row-title {
+      margin: 0;
+      color: var(--ctx-card-heading, var(--color-cream));
+      font-family: var(--font-body);
+      font-size: 24px;
+      font-weight: 750;
+      line-height: 1.15;
+      letter-spacing: 0;
+      transition: color 0.25s ease;
+    }
+    .or-row:hover .or-row-title,
+    .or-row[open] .or-row-title {
+      color: var(--ctx-label, var(--color-yellow));
+    }
+    .or-row-tagline {
+      max-width: 64ch;
+      margin: 0;
+      color: var(--ctx-card-body, var(--ctx-body, var(--color-fog)));
+      font-size: 14.5px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+    .or-status {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 0;
-    }
-    .career-apply-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 0 16px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 750;
-      letter-spacing: 0.07em;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 650;
+      letter-spacing: 0.16em;
+      line-height: 1;
       text-transform: uppercase;
-      border: 1px solid transparent;
-      border-radius: var(--radius-button);
-      color: var(--ctx-btn-primary-text);
-      background: var(--ctx-btn-primary-bg);
       white-space: nowrap;
-      transition: transform 0.25s var(--ease-out-expo), filter 0.25s ease;
     }
-    .career-apply-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.03);
+    .or-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
     }
-    .career-toggle {
+    .or-status--closed {
+      color: var(--color-fog);
+      background: rgba(168,162,158,0.06);
+      border: 1px solid rgba(168,162,158,0.2);
+    }
+    .or-status--coming-soon {
+      color: var(--ctx-label, var(--color-yellow));
+      background: rgba(239, 225, 93, 0.09);
+      border: 1px solid rgba(239, 225, 93, 0.3);
+    }
+    .or-row--static .or-row-summary {
+      grid-template-columns: 48px minmax(0, 1fr) auto;
+      cursor: default;
+      user-select: text;
+    }
+    .or-row--static:hover .or-row-title,
+    .or-row--static .or-row-title {
+      color: var(--ctx-card-heading, var(--color-cream));
+    }
+    .or-toggle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--color-stone);
-      border-radius: 10px;
-      color: var(--color-fog);
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--ctx-border, rgba(245,242,237,0.16));
+      border-radius: 50%;
+      color: var(--ctx-card-body, var(--color-fog));
       background: rgba(255,255,255,0.02);
-      transition: transform 0.25s var(--ease-out-expo), border-color 0.25s ease, color 0.25s ease;
+      transition: transform 0.35s var(--ease-out-expo), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     }
-    .open-roles-list-section.surface-premium .career-toggle {
-      border-color: var(--ctx-border);
-      color: var(--ctx-card-body);
-      background: rgba(255, 255, 255, 0.03);
+    .or-toggle svg {
+      width: 14px;
+      height: 14px;
     }
-    .career-toggle svg {
-      width: 16px;
-      height: 16px;
+    .or-row:hover .or-toggle {
+      border-color: var(--ctx-label, var(--color-yellow));
     }
-    .career-card[open] .career-toggle {
+    .or-row[open] .or-toggle {
       transform: rotate(180deg);
-      border-color: rgba(151,199,205,0.3);
-      color: var(--color-cream);
+      border-color: var(--ctx-label, var(--color-yellow));
+      background: var(--ctx-label, var(--color-yellow));
+      color: var(--color-void);
     }
-    .open-roles-list-section.surface-premium .career-card[open] .career-toggle {
-      border-color: rgba(255, 239, 123, 0.28);
-      color: var(--ctx-card-heading);
+    .or-row-panel {
+      overflow: hidden;
     }
-    .career-panel {
-      padding: 0 32px 28px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+    .or-row-panel-inner {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 0 32px;
+      padding: 0 0 40px;
     }
-    .open-roles-list-section.surface-premium .career-panel {
-      border-top-color: var(--ctx-border);
+    .or-row-overview,
+    .or-row-section,
+    .or-apply {
+      grid-column: 2;
     }
-    .career-panel p {
-      max-width: 820px;
-      margin: 18px 0 0;
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--color-fog);
+    .or-row-overview {
+      max-width: 60ch;
+      margin: 0 0 24px;
+      color: var(--ctx-card-body, var(--color-bone));
+      font-size: 15.5px;
+      line-height: 1.65;
     }
-    .open-roles-list-section.surface-premium .career-panel p {
-      color: var(--ctx-card-body);
+    .or-row-section {
+      margin-bottom: 24px;
+    }
+    .or-row-section-label {
+      margin: 0 0 12px;
+      color: var(--ctx-label, var(--color-yellow));
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 650;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .or-row-section ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .or-row-section li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--ctx-card-body, var(--color-bone));
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+    .or-row-section li::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 8px;
+      height: 1px;
+      background: var(--ctx-label, var(--color-yellow));
+    }
+    .or-apply {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 48px;
+      margin-top: 8px;
+      padding: 0 24px;
+      border-radius: var(--radius-button);
+      background: var(--ctx-btn-primary-bg, var(--color-yellow));
+      color: var(--ctx-btn-primary-text, var(--color-void));
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      text-transform: uppercase;
+      transition: transform 0.35s var(--ease-out-expo), filter 0.25s ease;
+    }
+    .or-apply:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
     }
 
     @media (max-width: 768px) {
-      .career-summary {
-        flex-direction: column;
-        align-items: flex-start;
+      .or-row-summary {
+        grid-template-columns: 38px minmax(0, 1fr) 40px;
+        gap: 18px;
+        padding: 26px 0;
       }
-      .career-summary-actions {
-        width: 100%;
-        justify-content: space-between;
+      .or-row--static .or-row-summary {
+        grid-template-columns: 38px minmax(0, 1fr);
       }
-      .career-panel {
-        padding: 0 24px 24px;
+      .or-status {
+        grid-column: 2;
+        width: fit-content;
+      }
+      .or-toggle {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+        width: 40px;
+        height: 40px;
+      }
+      .or-row-panel-inner {
+        grid-template-columns: 38px minmax(0, 1fr);
+        gap: 0 18px;
+        padding-bottom: 32px;
       }
     }
-    @media (max-width: 640px) {
-      .career-summary {
-        padding: 24px;
+    @media (max-width: 480px) {
+      .or-row-summary {
+        grid-template-columns: 1fr 40px;
+        gap: 14px;
       }
-      .career-apply-btn {
-        min-height: 38px;
-        padding: 0 16px;
+      .or-row--static .or-row-summary {
+        grid-template-columns: 1fr;
+      }
+      .or-row-num {
+        grid-column: 1 / -1;
+      }
+      .or-row-body,
+      .or-status {
+        grid-column: 1;
+      }
+      .or-row-title {
+        font-size: 21px;
+      }
+      .or-row-panel-inner {
+        display: block;
       }
     }
 
@@ -4815,7 +4965,6 @@
         max-width: 160px;
       }
       .ep-featured-card { padding: 32px; }
-      .career-card { flex-direction: column; align-items: flex-start; }
     }
 
     /* Small mobile */
@@ -5299,63 +5448,35 @@
   }
 }
 body[data-page="media-partnerships"] .mp-cta {
-  padding: 0 0 var(--section-space-lg);
+  padding: var(--section-space-lg) 0;
 }
 .mp-cta.surface-premium {
   background: var(--surface-premium);
 }
 body[data-page="media-partnerships"] .mp-cta-shell {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: clamp(28px, 8vw, 120px);
-  align-items: center;
-  max-width: none;
-  margin: 0;
-  padding: 48px clamp(0px, 7vw, 96px) 0;
-  text-align: left;
-}
-body[data-page="media-partnerships"] .mp-cta-heading {
-  max-width: 46ch;
-  margin: 0;
-  font-family: var(--font-editorial);
-  font-size: clamp(20px, 1.9vw, 24px);
-  font-style: italic;
-  font-weight: 300;
-  line-height: 1.25;
-  letter-spacing: 0;
-  color: var(--color-cream);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
 }
 .mp-cta.surface-premium .section-label,
-.mp-cta.surface-premium .mp-cta-heading em {
+.mp-cta.surface-premium .services-cta-heading em {
   color: var(--ctx-label);
 }
-.mp-cta.surface-premium .mp-cta-heading {
+.mp-cta.surface-premium .services-cta-heading {
   color: var(--ctx-heading);
+  margin-bottom: 24px;
 }
-.mp-cta-heading em {
+body[data-page="media-partnerships"] .mp-cta .services-cta-heading em {
   color: var(--color-yellow);
 }
 body[data-page="media-partnerships"] .mp-cta .btn-primary {
-  min-width: 220px;
   justify-content: center;
-  box-shadow: none;
-}
-body[data-page="media-partnerships"] .mp-cta .btn-primary span {
-  font-size: 14px;
-  line-height: 1;
 }
 @media (max-width: 768px) {
   .mp-audience,
   body[data-page="media-partnerships"] .mp-cta {
     padding: var(--section-space-md) 0;
-  }
-  body[data-page="media-partnerships"] .mp-cta-shell {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding-top: 36px;
-  }
-  body[data-page="media-partnerships"] .mp-cta .btn-primary {
-    width: 100%;
   }
   .mp-device-cluster {
     flex-direction: column-reverse;

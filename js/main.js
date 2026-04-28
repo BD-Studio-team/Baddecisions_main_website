@@ -188,6 +188,22 @@ function initStaggeredReveal() {
   });
 }
 
+function initOpenRolesAccordion() {
+  document.querySelectorAll('.or-list').forEach(function(list) {
+    var rows = Array.prototype.slice.call(list.querySelectorAll('.or-row'));
+    if (rows.length === 0) return;
+
+    rows.forEach(function(row) {
+      row.addEventListener('toggle', function() {
+        if (!row.open) return;
+        rows.forEach(function(otherRow) {
+          if (otherRow !== row) otherRow.open = false;
+        });
+      });
+    });
+  });
+}
+
 function initMobileSwipeTracks() {
   var tracks = document.querySelectorAll('.mobile-swipe-track[data-mobile-slider]');
   if (tracks.length === 0) return;
@@ -284,6 +300,7 @@ function initBDS() {
   initVideoCycling();
   initLazyVideos();
   initStaggeredReveal();
+  initOpenRolesAccordion();
 }
 
 if (document.readyState === 'loading') {

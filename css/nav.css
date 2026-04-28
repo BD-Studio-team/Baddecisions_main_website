@@ -218,6 +218,7 @@
 
 @media (max-width: 768px) {
   .site-nav {
+    padding-top: env(safe-area-inset-top, 0px);
     overflow-x: hidden;
   }
 
@@ -254,7 +255,7 @@
 
   .nav-mobile-overlay {
     position: fixed;
-    inset: 56px 0 0;
+    inset: calc(56px + env(safe-area-inset-top, 0px)) 0 0;
     z-index: 99;
     display: none;
     background: var(--surface-premium, #050505);
@@ -268,7 +269,7 @@
 
   .nav-mobile-shell {
     padding-top: 8px;
-    padding-bottom: 28px;
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
   }
 
   .nav-mobile-overlay .mobile-nav-list {
