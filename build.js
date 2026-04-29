@@ -397,6 +397,141 @@ function findTemplates(dir, prefix) {
   return results;
 }
 
+// llms-full.txt — a single dense markdown file with the entire brand story,
+// programs, podcast, services, stats, and recent episode list. LLMs (Claude,
+// GPT, Perplexity, etc.) ingest this in one fetch instead of crawling 7 pages.
+// Stays in sync with site-content.js — re-emitted on every build.
+function buildLlmsFull() {
+  var episodes = (siteContent.podcastRecentEpisodes || []).slice(0, 6);
+  var guests = siteContent.podcastGuests || [];
+  var freeRows = siteContent.learnFreeRows || [];
+
+  function ep(e) {
+    return '- **' + e.episode + '** (' + (e.date || 'recent') + ') — [' + e.title + '](' + e.href + ')';
+  }
+  function guest(g) {
+    return '- ' + g.name + ' — ' + (g.role || '').replace(/&amp;/g, '&').replace(/&rsquo;/g, '\'');
+  }
+  function freeRow(r) {
+    var title = (r.titleHtml || '').replace(/<\/?em>/g, '').replace(/&amp;/g, '&').trim();
+    return '- [' + title + '](' + r.href + '): ' + r.subtitle;
+  }
+
+  var content = [
+    '# Bad Decisions Studio — Full Brand Reference',
+    '',
+    '> Creative technology Studio focused on AI, real-time 3D (Unreal Engine), and content. Run by Farhad Shababi and Faraz Shababi and a team from Vancouver and Dubai.',
+    '',
+    'This file is the complete brand reference for Bad Decisions Studio (BDS), intended for LLM ingestion. It mirrors the live site at https://www.baddecisions.studio and stays in sync via the build pipeline.',
+    '',
+    '## What Bad Decisions Studio is',
+    '',
+    'Bad Decisions Studio is a creative technology studio operating across three pillars:',
+    '',
+    '- **Content** — The Bad Decisions Podcast (modern tech, AI, and business; new episodes Tuesday and Friday), long-form educational videos, and short-form videos across Instagram, TikTok, YouTube Shorts, and X.',
+    '- **Education** — Two flagship premium programs (Ultimate Unreal Engine Program at learn.baddecisions.studio, Ultimate AI for Creatives Program at ai.baddecisions.studio) plus free YouTube tutorial series.',
+    '- **Services** — Consulting, AI-enabled solutions, corporate training, interactive experiences, and content strategy for brands, studios, and teams across the US, Canada, Europe, and the Middle East.',
+    '',
+    'Founded and run by Farhad Shababi and Faraz Shababi, with a team operating across Vancouver and Dubai. Clients include Epic Games, Dell, YouTube, Snapchat, Dubai Police, A2RL, Polycam, Autodesk, and others.',
+    '',
+    '## Reach',
+    '',
+    '- 15M+ YouTube views',
+    '- 271K+ YouTube subscribers',
+    '- 300K+ Instagram followers',
+    '- 47K+ TikTok followers',
+    '- 10M+ monthly cross-platform reach',
+    '- 100+ podcast episodes published',
+    '- 1,500+ students enrolled across 80+ countries',
+    '',
+    '## The Bad Decisions Podcast',
+    '',
+    'A practical guide to modern tech, AI, and business. Episodes break down trends, test bold claims, and turn complex ideas into clear, actionable insights. Conversations with founders, CEOs, and industry leaders. New episodes every Tuesday and Friday.',
+    '',
+    '- Spotify: https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW',
+    '- Apple Podcasts: https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934',
+    '- YouTube: https://www.youtube.com/@badxstudio',
+    '',
+    '### Recent episodes',
+    '',
+    episodes.map(ep).join('\n'),
+    '',
+    '### Notable past guests',
+    '',
+    guests.slice(0, 16).map(guest).join('\n'),
+    '',
+    '## Education',
+    '',
+    '### Ultimate Unreal Engine Program',
+    '',
+    'Step-by-step program teaching Unreal Engine 5 from beginner to portfolio-ready. 55 modules, 20+ hours. Covers virtual production, MetaHuman creation, environment design at 4K, advanced lighting, and full cinematic storytelling (built around a samurai story set in 1514 Osaka).',
+    '',
+    'URL: https://learn.baddecisions.studio',
+    '',
+    '### Ultimate AI for Creatives Program',
+    '',
+    'Hands-on AI workflows, curated tool picks, and step-by-step playbooks for creators. Covers foundation concepts, the modern AI toolbox (ChatGPT, Claude, Gemini, Midjourney, Runway, ElevenLabs, HeyGen, and others), and playbooks for common creative jobs.',
+    '',
+    'URL: https://ai.baddecisions.studio',
+    '',
+    '### Free learning on YouTube',
+    '',
+    freeRows.map(freeRow).join('\n'),
+    '',
+    '## Services',
+    '',
+    'Bad Decisions Studio offers five service lines for brands, studios, and teams:',
+    '',
+    '- **Consulting** — Strategic consulting across AI adoption, workflow design, content systems, and technology execution. Embedded with founders, operators, and leadership teams.',
+    '- **AI-Enabled Solutions** — Custom AI-enabled solutions for content, automation, internal tools, and modern creative workflows.',
+    '- **Corporate Training** — Tailored programs in AI, Unreal Engine, and emerging tools for teams, studios, and organizations.',
+    '- **Interactive Experiences** — Real-time interactive work, from virtual production to immersive installations and spatial concepts.',
+    '- **Content Strategy** — Content strategy for brands and founders who want sharper positioning, better distribution, and stronger output.',
+    '',
+    'Contact: create@baddecisions.studio · https://www.baddecisions.studio/work-with-us/services',
+    '',
+    '## Media Partnerships',
+    '',
+    'Brand sponsorships across the BDS ecosystem — full-episode podcast sponsorships, integrated short-form on Instagram/TikTok/YouTube, and newsletter placements. Audience: creators, founders, operators, and teams who care about AI, technology, and creative work.',
+    '',
+    'Contact: create@baddecisions.studio · https://www.baddecisions.studio/work-with-us/media-partnerships',
+    '',
+    '## Open Roles',
+    '',
+    'Currently hiring (as of build date):',
+    '',
+    '- **Video Editor** — Cinematic edits for podcasts, reels, and short-form. Remote (CA/US/AE).',
+    '- **Social Media Manager** — Content distribution, hooks, captions, and growth systems across IG, TikTok, YouTube Shorts, X, LinkedIn. Remote (CA/US/AE).',
+    '',
+    'Apply: create@baddecisions.studio · https://www.baddecisions.studio/work-with-us/open-roles',
+    '',
+    '## Connected sites',
+    '',
+    '- **baddecisions.studio** — Studio homepage (this site)',
+    '- **learn.baddecisions.studio** — Ultimate Unreal Engine Program landing page (`llms.txt` available)',
+    '- **ai.baddecisions.studio** — Ultimate AI for Creatives Program landing page (`llms.txt` available)',
+    '- **academy.baddecisions.studio** — Student LMS (login)',
+    '',
+    '## Social',
+    '',
+    '- Instagram: https://www.instagram.com/badxstudio/',
+    '- YouTube: https://www.youtube.com/@badxstudio',
+    '- TikTok: https://www.tiktok.com/@badxstudio',
+    '- X: https://x.com/badxstudio',
+    '- LinkedIn: https://ca.linkedin.com/company/badxstudio',
+    '- Threads: https://www.threads.net/@badxstudio',
+    '- Discord: https://discord.gg/bWCBcmqYh9',
+    '',
+    '## Contact',
+    '',
+    '- Email: create@baddecisions.studio',
+    '- Website: https://www.baddecisions.studio'
+  ].join('\n');
+
+  fs.writeFileSync(path.join(ROOT, 'llms-full.txt'), content + '\n', 'utf8');
+  console.log('  Built: llms-full.txt');
+}
+
 function buildSitemap() {
   var today = new Date().toISOString().slice(0, 10);
   var entries = [
@@ -436,6 +571,7 @@ async function main() {
 
   templates.forEach(buildPage);
   buildSitemap();
+  buildLlmsFull();
   console.log(`Done. ${templates.length} pages built.`);
 }
 

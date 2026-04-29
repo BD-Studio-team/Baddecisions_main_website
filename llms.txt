@@ -1,48 +1,52 @@
 # Bad Decisions Studio
 
-> Creative technology education and content brand.
+> Creative technology Studio focused on AI, real-time 3D (Unreal Engine), and content. Run by Farhad Shababi and Faraz Shababi and a team from Vancouver and Dubai.
 
-Bad Decisions Studio (BDS) is a creative technology brand run by brothers Faraz Shababi (Commander) and Farhad Shababi, operating across Vancouver and Dubai. BDS teaches millions to build with Unreal Engine, AI, and emerging creative tools through free YouTube tutorials, premium courses, a podcast, and live events.
+Bad Decisions Studio is built around three pillars: Content (a podcast, long-form educational videos, and short-form videos), Education (premium programs and free tutorials), and Services (consulting, AI-enabled solutions, training, interactive experiences, content strategy).
 
-## Offerings
+## Pages
 
-### The Bad Decisions Podcast
-Tech, AI, and creative culture broken down for builders, artists, and entrepreneurs. New episodes every Tuesday and Friday. Featuring conversations with founders, CEOs, and creative leaders.
-- Spotify: https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW
-- Apple Podcasts: https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934
-- YouTube: https://www.youtube.com/@badxstudio
+- [Home](https://www.baddecisions.studio/): Brand overview and the three paths
+- [Podcast](https://www.baddecisions.studio/podcast): The Bad Decisions Podcast — a practical guide to modern tech, AI, and business. New episodes Tuesday and Friday.
+- [Education](https://www.baddecisions.studio/education): Premium programs (AI, Unreal Engine) and free YouTube series
+- [Work With Us](https://www.baddecisions.studio/work-with-us): Services, media partnerships, and open roles
+- [Services](https://www.baddecisions.studio/work-with-us/services): Consulting, AI-enabled solutions, corporate training, interactive experiences, content strategy
+- [Media Partnerships](https://www.baddecisions.studio/work-with-us/media-partnerships): Brand sponsorships across podcast, YouTube, Instagram, TikTok, and newsletter
+- [Open Roles](https://www.baddecisions.studio/work-with-us/open-roles): Currently hiring — Video Editor and Social Media Manager
 
-### Education
-- Ultimate Unreal Engine Program: https://learn.baddecisions.studio
-- Ultimate AI for Creatives Program: https://ai.baddecisions.studio
-- Student Login / Academy: https://academy.baddecisions.studio
-- Free tutorials on YouTube: https://www.youtube.com/@badxstudio
+## Programs
 
-### Services
-Cinematic production, AI integration, corporate training, interactive experiences, podcast sponsorship, and content strategy. Clients include Epic Games, Dell, YouTube, Snapchat, Dubai Police, A2RL, Polycam, Autodesk, and others across the US, Canada, Europe, and the Middle East.
+- [Ultimate Unreal Engine Program](https://learn.baddecisions.studio): Step-by-step program teaching Unreal Engine 5 — virtual production, MetaHuman characters, 4K environments, advanced lighting. 55 modules, 20+ hours.
+- [Ultimate AI for Creatives Program](https://ai.baddecisions.studio): Hands-on AI workflows, curated tool picks, and step-by-step playbooks for creators
+- [Student Academy](https://academy.baddecisions.studio): LMS for enrolled students (login)
 
-## Key Stats
-- 15M+ YouTube views
-- 10M+ monthly reach across platforms
+## Listen
+
+- [Spotify](https://open.spotify.com/show/12jUe4lIJgxE4yst7rrfmW): The Bad Decisions Podcast on Spotify
+- [Apple Podcasts](https://podcasts.apple.com/us/podcast/bad-decisions-podcast/id1677462934): The Bad Decisions Podcast on Apple
+- [YouTube](https://www.youtube.com/@badxstudio): Full episodes and free tutorials
+
+## Reach
+
+- 15M+ YouTube views, 271K+ subscribers
 - 300K+ Instagram followers
-- 271K+ YouTube subscribers
 - 47K+ TikTok followers
-- 1,500+ students enrolled
-- 80+ countries reached
+- 10M+ monthly cross-platform reach
 - 100+ podcast episodes
+- 1,500+ students enrolled across 80+ countries
 
-## Founders
-- Faraz Shababi (Commander) — Co-founder
-- Farhad Shababi — Co-founder
+## Connected sites
 
-## Contact
-- Email: create@baddecisions.studio
-- Website: https://www.baddecisions.studio
+- [learn.baddecisions.studio](https://learn.baddecisions.studio): Unreal Engine program landing page (`llms.txt` available)
+- [ai.baddecisions.studio](https://ai.baddecisions.studio): AI for Creatives program landing page (`llms.txt` available)
+- [academy.baddecisions.studio](https://academy.baddecisions.studio): Student LMS (login required)
 
-## Social
-- Instagram: https://www.instagram.com/badxstudio/
-- YouTube: https://www.youtube.com/@badxstudio
-- TikTok: https://www.tiktok.com/@badxstudio
-- X: https://x.com/badxstudio
-- LinkedIn: https://ca.linkedin.com/company/badxstudio
-- Discord: https://discord.gg/bWCBcmqYh9
+## Optional
+
+- [Instagram](https://www.instagram.com/badxstudio/): @badxstudio
+- [TikTok](https://www.tiktok.com/@badxstudio): @badxstudio
+- [X](https://x.com/badxstudio): @badxstudio
+- [LinkedIn](https://ca.linkedin.com/company/badxstudio): Bad Decisions Studio
+- [Threads](https://www.threads.net/@badxstudio): @badxstudio
+- [Discord](https://discord.gg/bWCBcmqYh9): Community for students and viewers
+- [Contact](mailto:create@baddecisions.studio): create@baddecisions.studio

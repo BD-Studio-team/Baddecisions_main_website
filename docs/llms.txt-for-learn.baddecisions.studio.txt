@@ -1,0 +1,43 @@
+# Ultimate Unreal Engine Program — Bad Decisions Studio
+
+> A premium step-by-step program teaching Unreal Engine 5 from beginner to portfolio-ready. Built by Bad Decisions Studio for creators, artists, and studios.
+
+The Ultimate Unreal Engine Program is the flagship Unreal Engine education product from Bad Decisions Studio. It covers virtual production, MetaHuman characters, environment design at 4K, advanced lighting, and cinematic storytelling. 55 modules, 20+ hours of content, used by 1,500+ students across 80+ countries.
+
+## Pages
+
+- [Program homepage](https://learn.baddecisions.studio): Curriculum, modules, pricing, enrollment
+- [Student Academy](https://academy.baddecisions.studio): LMS for enrolled students (login)
+
+## Curriculum highlights
+
+- Virtual production fundamentals
+- MetaHuman creation and animation
+- Environment building at production-grade quality (4K)
+- Advanced lighting workflows
+- Cinematic storytelling — full samurai story set in 1514 Osaka
+- 55 modules · 20+ hours · self-paced
+- 1,500+ students enrolled across 80+ countries
+
+## About the studio
+
+Bad Decisions Studio is a creative technology studio focused on AI, real-time 3D, and content. Run by Farhad Shababi and Faraz Shababi and a team from Vancouver and Dubai. The studio operates across three pillars: Content (podcast + videos), Education (premium programs and free tutorials), and Services (consulting, AI-enabled solutions, training, interactive experiences, content strategy).
+
+## Connected sites
+
+- [baddecisions.studio](https://www.baddecisions.studio): Studio homepage (`llms.txt` available)
+- [ai.baddecisions.studio](https://ai.baddecisions.studio): Sister program — Ultimate AI for Creatives (`llms.txt` available)
+- [academy.baddecisions.studio](https://academy.baddecisions.studio): Student LMS
+
+## Free learning
+
+- [YouTube channel](https://www.youtube.com/@badxstudio): Free Unreal Engine tutorials, including the Beginner Tutorial 2026 challenge, the Dune shot-by-shot recreation, MetaHuman customization, and Gaussian Splatting
+
+## Optional
+
+- [Instagram](https://www.instagram.com/badxstudio/): @badxstudio
+- [TikTok](https://www.tiktok.com/@badxstudio): @badxstudio
+- [X](https://x.com/badxstudio): @badxstudio
+- [LinkedIn](https://ca.linkedin.com/company/badxstudio): Bad Decisions Studio
+- [Discord](https://discord.gg/bWCBcmqYh9): Community for students and viewers
+- [Contact](mailto:create@baddecisions.studio): create@baddecisions.studio

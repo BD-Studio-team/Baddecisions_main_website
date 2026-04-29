@@ -1,0 +1,41 @@
+# Ultimate AI for Creatives Program — Bad Decisions Studio
+
+> A hands-on program teaching AI workflows, tools, and playbooks for creators, artists, and operators. Built by Bad Decisions Studio.
+
+The Ultimate AI for Creatives Program is the flagship AI education product from Bad Decisions Studio. It teaches practical AI workflows, curated tool picks, and step-by-step playbooks designed to help creators save time, win clients, and build with modern AI tooling.
+
+## Pages
+
+- [Program homepage](https://ai.baddecisions.studio): Curriculum, modules, pricing, enrollment
+- [Student Academy](https://academy.baddecisions.studio): LMS for enrolled students (login)
+
+## What's covered
+
+- Foundation: how modern AI works for creative work
+- Toolbox: curated set of AI tools for image, video, audio, copy, and automation (ChatGPT, Claude, Gemini, Midjourney, Runway, ElevenLabs, HeyGen, Kling, and others)
+- Playbooks: step-by-step recipes for common creative jobs (brand work, video edits, ideation, automation)
+- Workflows that combine AI with traditional creative tools (Photoshop, After Effects, Premiere Pro, Unreal Engine)
+
+## About the studio
+
+Bad Decisions Studio is a creative technology studio focused on AI, real-time 3D, and content. Run by Farhad Shababi and Faraz Shababi and a team from Vancouver and Dubai. The studio operates across three pillars: Content (podcast + videos), Education (premium programs and free tutorials), and Services (consulting, AI-enabled solutions, training, interactive experiences, content strategy).
+
+## Connected sites
+
+- [baddecisions.studio](https://www.baddecisions.studio): Studio homepage (`llms.txt` available)
+- [learn.baddecisions.studio](https://learn.baddecisions.studio): Sister program — Ultimate Unreal Engine Program (`llms.txt` available)
+- [academy.baddecisions.studio](https://academy.baddecisions.studio): Student LMS
+
+## Free learning
+
+- [YouTube channel](https://www.youtube.com/@badxstudio): Free tutorials on AI tools, creative workflows, and emerging tech
+- [The Bad Decisions Podcast](https://www.baddecisions.studio/podcast): Modern tech, AI, and business — new episodes Tuesday and Friday
+
+## Optional
+
+- [Instagram](https://www.instagram.com/badxstudio/): @badxstudio
+- [TikTok](https://www.tiktok.com/@badxstudio): @badxstudio
+- [X](https://x.com/badxstudio): @badxstudio
+- [LinkedIn](https://ca.linkedin.com/company/badxstudio): Bad Decisions Studio
+- [Discord](https://discord.gg/bWCBcmqYh9): Community for students and viewers
+- [Contact](mailto:create@baddecisions.studio): create@baddecisions.studio
