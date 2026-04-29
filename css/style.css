@@ -929,17 +929,9 @@
       background: var(--color-peach);
     }
 
-    .wwu-card--services {
-      background:
-        radial-gradient(ellipse 50% 30% at 50% 28%, rgba(151, 199, 205, 0.22), transparent 70%),
-        radial-gradient(ellipse 60% 60% at 50% 100%, rgba(0, 0, 0, 0.6), transparent 60%),
-        linear-gradient(180deg, #122024 0%, #0c1517 40%, #050708 100%);
-    }
+    .wwu-card--services,
     .wwu-card--media {
-      background:
-        radial-gradient(ellipse 50% 30% at 50% 28%, rgba(255, 200, 120, 0.16), transparent 70%),
-        radial-gradient(ellipse 60% 60% at 50% 100%, rgba(0, 0, 0, 0.6), transparent 60%),
-        linear-gradient(180deg, #2a1d12 0%, #1a1208 40%, #0a0805 100%);
+      background: var(--color-soot);
     }
     .wwu-card::before {
       content: '';
