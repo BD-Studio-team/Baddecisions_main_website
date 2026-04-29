@@ -296,8 +296,8 @@ function renderGscVerificationMeta() {
   return '<meta name="google-site-verification" content="' + escapeHtml(token) + '">';
 }
 
-// Regex to match <div data-include="/sections/xyz.html"></div>
-const INCLUDE_RE = /<div\s+data-include="(\/sections\/[^"]+)"\s*><\/div>/g;
+// Regex to match paired include placeholders like <div data-include="/sections/xyz.html"></div>.
+const INCLUDE_RE = /<([a-zA-Z][\w:-]*)\b[^>]*\sdata-include=(["'])(\/sections\/[^"']+)\2[^>]*>\s*<\/\1>/g;
 
 // Regex to match the inline loader IIFE script block
 const LOADER_IIFE_RE = /\s*<script>\s*\(function\(\)\s*\{[\s\S]*?sections-loaded[\s\S]*?\}\)\(\);\s*<\/script>/;
@@ -325,6 +325,18 @@ function bustAssetUrls(html) {
   });
 }
 
+function assertNoUnresolvedBuildMarkers(html, templateFile) {
+  var includeMatch = html.match(/\bdata-include=(["'])/);
+  if (includeMatch) {
+    throw new Error(`Template ${templateFile} still contains unresolved data-include markup after build`);
+  }
+
+  var tokenMatch = html.match(/\{\{[^{}]+\}\}/);
+  if (tokenMatch) {
+    throw new Error(`Template ${templateFile} still contains unresolved token ${tokenMatch[0]} after build`);
+  }
+}
+
 // Inject shared CSS around style.css (regex matches both plain and fetchpriority variants)
 const STYLE_LINK_RE = /<link rel="stylesheet" href="\/css\/style\.css"([^>]*?)\s*\/?\s*>/;
 const SHARED_STYLES_INJECT = (match, attrs) => {
@@ -344,7 +356,7 @@ function buildPage(templateFile) {
     INCLUDE_RE.lastIndex = 0;
     if (!INCLUDE_RE.test(html)) break;
     INCLUDE_RE.lastIndex = 0;
-    html = html.replace(INCLUDE_RE, (match, sectionPath) => {
+    html = html.replace(INCLUDE_RE, (match, tagName, quote, sectionPath) => {
       const filePath = path.join(ROOT, sectionPath);
       if (!fs.existsSync(filePath)) {
         // Fail loud: missing includes should break the build, not silently produce broken HTML
@@ -372,6 +384,8 @@ function buildPage(templateFile) {
 
   // 6. Append content hashes to /css/* and /js/* references so they can cache immutable
   html = bustAssetUrls(html);
+
+  assertNoUnresolvedBuildMarkers(html, templateFile);
 
   // 7. Write to output (preserving subdirectory structure)
   const outPath = path.join(ROOT, templateFile);

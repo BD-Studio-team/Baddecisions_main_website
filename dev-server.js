@@ -8,7 +8,6 @@
 const http = require('http');
 const fs   = require('fs');
 const path = require('path');
-const url  = require('url');
 
 const ROOT = __dirname;
 const PORT = parseInt(process.env.PORT || process.argv[2], 10) || 8000;
@@ -40,7 +39,12 @@ const MIME = {
 
 function safeJoin(root, requestPath) {
   // Block path traversal
-  const decoded = decodeURIComponent(requestPath);
+  let decoded = '';
+  try {
+    decoded = decodeURIComponent(requestPath);
+  } catch (_) {
+    return null;
+  }
   const normalized = path.normalize(decoded).replace(/^(\.\.[/\\])+/, '');
   const full = path.join(root, normalized);
   if (!full.startsWith(root)) return null;
@@ -56,8 +60,12 @@ function tryFile(p) {
 }
 
 function resolvePath(reqUrl) {
-  const parsed = url.parse(reqUrl);
-  let p = parsed.pathname || '/';
+  let p = '/';
+  try {
+    p = new URL(reqUrl, 'http://localhost').pathname || '/';
+  } catch (_) {
+    return null;
+  }
 
   // Drop trailing slash (except root)
   if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
@@ -111,19 +119,32 @@ const server = http.createServer((req, res) => {
   const ext = path.extname(filePath).toLowerCase();
   const mime = MIME[ext] || 'application/octet-stream';
 
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
+  fs.stat(filePath, (statErr, stat) => {
+    if (statErr) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('500 Internal Server Error\n');
-      log(`500 ${req.method} ${req.url} :: ${err.message}`);
+      log(`500 ${req.method} ${req.url} :: ${statErr.message}`);
       return;
     }
+
     res.writeHead(200, {
       'Content-Type': mime,
+      'Content-Length': stat.size,
       'Cache-Control': 'no-store',
     });
-    res.end(data);
-    log(`200 ${req.method} ${req.url} -> ${path.relative(ROOT, filePath)}`);
+
+    const stream = fs.createReadStream(filePath);
+    stream.on('error', (err) => {
+      if (!res.headersSent) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+      }
+      res.end('500 Internal Server Error\n');
+      log(`500 ${req.method} ${req.url} :: ${err.message}`);
+    });
+    stream.on('end', () => {
+      log(`200 ${req.method} ${req.url} -> ${path.relative(ROOT, filePath)}`);
+    });
+    stream.pipe(res);
   });
 });
 

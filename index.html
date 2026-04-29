@@ -27,12 +27,8 @@
   <!-- Fonts -->
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/pp-editorial-ultralight-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts-web/pp-editorial-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts-web/inter-var-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts-web/azeret-mono-var.woff2" as="font" type="font/woff2" crossorigin>
-  <!-- Hero video preload (LCP) -->
-  <link rel="preload" href="/assets/video/hero-video.webm" as="video" type="video/webm">
   <link rel="stylesheet" href="/css/globals.css?v=7d5e0867a7" />
   <link rel="stylesheet" href="/css/style.css?v=bd0604a709" fetchpriority="high" />
   <link rel="stylesheet" href="/css/components.css?v=ac65447daf" />
@@ -164,6 +160,7 @@
   <section id="hero" class="bg-glow-gold bg-vignette">
     <div class="hero-bg">
       <video data-autoplay autoplay muted loop playsinline preload="auto" class="hero-bg-video">
+        <source src="/assets/video/hero-video-480.mp4" media="(max-width: 768px)" type="video/mp4">
         <source src="/assets/video/hero-video.mp4" type="video/mp4">
         <source src="/assets/video/hero-video.webm" type="video/webm">
       </video>
@@ -192,31 +189,31 @@
     <div class="featured-scroll-wrap">
       <div class="featured-scroll-track">
         <div class="featured-logo-slot is-horizontal">
-          <img src="/assets/client-logos/metahuman.svg" alt="MetaHuman" loading="lazy">
+          <img src="/assets/client-logos/metahuman.svg" alt="MetaHuman">
         </div>
         <div class="featured-logo-slot is-horizontal">
-          <img src="/assets/client-logos/80lv.svg" alt="80 Level" loading="lazy">
+          <img src="/assets/client-logos/80lv.svg" alt="80 Level">
         </div>
         <div class="featured-logo-slot is-vertical">
-          <img src="/assets/client-logos/snapchat-featured.svg" alt="Snapchat" loading="lazy">
+          <img src="/assets/client-logos/snapchat-featured.svg" alt="Snapchat">
         </div>
         <div class="featured-logo-slot is-horizontal move-slot">
-          <img src="/assets/client-logos/move-ai.svg" alt="Move AI" loading="lazy">
+          <img src="/assets/client-logos/move-ai.svg" alt="Move AI">
         </div>
         <div class="featured-logo-slot is-vertical">
-          <img src="/assets/client-logos/epic-games-featured.svg" alt="Epic Games" loading="lazy">
+          <img src="/assets/client-logos/epic-games-featured.svg" alt="Epic Games">
         </div>
         <div class="featured-logo-slot is-vertical is-native">
-          <img src="/assets/client-logos/unreal-engine.svg" alt="Unreal Engine" loading="lazy">
+          <img src="/assets/client-logos/unreal-engine.svg" alt="Unreal Engine">
         </div>
         <div class="featured-logo-slot is-horizontal">
-          <img src="/assets/client-logos/dell-technologies.svg" alt="Dell Technologies" loading="lazy">
+          <img src="/assets/client-logos/dell-technologies.svg" alt="Dell Technologies">
         </div>
         <div class="featured-logo-slot is-horizontal">
-          <img src="/assets/client-logos/autodesk.svg" alt="Autodesk" loading="lazy">
+          <img src="/assets/client-logos/autodesk.svg" alt="Autodesk">
         </div>
         <div class="featured-logo-slot is-horizontal">
-          <img src="/assets/client-logos/polycam.svg" alt="Polycam" loading="lazy">
+          <img src="/assets/client-logos/polycam.svg" alt="Polycam">
         </div>
 
         <div class="featured-logo-slot is-horizontal">
@@ -262,7 +259,7 @@
 
       <div class="pillars-grid">
         <a href="/podcast" class="pillar-panel pillar-panel--watch reveal">
-          <video class="pillar-panel-img" data-autoplay muted loop playsinline preload="metadata" aria-label="Bad Decisions Podcast preview">
+          <video class="pillar-panel-img" data-autoplay muted loop playsinline preload="none" aria-label="Bad Decisions Podcast preview">
             <source src="/assets/video/podcast-reel.mp4" type="video/mp4">
           </video>
           <span class="pillar-grain" aria-hidden="true"></span>
@@ -277,7 +274,7 @@
         </a>
 
         <a href="/education" class="pillar-panel pillar-panel--learn reveal reveal-delay-1">
-          <video class="pillar-panel-img" data-autoplay muted loop playsinline preload="metadata" aria-label="Bad Decisions Education preview">
+          <video class="pillar-panel-img" data-autoplay muted loop playsinline preload="none" aria-label="Bad Decisions Education preview">
             <source src="/assets/video/education-reel.mp4" type="video/mp4">
           </video>
           <span class="pillar-grain" aria-hidden="true"></span>
@@ -292,7 +289,7 @@
         </a>
 
         <a href="/work-with-us" class="pillar-panel pillar-panel--services reveal reveal-delay-2">
-          <video class="pillar-panel-img" data-autoplay muted loop playsinline preload="metadata" aria-label="Bad Decisions services preview">
+          <video class="pillar-panel-img" data-autoplay muted loop playsinline preload="none" aria-label="Bad Decisions services preview">
             <source src="https://r14hngokr8soy7ms.public.blob.vercel-storage.com/who-we-are/Clients.mp4" type="video/mp4">
           </video>
           <span class="pillar-grain" aria-hidden="true"></span>
@@ -409,7 +406,7 @@
           </p>
         </div>
         <div class="about-video-card about-video-card--feature">
-          <video data-lazy muted loop playsinline>
+          <video data-lazy muted loop playsinline preload="none">
             <source src="/assets/video/after.mp4" type="video/mp4">
           </video>
         </div>
@@ -517,7 +514,7 @@
   </footer>
 
   <!-- Main script -->
-  <script src="/js/main.js?v=e81ed74a67" defer></script>
+  <script src="/js/main.js?v=ebb3d63742" defer></script>
   <script src="/js/newsletter.js?v=3fd2245ebc" defer></script>
 
 </body>

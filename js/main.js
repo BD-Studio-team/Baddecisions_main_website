@@ -128,6 +128,8 @@ function safePlay(video) {
 }
 
 function initManagedVideos() {
+  var deferredVideos = [];
+
   document.querySelectorAll('video').forEach(function(video) {
     var shouldForcePlay = video.classList.contains('hero-bg-video');
 
@@ -140,11 +142,46 @@ function initManagedVideos() {
     if (video.hasAttribute('data-autoplay')) {
       video.muted = true;
       video.defaultMuted = true;
-      video.autoplay = true;
       video.playsInline = true;
-      safePlay(video);
+
+      if (shouldForcePlay) {
+        video.autoplay = true;
+        safePlay(video);
+      } else {
+        video.autoplay = false;
+        video.preload = 'none';
+        deferredVideos.push(video);
+      }
     }
   });
+
+  if (deferredVideos.length) {
+    if ('IntersectionObserver' in window) {
+      var autoplayObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+
+          var video = entry.target;
+          video.preload = 'metadata';
+          video.autoplay = true;
+          video.load();
+          safePlay(video);
+          autoplayObserver.unobserve(video);
+        });
+      }, { rootMargin: '300px' });
+
+      deferredVideos.forEach(function(video) {
+        autoplayObserver.observe(video);
+      });
+    } else {
+      deferredVideos.forEach(function(video) {
+        video.preload = 'metadata';
+        video.autoplay = true;
+        video.load();
+        safePlay(video);
+      });
+    }
+  }
 
   document.addEventListener('visibilitychange', function() {
     if (document.visibilityState !== 'visible') return;
@@ -181,8 +218,11 @@ function initLazyVideos() {
   var videoObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        safePlay(entry.target);
-        videoObserver.unobserve(entry.target);
+        var video = entry.target;
+        video.preload = 'metadata';
+        video.load();
+        safePlay(video);
+        videoObserver.unobserve(video);
       }
     });
   }, { rootMargin: '200px' });
