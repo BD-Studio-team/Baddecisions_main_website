@@ -119,7 +119,7 @@ The build also appends `?v=<md5>` cache-busting query strings to every `/css/*` 
 ## Current page notes
 
 - `/work-with-us` hub cards: **Media Partnerships first (left/top), Services second (right/bottom)** — yellow CTA on Media, peach CTA on Services. (Navigation, dropdowns, footer, sitemap stay in `Services → Media → Open Roles` order; only the homepage hub flips it.)
-- `/work-with-us/open-roles` uses a compact header and role list only (bottom CTA removed). Two roles open (Video Editor, Social Media Manager); third is "Coming Soon".
+- `/work-with-us/open-roles` uses a compact header and role list only (bottom CTA removed). Video Editor and Social Media Manager are closed; the next role is marked "Coming Soon".
 - `/work-with-us/services` currently includes services cards → technology stack → final contact CTA. Technology stack logos are in `assets/tech-logos/` rendered via shared `.services-stack-*` classes.
 - `/education` flagship cards mirror the WWU hub system: AI on left/top (yellow), Unreal Engine on right/bottom (peach). Same 16:9 video at top, flat `--color-soot` background, identical dimensions.
 - Mobile nav: `Education` and `Work With Us` are clickable parent links with their child links always visible underneath (no accordion/expander).

@@ -1002,9 +1002,12 @@
     .wwu-card-cta {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       min-height: 48px;
       padding: 0 24px;
+      width: fit-content;
+      max-width: 100%;
       background: var(--ctx-btn-primary-bg, var(--color-yellow));
       color: var(--ctx-btn-primary-text, var(--color-void));
       font-family: var(--font-body);
@@ -1014,7 +1017,13 @@
       text-transform: uppercase;
       border-radius: var(--radius-button);
       align-self: flex-start;
+      justify-self: start;
+      text-align: center;
+      line-height: 1;
       transition: transform 0.35s var(--ease-out-expo), box-shadow 0.35s ease, background 0.35s ease;
+    }
+    .wwu-card-cta-text {
+      min-width: 0;
     }
     .wwu-card:hover .wwu-card-cta {
       transform: translateY(-2px);
