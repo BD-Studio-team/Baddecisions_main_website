@@ -5096,6 +5096,9 @@
   align-items: end;
   margin-bottom: 56px;
 }
+.mp-why-header--solo {
+  grid-template-columns: 1fr;
+}
 .mp-why-intro .section-label {
   margin-bottom: 20px;
 }
@@ -5295,7 +5298,7 @@ body[data-page="media-partnerships"] .mp-cta {
   background: var(--surface-premium);
 }
 body[data-page="media-partnerships"] .mp-cta-shell {
-  max-width: 900px;
+  max-width: 760px;
   margin: 0 auto;
   padding: 0;
   text-align: center;
