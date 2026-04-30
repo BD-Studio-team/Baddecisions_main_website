@@ -5338,8 +5338,14 @@ body[data-page="media-partnerships"] .mp-cta .btn-primary {
   .mp-device--ipad {
     width: min(90vw, 560px);
   }
+  .mp-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(100%, 360px);
+    gap: 10px;
+  }
   .mp-hero-stat {
-    min-width: 108px;
-    padding: 14px 16px;
+    min-width: 0;
+    padding: 14px 8px;
   }
 }
